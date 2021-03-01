@@ -8,5 +8,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "strict": true
-  }
+  },
+  "include": ["App.tsx", "src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
