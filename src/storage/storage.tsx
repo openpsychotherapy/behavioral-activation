@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const peopleKey = "people";
-const peopleDefault = [];
+const peopleDefault: string[] = [];
 
-function insertIfNull(key, value) {
+function insertIfNull(key: string, value: any) {
     AsyncStorage.getItem(key)
         .then(async v => {
             if (v === null) {
@@ -23,9 +23,9 @@ export function clearStorage() {
 }
 
 export function usePeople() {
-    const [people, setPeople] = useState([]);
+    const [people, setPeople] = useState<string[]>([]);
     const modifyPeople = {
-        add: p => {
+        add: (p: string): boolean => {
             if (!people.includes(p)) {
                 const newPeople = [...people, p];
                 AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
@@ -38,7 +38,7 @@ export function usePeople() {
 
     useEffect(() => {
         AsyncStorage.getItem(peopleKey)
-            .then(JSON.parse)
+            .then(v => JSON.parse(v as string))
             .then(v => setPeople(v));
     } ,[]);
 
