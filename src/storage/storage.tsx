@@ -26,9 +26,13 @@ export function usePeople() {
     const [people, setPeople] = useState([]);
     const modifyPeople = {
         add: p => {
-            const newPeople = [...people, p];
-            AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
-                .then(() => setPeople(newPeople));
+            if (!people.includes(p)) {
+                const newPeople = [...people, p];
+                AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
+                    .then(() => setPeople(newPeople));
+                return true;
+            }
+            return false;
         },
     };
 
