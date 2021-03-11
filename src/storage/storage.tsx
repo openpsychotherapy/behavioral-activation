@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const peopleKey = "people";
-const peopleDefault: string[] = [];
+import { peopleKey, peopleDefault, usePeople } from './people';
+import { settingsKey, settingsDefault, useSettings } from './settings';
 
 function insertIfNull(key: string, value: any) {
     AsyncStorage.getItem(key)
@@ -16,54 +16,14 @@ function insertIfNull(key: string, value: any) {
 
 export function initStorage() {
     insertIfNull(peopleKey, peopleDefault);
+    insertIfNull(settingsKey, settingsDefault);
 }
 
 export function clearStorage() {
     AsyncStorage.clear();
 }
 
-export function usePeople() {
-    const [people, setPeople] = useState<string[]>([]);
-    const modifyPeople = {
-        add: (p: string): boolean => {
-            if (!people.includes(p)) {
-                const newPeople = [...people, p];
-                AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
-                    .then(() => setPeople(newPeople));
-                return true;
-            }
-            return false;
-        },
-    };
-
-    useEffect(() => {
-        AsyncStorage.getItem(peopleKey)
-            .then(v => JSON.parse(v as string))
-            .then(v => setPeople(v));
-    } ,[]);
-
-    return [people, modifyPeople];
-}
-
-function getValue(key: string, callback: (value: string) => void) {
-    AsyncStorage.getItem(key)
-    .then(v => v !== null ? callback(v) : undefined);
-}
-
-function useCounter(): [number, () => void] {
-    const [counter, setCounter] = React.useState(0);
-
-    React.useEffect(() => {
-        AsyncStorage.getItem("counter")
-            .then(item => setCounter(Number(item)));
-    }, []);
-
-    const inc = () => {
-        const newValue = counter + 1;
-        AsyncStorage.setItem("counter", newValue.toString())
-        .then(() => setCounter(newValue))
-        .catch(err => console.log(err));
-    }
-
-    return [counter, inc];
-}
+export {
+    usePeople,
+    useSettings,
+};
