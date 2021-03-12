@@ -38,7 +38,7 @@ export function useSettings(): [Settings, ModifySettings] {
 
     useEffect(() => {
         AsyncStorage.getItem(settingsKey)
-            .then(v => JSON.parse(v as string))
+            .then(v => v === null ? settingsDefault : JSON.parse(v))
             .then(v => setSettings(v));
     } ,[]);
 

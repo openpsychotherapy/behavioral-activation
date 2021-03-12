@@ -28,7 +28,7 @@ export function usePeople(): [People, ModifyPeople] {
 
     useEffect(() => {
         AsyncStorage.getItem(peopleKey)
-            .then(v => JSON.parse(v as string))
+            .then(v => v === null ? peopleDefault : JSON.parse(v))
             .then(v => setPeople(v));
     } ,[]);
 

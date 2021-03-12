@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { peopleKey, peopleDefault, usePeople } from './people';
-import { settingsKey, settingsDefault, useSettings } from './settings';
-
-function insertIfNull(key: string, value: any) {
-    AsyncStorage.getItem(key)
-        .then(async v => {
-            if (v === null) {
-                await AsyncStorage.setItem(key, JSON.stringify(value))
-            }
-        })
-        .catch(e => console.log(e));
-}
+import { usePeople } from './people';
+import { useSettings } from './settings';
+import { useIcons } from './icons';
 
 export function initStorage() {
-    insertIfNull(peopleKey, peopleDefault);
-    insertIfNull(settingsKey, settingsDefault);
+    // Nothing for now
 }
 
 export function clearStorage() {
@@ -26,4 +16,5 @@ export function clearStorage() {
 export {
     usePeople,
     useSettings,
+    useIcons,
 };
