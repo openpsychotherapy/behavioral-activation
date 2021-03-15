@@ -6,6 +6,7 @@ import { useSettings } from './settings';
 import { useIcons } from './icons';
 import { useCalendar } from './calendar';
 import { useValues } from './values';
+import { useActivities } from './activities';
 
 export function initStorage() {
     // Nothing for now
@@ -21,4 +22,5 @@ export {
     useIcons,
     useCalendar,
     useValues,
+    useActivities,
 };
