@@ -16,15 +16,42 @@ export const settingsDefault: Settings = {
     language: "sv",
 };
 
+/**
+ * Hook returning the settings and functions to modify the settings.
+ *
+ * @example
+ * Get stored settings and print them:
+ * ```
+ * const [settings, modifySettings] = Storage.useSettings();
+ * console.log(settings);
+ * ```
+ *
+ * @example
+ * Turn on notifications:
+ * ```
+ * const [settings, modifySettings] = Storage.useSettings();
+ * modifySettings.setNotifications(true);
+ * ```
+ */
 export function useSettings(): [Settings, ModifySettings] {
     const [settings, setSettings] = useState<Settings>(settingsDefault);
 
+    /**
+     * Sets the notifications and updates AsyncStorage.
+     *
+     * @param value - The value to set notifications to
+     */
     function setNotifications(value: boolean): void {
         let newSettings = { ...settings, notifications: value };
         AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))
             .then(() => setSettings(newSettings));
     }
 
+    /**
+     * Sets the language and updates AsyncStorage.
+     *
+     * @param value - The two letter language code
+     */
     function setLanguage(value: string): void {
         let newSettings = { ...settings, language: value };
         AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))

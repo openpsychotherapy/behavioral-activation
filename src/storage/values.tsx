@@ -31,14 +31,49 @@ export const valuesDefault: Values = {
     work: [],
 };
 
+/**
+ * Compares two value entries and returns `true` if they are equal.
+ *
+ * @param a - The first value entry
+ * @param b - The second value entry
+ * @returns a === b
+ */
 function entryEq(a: ValuesEntry, b: ValuesEntry) {
     return a.text === b.text
         && a.icon === b.icon;
 }
 
+/**
+ * Hook returning the values object and functions to modify the object.
+ *
+ * @example
+ * Get the values object and print it:
+ * ```
+ * const [values, modifyValues] = Storage.useValues();
+ * // Prints a large object
+ * console.log(values);
+ * ```
+ *
+ * @example
+ * Add a new value:
+ * ```
+ * const [values, modifyValues] = Storage.useValues();
+ * modifyValues.addEntry("health", "working out", {
+ *     icon: "pumpingiron", 
+ *     text: "Go to gym",
+ * });
+ * ```
+ */
 export function useValues(): [Values, ModifyValues] {
     const [values, setValues] = useState<Values>(valuesDefault);
 
+    /**
+     * Adds a topic to the values object and updates AsyncStorage.
+     *
+     * @param category - The category where the topic should be added
+     * @param topic - The name of the topic
+     * @returns `true` if the topic was added, `false` otherwise
+     */
     function addTopic(category: string, topic: string): boolean {
         if (values.hasOwnProperty(category)) {
             if (!values[category].some(t => t.name === topic)) {
@@ -52,6 +87,13 @@ export function useValues(): [Values, ModifyValues] {
         return false;
     }
 
+    /**
+     * Adds an entry to the values object and updates AsyncStorage.
+     *
+     * @param category - The category where the topic should be added
+     * @param topic - The topic in which the entry should be added
+     * @returns `true` if the entry was added, `false` otherwise
+     */
     function addEntry(category: string, topic: string, entry: ValuesEntry): boolean {
         if (values.hasOwnProperty(category)) {
             const index = values[category].findIndex(t => t.name === topic);

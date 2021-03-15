@@ -17,6 +17,13 @@ type ModifyCalendar = {
 export const calendarKey: string = "calendar";
 export const calendarDefault: Calendar = [];
 
+/**
+ * Compares two calendar entries and returns `true` if they are equal.
+ *
+ * @param a - The first calendar entry
+ * @param b - The second calendar entry
+ * @returns a === b
+ */
 function entryEq(a: CalendarEntry, b: CalendarEntry) {
     return a.date === b.date
         && a.start === b.start
@@ -26,9 +33,40 @@ function entryEq(a: CalendarEntry, b: CalendarEntry) {
         && a.person === b.person;
 }
 
+/**
+ * Hook returning the calendar and functions to modify the calendar.
+ *
+ * @example
+ * Get the calendar and print it:
+ * ```
+ * const [calendar, modifyCalendar] = Storage.useCalendar();
+ * // Prints a large object
+ * console.log(calendar);
+ * ```
+ *
+ * @example
+ * Add an event to the calendar:
+ * ```
+ * const [calendar, modifyCalendar] = Storage.useCalendar();
+ * modifyCalendar.add({
+ *     date: "2021-03-12",
+ *     start: "15.00",
+ *     end: "16.00",
+ *     text: "Game night",
+ *     icon: "pawn",
+ *     person: "Erik",
+ * });
+ * ```
+ */
 export function useCalendar(): [Calendar, ModifyCalendar] {
     const [calendar, setCalendar] = useState<Calendar>(calendarDefault);
 
+    /**
+     * Adds an entry to the calendar and updates AsyncStorage.
+     *
+     * @param entry - The entry to be added
+     * @returns `true` if the entry was added, `false` otherwise
+     */
     function add(entry: CalendarEntry): boolean {
         if (!calendar.some(elem => entryEq(elem, entry))) {
             const newCalendar = [...calendar, entry];
