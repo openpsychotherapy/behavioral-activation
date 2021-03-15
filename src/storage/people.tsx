@@ -10,7 +10,7 @@ export const peopleKey: string = "people";
 export const peopleDefault: People = [];
 
 export function usePeople(): [People, ModifyPeople] {
-    const [people, setPeople] = useState<People>([]);
+    const [people, setPeople] = useState<People>(peopleDefault);
 
     function add(p: string): boolean {
         if (!people.includes(p)) {
