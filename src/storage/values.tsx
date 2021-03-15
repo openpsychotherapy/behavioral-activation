@@ -15,9 +15,11 @@ type Values = {
     enjoyment: ValuesTopic[];
     health: ValuesTopic[];
     work: ValuesTopic[];
+    [index: string]: ValuesTopic[];
 };
 type ModifyValues = {
-    add: (entry: ValuesEntry) => boolean;
+    addTopic: (category: string, topic: string) => boolean;
+    addEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
 };
 
 export const valuesKey: string = "values";
@@ -35,27 +37,45 @@ function entryEq(a: ValuesEntry, b: ValuesEntry) {
 }
 
 export function useValues(): [Values, ModifyValues] {
-    const [calendar, setCalendar] = useState<Values>([]);
+    const [values, setValues] = useState<Values>(valuesDefault);
 
-    function add(entry: ValuesEntry): boolean {
-        if (!calendar.some(elem => entryEq(elem, entry))) {
-            const newCalendar = [...calendar, entry];
-            AsyncStorage.setItem(valuesKey, JSON.stringify(newCalendar))
-                .then(() => setCalendar(newCalendar));
-            return true;
+    function addTopic(category: string, topic: string): boolean {
+        if (values.hasOwnProperty(category)) {
+            if (!values[category].some(t => t.name === topic)) {
+                const newValues = JSON.parse(JSON.stringify(values));
+                newValues[category].push({ name: topic, entries: [] });
+                AsyncStorage.setItem(valuesKey, JSON.stringify(newValues))
+                    .then(() => setValues(newValues));
+                return true;
+            }
         }
         return false;
     }
 
-    const modifyCalendar = {
-        add: add,
+    function addEntry(category: string, topic: string, entry: ValuesEntry): boolean {
+        if (values.hasOwnProperty(category)) {
+            const index = values[category].findIndex(t => t.name === topic);
+            if (index !== -1 && !values[category][index].entries.some(e => entryEq(entry, e))) {
+                const newValues = JSON.parse(JSON.stringify(values));
+                newValues[category][index].entries.push(entry);
+                AsyncStorage.setItem(valuesKey, JSON.stringify(newValues))
+                    .then(() => setValues(newValues));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    const modifyValues = {
+        addTopic: addTopic,
+        addEntry: addEntry,
     };
 
     useEffect(() => {
         AsyncStorage.getItem(valuesKey)
             .then(v => v === null ? valuesDefault : JSON.parse(v))
-            .then(v => setCalendar(v));
+            .then(v => setValues(v));
     } ,[]);
 
-    return [calendar, modifyCalendar];
+    return [values, modifyValues];
 }
