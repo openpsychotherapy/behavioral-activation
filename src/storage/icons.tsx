@@ -48,7 +48,7 @@ export function useIcons(): [Icons, ModifyIcons] {
         AsyncStorage.getItem(iconsKey)
             .then(v => v === null ? iconsDefault : JSON.parse(v))
             .then(v => setIcons(v));
-    } ,[]);
+    }, []);
 
     return [icons, modifyIcons];
 }

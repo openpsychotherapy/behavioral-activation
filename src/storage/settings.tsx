@@ -40,7 +40,7 @@ export function useSettings(): [Settings, ModifySettings] {
         AsyncStorage.getItem(settingsKey)
             .then(v => v === null ? settingsDefault : JSON.parse(v))
             .then(v => setSettings(v));
-    } ,[]);
+    }, []);
 
     return [settings, modifySettings];
 }

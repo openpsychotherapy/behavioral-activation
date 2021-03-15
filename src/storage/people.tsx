@@ -30,7 +30,7 @@ export function usePeople(): [People, ModifyPeople] {
         AsyncStorage.getItem(peopleKey)
             .then(v => v === null ? peopleDefault : JSON.parse(v))
             .then(v => setPeople(v));
-    } ,[]);
+    }, []);
 
     return [people, modifyPeople];
 }

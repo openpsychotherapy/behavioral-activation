@@ -27,7 +27,7 @@ function entryEq(a: CalendarEntry, b: CalendarEntry) {
 }
 
 export function useCalendar(): [Calendar, ModifyCalendar] {
-    const [calendar, setCalendar] = useState<Calendar>([]);
+    const [calendar, setCalendar] = useState<Calendar>(calendarDefault);
 
     function add(entry: CalendarEntry): boolean {
         if (!calendar.some(elem => entryEq(elem, entry))) {
@@ -47,7 +47,7 @@ export function useCalendar(): [Calendar, ModifyCalendar] {
         AsyncStorage.getItem(calendarKey)
             .then(v => v === null ? calendarDefault : JSON.parse(v))
             .then(v => setCalendar(v));
-    } ,[]);
+    }, []);
 
     return [calendar, modifyCalendar];
 }

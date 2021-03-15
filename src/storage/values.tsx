@@ -75,7 +75,7 @@ export function useValues(): [Values, ModifyValues] {
         AsyncStorage.getItem(valuesKey)
             .then(v => v === null ? valuesDefault : JSON.parse(v))
             .then(v => setValues(v));
-    } ,[]);
+    }, []);
 
     return [values, modifyValues];
 }
