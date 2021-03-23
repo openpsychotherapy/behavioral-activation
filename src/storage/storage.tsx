@@ -21,14 +21,14 @@ export function initStorage(): void {
  * This should ONLY(!!!) be used for debugging purposes.
  */
 export function clearStorage(): void {
-    AsyncStorage.clear();
+  AsyncStorage.clear();
 }
 
 export {
-    usePeople,
-    useSettings,
-    useIcons,
-    useCalendar,
-    useValues,
-    useActivities,
+  usePeople,
+  useSettings,
+  useIcons,
+  useCalendar,
+  useValues,
+  useActivities,
 };

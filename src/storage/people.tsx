@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type People = string[];
 type ModifyPeople = {
-    add: (p: string) => boolean;
+  add: (p: string) => boolean;
 };
 
 export const peopleKey: string = "people";
@@ -27,33 +27,33 @@ export const peopleDefault: People = [];
  * ```
  */
 export function usePeople(): [People, ModifyPeople] {
-    const [people, setPeople] = useState<People>(peopleDefault);
+  const [people, setPeople] = useState<People>(peopleDefault);
 
-    /**
-     * Adds a person to the list of people and updates AsyncStorage.
-     *
-     * @param person - The person to be added to the list
-     * @returns `true` if the person was added, `false` otherwise
-     */
-    function add(person: string): boolean {
-        if (!people.includes(person)) {
-            const newPeople = [...people, person];
-            AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
-                .then(() => setPeople(newPeople));
-            return true;
-        }
-        return false;
+  /**
+   * Adds a person to the list of people and updates AsyncStorage.
+   *
+   * @param person - The person to be added to the list
+   * @returns `true` if the person was added, `false` otherwise
+   */
+  function add(person: string): boolean {
+    if (!people.includes(person)) {
+      const newPeople = [...people, person];
+      AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
+        .then(() => setPeople(newPeople));
+      return true;
     }
+    return false;
+  }
 
-    const modifyPeople = {
-        add: add,
-    };
+  const modifyPeople = {
+    add: add,
+  };
 
-    useEffect(() => {
-        AsyncStorage.getItem(peopleKey)
-            .then(v => v === null ? peopleDefault : JSON.parse(v))
-            .then(v => setPeople(v));
-    }, []);
+  useEffect(() => {
+    AsyncStorage.getItem(peopleKey)
+    .then(v => v === null ? peopleDefault : JSON.parse(v))
+    .then(v => setPeople(v));
+  }, []);
 
-    return [people, modifyPeople];
+  return [people, modifyPeople];
 }
