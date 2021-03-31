@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type People = string[];
 type ModifyPeople = {
-  add: (p: string) => boolean;
+  add: (person: string) => boolean;
 };
 
 export const peopleKey: string = "people";
