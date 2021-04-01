@@ -26,7 +26,7 @@ export const peopleDefault: People = [];
  * modifyPeople.add("Erik");
  * ```
  */
-export function usePeople(): [People, ModifyPeople] {
+export const usePeople = (): [People, ModifyPeople] => {
   const [people, setPeople] = useState<People>(peopleDefault);
 
   /**
@@ -35,7 +35,7 @@ export function usePeople(): [People, ModifyPeople] {
    * @param person - The person to be added to the list
    * @returns `true` if the person was added, `false` otherwise
    */
-  function add(person: string): boolean {
+  const add = (person: string): boolean => {
     if (!people.includes(person)) {
       const newPeople = [...people, person];
       AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))

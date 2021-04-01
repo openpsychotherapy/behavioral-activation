@@ -30,7 +30,7 @@ export const iconsDefault: Icons = [
  * modifyIcons.swap(0, 1);
  * ```
  */
-export function useIcons(): [Icons, ModifyIcons] {
+export const useIcons = (): [Icons, ModifyIcons] => {
   const [icons, setIcons] = useState<Icons>([]);
 
   /**
@@ -39,7 +39,7 @@ export function useIcons(): [Icons, ModifyIcons] {
    * @param icon - The icon to be added to the list
    * @returns `true` if the icon was added, `false` otherwise
    */
-  function add(p: string): boolean {
+  const add = (p: string): boolean => {
     if (!icons.includes(p)) {
       const newIcons = [...icons, p];
       AsyncStorage.setItem(iconsKey, JSON.stringify(newIcons))
@@ -59,7 +59,7 @@ export function useIcons(): [Icons, ModifyIcons] {
    * @param b - The index of the second icon
    * @returns `true` if the icons were swapped, `false` otherwise
    */
-  function swap(a: number, b: number): boolean {
+  const swap = (a: number, b: number): boolean => {
     if (a !== b && 0 <= a && a < icons.length && 0 <= b && b < icons.length) {
       let newIcons = [...icons];
       const temp = newIcons[a];

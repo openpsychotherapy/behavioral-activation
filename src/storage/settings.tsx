@@ -33,7 +33,7 @@ export const settingsDefault: Settings = {
  * modifySettings.setNotifications(true);
  * ```
  */
-export function useSettings(): [Settings, ModifySettings] {
+export const useSettings = (): [Settings, ModifySettings] => {
   const [settings, setSettings] = useState<Settings>(settingsDefault);
 
   /**
@@ -41,7 +41,7 @@ export function useSettings(): [Settings, ModifySettings] {
    *
    * @param value - The value to set notifications to
    */
-  function setNotifications(value: boolean): void {
+  const setNotifications = (value: boolean): void => {
     let newSettings = { ...settings, notifications: value };
     AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))
       .then(() => setSettings(newSettings));
@@ -52,7 +52,7 @@ export function useSettings(): [Settings, ModifySettings] {
    *
    * @param value - The two letter language code
    */
-  function setLanguage(value: string): void {
+  const setLanguage = (value: string): void => {
     let newSettings = { ...settings, language: value };
     AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))
       .then(() => setSettings(newSettings));

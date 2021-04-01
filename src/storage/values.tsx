@@ -38,7 +38,7 @@ export const valuesDefault: Values = {
  * @param b - The second value entry
  * @returns a === b
  */
-function entryEq(a: ValuesEntry, b: ValuesEntry) {
+const entryEq = (a: ValuesEntry, b: ValuesEntry) => {
   return a.text === b.text
       && a.icon === b.icon;
 }
@@ -64,7 +64,7 @@ function entryEq(a: ValuesEntry, b: ValuesEntry) {
  * });
  * ```
  */
-export function useValues(): [Values, ModifyValues] {
+export const useValues = (): [Values, ModifyValues] => {
   const [values, setValues] = useState<Values>(valuesDefault);
 
   /**
@@ -74,7 +74,7 @@ export function useValues(): [Values, ModifyValues] {
    * @param topic - The name of the topic
    * @returns `true` if the topic was added, `false` otherwise
    */
-  function addTopic(category: string, topic: string): boolean {
+  const addTopic = (category: string, topic: string): boolean => {
     if (values.hasOwnProperty(category)) {
       if (!values[category].some(t => t.name === topic)) {
         const newValues = JSON.parse(JSON.stringify(values));
@@ -94,7 +94,7 @@ export function useValues(): [Values, ModifyValues] {
    * @param topic - The topic in which the entry should be added
    * @returns `true` if the entry was added, `false` otherwise
    */
-  function addEntry(category: string, topic: string, entry: ValuesEntry): boolean {
+  const addEntry = (category: string, topic: string, entry: ValuesEntry): boolean => {
     if (values.hasOwnProperty(category)) {
       const index = values[category].findIndex(t => t.name === topic);
       if (index !== -1 && !values[category][index].entries.some(e => entryEq(entry, e))) {

@@ -11,7 +11,7 @@ import { useActivities } from './activities';
 /**
  * May be used for initializing the database in the future.
  */
-export function initStorage(): void {
+export const initStorage = (): void => {
 }
 
 /**
@@ -20,7 +20,7 @@ export function initStorage(): void {
  * @remarks
  * This should ONLY(!!!) be used for debugging purposes.
  */
-export function clearStorage(): void {
+export const clearStorage = (): void => {
   AsyncStorage.clear();
 }
 

@@ -24,7 +24,7 @@ export const calendarDefault: Calendar = [];
  * @param b - The second calendar entry
  * @returns a === b
  */
-function entryEq(a: CalendarEntry, b: CalendarEntry) {
+const entryEq = (a: CalendarEntry, b: CalendarEntry) => {
   return a.date === b.date
       && a.start === b.start
       && a.end === b.end
@@ -58,7 +58,7 @@ function entryEq(a: CalendarEntry, b: CalendarEntry) {
  * });
  * ```
  */
-export function useCalendar(): [Calendar, ModifyCalendar] {
+export const useCalendar = (): [Calendar, ModifyCalendar] => {
   const [calendar, setCalendar] = useState<Calendar>(calendarDefault);
 
   /**
@@ -67,7 +67,7 @@ export function useCalendar(): [Calendar, ModifyCalendar] {
    * @param entry - The entry to be added
    * @returns `true` if the entry was added, `false` otherwise
    */
-  function add(entry: CalendarEntry): boolean {
+  const add = (entry: CalendarEntry): boolean => {
     if (!calendar.some(elem => entryEq(elem, entry))) {
       const newCalendar = [...calendar, entry];
       AsyncStorage.setItem(calendarKey, JSON.stringify(newCalendar))

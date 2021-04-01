@@ -46,7 +46,7 @@ export const activitiesDefault: Activities = [];
  * });
  * ```
  */
-export function useActivities(): [Activities, ModifyActivities] {
+export const useActivities = (): [Activities, ModifyActivities] => {
   const [activities, setActivities] = useState<Activities>(activitiesDefault);
 
   /**
@@ -58,7 +58,7 @@ export function useActivities(): [Activities, ModifyActivities] {
    * @param date - The date to be inserted
    * @returns The activities object with specified date inserted
    */
-  function _insertDay(date: string): Activities {
+  const _insertDay = (date: string): Activities => {
     const newActivities = JSON.parse(JSON.stringify(activities));
     if (!activities.some(a => a.date === date)) {
       newActivities.push({
@@ -84,7 +84,7 @@ export function useActivities(): [Activities, ModifyActivities] {
    * @param entry - The entry to be inserted
    * @returns `true` if the entry was inserted, `false` otherwise
    */
-  function add(date: string, hour: number, entry: ActivitiesEntry): boolean {
+  const add = (date: string, hour: number, entry: ActivitiesEntry): boolean => {
     if (0 <= hour && hour < 24) {
       const newActivities = _insertDay(date);
       const index = newActivities.findIndex(a => a.date === date);
