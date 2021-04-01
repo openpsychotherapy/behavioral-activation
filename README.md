@@ -2,7 +2,7 @@
 
 ## Code style
 
-These are only guidelines, and may be ignored if it is appropriate.
+These are only guidelines, and may be ignored if appropriate.
 
 * Use 2 spaces for indentation.
 * Use UNIX line endings ([vscode](https://stackoverflow.com/a/48694365),
@@ -14,13 +14,13 @@ These are only guidelines, and may be ignored if it is appropriate.
 Defining functions
 
 ```TypeScript
-    // preferred
-    const f = (a: number, b: number): number => {
-        return a + b;
-    }
+// preferred
+const f = (a: number, b: number): number => {
+    return a + b;
+}
 
-    // avoid
-    function f(a: number, b: number): number {
-        return a + b;
-    }
+// avoid
+function f(a: number, b: number): number {
+    return a + b;
+}
 ```
