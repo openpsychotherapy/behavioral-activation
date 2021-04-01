@@ -10,6 +10,7 @@ These are only guidelines, and may be ignored if appropriate.
 * Use `const` for constants and `let` for variables. Never use `var`.
 * Use Hooks instead of classes.
 * Avoid the `any` type whenever possible.
+* Write documentation using [TSDoc](https://tsdoc.org/)
 
 Defining functions
 
