@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Text, Button, Surface, IconButton, useTheme } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -27,9 +27,45 @@ const IconSettingsView = () => (
   </View>
 );
 
-const ViewContent = ({ navigation }: any) => {
+const CircleButton = (props: any) => {
   return (
-    <IconMeny navigation={navigation} />
+    <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
+      <IconButton icon={props.icon} size={props.size} />
+    </Surface >
+  );
+}
+
+const ViewContent = ({ navigation }: any) => {
+  let navigationButtonSize = 40;
+
+  const { colors } = useTheme();
+
+  const iconListButton = () => {
+    navigation.navigate('IconList');
+  };
+
+  const historyButton = () => {
+    navigation.navigate('History');
+  };
+
+  const iconSettingsButton = () => {
+    navigation.navigate('IconSettings');
+  };
+
+  const iconPressCallback = (pressedIcon: Number, icon: String) => {
+    console.log(pressedIcon + " - " + icon);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <IconMeny pressCallback={iconPressCallback} />
+
+      <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+        <CircleButton icon='menu' size={navigationButtonSize} backgroundColor={colors.accent} onPress={iconListButton} />
+        <CircleButton icon='calendar-check' size={navigationButtonSize} backgroundColor={colors.accent} />
+        <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
+      </View>
+    </View>
   );
 }
 
