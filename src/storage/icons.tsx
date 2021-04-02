@@ -9,8 +9,20 @@ type ModifyIcons = {
 
 export const iconsKey: string = "icons";
 export const iconsDefault: Icons = [
-  "folder",
-  "person",
+  "format-text",
+  "bed-empty",
+  "brush",
+  "dumbbell",
+
+  "food-fork-drink",
+  "account-supervisor",
+  "nature",
+  "music",
+
+  "run",
+  "gamepad-variant",
+  "chat",
+  "car"
 ];
 
 /**
@@ -79,8 +91,8 @@ export const useIcons = (): [Icons, ModifyIcons] => {
 
   useEffect(() => {
     AsyncStorage.getItem(iconsKey)
-    .then(value => value === null ? iconsDefault : JSON.parse(value))
-    .then(value => setIcons(value));
+      .then(value => value === null ? iconsDefault : JSON.parse(value))
+      .then(value => setIcons(value));
   }, []);
 
   return [icons, modifyIcons];
