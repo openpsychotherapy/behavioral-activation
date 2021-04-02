@@ -1,27 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { IconButton } from 'react-native-paper';
-
-
-const icons = [
-  "format-text",
-  "bed-empty",
-  "brush",
-  "dumbbell",
-
-  "food-fork-drink",
-  "account-supervisor",
-  "nature",
-  "music",
-
-  "run",
-  "gamepad-variant",
-  "chat",
-  "car"
-];
-
+import Storage from 'storage';
 
 export const IconMeny = (props: any) => {
+  const [icons, modifyIcons] = Storage.useIcons();
   let iconSize = 60;
 
   return (
