@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext } from 'react';
+import { StorageContext } from './context';
 
-type Settings = {
+interface Settings {
   notifications: boolean;
   language: string;
-};
-type ModifySettings = {
+}
+
+interface ModifySettings {
   setNotifications: (value: boolean) => void;
   setLanguage: (value: string) => void;
-};
+}
 
 export const settingsKey: string = "settings";
 export const settingsDefault: Settings = {
@@ -34,40 +35,31 @@ export const settingsDefault: Settings = {
  * ```
  */
 export const useSettings = (): [Settings, ModifySettings] => {
-  const [settings, setSettings] = useState<Settings>(settingsDefault);
+  const { store, setStoreItem } = useContext(StorageContext);
+  const settings: Settings = store[settingsKey];
 
   /**
-   * Sets the notifications and updates AsyncStorage.
+   * Sets the notifications and updates the store.
    *
    * @param value - The value to set notifications to
    */
   const setNotifications = (value: boolean): void => {
-    let newSettings = { ...settings, notifications: value };
-    AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))
-      .then(() => setSettings(newSettings));
+    setStoreItem(settingsKey, { ...settings, notifications: value });
   }
 
   /**
-   * Sets the language and updates AsyncStorage.
+   * Sets the language and updates the store.
    *
    * @param value - The two letter language code
    */
   const setLanguage = (value: string): void => {
-    let newSettings = { ...settings, language: value };
-    AsyncStorage.setItem(settingsKey, JSON.stringify(newSettings))
-      .then(() => setSettings(newSettings));
+      setStoreItem(settingsKey, { ...settings, language: value });
   }
 
   const modifySettings: ModifySettings = {
     setNotifications: setNotifications,
     setLanguage: setLanguage,
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem(settingsKey)
-    .then(value => value === null ? settingsDefault : JSON.parse(value))
-    .then(value => setSettings(value));
-  }, []);
 
   return [settings, modifySettings];
 }

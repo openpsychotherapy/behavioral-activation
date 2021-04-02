@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext } from 'react';
+import { StorageContext } from './context';
 
 type People = string[];
-type ModifyPeople = {
+
+interface ModifyPeople {
   add: (person: string) => boolean;
-};
+}
 
 export const peopleKey: string = "people";
 export const peopleDefault: People = [];
@@ -27,19 +28,18 @@ export const peopleDefault: People = [];
  * ```
  */
 export const usePeople = (): [People, ModifyPeople] => {
-  const [people, setPeople] = useState<People>(peopleDefault);
+  const { store, setStoreItem } = useContext(StorageContext);
+  const people: People = store[peopleKey];
 
   /**
-   * Adds a person to the list of people and updates AsyncStorage.
+   * Adds a person to the list of people and updates the store.
    *
    * @param person - The person to be added to the list
    * @returns `true` if the person was added, `false` otherwise
    */
   const add = (person: string): boolean => {
     if (!people.includes(person)) {
-      const newPeople = [...people, person];
-      AsyncStorage.setItem(peopleKey, JSON.stringify(newPeople))
-        .then(() => setPeople(newPeople));
+      setStoreItem(peopleKey, [...people, person]);
       return true;
     }
     return false;
@@ -48,12 +48,6 @@ export const usePeople = (): [People, ModifyPeople] => {
   const modifyPeople: ModifyPeople = {
     add: add,
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem(peopleKey)
-    .then(value => value === null ? peopleDefault : JSON.parse(value))
-    .then(value => setPeople(value));
-  }, []);
 
   return [people, modifyPeople];
 }
