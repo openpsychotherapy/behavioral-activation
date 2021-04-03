@@ -1,37 +1,21 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { Portal, Dialog, IconButton, useTheme } from 'react-native-paper';
-
-let icons = [
-  "format-text",
-  "bed-empty",
-  "brush",
-  "dumbbell",
-
-  "food-fork-drink",
-  "account-supervisor",
-  "nature",
-  "music",
-
-  "run",
-  "gamepad-variant",
-  "chat",
-  "car",
-];
-
-icons = [...icons, ...icons, ...icons];
+import { Portal, Dialog, IconButton, useTheme, } from 'react-native-paper';
+import Storage from 'storage';
 
 export const IconList = (props: any) => {
+  const [icons, modifyIcons] = Storage.useIcons();
   const { iconSizes } = useTheme();
 
   const hideDialog = () => props.setVisible(false);
 
   const items = [];
   const iconsPerRow = 3;
+  const startIndex = 12; // Index offset to exlude default items
 
   let currentSegment = [];
 
-  for (let i = 0; i < icons.length; ++i) {
+  for (let i = startIndex; i < icons.length; ++i) {
     const value = icons[i];
 
     // Add iconbutton to current segment

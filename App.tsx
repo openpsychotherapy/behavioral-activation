@@ -6,6 +6,23 @@ import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './src/components/RootNavigator';
 import { Provider as StorageProvider } from 'storage/context';
 
+// Typescript custom theme declaration
+declare global {
+  namespace ReactNativePaper {
+    interface ThemeColors {
+
+    }
+    interface Theme {
+      iconSizes: {
+        small: number,
+        medium: number,
+        large: number
+      }
+    }
+  }
+}
+
+// Custom theme
 const customTheme = {
   ...DefaultTheme,
   colors: {
