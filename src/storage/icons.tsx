@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Icons = string[];
 type ModifyIcons = {
-  add: (p: string) => boolean;
-  swap: (a: number, b: number) => boolean;
+  add: (icon: string) => boolean;
+  swap: (i1: number, i2: number) => boolean;
 };
 
 export const iconsKey: string = "icons";
@@ -39,9 +39,9 @@ export const useIcons = (): [Icons, ModifyIcons] => {
    * @param icon - The icon to be added to the list
    * @returns `true` if the icon was added, `false` otherwise
    */
-  const add = (p: string): boolean => {
-    if (!icons.includes(p)) {
-      const newIcons = [...icons, p];
+  const add = (icon: string): boolean => {
+    if (!icons.includes(icon)) {
+      const newIcons = [...icons, icon];
       AsyncStorage.setItem(iconsKey, JSON.stringify(newIcons))
         .then(() => setIcons(newIcons));
       return true;
@@ -55,16 +55,16 @@ export const useIcons = (): [Icons, ModifyIcons] => {
    * @remark
    * Swapping the same index will return `false`.
    *
-   * @param a - The index of the first icon
-   * @param b - The index of the second icon
+   * @param i1 - The index of the first icon
+   * @param i2 - The index of the second icon
    * @returns `true` if the icons were swapped, `false` otherwise
    */
-  const swap = (a: number, b: number): boolean => {
-    if (a !== b && 0 <= a && a < icons.length && 0 <= b && b < icons.length) {
+  const swap = (i1: number, i2: number): boolean => {
+    if (i1 !== i2 && 0 <= i1 && i1 < icons.length && 0 <= i2 && i2 < icons.length) {
       let newIcons = [...icons];
-      const temp = newIcons[a];
-      newIcons[a] = newIcons[b];
-      newIcons[b] = temp;
+      const temp = newIcons[i1];
+      newIcons[i1] = newIcons[i2];
+      newIcons[i2] = temp;
       AsyncStorage.setItem(iconsKey, JSON.stringify(newIcons))
         .then(() => setIcons(newIcons));
       return true;
