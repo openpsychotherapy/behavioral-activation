@@ -80,8 +80,8 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @remarks
    * This function will add the date if not present.
    *
-   * @param date - The date on which the entry will be inserted
-   * @param hour - The hour on which the entry will be inserted
+   * @param date - The date on which the entry will be inserted (YYYY-mm-dd)
+   * @param hour - The hour on which the entry will be inserted [0, 23]
    * @param entry - The entry to be inserted
    * @returns `true` if the entry was inserted, `false` otherwise
    */
