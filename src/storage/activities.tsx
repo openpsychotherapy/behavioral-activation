@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isDate } from './utils';
 
 type ActivitiesEntry = {
   text: string;
@@ -55,7 +56,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @remarks
    * A date will not be inserted if already present.
    *
-   * @param date - The date to be inserted
+   * @param date - The date to be inserted (YYYY-mm-dd)
    * @returns The activities object with specified date inserted
    */
   const _insertDay = (date: string): Activities => {
@@ -85,7 +86,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns `true` if the entry was inserted, `false` otherwise
    */
   const add = (date: string, hour: number, entry: ActivitiesEntry): boolean => {
-    if (0 <= hour && hour < 24) {
+    if (isDate(date) && 0 <= hour && hour < 24) {
       const newActivities = _insertDay(date);
       const index = newActivities.findIndex(a => a.date === date);
       newActivities[index].entries[hour] = entry;

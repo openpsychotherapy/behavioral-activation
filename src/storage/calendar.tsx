@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isDate, isTime } from './utils';
 
 type CalendarEntry = {
   date: string;
@@ -50,8 +51,8 @@ const entryEq = (a: CalendarEntry, b: CalendarEntry) => {
  * const [calendar, modifyCalendar] = Storage.useCalendar();
  * modifyCalendar.add({
  *     date: "2021-03-12",
- *     start: "15.00",
- *     end: "16.00",
+ *     start: "15:00",
+ *     end: "16:00",
  *     text: "Game night",
  *     icon: "pawn",
  *     person: "Erik",
@@ -68,7 +69,11 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
    * @returns `true` if the entry was added, `false` otherwise
    */
   const add = (entry: CalendarEntry): boolean => {
-    if (!calendar.some(elem => entryEq(elem, entry))) {
+    const isValidEntry = isDate(entry.date)
+                       && isTime(entry.start)
+                       && isTime(entry.end)
+                       && !calendar.some(elem => entryEq(elem, entry));
+    if (isValidEntry) {
       const newCalendar = [...calendar, entry];
       AsyncStorage.setItem(calendarKey, JSON.stringify(newCalendar))
         .then(() => setCalendar(newCalendar));

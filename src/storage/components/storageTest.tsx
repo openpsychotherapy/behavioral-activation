@@ -15,8 +15,8 @@ export default function StorageTest() {
     const addCalendarEntry = () => {
         modifyCalendar.add({
             date: "2021-03-12",
-            start: "15.00",
-            end: "16.00",
+            start: "15:00",
+            end: "16:00",
             text: "Hello",
             icon: "person",
             person: "Erik",
