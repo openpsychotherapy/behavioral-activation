@@ -7,26 +7,22 @@ import { CustomNavigationBar } from './CustomNavigationBar';
 
 const CalendarStack = createStackNavigator();
 
-function ViewContent() {
+const ViewContent = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Calendar</Text>
-      </View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Calendar</Text>
     </View>
   );
 }
 
-export function CalendarScreen() {
+export const CalendarScreen = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <CalendarStack.Navigator initialRouteName="Calendar" headerMode="float"
-        screenOptions={{
-          header: (props) => <CustomNavigationBar {...props} />,
-        }}
-      >
-        <CalendarStack.Screen name="Calendar" component={ViewContent} />
-      </CalendarStack.Navigator>
-    </View>
+    <CalendarStack.Navigator initialRouteName="Calendar" headerMode="float"
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} />,
+      }}
+    >
+      <CalendarStack.Screen name="Calendar" component={ViewContent} />
+    </CalendarStack.Navigator>
   );
 }

@@ -7,26 +7,22 @@ import { CustomNavigationBar } from './CustomNavigationBar';
 
 const ValuesStack = createStackNavigator();
 
-function ViewContent() {
+const ViewContent = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Values</Text>
-      </View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Values</Text>
     </View>
   );
 }
 
-export function ValuesScreen() {
+export const ValuesScreen = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <ValuesStack.Navigator initialRouteName="Values" headerMode="float"
-        screenOptions={{
-          header: (props) => <CustomNavigationBar {...props} />,
-        }}
-      >
-        <ValuesStack.Screen name="Values" component={ViewContent} />
-      </ValuesStack.Navigator>
-    </View>
+    <ValuesStack.Navigator initialRouteName="Values" headerMode="float"
+      screenOptions={{
+        header: (props) => <CustomNavigationBar {...props} />,
+      }}
+    >
+      <ValuesStack.Screen name="Values" component={ViewContent} />
+    </ValuesStack.Navigator>
   );
 }

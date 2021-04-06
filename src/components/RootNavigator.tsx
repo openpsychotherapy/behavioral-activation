@@ -9,7 +9,7 @@ import { InformationScreen } from './InformationScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export function RootNavigator() {
+export const RootNavigator = () => {
   return (
     <Tab.Navigator initialRouteName="Activity" shifting={true} sceneAnimationEnabled={false} labeled={false}>
       <Tab.Screen name="Activites" component={ActivityScreen} options={{tabBarIcon: 'plus'}}/>
