@@ -58,15 +58,15 @@ export const useSettings = (): [Settings, ModifySettings] => {
       .then(() => setSettings(newSettings));
   }
 
-  const modifySettings = {
+  const modifySettings: ModifySettings = {
     setNotifications: setNotifications,
     setLanguage: setLanguage,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(settingsKey)
-    .then(v => v === null ? settingsDefault : JSON.parse(v))
-    .then(v => setSettings(v));
+    .then(value => value === null ? settingsDefault : JSON.parse(value))
+    .then(value => setSettings(value));
   }, []);
 
   return [settings, modifySettings];

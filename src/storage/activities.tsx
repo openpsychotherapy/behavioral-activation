@@ -97,14 +97,14 @@ export const useActivities = (): [Activities, ModifyActivities] => {
     return false;
   }
 
-  const modifyActivities = {
+  const modifyActivities: ModifyActivities = {
     add: add,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(activitiesKey)
-    .then(v => v === null ? activitiesDefault : JSON.parse(v))
-    .then(v => setActivities(v));
+    .then(value => value === null ? activitiesDefault : JSON.parse(value))
+    .then(value => setActivities(value));
   }, []);
 
   return [activities, modifyActivities];

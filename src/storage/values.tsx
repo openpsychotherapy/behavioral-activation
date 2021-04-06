@@ -108,15 +108,15 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
-  const modifyValues = {
+  const modifyValues: ModifyValues = {
     addTopic: addTopic,
     addEntry: addEntry,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(valuesKey)
-    .then(v => v === null ? valuesDefault : JSON.parse(v))
-    .then(v => setValues(v));
+    .then(value => value === null ? valuesDefault : JSON.parse(value))
+    .then(value => setValues(value));
   }, []);
 
   return [values, modifyValues];

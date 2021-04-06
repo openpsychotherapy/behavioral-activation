@@ -72,15 +72,15 @@ export const useIcons = (): [Icons, ModifyIcons] => {
     return false;
   }
 
-  const modifyIcons = {
+  const modifyIcons: ModifyIcons = {
     add: add,
     swap: swap,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(iconsKey)
-    .then(v => v === null ? iconsDefault : JSON.parse(v))
-    .then(v => setIcons(v));
+    .then(value => value === null ? iconsDefault : JSON.parse(value))
+    .then(value => setIcons(value));
   }, []);
 
   return [icons, modifyIcons];

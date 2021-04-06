@@ -45,14 +45,14 @@ export const usePeople = (): [People, ModifyPeople] => {
     return false;
   }
 
-  const modifyPeople = {
+  const modifyPeople: ModifyPeople = {
     add: add,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(peopleKey)
-    .then(v => v === null ? peopleDefault : JSON.parse(v))
-    .then(v => setPeople(v));
+    .then(value => value === null ? peopleDefault : JSON.parse(value))
+    .then(value => setPeople(value));
   }, []);
 
   return [people, modifyPeople];

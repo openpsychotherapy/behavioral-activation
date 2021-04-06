@@ -25,7 +25,7 @@ export const calendarDefault: Calendar = [];
  * @param b - The second calendar entry
  * @returns a === b
  */
-const entryEq = (a: CalendarEntry, b: CalendarEntry) => {
+const entryEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
   return a.date === b.date
       && a.start === b.start
       && a.end === b.end
@@ -82,14 +82,14 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
     return false;
   }
 
-  const modifyCalendar = {
+  const modifyCalendar: ModifyCalendar = {
     add: add,
   };
 
   useEffect(() => {
     AsyncStorage.getItem(calendarKey)
-    .then(v => v === null ? calendarDefault : JSON.parse(v))
-    .then(v => setCalendar(v));
+    .then(value => value === null ? calendarDefault : JSON.parse(value))
+    .then(value => setCalendar(value));
   }, []);
 
   return [calendar, modifyCalendar];
