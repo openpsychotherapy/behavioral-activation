@@ -38,7 +38,7 @@ export const valuesDefault: Values = {
  * @param b - The second value entry
  * @returns a === b
  */
-const entryEq = (a: ValuesEntry, b: ValuesEntry) => {
+const entryEq = (a: ValuesEntry, b: ValuesEntry): boolean => {
   return a.text === b.text
       && a.icon === b.icon;
 }
