@@ -11,6 +11,7 @@ These are only guidelines, and may be ignored if appropriate.
 * Use Hooks instead of classes.
 * Avoid the `any` type whenever possible.
 * Write documentation using [TSDoc](https://tsdoc.org/).
+* Exported functions must have typing and documentation.
 
 Defining functions
 
