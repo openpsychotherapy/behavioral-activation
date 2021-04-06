@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { TextInput, Provider, Button } from 'react-native-paper';
-import Storage from './..';
+import Storage, { clearStorage } from 'storage';
 
 export default function StorageTest() {
     const [text, setText] = React.useState('');
@@ -44,7 +44,7 @@ export default function StorageTest() {
     return (
         <Provider>
           <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                <Button onPress={() => Storage.clearStorage()}>Clear (requires reload)</Button>
+                <Button onPress={() => clearStorage()}>Clear (requires reload)</Button>
 
                 <pre>Calendar: {JSON.stringify(calendar, null, 4)}</pre>
                 <Button onPress={addCalendarEntry}>Add calendar entry</Button>
