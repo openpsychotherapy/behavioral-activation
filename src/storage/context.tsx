@@ -15,7 +15,7 @@ interface StorageContextType {
   setStoreItem: (key: string, value: any) => void;
 }
 
-const storageDefault: StorageContextType = {
+const contextDefault: StorageContextType = {
   store: {
     [activitiesKey]: activitiesDefault,
     [calendarKey]: calendarDefault,
@@ -27,10 +27,10 @@ const storageDefault: StorageContextType = {
   setStoreItem: (key: string, value: any) => {},
 };
 
-export const StorageContext = createContext<StorageContextType>(storageDefault);
+export const StorageContext = createContext<StorageContextType>(contextDefault);
 
 export const Provider = (props: any) => {
-  const [store, setStore] = useState(storageDefault.store);
+  const [store, setStore] = useState(contextDefault.store);
 
   const setStoreItem = (key: string, value: any) => {
     AsyncStorage.setItem(key, JSON.stringify(value));

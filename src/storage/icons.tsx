@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 
 type Icons = string[];
-type ModifyIcons = {
+
+interface ModifyIcons {
   add: (icon: string) => boolean;
   swap: (i1: number, i2: number) => boolean;
-};
+}
 
 export const iconsKey: string = "icons";
 export const iconsDefault: Icons = [

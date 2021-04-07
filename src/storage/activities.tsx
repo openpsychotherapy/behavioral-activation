@@ -17,9 +17,10 @@ interface ActivitiesDay {
 }
 
 type Activities = ActivitiesDay[];
-type ModifyActivities = {
+
+interface ModifyActivities {
   add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
-};
+}
 
 export const activitiesKey: string = "activities";
 export const activitiesDefault: Activities = [];

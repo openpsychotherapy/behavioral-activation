@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 
 type People = string[];
-type ModifyPeople = {
+
+interface ModifyPeople {
   add: (person: string) => boolean;
-};
+}
 
 export const peopleKey: string = "people";
 export const peopleDefault: People = [];

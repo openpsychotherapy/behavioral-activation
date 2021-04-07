@@ -12,9 +12,10 @@ interface CalendarEntry {
 }
 
 type Calendar = CalendarEntry[];
-type ModifyCalendar = {
+
+interface ModifyCalendar {
   add: (entry: CalendarEntry) => boolean;
-};
+}
 
 export const calendarKey: string = "calendar";
 export const calendarDefault: Calendar = [];
