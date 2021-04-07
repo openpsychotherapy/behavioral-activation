@@ -16,7 +16,7 @@ type ActivitiesDay = {
 };
 type Activities = ActivitiesDay[];
 type ModifyActivities = {
-  add: (date: number, hour: number, entry: ActivitiesEntry) => boolean;
+  add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
 };
 
 export const activitiesKey: string = "activities";
