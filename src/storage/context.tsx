@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { activitiesKey, activitiesDefault, Activities } from './activities';
+import { activitiesKey, activitiesDefault } from './activities';
+import { calendarKey, calendarDefault } from './calendar';
 
 interface StorageContextType {
   store: {
@@ -13,6 +14,7 @@ interface StorageContextType {
 const storageDefault: StorageContextType = {
   store: {
     [activitiesKey]: activitiesDefault,
+    [calendarKey]: calendarDefault,
   },
   setStoreItem: (key: string, value: any) => {},
 };
@@ -31,8 +33,10 @@ export const Provider = (props: any) => {
   useEffect(() => {
     (async () => {
       const activities = await AsyncStorage.getItem(activitiesKey);
+      const calendar = await AsyncStorage.getItem(calendarKey);
       const newStore = {
         [activitiesKey]: activities ? JSON.parse(activities) : activitiesDefault,
+        [calendarKey]: calendar ? JSON.parse(calendar) : calendarDefault,
       };
       setStore(newStore);
     })()
