@@ -31,6 +31,6 @@ const Storage = {
   useCalendar,
   useValues,
   useActivities,
-}; 
+};
 
 export default Storage;

@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect, useContext } from 'react';
+import { StorageContext } from './context';
 import { isDate } from './utils';
 
-type ActivitiesEntry = {
+export interface ActivitiesEntry {
   text: string;
   icon: string;
   person: string;
   meaningful: number;
   entertaining: number;
-};
-type ActivitiesDay = {
+}
+
+export interface ActivitiesDay {
   date: string;
   score: number | null;
   entries: (ActivitiesEntry | null)[];
-};
-type Activities = ActivitiesDay[];
-type ModifyActivities = {
+}
+
+export type Activities = ActivitiesDay[];
+export type ModifyActivities = {
   add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
 };
 
@@ -48,7 +50,8 @@ export const activitiesDefault: Activities = [];
  * ```
  */
 export const useActivities = (): [Activities, ModifyActivities] => {
-  const [activities, setActivities] = useState<Activities>(activitiesDefault);
+  const { store, setStoreItem } = useContext(StorageContext);
+  const activities: Activities = store[activitiesKey];
 
   /**
    * Returns a copy of the activities object with specified date inserted.
@@ -60,7 +63,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns The activities object with specified date inserted
    */
   const _insertDay = (date: string): Activities => {
-    const newActivities = JSON.parse(JSON.stringify(activities));
+    const newActivities = [ ...activities ];
     if (!activities.some(a => a.date === date)) {
       newActivities.push({
         date: date,
@@ -75,7 +78,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
   }
 
   /**
-   * Inserts an entry into the activities object and updates AsyncStorage.
+   * Inserts an entry into the activities object and updates the store.
    *
    * @remarks
    * This function will add the date if not present.
@@ -90,8 +93,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
       const newActivities = _insertDay(date);
       const index = newActivities.findIndex(a => a.date === date);
       newActivities[index].entries[hour] = entry;
-      AsyncStorage.setItem(activitiesKey, JSON.stringify(newActivities))
-        .then(() => setActivities(newActivities));
+      setStoreItem(activitiesKey, newActivities);
       return true;
     }
     return false;
@@ -100,12 +102,6 @@ export const useActivities = (): [Activities, ModifyActivities] => {
   const modifyActivities: ModifyActivities = {
     add: add,
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem(activitiesKey)
-    .then(value => value === null ? activitiesDefault : JSON.parse(value))
-    .then(value => setActivities(value));
-  }, []);
 
   return [activities, modifyActivities];
 }
