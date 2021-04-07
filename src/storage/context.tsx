@@ -6,6 +6,7 @@ import { calendarKey, calendarDefault } from './calendar';
 import { iconsKey, iconsDefault } from './icons';
 import { peopleKey, peopleDefault } from './people';
 import { settingsKey, settingsDefault } from './settings';
+import { valuesKey, valuesDefault } from './values';
 
 interface StorageContextType {
   store: {
@@ -21,6 +22,7 @@ const storageDefault: StorageContextType = {
     [iconsKey]: iconsDefault,
     [peopleKey]: peopleDefault,
     [settingsKey]: settingsDefault,
+    [valuesKey]: valuesDefault,
   },
   setStoreItem: (key: string, value: any) => {},
 };
@@ -43,12 +45,14 @@ export const Provider = (props: any) => {
       const icons = await AsyncStorage.getItem(iconsKey);
       const people = await AsyncStorage.getItem(peopleKey);
       const settings = await AsyncStorage.getItem(settingsKey);
+      const values = await AsyncStorage.getItem(valuesKey);
       const newStore = {
         [activitiesKey]: activities ? JSON.parse(activities) : activitiesDefault,
         [calendarKey]: calendar ? JSON.parse(calendar) : calendarDefault,
         [iconsKey]: icons ? JSON.parse(icons) : iconsDefault,
         [peopleKey]: people ? JSON.parse(people) : peopleDefault,
         [settingsKey]: settings ? JSON.parse(settings) : settingsDefault,
+        [valuesKey]: values ? JSON.parse(values) : valuesDefault,
       };
       setStore(newStore);
     })()
