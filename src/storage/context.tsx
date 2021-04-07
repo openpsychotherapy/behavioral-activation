@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { activitiesKey, activitiesDefault } from './activities';
 import { calendarKey, calendarDefault } from './calendar';
+import { iconsKey, iconsDefault } from './icons';
 
 interface StorageContextType {
   store: {
@@ -15,6 +16,7 @@ const storageDefault: StorageContextType = {
   store: {
     [activitiesKey]: activitiesDefault,
     [calendarKey]: calendarDefault,
+    [iconsKey]: iconsDefault,
   },
   setStoreItem: (key: string, value: any) => {},
 };
@@ -34,9 +36,11 @@ export const Provider = (props: any) => {
     (async () => {
       const activities = await AsyncStorage.getItem(activitiesKey);
       const calendar = await AsyncStorage.getItem(calendarKey);
+      const icons = await AsyncStorage.getItem(iconsKey);
       const newStore = {
         [activitiesKey]: activities ? JSON.parse(activities) : activitiesDefault,
         [calendarKey]: calendar ? JSON.parse(calendar) : calendarDefault,
+        [iconsKey]: icons ? JSON.parse(icons) : iconsDefault,
       };
       setStore(newStore);
     })()
