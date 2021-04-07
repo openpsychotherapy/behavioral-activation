@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { StorageContext } from './context';
 import { isDate } from './utils';
 
-export interface ActivitiesEntry {
+interface ActivitiesEntry {
   text: string;
   icon: string;
   person: string;
@@ -10,14 +10,14 @@ export interface ActivitiesEntry {
   entertaining: number;
 }
 
-export interface ActivitiesDay {
+interface ActivitiesDay {
   date: string;
   score: number | null;
   entries: (ActivitiesEntry | null)[];
 }
 
-export type Activities = ActivitiesDay[];
-export type ModifyActivities = {
+type Activities = ActivitiesDay[];
+type ModifyActivities = {
   add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
 };
 
