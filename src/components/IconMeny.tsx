@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { Text, Button, IconButton, Colors, } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
+
 
 const icons = [
   "format-text",
