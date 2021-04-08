@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext } from 'react';
+import { StorageContext } from './context';
 import { isDate, isTime } from './utils';
 
-type CalendarEntry = {
+interface CalendarEntry {
   date: string;
   start: string;
   end: string;
   text: string;
   icon: string;
   person: string;
-};
+}
+
 type Calendar = CalendarEntry[];
-type ModifyCalendar = {
+
+interface ModifyCalendar {
   add: (entry: CalendarEntry) => boolean;
-};
+}
 
 export const calendarKey: string = "calendar";
 export const calendarDefault: Calendar = [];
@@ -60,10 +62,11 @@ const entryEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
  * ```
  */
 export const useCalendar = (): [Calendar, ModifyCalendar] => {
-  const [calendar, setCalendar] = useState<Calendar>(calendarDefault);
+  const { store, setStoreItem } = useContext(StorageContext);
+  const calendar: Calendar = store[calendarKey];
 
   /**
-   * Adds an entry to the calendar and updates AsyncStorage.
+   * Adds an entry to the calendar and updates the store.
    *
    * @param entry - The entry to be added
    * @returns `true` if the entry was added, `false` otherwise
@@ -74,9 +77,7 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
                        && isTime(entry.end)
                        && !calendar.some(elem => entryEq(elem, entry));
     if (isValidEntry) {
-      const newCalendar = [...calendar, entry];
-      AsyncStorage.setItem(calendarKey, JSON.stringify(newCalendar))
-        .then(() => setCalendar(newCalendar));
+      setStoreItem(calendarKey, [...calendar, entry]);
       return true;
     }
     return false;
@@ -85,12 +86,6 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
   const modifyCalendar: ModifyCalendar = {
     add: add,
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem(calendarKey)
-    .then(value => value === null ? calendarDefault : JSON.parse(value))
-    .then(value => setCalendar(value));
-  }, []);
 
   return [calendar, modifyCalendar];
 }

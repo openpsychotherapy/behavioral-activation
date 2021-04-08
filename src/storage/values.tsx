@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext } from 'react';
+import { StorageContext } from './context';
 
-type ValuesEntry = {
+interface ValuesEntry {
   text: string;
   icon: string;
-};
-type ValuesTopic = {
+}
+
+interface ValuesTopic {
   name: string;
   entries: ValuesEntry[];
-};
-type Values = {
+}
+
+interface Values {
   responsibilities: ValuesTopic[];
   relations: ValuesTopic[];
   enjoyment: ValuesTopic[];
   health: ValuesTopic[];
   work: ValuesTopic[];
   [index: string]: ValuesTopic[];
-};
-type ModifyValues = {
+}
+
+interface ModifyValues {
   addTopic: (category: string, topic: string) => boolean;
   addEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
-};
+}
 
 export const valuesKey: string = "values";
 export const valuesDefault: Values = {
@@ -65,10 +68,11 @@ const entryEq = (a: ValuesEntry, b: ValuesEntry): boolean => {
  * ```
  */
 export const useValues = (): [Values, ModifyValues] => {
-  const [values, setValues] = useState<Values>(valuesDefault);
+  const { store, setStoreItem } = useContext(StorageContext);
+  const values: Values = store[valuesKey];
 
   /**
-   * Adds a topic to the values object and updates AsyncStorage.
+   * Adds a topic to the values object and updates the store.
    *
    * @param category - The category where the topic should be added
    * @param topic - The name of the topic
@@ -79,8 +83,7 @@ export const useValues = (): [Values, ModifyValues] => {
       if (!values[category].some(t => t.name === topic)) {
         const newValues = JSON.parse(JSON.stringify(values));
         newValues[category].push({ name: topic, entries: [] });
-        AsyncStorage.setItem(valuesKey, JSON.stringify(newValues))
-          .then(() => setValues(newValues));
+        setStoreItem(valuesKey, newValues);
         return true;
       }
     }
@@ -88,7 +91,7 @@ export const useValues = (): [Values, ModifyValues] => {
   }
 
   /**
-   * Adds an entry to the values object and updates AsyncStorage.
+   * Adds an entry to the values object and updates the store.
    *
    * @param category - The category where the topic should be added
    * @param topic - The topic in which the entry should be added
@@ -100,8 +103,7 @@ export const useValues = (): [Values, ModifyValues] => {
       if (index !== -1 && !values[category][index].entries.some(e => entryEq(entry, e))) {
         const newValues = JSON.parse(JSON.stringify(values));
         newValues[category][index].entries.push(entry);
-        AsyncStorage.setItem(valuesKey, JSON.stringify(newValues))
-          .then(() => setValues(newValues));
+        setStoreItem(valuesKey, newValues);
         return true;
       }
     }
@@ -112,12 +114,6 @@ export const useValues = (): [Values, ModifyValues] => {
     addTopic: addTopic,
     addEntry: addEntry,
   };
-
-  useEffect(() => {
-    AsyncStorage.getItem(valuesKey)
-    .then(value => value === null ? valuesDefault : JSON.parse(value))
-    .then(value => setValues(value));
-  }, []);
 
   return [values, modifyValues];
 }
