@@ -1,3 +1,7 @@
 {
-    "welcomeMessage": "Welcome"
+    "valuesHeaderEvaluation": "Evaluation",
+    "activitiesButtonRateDay": "Rate day",
+    "activitiesSliderRateDay": "Today's rating",
+    "january": "January",
+    "monday": "Monday"
 }

@@ -1,3 +1,7 @@
 {
-    "welcomeMessage": "Välkommen"
+    "valuesHeaderEvaluation": "Värdering",
+    "activitiesButtonRateDay": "Betygsätt dag",
+    "activitiesSliderRateDay": "Dagens betyg",
+    "january": "Januari",
+    "monday": "Måndag"
 }
