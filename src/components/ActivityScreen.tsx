@@ -34,7 +34,7 @@ const ViewContent = ({ navigation }: any) => {
   const { colors } = useTheme();
 
   const [visible, setVisible] = React.useState(false);
-  let navigationButtonSize = 40;
+  const navigationButtonSize = 40;
 
   const iconListButton = () => {
     setVisible(true);
