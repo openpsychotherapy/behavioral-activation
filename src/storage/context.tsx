@@ -80,7 +80,7 @@ export const Provider = (props: any) => {
        * @param def - The object to use if no value is found
        * @returns A value from AsyncStorage if it exists, def otherwise.
        */
-      const getFromStorage = async (key: string, def: any): any => {
+      const getFromStorage = async (key: string, def: any): Promise<any> => {
         const value = await AsyncStorage.getItem(key);
         return value ? JSON.parse(value) : def;
       }
