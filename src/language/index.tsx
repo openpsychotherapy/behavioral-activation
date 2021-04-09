@@ -1,24 +1,13 @@
-import en from './en.json';
-import sv from './sv.json';
-//"valuesHeaderEvaluation"
-//"activitiesButtonGradeDay"
-//"activitiesSliderGradeDay"
-//Format: "navigationbarTypeText"
-//navigationbar: activities, values, calendar, info
+import en from 'language/en.json';
+import sv from 'language/sv.json';
 
-//"january"
-//"february"
-//.
-//.
-//.
-//"monday"
 interface Languages{
     [index: string]: any;
 }
 
 const languages: Languages = {
-    "sv" : sv,
-    "en" : en,
+    "sv": sv,
+    "en": en,
 }
 
 export default languages;

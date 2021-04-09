@@ -2,7 +2,10 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "skipLibCheck": true,
@@ -10,10 +13,26 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "storage": ["src/storage"],
-      "storage/*": ["src/storage/*"],
+      "storage": [
+        "src/storage"
+      ],
+      "storage/*": [
+        "src/storage/*"
+      ],
+      "language": [
+        "src/language"
+      ],
+      "language/*": [
+        "src/language/*"
+      ],
     }
   },
-  "include": ["App.tsx", "src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "include": [
+    "App.tsx",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
 }

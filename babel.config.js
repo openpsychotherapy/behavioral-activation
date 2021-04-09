@@ -8,7 +8,9 @@ module.exports = function(api) {
         {
           alias: {
             'storage': './src/storage',
-            'storage/*': './src/storage/*'
+            'storage/*': './src/storage/*',
+            'language': './src/language',
+            'language/*': './src/language/*',
           }
         }
       ]
