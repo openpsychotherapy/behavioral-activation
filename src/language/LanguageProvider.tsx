@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext } from "react";
 import sv from "language/sv.json";
 
 import languages from 'language';
-
 import Storage from 'storage';
 
 const LanguageContext = createContext(sv);

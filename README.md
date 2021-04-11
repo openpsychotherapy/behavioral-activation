@@ -51,7 +51,7 @@ Some examples:
 ```
 Get the word with the key "keyword" in the correct language using :
 ```Typescript
-import { useTranslation } from '../language/LanguageProvider';
+import { useTranslation } from 'language/LanguageProvider';
 
 const dict = useTranslation();
 dict["keyword"]
