@@ -37,6 +37,17 @@ const entryEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
 }
 
 /**
+ * Compares two calendar entries and returns if a comes after b.
+ *
+ * @param a - The first calendar entry
+ * @param b - The second calendar entry
+ * @returns a.date > b.date || (a.date == b.date && a.start > b.start)
+ */
+const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
+  return a.date > b.date || (a.date == b.date && a.start > b.start);
+}
+
+/**
  * Hook returning the calendar and functions to modify the calendar.
  *
  * @example
@@ -66,7 +77,8 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
   const calendar: Calendar = store[calendarKey];
 
   /**
-   * Adds an entry to the calendar and updates the store.
+   * Adds an entry to the calendar and updates the store. The entry is inserted
+   * in chronological order.
    *
    * @param entry - The entry to be added
    * @returns `true` if the entry was added, `false` otherwise
@@ -77,7 +89,18 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
                        && isTime(entry.end)
                        && !calendar.some(elem => entryEq(elem, entry));
     if (isValidEntry) {
-      setStoreItem(calendarKey, [...calendar, entry]);
+      const index = calendar.findIndex(elem => entryGt(elem, entry));
+      let newCalendar = [];
+      if (index === -1) {
+        newCalendar = [...calendar, entry];
+      } else {
+        newCalendar = [
+          ...calendar.slice(0, index),
+          entry,
+          ...calendar.slice(index)
+        ];
+      }
+      setStoreItem(calendarKey, newCalendar);
       return true;
     }
     return false;
