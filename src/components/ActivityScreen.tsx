@@ -6,14 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 
 import { IconMeny } from './IconMeny';
+import { IconList } from './IconList';
 
 const ActivityStack = createStackNavigator();
-
-const IconListView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Icon list</Text>
-  </View>
-);
 
 const HistoryView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -30,18 +25,19 @@ const IconSettingsView = () => (
 const CircleButton = (props: any) => {
   return (
     <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
-      <IconButton icon={props.icon} size={props.size} />
+      <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
     </Surface >
   );
 }
 
 const ViewContent = ({ navigation }: any) => {
-  let navigationButtonSize = 40;
-
   const { colors } = useTheme();
 
+  const [visible, setVisible] = React.useState(false);
+  const navigationButtonSize = 40;
+
   const iconListButton = () => {
-    navigation.navigate('IconList');
+    setVisible(true);
   };
 
   const historyButton = () => {
@@ -56,8 +52,10 @@ const ViewContent = ({ navigation }: any) => {
     console.log(pressedIcon + " - " + icon);
   };
 
+
   return (
     <View style={{ flex: 1 }}>
+      <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
       <IconMeny pressCallback={iconPressCallback} />
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
@@ -77,7 +75,6 @@ export const ActivityScreen = ({ navigation }: any) => {
       }}
     >
       <ActivityStack.Screen name="Activities" component={ViewContent} />
-      <ActivityStack.Screen name="IconList" component={IconListView} />
       <ActivityStack.Screen name="History" component={HistoryView} />
       <ActivityStack.Screen name="IconSettings" component={IconSettingsView} />
     </ActivityStack.Navigator>
