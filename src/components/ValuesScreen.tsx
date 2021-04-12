@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Title, List} from 'react-native-paper';
+import { Text, Title, List, Button} from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -8,29 +8,69 @@ import { FlatList } from 'react-native-gesture-handler';
 
 const ValuesStack = createStackNavigator();
 
-/*const ViewTitle = () => (
-  <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
+const TitleText = () => (
     <Title>Värdering</Title>
+)
+
+const RelationButton = () => (
+
+  <Button mode="outlined" onPress={() => console.log('Pressed')}>
+    Relation
+  </Button>
+
+)
+const StudierButton = () => (
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+    Studier/Karriär
+  </Button>
+
+
+)
+const FritidButton = () => (
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+    Fritid/intressen
+  </Button>
+)
+
+const ViewContent = () => (
+  <View style={{flex: 1}}>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+    <Title>Värdering</Title>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Relation
+      </Button>
+    </View>
+    <View style={{ flex: 0.14,  alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Studier/Karriär
+      </Button>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Fritid/intressent
+      </Button>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Sinne/Kropp/Spirituellt
+      </Button>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Dagliga ansvar
+      </Button>
+    </View>
+    <View style={{flex: 0.05, alignItems: 'center', justifyContent: 'center'}}>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <Button mode="outlined" onPress={() => console.log('Pressed')}>
+        Stödpersoner
+      </Button>
+    </View>
   </View>
-)*/
-
-const ValuesList = () => (
-  <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-    <List.Section>
-      <List.Subheader>Värdering</List.Subheader>
-      <List.Item title="Relation" />
-      <List.Item title="Studier/Karriär" />
-      <List.Item title="Fritid/Intressen" />
-      <List.Item title="Sinne/Kropp/Spirituellt" />
-      <List.Item title="Dagligt ansvar" /> 
-
-   </List.Section>
-  </View>
-  
-);
-
-
-
+)
 
 
   
@@ -42,7 +82,8 @@ export const ValuesScreen = () => {
         header: (props: any) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ValuesStack.Screen name="ValuesList" component={ValuesList} />
+      <ValuesStack.Screen name="RelationButton" component={ViewContent} />
+      
 
     </ValuesStack.Navigator>
   );
