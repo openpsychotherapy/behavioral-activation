@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 import { isDate, isTime } from './utils';
 
-interface CalendarEntry {
+export interface CalendarEntry {
   date: string;
   start: string;
   end: string;
@@ -11,7 +11,7 @@ interface CalendarEntry {
   person: string;
 }
 
-type Calendar = CalendarEntry[];
+export type Calendar = CalendarEntry[];
 
 interface ModifyCalendar {
   add: (entry: CalendarEntry) => boolean;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
+import { Calendar } from 'storage/calendar';
 import { CalendarListSection } from './CalendarListSection';
 
-export const CalendarList = ({ calendar }) => {
+export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
   return (
     <FlatList
       data={[calendar]}

@@ -1,11 +1,14 @@
 import React from 'react';
 
+import { CalendarEntry } from 'storage/calendar';
+
 import { List, Surface, Text } from 'react-native-paper';
 
 
-export const CalendarListItem = ({ entry, index }) => {
+export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
   return (
     <List.Item
+      title=""
       left={() => (
           <Surface
             style={{
@@ -13,8 +16,8 @@ export const CalendarListItem = ({ entry, index }) => {
               height: 60,
               justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: '100%',
-              visibility: index == 0 ? 'visible' : 'hidden',
+              borderRadius: 100,
+              opacity: index == 0 ? 1 : 0,
             }}
           >
             <Text style={{ fontSize: 28 }}>
