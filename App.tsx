@@ -7,9 +7,11 @@ import { RootNavigator } from './src/components/RootNavigator';
 import { LanguageProvider } from 'language/LanguageProvider';
 import { Provider as StorageProvider } from 'storage/context';
 
+import { CustomTheme } from './src/CustomTheme';
+
 export default function App() {
   return (
-    <PaperProvider theme={DefaultTheme}>
+    <PaperProvider theme={CustomTheme}>
       <NavigationContainer>
         <StorageProvider>
           <LanguageProvider>

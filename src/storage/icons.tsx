@@ -1,17 +1,124 @@
-import React, { useContext } from 'react';
-import { StorageContext } from './context';
+import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type Icons = string[];
-
-interface ModifyIcons {
+type ModifyIcons = {
   add: (icon: string) => boolean;
   swap: (i1: number, i2: number) => boolean;
-}
+};
 
 export const iconsKey: string = "icons";
 export const iconsDefault: Icons = [
-  "folder",
-  "person",
+  // Default front side
+  'format-text',
+  'bed-empty',
+  'brush',
+  'dumbbell',
+
+  'food-fork-drink',
+  'account-supervisor',
+  'tree',
+  'music',
+
+  'run',
+  'gamepad-variant',
+  'chat',
+  'car-hatchback',
+
+  // More icons
+  // Sports
+  'basketball',
+  'bowling',
+
+  // Transport
+  'bike',
+  'bus',
+  'airplane',
+  'anchor',
+  'walk',
+  'tractor',
+  'subway-variant',
+
+  // Food and drinks
+  'beer',
+  'coffee',
+  'glass-cocktail',
+  'grill',
+  'candycane',
+  'cake-layered',
+
+  // Activities
+  'book-open-variant',
+  'laptop',
+  'monitor',
+  'cellphone',
+  'phone',
+  'microphone',
+  'speaker',
+  'television-classic',
+  'movie',
+  'cards',
+
+  // Work
+  'desk-lamp',
+  'file-document-edit',
+  'email',
+  'calendar-blank',
+  'console-line',
+  'presentation',
+  'school',
+
+  // WC
+  'shower-head',
+  'toilet',
+  'washing-machine',
+
+  // Tools
+  'hammer',
+  'axe',
+
+  // Shopping
+  'cart',
+  'shopping',
+  'briefcase',
+  'shoe-heel',
+
+  // Nature
+  'cloud',
+  'cactus',
+  'flower',
+  'fire',
+  'compass',
+  'map',
+  'web',
+  'bug',
+
+  // Family
+  'cat',
+  'dog-side',
+  'heart',
+  'baby-buggy',
+
+  // Services
+  'hospital',
+
+  // Home
+  'key-variant',
+  'home',
+  'home-city',
+
+  // People
+  'human-female-female',
+  'human-male-female',
+  'human-female-girl',
+  'human-male-boy',
+
+  // Religion
+  'islam',
+  'judaism',
+  'christianity',
+  'buddhism',
+  'hinduism'
 ];
 
 /**
@@ -32,25 +139,26 @@ export const iconsDefault: Icons = [
  * ```
  */
 export const useIcons = (): [Icons, ModifyIcons] => {
-  const { store, setStoreItem } = useContext(StorageContext);
-  const icons: Icons = store[iconsKey];
+  const [icons, setIcons] = useState<Icons>([]);
 
   /**
-   * Adds an icon to the list of icons and updates the store.
+   * Adds an icon to the list of icons and updates AsyncStorage.
    *
    * @param icon - The icon to be added to the list
    * @returns `true` if the icon was added, `false` otherwise
    */
   const add = (icon: string): boolean => {
     if (!icons.includes(icon)) {
-      setStoreItem(iconsKey, [...icons, icon]);
+      const newIcons = [...icons, icon];
+      AsyncStorage.setItem(iconsKey, JSON.stringify(newIcons))
+        .then(() => setIcons(newIcons));
       return true;
     }
     return false;
   }
 
   /**
-   * Swaps two icons in the list and updates the store.
+   * Swaps two icons in the list and updates AsyncStorage.
    *
    * @remark
    * Swapping the same index will return `false`.
@@ -65,7 +173,8 @@ export const useIcons = (): [Icons, ModifyIcons] => {
       const temp = newIcons[i1];
       newIcons[i1] = newIcons[i2];
       newIcons[i2] = temp;
-      setStoreItem(iconsKey, newIcons);
+      AsyncStorage.setItem(iconsKey, JSON.stringify(newIcons))
+        .then(() => setIcons(newIcons));
       return true;
     }
     return false;
@@ -75,6 +184,12 @@ export const useIcons = (): [Icons, ModifyIcons] => {
     add: add,
     swap: swap,
   };
+
+  useEffect(() => {
+    AsyncStorage.getItem(iconsKey)
+      .then(value => value === null ? iconsDefault : JSON.parse(value))
+      .then(value => setIcons(value));
+  }, []);
 
   return [icons, modifyIcons];
 }
