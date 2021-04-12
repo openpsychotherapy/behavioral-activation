@@ -6,33 +6,55 @@ import {
   List,
   Surface,
   Text,
+  FAB
 } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { CalendarList } from './calendar/CalendarList';
 
-import Storage from '../storage';
+import Storage from 'storage';
 
 const CalendarStack = createStackNavigator();
+
+const AddEventButton = () =>  {
+  const [calendar, modifyCalendar] = Storage.useCalendar();
+  const [settings, modifySettings] = Storage.useSettings();
+
+  const addEntry = () => {
+    modifySettings.setLanguage('sv');
+    modifyCalendar.add({
+        date: "2022-05-15",
+        start: "00:00",
+        end: "02:00",
+        text: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ",
+        icon: "run",
+        person: "Erik",
+    });
+  }
+
+  return (
+  <FAB
+    style={{
+      position: 'absolute',
+      margin: 16,
+      right: 0,
+      bottom: 0,
+    }}
+    icon="plus"
+    onPress={addEntry}
+  />
+  );
+}
+
 
 const ViewContent = () => {
   const [calendar, modifyCalendar] = Storage.useCalendar();
 
-  const addEntry = () => {
-      modifyCalendar.add({
-          date: "2021-03-12",
-          start: "19:00",
-          end: "20:00",
-          text: "Hello - The afterparty 7",
-          icon: "run",
-          person: "Erik",
-      });
-  }
-
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <CalendarList calendar={calendar}/>
+      <AddEventButton />
     </View>
   );
 }
