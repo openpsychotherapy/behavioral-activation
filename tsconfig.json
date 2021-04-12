@@ -12,6 +12,8 @@
     "paths": {
       "storage": ["src/storage"],
       "storage/*": ["src/storage/*"],
+      "language": ["src/language"],
+      "language/*": ["src/language/*"],
     }
   },
   "include": ["App.tsx", "src/**/*"],

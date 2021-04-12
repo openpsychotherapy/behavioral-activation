@@ -4,6 +4,7 @@ import { Provider as PaperProvider, DefaultTheme, DarkTheme } from 'react-native
 
 import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './src/components/RootNavigator';
+import { LanguageProvider } from 'language/LanguageProvider';
 import { Provider as StorageProvider } from 'storage/context';
 
 export default function App() {
@@ -11,7 +12,9 @@ export default function App() {
     <PaperProvider theme={DefaultTheme}>
       <NavigationContainer>
         <StorageProvider>
-          <RootNavigator />
+          <LanguageProvider>
+            <RootNavigator />
+          </LanguageProvider>
         </StorageProvider>
       </NavigationContainer>
     </PaperProvider>
