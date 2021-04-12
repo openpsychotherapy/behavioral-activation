@@ -21,15 +21,15 @@ export const settingsDefault: Settings = {
  * Hook returning the settings and functions to modify the settings.
  *
  * @example
- * Get stored settings and print them:
  * ```
+ * // Get stored settings and print them
  * const [settings, modifySettings] = Storage.useSettings();
  * console.log(settings);
  * ```
  *
  * @example
- * Turn on notifications:
  * ```
+ * // Turn on notifications
  * const [settings, modifySettings] = Storage.useSettings();
  * modifySettings.setNotifications(true);
  * ```

@@ -18,15 +18,15 @@ export const iconsDefault: Icons = [
  * Hook returning a list of icons and functions to modify the list.
  *
  * @example
- * Get stored icons and print them:
  * ```
+ * // Get stored icons and print them
  * const [icons, modifyIcons] = Storage.useIcons();
  * console.log(icons);
  * ```
  *
  * @example
- * Swap two icons in the list:
  * ```
+ * // Swap two icons in the list
  * const [icons, modifyIcons] = Storage.useIcons();
  * modifyIcons.swap(0, 1);
  * ```
