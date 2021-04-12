@@ -7,8 +7,15 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "storage": ["src/storage"],
+      "storage/*": ["src/storage/*"],
+      "language": ["src/language"],
+      "language/*": ["src/language/*"],
+    }
   },
   "include": ["App.tsx", "src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts"],
 }
