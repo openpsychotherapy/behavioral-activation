@@ -10,7 +10,8 @@ declare global {
       iconSizes: {
         small: number,
         medium: number,
-        large: number
+        large: number,
+        avatar: number
       }
     }
   }
@@ -24,8 +25,11 @@ export const CustomTheme = {
 
   },
   iconSizes: {
+    // IconButton
     small: 30,
     medium: 40,
-    large: 60
+    large: 60,
+    
+    avatar: 70
   }
 };

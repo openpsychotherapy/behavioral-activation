@@ -3,5 +3,12 @@
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
     "january": "January",
-    "monday": "Monday"
+    "monday": "Monday",
+
+    "datePickerLabel": "Pick a date",
+    "datePickerStartLabel": "From",
+    "datePickerEndLabel": "To",
+    "datePickerSaveLabel": "Save",
+    "datePickerEmptyLabel": "",
+    "datePickerMoreLabel": ""
 }

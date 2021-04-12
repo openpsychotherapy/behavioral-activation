@@ -3,5 +3,12 @@
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
     "january": "Januari",
-    "monday": "Måndag"
+    "monday": "Måndag",
+
+    "datePickerLabel": "Välj ett datum",
+    "datePickerStartLabel": "Från",
+    "datePickerEndLabel": "Till",
+    "datePickerSaveLabel": "Spara",
+    "datePickerEmptyLabel": "",
+    "datePickerMoreLabel": ""
 }

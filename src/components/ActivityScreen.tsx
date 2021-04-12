@@ -6,7 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 
 import { IconMeny } from './IconMeny';
-import { IconList } from './IconList';
+import { IconList } from './activity/IconList';
+import { ActivityRegistrator } from './activity/ActivityRegistrator';
 
 const ActivityStack = createStackNavigator();
 
@@ -50,8 +51,9 @@ const ViewContent = ({ navigation }: any) => {
 
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     console.log(pressedIcon + " - " + icon);
+    setVisible(false);
+    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
   };
-
 
   return (
     <View style={{ flex: 1 }}>
@@ -77,6 +79,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name="Activities" component={ViewContent} />
       <ActivityStack.Screen name="History" component={HistoryView} />
       <ActivityStack.Screen name="IconSettings" component={IconSettingsView} />
+      <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
     </ActivityStack.Navigator>
   );
 }
