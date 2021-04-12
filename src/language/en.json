@@ -3,5 +3,13 @@
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
     "january": "January",
-    "monday": "Monday"
+    "weekdays": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ]
 }

@@ -3,5 +3,13 @@
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
     "january": "Januari",
-    "monday": "Måndag"
+    "weekdays": [
+        "Sön",
+        "Mån",
+        "Tis",
+        "Ons",
+        "Tor",
+        "Fre",
+        "Lör"
+    ]
 }

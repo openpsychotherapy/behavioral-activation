@@ -4,7 +4,6 @@ import { CalendarEntry } from 'storage/calendar';
 
 import { List, Surface, Text } from 'react-native-paper';
 
-
 export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
   return (
     <List.Item
@@ -21,7 +20,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
             }}
           >
             <Text style={{ fontSize: 28 }}>
-              21
+              {new Date(entry.date).getDate()}
             </Text>
           </Surface>
         )
