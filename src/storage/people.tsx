@@ -14,15 +14,15 @@ export const peopleDefault: People = [];
  * Hook returning a list of people and functions to modify the list.
  *
  * @example
- * Get stored people and print them:
  * ```
+ * // Get stored people and print them
  * const [people, modifyPeople] = Storage.usePeople();
  * console.log(people);
  * ```
  *
  * @example
- * Add a new person to the list:
  * ```
+ * // Add a new person to the list
  * const [people, modifyPeople] = Storage.usePeople();
  * modifyPeople.add("Erik");
  * ```

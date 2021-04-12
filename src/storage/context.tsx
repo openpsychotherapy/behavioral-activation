@@ -45,8 +45,8 @@ export const StorageContext = createContext<StorageContextType>(contextDefault);
  * It is undefined behaviour to have more than one of these in the application.
  *
  * @example
- * Wrap a component with the provider:
  * ```
+ * // Wrap a component with the provider
  * import { Provider as StorageProvider } from 'storage/context';
  *
  * ...
