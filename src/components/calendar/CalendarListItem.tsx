@@ -17,7 +17,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 100,
-            opacity: index == 0 ? 1 : 0,
+            opacity: index === 0 ? 1 : 0,
           }}
         >
           <Text style={{ fontSize: 28 }}>

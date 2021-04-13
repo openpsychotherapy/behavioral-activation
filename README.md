@@ -26,6 +26,7 @@ function f(a: number, b: number): number {
     return a + b;
 }
 ```
+
 ## Language implementation
 Format for keys:"navigationbarTypeText"
 
@@ -41,18 +42,23 @@ Some examples:
 "activitiesButtonGradeDay"
 "activitiesSliderGradeDay"
 ```
-Keys related to time follows different format. Days and months has their name in english as key.
+Keys related to time follows different format.
+
+To get the translation for a weekday, you use the key weekdays and index the day you're looking for (0 is sunday, 6 is saturday).
+
+To get the translation for a month, you use the key months and index the month you're looking for (0 is January, 11 is December).
 
 Some examples:
 ```Typescript
-"january"
-"february"
-"monday"
+dict.weeksday[0] // sunday
+dict.weekdays[1] // monday
+dict.months[0]   // january
+dict.months[11]  // december
 ```
 Get the word with the key "keyword" in the correct language using :
 ```Typescript
 import { useTranslation } from 'language/LanguageProvider';
 
 const dict = useTranslation();
-dict["keyword"]
+dict.keyword; // or dict["keyword"]
 ```

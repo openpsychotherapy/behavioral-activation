@@ -6,6 +6,15 @@ import { Divider, Title } from 'react-native-paper';
 import { Calendar, entryGt } from 'storage/calendar';
 import { CalendarListSection } from './CalendarListSection';
 
+/**
+ * Returns a new calendar grouped by date.
+ *
+ * @remarks
+ * This function assumes the calendar is sorted.
+ *
+ * @param calendar - The calendar to group by date (day)
+ * @returns A list of calendars where each calendar is a day of entries
+ */
 const groupByDate = (calendar: Calendar): Calendar[] => {
   let groups: Calendar[] = [];
   let currentGroup: Calendar = [];
@@ -30,27 +39,43 @@ const groupByDate = (calendar: Calendar): Calendar[] => {
   return groups;
 }
 
+/**
+ * Inserts headers of the form YYYY-mm before calendars that has the
+ * header as year and month.
+ *
+ * @remarks
+ * This function assumes the calendar is sorted.
+ *
+ * @param groups - The list of calendars to insert headers into
+ * @returns A list containing calendars and strings (headers)
+ */
 const insertMonthHeaders = (groups: Calendar[]): (Calendar | string)[] => {
-  let newGroups: (Calendar | string)[] = [];
+  let groupsWithHeaders: (Calendar | string)[] = [];
   let currentMonth = "";
 
   groups.forEach(group => {
-    const month = group[0].date.slice(0, 7);
+    const month = group[0].date.slice(0, 7); // YYYY-mm
     if (month !== currentMonth) {
-      newGroups.push(month);
+      groupsWithHeaders.push(month);
     }
-    newGroups.push(group);
+    groupsWithHeaders.push(group);
     currentMonth = month;
   });
 
-  return newGroups;
+  return groupsWithHeaders;
 }
 
+/**
+ * Returns the current date in ISO format. Normal programming languages use
+ * something like date.strftime("%Y-%m-%d").
+ *
+ * @returns A ISO-formatted date
+ */
 const ISODate = (): string => {
-  const d = new Date();
-  const year = d.getFullYear();
-  let month = '' + (d.getMonth() + 1);
-  let day = '' + d.getDate();
+  const date = new Date();
+  const year = date.getFullYear();
+  let month = '' + (date.getMonth() + 1);
+  let day = '' + date.getDate();
 
   if (month.length < 2) {
     month = '0' + month;
@@ -69,14 +94,20 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
   const dict = useTranslation();
 
   useEffect(() => {
+    // Load upcoming calendar entries when initializing
     const today = ISODate();
-    const upcomingEntries = calendar.filter(entry => entryGt(entry, {...entry, date: today, start: "00:00"}))
+    const upcomingEntries = calendar.filter(entry => {
+      return entryGt(entry, {...entry, date: today, start: "00:00"})
+    });
     setListState({
       groups: groupByDate(upcomingEntries),
       entryCount: upcomingEntries.length,
     });
   }, [calendar]);
 
+  /**
+   * Loads previous events during a refresh.
+   */
   const onRefresh = async () => {
     let daysToAdd = 10;
     let newEntries = [];
@@ -105,7 +136,7 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
       refreshing={false}
       onRefresh={onRefresh}
       keyExtractor={(item) => JSON.stringify(item)}
-      renderItem={({item, index, separators}) =>
+      renderItem={({item}) =>
         typeof(item) === "string" ? (
           <>
             <Divider/>

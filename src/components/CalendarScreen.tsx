@@ -1,13 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import {
-  Button,
-  IconButton,
-  List,
-  Surface,
-  Text,
-  FAB
-} from 'react-native-paper';
+import { FAB } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -19,10 +12,8 @@ const CalendarStack = createStackNavigator();
 
 const CalendarFAB = () =>  {
   const [calendar, modifyCalendar] = Storage.useCalendar();
-  const [settings, modifySettings] = Storage.useSettings();
 
   const addEntry = () => {
-    modifySettings.setLanguage('sv');
     modifyCalendar.add({
         date: "2022-04-10",
         start: "12:00",
@@ -34,16 +25,16 @@ const CalendarFAB = () =>  {
   }
 
   return (
-  <FAB
-    style={{
-      position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
-    }}
-    icon="plus"
-    onPress={addEntry}
-  />
+    <FAB
+      style={{
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+      }}
+      icon="plus"
+      onPress={addEntry}
+    />
   );
 }
 
