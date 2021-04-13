@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Button, Avatar, useTheme, Portal, Switch } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 import { DatePickerModal } from 'react-native-paper-dates';
 
 import { useTranslation } from 'language/LanguageProvider';
@@ -27,7 +27,7 @@ export const DatePicker = (props: any) => {
 
   return (
     <View>
-      <Button onPress={() => setOpen(true)} mode='text' icon='calendar' >{ Intl.DateTimeFormat(settings.language).format(date) }</Button>
+      <Button onPress={() => setOpen(true)} mode='text' icon='calendar' >{Intl.DateTimeFormat(settings.language).format(date)}</Button>
       <DatePickerModal
         mode='single'
         visible={open}
