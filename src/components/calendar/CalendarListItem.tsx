@@ -7,8 +7,8 @@ import { View } from 'react-native';
 
 export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
   return (
-    <View style={{flexDirection: "row", width: "100%", marginBottom: 10 }}>
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flexDirection: "row", width: "100%", marginBottom: 10 }}>
+      <View style={{ justifyContent: 'center' }}>
         <Surface
           style={{
             width: 60,
@@ -25,7 +25,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
           </Text>
         </Surface>
       </View>
-      <Surface style={{ width: "78%", borderRadius: 5 }}>
+      <Surface style={{ flex: 1, flexGrow: 1, borderRadius: 5, marginRight: 10 }}>
         <List.Item
           title={`${entry.start} - ${entry.end}`}
           description={entry.text}

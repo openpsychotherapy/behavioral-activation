@@ -100,6 +100,7 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
 
   return (
     <FlatList
+      style={{width: "100%"}}
       data={insertMonthHeaders(listState.groups)}
       refreshing={false}
       onRefresh={onRefresh}
