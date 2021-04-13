@@ -17,17 +17,17 @@ import Storage from 'storage';
 
 const CalendarStack = createStackNavigator();
 
-const AddEventButton = () =>  {
+const CalendarFAB = () =>  {
   const [calendar, modifyCalendar] = Storage.useCalendar();
   const [settings, modifySettings] = Storage.useSettings();
 
   const addEntry = () => {
     modifySettings.setLanguage('sv');
     modifyCalendar.add({
-        date: "2022-05-15",
-        start: "00:00",
-        end: "02:00",
-        text: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ",
+        date: "2022-04-10",
+        start: "12:00",
+        end: "13:00",
+        text: "Hello",
         icon: "run",
         person: "Erik",
     });
@@ -54,7 +54,7 @@ const ViewContent = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <CalendarList calendar={calendar}/>
-      <AddEventButton />
+      <CalendarFAB />
     </View>
   );
 }

@@ -11,7 +11,8 @@ export const CalendarListSection: React.FC<{entries: Calendar}> = ({ entries }) 
   return (
     <List.Section>
       <List.Subheader style={{ fontSize: 30, paddingVertical: 0 }}>{weekday}</List.Subheader>
-      {entries.map((entry: CalendarEntry, i: number) => <CalendarListItem key={i} entry={entry} index={i}/>)}
+      {entries.map((entry: CalendarEntry, i: number) =>
+      <CalendarListItem key={i} entry={entry} index={i} />)}
     </List.Section>
   );
 }
