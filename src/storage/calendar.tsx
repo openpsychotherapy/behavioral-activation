@@ -43,7 +43,7 @@ const entryEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
  * @param b - The second calendar entry
  * @returns a.date > b.date || (a.date == b.date && a.start > b.start)
  */
-const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
+export const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
   return a.date > b.date || (a.date == b.date && a.start > b.start);
 }
 
