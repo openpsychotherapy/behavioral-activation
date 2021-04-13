@@ -50,9 +50,9 @@ if(isAndroid) {
   require('@formatjs/intl-datetimeformat/locale-data/en.js');
 
   // TODO: Figure out why TS is mad
-  // if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
-  //   Intl.DateTimeFormat.__setDefaultTimeZone( // <-- "Never" type causes problems
-  require("expo-localization").timezone // <-- Is required on Android
-  //   );
-  // }
+  if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
+    Intl.DateTimeFormat.__setDefaultTimeZone( // <-- "Never" type causes problems
+      require("expo-localization").timezone // <-- Is required on Android
+    );
+  }
 }

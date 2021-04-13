@@ -14,8 +14,10 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   return (
     <View style={{ padding: 10 }}>
       <View style={{ flexDirection: 'row' }}>
-        {/*<Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />*/}
-        {/*<DatePicker />*/}
+        <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
+        <DatePicker />
+      </View>
+      <View style={{ flexDirection: 'row' }}>
         <TimePicker steps={1} />
       </View>
     </View>
