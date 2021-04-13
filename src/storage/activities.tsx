@@ -30,16 +30,16 @@ export const activitiesDefault: Activities = [];
  * object.
  *
  * @example
- * Get stored activities and print them:
  * ```
+ * // Get stored activities and print them
  * const [activities, modifyActivities] = Storage.useActivities();
  * // Prints a large object
  * console.log(activities);
  * ```
  *
  * @example
- * Add a new activity:
  * ```
+ * // Add a new activity
  * const [activities, modifyActivities] = Storage.useActivities();
  * modifyActivities.add("2021-03-15", 17, {
  *     text: "Went out walking",

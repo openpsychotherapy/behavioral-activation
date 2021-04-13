@@ -51,16 +51,16 @@ export const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
  * Hook returning the calendar and functions to modify the calendar.
  *
  * @example
- * Get the calendar and print it:
  * ```
+ * // Get the calendar and print it
  * const [calendar, modifyCalendar] = Storage.useCalendar();
  * // Prints a large object
  * console.log(calendar);
  * ```
  *
  * @example
- * Add an event to the calendar:
  * ```
+ * // Add an event to the calendar
  * const [calendar, modifyCalendar] = Storage.useCalendar();
  * modifyCalendar.add({
  *     date: "2021-03-12",
