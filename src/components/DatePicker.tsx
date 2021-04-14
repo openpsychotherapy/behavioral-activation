@@ -6,11 +6,11 @@ import { DatePickerModal } from 'react-native-paper-dates';
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 
-export const DatePicker = (props: any) => {
+export const DatePicker = (props: {date: Date, setDate: React.Dispatch<React.SetStateAction<Date>>}) => {
   const lang = useTranslation();
   const [settings, modifySettings] = Storage.useSettings();
 
-  const [date, setDate] = React.useState<Date>(new Date());
+  
   const [open, setOpen] = React.useState(false);
 
   const onDismissSingle = React.useCallback(() => {
@@ -20,20 +20,20 @@ export const DatePicker = (props: any) => {
   const onConfirmSingle = React.useCallback(
     (params) => {
       setOpen(false);
-      setDate(params.date);
+      props.setDate(params.date);
     },
-    [setOpen, setDate]
+    [setOpen, props.setDate]
   );
 
   return (
     <View>
-      <Button onPress={() => setOpen(true)} mode='text' icon='calendar' >{Intl.DateTimeFormat(settings.language).format(date)}</Button>
+      <Button onPress={() => setOpen(true)} mode='text' icon='calendar' >{Intl.DateTimeFormat(settings.language).format(props.date)}</Button>
       <DatePickerModal
         mode='single'
         visible={open}
         onDismiss={onDismissSingle}
         onConfirm={onConfirmSingle}
-        date={date}
+        date={props.date}
         label={lang.datePickerLabel}
         startLabel={lang.datePickerStartLabel}
         endLabel={lang.datePickerEndLabel}

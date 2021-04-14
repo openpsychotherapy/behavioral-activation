@@ -4,22 +4,31 @@ import { Text, Button, Avatar, useTheme } from 'react-native-paper';
 
 import { DatePicker } from './../DatePicker';
 
-import { TimePicker } from './../TimePicker';
+import { TimePicker, getCurrentTimeRounded } from './../TimePicker';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
   // route.params contains information from activity screen 
 
   const { iconSizes } = useTheme();
+  const steps = 1;
+
+  const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
+  const [toTime, setToTime] = React.useState(getCurrentTimeRounded(1, steps));
+
+  const [date, setDate] = React.useState<Date>(new Date());
+
 
   return (
     <View style={{ padding: 10 }}>
       <View style={{ flexDirection: 'row' }}>
         <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
-        <DatePicker />
+        <DatePicker date={date} setDate={setDate} />
       </View>
       <View style={{ flexDirection: 'row' }}>
-        <TimePicker steps={1} />
+        <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} toTime={toTime} setToTime={setToTime} />
       </View>
+      <Text>{fromTime.toString()} - {toTime.toString()}</Text>
+      <Text>{date.toString()}</Text>
     </View>
   );
 };

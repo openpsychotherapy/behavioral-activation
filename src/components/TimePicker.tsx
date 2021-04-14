@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, List, Avatar} from 'react-native-paper';
+import { List,} from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
 import Storage from 'storage';
 
-export const TimePicker = (props: any) => {
-  const [settings, modifySettings] = Storage.useSettings();
+// Converts hours and minutes into date based on current date.
+const getOffsetDate = (date: Date, hours: number, minutes: number) : Date => {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDay(), hours, minutes);
+};
 
-  // Things that should be props
+export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
   const now = new Date();
-  const defaultTimeDifference = 60; // Minutes
+  const stepSize = 60 / steps;
+
+  // Rounds current time to the closes multiple of stepSize 
+  let currentMinutes = Math.floor((now.getHours() * 60 + now.getMinutes()) / stepSize) * stepSize;
+  
+  // Calculate the hours / minutes from total minutes
+  const currentHours = Math.floor(currentMinutes/60);
+  currentMinutes = currentMinutes % 60;
+
+ return getOffsetDate(now, currentHours+offset, currentMinutes);
+
+}
+
+export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps: number, 
+    fromTime: Date, setFromTime: React.Dispatch<React.SetStateAction<Date>>, toTime: Date, setToTime: React.Dispatch<React.SetStateAction<Date>>}) => {
+  const [settings, modifySettings] = Storage.useSettings();
 
 
   // Formats a date into a locale time string.
@@ -21,10 +38,7 @@ export const TimePicker = (props: any) => {
     return Intl.DateTimeFormat(settings.language, options).format(date);
   };
 
-  // Converts hours and minutes into date based on current date.
-  const getOffsetDate = (hours: number, minutes: number) : Date => {
-    return new Date(now.getFullYear(), now.getMonth(), now.getDay(), hours, minutes);
-  };
+
 
   // JSX Picker.Item components
   let timeSteps = [];
@@ -40,7 +54,7 @@ export const TimePicker = (props: any) => {
     const hours = Math.floor(minutes / 60);
     minutes = minutes % 60;
 
-    const stepDate = getOffsetDate(hours, minutes);
+    const stepDate = getOffsetDate(props.now,hours, minutes);
     const timeString = getFormatedTime(stepDate);
     
     timeStepDates[timeString] = stepDate;
@@ -49,52 +63,32 @@ export const TimePicker = (props: any) => {
     );
   }
 
-  // Rounds current time to the closes multiple of stepSize 
-  let currentMinutes = Math.floor((now.getHours() * 60 + now.getMinutes()) / stepSize) * stepSize;
-  
-  // Calculate the hours / minutes from total minutes
-  const currentHours = Math.floor(currentMinutes/60);
-  currentMinutes = currentMinutes % 60;
-
-  const startTime = getOffsetDate(currentHours, currentMinutes);
-  const endTime = getOffsetDate(currentHours+1, currentMinutes);
-
-  const startTimeFormatted = getFormatedTime(startTime);
-  const endTimeFormatted = getFormatedTime(endTime);
-  
-
-  // Store the state of the pickers
-  const [fromTime, setFromTime] = useState(startTimeFormatted);
-  const [toTime, setToTime] = useState(endTimeFormatted);
-
   const onValueChangeFrom = (itemValue: string) => {
-    setFromTime(itemValue);
     const fromDate = timeStepDates[itemValue];
-    const toDate = timeStepDates[toTime];
-
-    if(fromDate >= toDate) {
-      let newToDate = fromDate;
-      newToDate.setMinutes(newToDate.getMinutes() + defaultTimeDifference);
-      setToTime(getFormatedTime(newToDate))
+    props.setFromTime(fromDate);
+    
+    if(fromDate >= props.toTime) {
+      let newToDate = new Date(fromDate);
+      newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
+      props.setToTime(newToDate);
     }
   }
 
   const onValueChangeTo = (itemValue: string) => {
-    setToTime(itemValue);
     const toDate = timeStepDates[itemValue];
-    const fromDate = timeStepDates[fromTime];
+    props.setToTime(toDate);
 
-    if(toDate <= fromDate) {
-      let newFromDate = toDate;
-      newFromDate.setMinutes(newFromDate.getMinutes() - defaultTimeDifference);
-      setFromTime(getFormatedTime(newFromDate))
+    if(toDate <= props.fromTime) {
+      let newFromDate = new Date(toDate);
+      newFromDate.setMinutes(newFromDate.getMinutes() - props.defaultTimeOffset);
+      props.setFromTime(newFromDate);
     }
   }
 
   return (
     <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
       <Picker style={{flex: 1, flexGrow: 1}}
-        selectedValue={fromTime}
+        selectedValue={getFormatedTime(props.fromTime)}
         mode='dropdown'
         onValueChange={(itemValue: string, itemIndex: number) => onValueChangeFrom(itemValue)}
         >
@@ -102,7 +96,7 @@ export const TimePicker = (props: any) => {
       </Picker>
       <List.Icon icon='clock' style={{margin: 0}} />
       <Picker style={{flex: 1, flexGrow: 1}}
-        selectedValue={toTime}
+        selectedValue={getFormatedTime(props.toTime)}
         mode='dropdown'
         onValueChange={(itemValue: string, itemIndex: number) => onValueChangeTo(itemValue)}
         >
