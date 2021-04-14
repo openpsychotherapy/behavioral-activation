@@ -50,7 +50,7 @@ To get the translation for a month, you use the key months and index the month y
 
 Some examples:
 ```Typescript
-dict.weeksday[0] // sunday
+dict.weekdays[0] // sunday
 dict.weekdays[1] // monday
 dict.months[0]   // january
 dict.months[11]  // december
