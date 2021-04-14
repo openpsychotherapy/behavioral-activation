@@ -7,6 +7,8 @@ import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 
 export const DatePicker = (props: {date: Date, setDate: React.Dispatch<React.SetStateAction<Date>>}) => {
+
+
   const lang = useTranslation();
   const [settings, modifySettings] = Storage.useSettings();
 
@@ -24,10 +26,11 @@ export const DatePicker = (props: {date: Date, setDate: React.Dispatch<React.Set
     },
     [setOpen, props.setDate]
   );
-
+  
+  // TODO: Remove fontSize styling
   return (
-    <View>
-      <Button onPress={() => setOpen(true)} mode='text' icon='calendar' >{Intl.DateTimeFormat(settings.language).format(props.date)}</Button>
+    <View style={{flex: 1, flexDirection: 'row'}}>
+      <Button style={{flex: 1, flexGrow: 1}} labelStyle={{fontSize: 20}} onPress={() => setOpen(true)} icon='calendar' >{Intl.DateTimeFormat(settings.language).format(props.date)}</Button>
       <DatePickerModal
         mode='single'
         visible={open}

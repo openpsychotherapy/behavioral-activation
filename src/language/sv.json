@@ -10,5 +10,8 @@
     "datePickerEndLabel": "Till",
     "datePickerSaveLabel": "Spara",
     "datePickerEmptyLabel": "",
-    "datePickerMoreLabel": ""
+    "datePickerMoreLabel": "",
+
+    "activityRegistratorTextInputLabel": "Aktivitet",
+    "activityRegistratorActivityDefaultChoise": "Skriv text"
 }
