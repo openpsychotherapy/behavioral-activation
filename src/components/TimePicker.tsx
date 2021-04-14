@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactText } from 'react';
 import { View } from 'react-native';
 import { List,} from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -18,7 +18,7 @@ export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
   let currentMinutes = Math.floor((now.getHours() * 60 + now.getMinutes()) / stepSize) * stepSize;
   
   // Calculate the hours / minutes from total minutes
-  const currentHours = Math.floor(currentMinutes/60);
+  const currentHours = Math.floor(currentMinutes / 60);
   currentMinutes = currentMinutes % 60;
 
  return getOffsetDate(now, currentHours+offset, currentMinutes);
@@ -63,22 +63,22 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     );
   }
 
-  const onValueChangeFrom = (itemValue: string) => {
+  const onValueChangeFrom = (itemValue: ReactText) => {
     const fromDate = timeStepDates[itemValue];
     props.setFromTime(fromDate);
     
-    if(fromDate >= props.toTime) {
+    if (fromDate >= props.toTime) {
       let newToDate = new Date(fromDate);
       newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
       props.setToTime(newToDate);
     }
   }
 
-  const onValueChangeTo = (itemValue: string) => {
+  const onValueChangeTo = (itemValue: ReactText) => {
     const toDate = timeStepDates[itemValue];
     props.setToTime(toDate);
 
-    if(toDate <= props.fromTime) {
+    if (toDate <= props.fromTime) {
       let newFromDate = new Date(toDate);
       newFromDate.setMinutes(newFromDate.getMinutes() - props.defaultTimeOffset);
       props.setFromTime(newFromDate);
@@ -90,7 +90,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
       <Picker style={{flex: 1, flexGrow: 1}}
         selectedValue={getFormattedTime(props.fromTime)}
         mode='dropdown'
-        onValueChange={(itemValue: string, itemIndex: number) => onValueChangeFrom(itemValue)}
+        onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeFrom(itemValue)}
         >
         { timeSteps }
       </Picker>
@@ -98,7 +98,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
       <Picker style={{flex: 1, flexGrow: 1}}
         selectedValue={getFormattedTime(props.toTime)}
         mode='dropdown'
-        onValueChange={(itemValue: string, itemIndex: number) => onValueChangeTo(itemValue)}
+        onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeTo(itemValue)}
         >
         { timeSteps }
       </Picker>

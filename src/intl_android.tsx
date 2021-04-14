@@ -16,10 +16,6 @@ const isAndroid = Platform.OS === 'android';
 // This could possible be change to be using ES6 synatax but then the
 //  conditional android check won't function.
 
-// One of these libraries also started to point out and exising possible issue
-//  regarding several require cycles, one being: 
-//  src\storage\context.tsx -> src\storage\calendar.tsx -> src\storage\context.tsx
-
 if(isAndroid) {
 
   require('@formatjs/intl-getcanonicallocales/polyfill');
@@ -51,6 +47,7 @@ if(isAndroid) {
 
   // TODO: Figure out why TS is mad
   if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
+    // @ts-ignore TODO: Find proper fix for this. This line of code works.
     Intl.DateTimeFormat.__setDefaultTimeZone( // <-- "Never" type causes problems
       require("expo-localization").timezone // <-- Is required on Android
     );
