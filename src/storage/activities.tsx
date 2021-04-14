@@ -2,28 +2,17 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 import { isDate } from './utils';
 
-interface ActivitiesEntry {
-  text: string;
-  icon: string;
-  person: string;
-  meaningful: number;
-  entertaining: number;
-}
+import {
+  ActivitiesEntry,
+  ActivitiesDay,
+  Activities,
+  ModifyActivities,
+} from './types';
 
-interface ActivitiesDay {
-  date: string;
-  score: number | null;
-  entries: (ActivitiesEntry | null)[];
-}
-
-type Activities = ActivitiesDay[];
-
-interface ModifyActivities {
-  add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
-}
-
-export const activitiesKey: string = "activities";
-export const activitiesDefault: Activities = [];
+import {
+  activitiesKey,
+  activitiesDefault,
+} from './constants';
 
 /**
  * Hook returning a object with recorded activities and functions to modify the
