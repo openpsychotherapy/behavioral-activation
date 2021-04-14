@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { List,} from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
@@ -31,7 +31,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
 
 
   // Formats a date into a locale time string.
-  const getFormatedTime = (date: Date): string => {
+  const getFormattedTime = (date: Date): string => {
     const options: Intl.DateTimeFormatOptions = {
       hour: 'numeric', minute: 'numeric'
     };
@@ -55,7 +55,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     minutes = minutes % 60;
 
     const stepDate = getOffsetDate(props.now,hours, minutes);
-    const timeString = getFormatedTime(stepDate);
+    const timeString = getFormattedTime(stepDate);
     
     timeStepDates[timeString] = stepDate;
     timeSteps.push(
@@ -88,7 +88,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   return (
     <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
       <Picker style={{flex: 1, flexGrow: 1}}
-        selectedValue={getFormatedTime(props.fromTime)}
+        selectedValue={getFormattedTime(props.fromTime)}
         mode='dropdown'
         onValueChange={(itemValue: string, itemIndex: number) => onValueChangeFrom(itemValue)}
         >
@@ -96,7 +96,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
       </Picker>
       <List.Icon icon='clock' style={{margin: 0}} />
       <Picker style={{flex: 1, flexGrow: 1}}
-        selectedValue={getFormatedTime(props.toTime)}
+        selectedValue={getFormattedTime(props.toTime)}
         mode='dropdown'
         onValueChange={(itemValue: string, itemIndex: number) => onValueChangeTo(itemValue)}
         >
