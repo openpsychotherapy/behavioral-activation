@@ -3,5 +3,11 @@
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
     "january": "Januari",
-    "monday": "Måndag"
+    "monday": "Måndag",
+    "valuesButtonRelationships": "Relation",
+    "valuesButtonCareer": "Studier/Karriär",
+    "valuesButtonInterests": "Fritid/Intressen",
+    "valuesButtonMind": "Sinne/Kropp/Spirituellt",
+    "valuesButtonResponsibility": "Dagliga ansvar",
+    "valuesButtonSupport": "Stödpersoner"
 }

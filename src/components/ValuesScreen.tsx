@@ -1,46 +1,73 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Title, List, Button} from 'react-native-paper';
+import { Text, Title, Button, TextInput} from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { FlatList } from 'react-native-gesture-handler';
+import { useTranslation } from 'language/LanguageProvider';
 
 const ValuesStack = createStackNavigator();
 
-const RelationView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Relation</Text>
-  </View>
-); 
+
+
+const topicTextInput = (props:any) => {
+  const [text, setText] = React.useState('');
+
+  return (
+    <View style={{flex: 1}}>
+      <View style={{flex: 0.2,justifyContent: 'center'}}>
+      <TextInput
+      value={text}
+      onChangeText={(text: string) => setText(text)}
+      mode={"outlined"}
+      //style={{flex: 1, paddingVertical: 200, paddingHorizontal: 50, height: 200, width: 400}}
+     
+      style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start'}}
+      label={props.name}
+      placeholder={"Skriv här"}
+      multiline={true}
+     
+     
+      
+    />
+      </View>
+
+     </View>
+
+  )
+}
+  
+
+
 
 const CareerView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Studier/karrriär</Text>
+    <Text>Karriär</Text>
   </View>
 ); 
 
 const InterestsView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Fritid/intressen</Text>
+    <Text>Intressen</Text>
   </View>
 );
 
 const MindView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Sinne/Kropp/Spirituellt</Text>
+    <Text>Sinne</Text>
   </View>
 );
 
 const ResposibilityView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Dagliga ansvar</Text>
+    <Text>Ansvar</Text>
   </View>
 );
 
 const SupportView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Stödpersoner</Text>
+    <Text>Stöd</Text>
   </View>
 );
 
@@ -58,6 +85,8 @@ const CreateButton = (props: any) => {
 
   
 const ViewContent = ({navigation}: any) => {
+
+  const lang = useTranslation();
   
   const relationButton = () => {
     navigation.navigate('Relation');
@@ -89,23 +118,20 @@ const ViewContent = ({navigation}: any) => {
     <View style={{flex: 0.10, alignItems: 'center', justifyContent: 'center'}}>
       <Title>Värdering</Title>
     </View>
-    <CreateButton name="relation" function={relationButton}/>
-    <CreateButton name="Studier/karriär" function={careerButton}/>
-    <CreateButton name="Fritid/intressen" function={interestsButton}/>
-    <CreateButton name="Sinne/kropp/spirituellt" function={mindButton}/>
-    <CreateButton name="Dagliga ansvar" function={responsibilityButton}/>
+    <CreateButton name={lang.valuesButtonRelationships} function={relationButton}/>
+    <CreateButton name={lang.valuesButtonCareer} function={careerButton}/>
+    <CreateButton name={lang.valuesButtonInterests} function={interestsButton}/>
+    <CreateButton name={lang.valuesButtonMind} function={mindButton}/>
+    <CreateButton name={lang.valuesButtonResponsibility} function={responsibilityButton}/>
     <View style={{flex: 0.02, alignItems: 'center', justifyContent: 'center'}}>
     </View>
-    <CreateButton name="Stödpersoner" function={supportButton}/>
+    <CreateButton name={lang.valuesButtonSupport} function={supportButton}/>
   </View>
   )
 }
 
 
 
-
-
-  
 
 export const ValuesScreen = () => {
   return (
@@ -115,7 +141,7 @@ export const ValuesScreen = () => {
       }}
     >
       <ValuesStack.Screen name="ViewContent" component={ViewContent} />
-      <ValuesStack.Screen name="Relation" component={RelationView} />
+      <ValuesStack.Screen name="Relation" component={topicTextInput} />
       <ValuesStack.Screen name="Career" component={CareerView} />
       <ValuesStack.Screen name="Interests" component={InterestsView} />
       <ValuesStack.Screen name="Mind" component={MindView} />

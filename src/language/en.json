@@ -3,5 +3,11 @@
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
     "january": "January",
-    "monday": "Monday"
+    "monday": "Monday",
+    "valuesButtonRelationships": "Relationship",
+    "valuesButtonCareer": "Studies/Career",
+    "valuesButtonInterests": "Spare time/Interests",
+    "valuesButtonMind": "Mind/Body/Spiritually",
+    "valuesButtonResponsibility": "Daily responibility",
+    "valuesButtonSupport": "Support persons"
 }
