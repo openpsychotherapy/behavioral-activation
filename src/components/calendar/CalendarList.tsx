@@ -1,7 +1,7 @@
 import { useTranslation } from 'language/LanguageProvider';
 import React, { useEffect, useState } from 'react';
 import { FlatList} from 'react-native';
-import { Divider, Title } from 'react-native-paper';
+import { Divider, Title, useTheme } from 'react-native-paper';
 
 import { Calendar, entryGt } from 'storage/calendar';
 import { CalendarListSection } from './CalendarListSection';
@@ -92,6 +92,7 @@ type ListState = {groups: Calendar[], entryCount: number};
 export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
   const dict = useTranslation();
+  const { title } = useTheme();
 
   useEffect(() => {
     // Load upcoming calendar entries when initializing
@@ -140,7 +141,7 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
         typeof(item) === "string" ? (
           <>
             <Divider/>
-            <Title style={{ fontSize: 30, textAlign: 'center', marginVertical: 10 }}>
+            <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
               {`${dict.months[new Date(item).getMonth()]} ${item.slice(0, 4)}`}
             </Title>
             <Divider/>
