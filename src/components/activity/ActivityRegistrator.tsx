@@ -17,6 +17,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
   const lang = useTranslation();
   const [values, modifyValues] = Storage.useValues();
+  const [activities, modifyActivities] = Storage.useActivities();
 
   const { iconSizes, colors } = useTheme();
   const steps = 1;
@@ -39,7 +40,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const [choise, setChoise] = React.useState(defaultChoise);
   const [activityText, setActivityText] = React.useState('');
 
-  let choises = [ defaultChoise, test, test];
+  let choises = [ defaultChoise, test, test, test, test, test, test, test, test, test, test, test, test, test, test];
 
 
   //Found topics to choose from depending on icon 
@@ -74,59 +75,90 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const [entertainment, setEntertainment] = React.useState(5);
 
   const onConfirm = () => {
-    
+    const entry = {
+
+    };
+    console.log(fromTime.getHours() + ' - ' + toTime.getHours())
+    //modifyActivities.add(date.toISOString(), )
+
+    navigation.goBack();
   };
 
   const onCancel = () => {
-    
+    navigation.goBack();
   };
   
   return (
-    <View style={{ padding: 10, flexDirection: 'column', flex:1,  justifyContent: 'space-evenly'}}>
+    <View style={{ padding: 10, flexDirection: 'column', flex: 1,  justifyContent: 'space-evenly'}}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
         <DatePicker date={date} setDate={setDate}  />
       </View>
       <View style={{ flexDirection: 'row' }}>
-        <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} toTime={toTime} setToTime={setToTime} />
+        <Text>Tidsintervall</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row' }}>
+        <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+          toTime={toTime} setToTime={setToTime} />
       </View>
 
       <KeyboardAvoidingView>
-        <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} choises={ choises } choise={choise} setChoise={setChoise} />
+        <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} 
+          choises={ choises } choise={choise} setChoise={setChoise} />
       </KeyboardAvoidingView>
 
-      <View style={{ flexDirection: 'row' }}>
-        <Text>{lang.activityRegistratorValueLabel + ": "}</Text>
-        <Text>{value}</Text>
+
+      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+
+        <View style={{flexDirection: 'column', width: '80%'}}>
+          
+          <View style={{ flexDirection: 'row'}}>
+            <Text>{lang.activityRegistratorValueLabel + ": "}</Text>
+            <Text>{value}</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+            <Text>0</Text>
+            <Slider
+              style={{flex: 1}} value={5} step={1}
+              minimumValue={0} maximumValue={10}
+              onValueChange={(value: number) => {setValue(value)}}
+              minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+            />
+            <Text>10</Text>
+          </View>
+
+        </View>
+
       </View>
 
-      <View style={{ flexDirection: 'row' }}>
-        <Text>0</Text>
-        <Slider
-          style={{flex: 1}} value={5} step={1}
-          minimumValue={0} maximumValue={10}
-          onValueChange={(value: number) => {setValue(value)}}
-          minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
-          />
-        <Text>10</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+
+        <View style={{flexDirection: 'column', width: '80%'}}>
+
+          <View style={{ flexDirection: 'row'}}>
+            <Text>{lang.activityRegistratorEntertainmentLabel + ": "}</Text>
+            <Text>{entertainment}</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+            <Text>0</Text>
+            <Slider style={{flex: 1}} value={5} step={1}
+              minimumValue={0} maximumValue={10}
+              onValueChange={(value: number) => {setEntertainment(value)}}
+              minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+            />
+            <Text>10</Text>
+          </View>
+
+        </View>
+
       </View>
 
-      <View style={{ flexDirection: 'row' }}>
-        <Text>{lang.activityRegistratorEntertainmentLabel + ": "}</Text>
-        <Text>{entertainment}</Text>
-      </View>
-
-      <View style={{ flexDirection: 'row' }}>
-        <Text>0</Text>
-        <Slider style={{flex: 1}} value={5} step={1}
-        minimumValue={0} maximumValue={10}
-        onValueChange={(value: number) => {setEntertainment(value)}}
-        minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000" />
-        <Text>10</Text>
-      </View>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-        <IconButton icon='cancel' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
+        <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
         <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
       </View>
     </View>

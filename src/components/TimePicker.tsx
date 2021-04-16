@@ -45,7 +45,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   let timeStepDates : {[key: string]: Date} = {};
 
   // props.steps is number of steps per hour
-  const count = 24 * props.steps;
+  const count = 24 * props.steps + 1;
   const stepSize = 60 / props.steps;
   
   // Divide the time depending on stepsize (props.steps)
@@ -67,6 +67,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const fromDate = timeStepDates[itemValue];
     props.setFromTime(fromDate);
     
+    // This functionality does not work properly when midnight shifts.
     if (fromDate >= props.toTime) {
       let newToDate = new Date(fromDate);
       newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
@@ -77,6 +78,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   const onValueChangeTo = (itemValue: ReactText) => {
     const toDate = timeStepDates[itemValue];
     props.setToTime(toDate);
+
 
     if (toDate <= props.fromTime) {
       let newFromDate = new Date(toDate);
@@ -92,7 +94,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
         mode='dropdown'
         onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeFrom(itemValue)}
         >
-        { timeSteps }
+        { timeSteps.slice(0, count-1) }
       </Picker>
       <List.Icon icon='clock' style={{margin: 0}} />
       <Picker style={{flex: 1, flexGrow: 1}}
@@ -100,7 +102,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
         mode='dropdown'
         onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeTo(itemValue)}
         >
-        { timeSteps }
+        { timeSteps.slice(1) }
       </Picker>
       <List.Icon icon='clock' style={{margin: 0}} />
     </View>

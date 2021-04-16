@@ -21,24 +21,14 @@ export const SuggestiveTextInput = (props: {label: string, activityText: string,
     const choise = props.choises[i];
     
     choiseComponents.push(
-      <TouchableWithoutFeedback onPress={()=>{ props.setChoise(choise); setVisible(false) }}>
-        <Surface style={{ flexDirection: 'row', elevation: visible ? 5 : 0, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }} key={'c_' + i}>
+      <TouchableWithoutFeedback onPress={()=>{ props.setChoise(choise); setVisible(false) }} key={'c_' + i}>
+        <Surface style={{ flexDirection: 'row', elevation: visible ? 5 : 0, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
           <Text style={{ padding: 10}}>{choise.value}</Text>
         </Surface>
       </TouchableWithoutFeedback>
     );
   }
 
-
-  /* Old picker
-  <Picker
-    selectedValue={props.choise.value}
-    mode='dropdown'
-    onValueChange={(itemValue: ItemValue, itemIndex: number) => props.setChoise(props.choises[itemIndex])}
-    >
-    { choiseComponents }
-  </Picker>
-  */
 
   return (
     <View>
@@ -58,6 +48,7 @@ export const SuggestiveTextInput = (props: {label: string, activityText: string,
       </Surface>
       
       <TextInput
+        mode = 'outlined'
         label={props.label}
         editable={props.choise.isDefault}
         value={!props.choise.isDefault ? props.choise.value : props.activityText}

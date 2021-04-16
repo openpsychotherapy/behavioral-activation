@@ -12,11 +12,11 @@
     "datePickerEmptyLabel": "",
     "datePickerMoreLabel": "",
 
-    "activityRegistratorTextInputLabel": "Activity",
+    "activityRegistratorTextInputLabel": "What have you been doing?",
     "activityRegistratorActivityDefaultChoise": "Write text",
     "activityRegistratorValueLabel" : "Enjoyment",
     "activityRegistratorEntertainmentLabel": "Importance",
-    
+
     "suggestiveTextInputChangeLabel": "Change"
     
 }
