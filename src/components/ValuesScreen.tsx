@@ -4,7 +4,6 @@ import { Text, Title, Button, TextInput, FAB, IconButton, Surface} from 'react-n
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
-import { FlatList } from 'react-native-gesture-handler';
 import { useTranslation } from 'language/LanguageProvider';
 
 const ValuesStack = createStackNavigator();
@@ -161,24 +160,24 @@ const ViewContent = ({navigation}: any) => {
       <Title>Värdering</Title>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonRelationships} function={relationButton}/>
+      <StyledButton name={lang.valuesButtonRelationships} function={relationButton}/>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonCareer} function={careerButton}/>
+      <StyledButton name={lang.valuesButtonCareer} function={careerButton}/>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonInterests} function={interestsButton}/>
+      <StyledButton name={lang.valuesButtonInterests} function={interestsButton}/>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonMind} function={mindButton}/>
+      <StyledButton name={lang.valuesButtonMind} function={mindButton}/>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonResponsibility} function={responsibilityButton}/>
+      <StyledButton name={lang.valuesButtonResponsibility} function={responsibilityButton}/>
     </View>
     <View style={{flex: 0.02, alignItems: 'center', justifyContent: 'center'}}>
     </View>
     <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
-      <CreateButton name={lang.valuesButtonSupport} function={supportButton}/>
+      <StyledButton name={lang.valuesButtonSupport} function={supportButton}/>
     </View>
     
   </View>
