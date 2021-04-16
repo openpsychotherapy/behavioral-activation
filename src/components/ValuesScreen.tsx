@@ -115,7 +115,7 @@ const SupportView = () => (
 );
 
 
-const CreateButton = (props: any) => {
+const StyledButton = (props: any) => {
   return (
     
       <Button theme={{ roundness: 30 }} contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={props.function}>
