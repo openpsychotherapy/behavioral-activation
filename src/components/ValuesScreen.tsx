@@ -8,7 +8,7 @@ import { useTranslation } from 'language/LanguageProvider';
 
 const ValuesStack = createStackNavigator();
 
-const CircleButton = (props: any) => {
+const YesNoButton = (props: any) => {
   return (
     <Surface style={{ borderRadius: 100, elevation: 3}}>
       <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
@@ -40,8 +40,8 @@ const topicTextInput = (props:any) => {
     />
       </View>
       <View style={{ flex: 0.3, paddingBottom: 60, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-evenly'}}>
-        <CircleButton icon="close" size={40} onPress={() => console.log("pressedIcon")} />
-        <CircleButton icon="check" size={40} onPress={() => console.log("pressedIcon")} />
+        <YesNoButton icon="close" size={40} onPress={() => console.log("pressedIcon")} />
+        <YesNoButton icon="check" size={40} onPress={() => console.log("pressedIcon")} />
            
       </View>
 
@@ -54,25 +54,12 @@ const topicTextInput = (props:any) => {
 
 
 const CareerView = () => (
+
   <View style={{ flex: 1}}>
     <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
       <Title style={{fontSize: 30}}>Karriär</Title>
     </View>
     <ScrollView>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-      <Text style={{ fontSize: 80 }}>React Native</Text>
-
     </ScrollView>
     <FAB
       style={{
@@ -82,7 +69,7 @@ const CareerView = () => (
       bottom: 0,
       }}
       icon="pencil"
-      onPress={() => console.log('Pressed fab')}
+      onPress={topicTextInput}
     />
   </View>
 ); 
