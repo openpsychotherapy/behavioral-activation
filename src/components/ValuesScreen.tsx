@@ -1,12 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text, Title, Button, TextInput, FAB, IconButton, Surface} from 'react-native-paper';
-
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { useTranslation } from 'language/LanguageProvider';
 
+import Storage from 'storage';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/core';
+
 const ValuesStack = createStackNavigator();
+
+
 
 const YesNoButton = (props: any) => {
   return (
@@ -16,20 +21,20 @@ const YesNoButton = (props: any) => {
   );
   }
 
-const topicTextInput = (props:any) => {
+const TopicTextInputView = ({route, navigation}: any) => {
+  const [values, modifyValues] = Storage.useValues();
   const [text, setText] = React.useState('');
-
+  //const { name } = route.params;
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-        <Title style={{fontSize: 25}}>{props.name}</Title>
+        <Title style={{fontSize: 30}}>inget</Title>
       </View>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
       <TextInput
       value={text}
-      onChangeText={(text: string) => setText(text)}
+      onChangeText={setText}
       mode={"outlined"}
-      //style={{flex: 1, paddingVertical: 200, paddingHorizontal: 50, height: 200, width: 400}}
      
       style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start', fontSize: 20}}
       placeholder={"Skriv här"}
@@ -41,7 +46,16 @@ const topicTextInput = (props:any) => {
       </View>
       <View style={{ flex: 0.3, paddingBottom: 60, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-evenly'}}>
         <YesNoButton icon="close" size={40} onPress={() => console.log("pressedIcon")} />
-        <YesNoButton icon="check" size={40} onPress={() => console.log("pressedIcon")} />
+        <YesNoButton icon="check" size={40} onPress={() =>{
+          navigation.navigate({
+            name: 'Career',
+            //params: { post: text},
+            //merge: true,
+          },
+
+          );
+          modifyValues.addTopic("work", text);
+        } } />
            
       </View>
 
@@ -49,15 +63,58 @@ const topicTextInput = (props:any) => {
 
   )
 }
+
+
+
+const CareerView = ({navigation, route}: any) => {
+  const [values, modifyValues] = Storage.useValues();
+  console.log(values.work)
+ 
+  const numbers = [1, 2, 3, 4, 5];
+  console.log(numbers)
   
+  React.useEffect(() => {
+    if (route.params?.post) {
 
+    }
 
+  }, [route.params?.post]);
 
-const CareerView = () => (
-
-  <View style={{ flex: 1}}>
+  return (
+    <View style={{ flex: 1}}>
     <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
       <Title style={{fontSize: 30}}>Karriär</Title>
+    </View>
+    <ScrollView>
+      <Text>Post: {route.params?.post}</Text>
+    </ScrollView>
+    <FAB
+      style={{
+      position: 'absolute',
+      margin: 16,
+      right: 0,
+      bottom: 0,
+      }}
+      icon="pencil"
+      onPress={() => 
+        navigation.navigate('TopicTextInputView')
+      }
+    />
+    
+
+  </View>
+  );
+  
+}
+
+const TopicView = ({route, navigation}: any) => {
+
+  const { name } = route.params;
+
+  return (
+    <View style={{ flex: 1}}>
+    <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
+      <Title style={{fontSize: 30}}>{name}</Title>
     </View>
     <ScrollView>
     </ScrollView>
@@ -69,28 +126,16 @@ const CareerView = () => (
       bottom: 0,
       }}
       icon="pencil"
-      onPress={topicTextInput}
+      onPress={() => {
+        navigation.navigate('TopicTextInputView', {
+          name: name,
+        });
+      }}
     />
   </View>
-); 
+  );
+}
 
-const InterestsView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text>Intressen</Text>
-  </View>
-);
-
-const MindView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Sinne</Text>
-  </View>
-);
-
-const ResposibilityView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Ansvar</Text>
-  </View>
-);
 
 const SupportView = () => (
   <View style={{flex: 1}}>
@@ -112,12 +157,14 @@ const StyledButton = (props: any) => {
 
 
   
-const ViewContent = ({navigation}: any) => {
+const StartScreenView = ({navigation}: any) => {
 
   const lang = useTranslation();
   
   const relationButton = () => {
-    navigation.navigate('Relation');
+    navigation.navigate('Relation', {
+      name: 'Relation'
+    });
   };
 
   const careerButton = () => {
@@ -125,15 +172,21 @@ const ViewContent = ({navigation}: any) => {
   };
 
   const interestsButton = () => {
-    navigation.navigate('Interests');
+    navigation.navigate('Interests', {
+      name: 'Fritid/intressen'
+    });
   };
 
   const mindButton = () => {
-    navigation.navigate('Mind');
+    navigation.navigate('Mind', {
+      name: 'Sinne/Kropp/Spirituellt'
+    });
   };
 
   const responsibilityButton = () => {
-    navigation.navigate('Responsibility');
+    navigation.navigate('Responsibility', {
+      name: 'Dagliga ansvar'
+    });
   };
 
   const supportButton = () => {
@@ -176,18 +229,22 @@ const ViewContent = ({navigation}: any) => {
 
 export const ValuesScreen = () => {
   return (
+    
     <ValuesStack.Navigator initialRouteName="Values" headerMode="float"
       screenOptions={{
         header: (props: any) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ValuesStack.Screen name="ViewContent" component={ViewContent} />
-      <ValuesStack.Screen name="Relation" component={topicTextInput} />
+      
+      <ValuesStack.Screen name= "StartScreenView" component= {StartScreenView} />
+      <ValuesStack.Screen name="Relation" component={TopicView} />
       <ValuesStack.Screen name="Career" component={CareerView} />
-      <ValuesStack.Screen name="Interests" component={InterestsView} />
-      <ValuesStack.Screen name="Mind" component={MindView} />
-      <ValuesStack.Screen name="Responsibility" component={ResposibilityView} />
+      <ValuesStack.Screen name="Interests" component={TopicView} />
+      <ValuesStack.Screen name="Mind" component={TopicView} />
+      <ValuesStack.Screen name="Responsibility" component={TopicView} />
       <ValuesStack.Screen name="Support" component={SupportView} />
+
+      <ValuesStack.Screen name="TopicTextInputView" component={TopicTextInputView}/>
 
     </ValuesStack.Navigator>
   );
