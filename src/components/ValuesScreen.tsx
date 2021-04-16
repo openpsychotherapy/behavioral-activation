@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Title, Button, TextInput} from 'react-native-paper';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Text, Title, Button, TextInput, FAB, IconButton, Surface} from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -9,28 +9,41 @@ import { useTranslation } from 'language/LanguageProvider';
 
 const ValuesStack = createStackNavigator();
 
-
+const CircleButton = (props: any) => {
+  return (
+    <Surface style={{ borderRadius: 100, elevation: 3}}>
+      <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
+    </Surface >
+  );
+  }
 
 const topicTextInput = (props:any) => {
   const [text, setText] = React.useState('');
 
   return (
     <View style={{flex: 1}}>
-      <View style={{flex: 0.2,justifyContent: 'center'}}>
+      <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+        <Title style={{fontSize: 25}}>{props.name}</Title>
+      </View>
+      <View style={{flex: 0.2, justifyContent: 'center'}}>
       <TextInput
       value={text}
       onChangeText={(text: string) => setText(text)}
       mode={"outlined"}
       //style={{flex: 1, paddingVertical: 200, paddingHorizontal: 50, height: 200, width: 400}}
      
-      style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start'}}
-      label={props.name}
+      style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start', fontSize: 20}}
       placeholder={"Skriv här"}
       multiline={true}
      
      
       
     />
+      </View>
+      <View style={{ flex: 0.3, paddingBottom: 60, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-evenly'}}>
+        <CircleButton icon="close" size={40} onPress={() => console.log("pressedIcon")} />
+        <CircleButton icon="check" size={40} onPress={() => console.log("pressedIcon")} />
+           
       </View>
 
      </View>
@@ -42,13 +55,41 @@ const topicTextInput = (props:any) => {
 
 
 const CareerView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Karriär</Text>
+  <View style={{ flex: 1}}>
+    <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
+      <Title style={{fontSize: 30}}>Karriär</Title>
+    </View>
+    <ScrollView>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+      <Text style={{ fontSize: 80 }}>React Native</Text>
+
+    </ScrollView>
+    <FAB
+      style={{
+      position: 'absolute',
+      margin: 16,
+      right: 0,
+      bottom: 0,
+      }}
+      icon="pencil"
+      onPress={() => console.log('Pressed fab')}
+    />
   </View>
 ); 
 
 const InterestsView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Text>Intressen</Text>
   </View>
 );
@@ -66,19 +107,20 @@ const ResposibilityView = () => (
 );
 
 const SupportView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <View style={{flex: 1}}>
+  <View style={{ flex: 0.1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Stöd</Text>
+  </View>
   </View>
 );
 
 
 const CreateButton = (props: any) => {
   return (
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+    
       <Button theme={{ roundness: 30 }} contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={props.function}>
         <Text>{props.name}</Text>
       </Button>
-    </View>
       )
 }
 
@@ -118,14 +160,27 @@ const ViewContent = ({navigation}: any) => {
     <View style={{flex: 0.10, alignItems: 'center', justifyContent: 'center'}}>
       <Title>Värdering</Title>
     </View>
-    <CreateButton name={lang.valuesButtonRelationships} function={relationButton}/>
-    <CreateButton name={lang.valuesButtonCareer} function={careerButton}/>
-    <CreateButton name={lang.valuesButtonInterests} function={interestsButton}/>
-    <CreateButton name={lang.valuesButtonMind} function={mindButton}/>
-    <CreateButton name={lang.valuesButtonResponsibility} function={responsibilityButton}/>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonRelationships} function={relationButton}/>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonCareer} function={careerButton}/>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonInterests} function={interestsButton}/>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonMind} function={mindButton}/>
+    </View>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonResponsibility} function={responsibilityButton}/>
+    </View>
     <View style={{flex: 0.02, alignItems: 'center', justifyContent: 'center'}}>
     </View>
-    <CreateButton name={lang.valuesButtonSupport} function={supportButton}/>
+    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
+      <CreateButton name={lang.valuesButtonSupport} function={supportButton}/>
+    </View>
+    
   </View>
   )
 }
