@@ -13,5 +13,7 @@
     "datePickerMoreLabel": "",
 
     "activityRegistratorTextInputLabel": "Activity",
-    "activityRegistratorActivityDefaultChoise": "Write text"
+    "activityRegistratorActivityDefaultChoise": "Write text",
+    "activityRegistratorValueLabel" : "Enjoyment",
+    "activityRegistratorEntertainmentLabel": "Importance"
 }

@@ -9,7 +9,7 @@ type Choise = {
   isDefault: boolean
 }
 
-export const SuggestiveTextInput = (props: {label: string, activityText: string, setActivityText: React.Dispatch<React.SetStateAction<string>>, 
+export const SuggestiveComboBox = (props: {label: string, activityText: string, setActivityText: React.Dispatch<React.SetStateAction<string>>, 
   choises: Choise[], choise: Choise, setChoise: React.Dispatch<React.SetStateAction<Choise>>}) => {
   
   let choiseComponents = []

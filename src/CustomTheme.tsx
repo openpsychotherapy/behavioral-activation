@@ -4,7 +4,8 @@ import { DefaultTheme, DarkTheme } from 'react-native-paper';
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
-
+      cancel: string,
+      confirm: string
     }
     interface Theme {
       iconSizes: {
@@ -23,6 +24,8 @@ export const CustomTheme = {
   colors: {
     ...DefaultTheme.colors,
 
+    cancel: 'red',
+    confirm: 'green'
   },
   iconSizes: {
     // IconButton

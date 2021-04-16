@@ -1,14 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Button, Avatar, useTheme } from 'react-native-paper';
+import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
+
+import Slider from '@react-native-community/slider';
+
+import { DatePicker } from '../DatePicker';
+import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
+import { SuggestiveComboBox } from '../SuggestiveComboBox';
 
 
-import { DatePicker } from './../DatePicker';
-import { TimePicker, getCurrentTimeRounded } from './../TimePicker';
-import { SuggestiveTextInput } from '../SuggestiveTextInput';
-
-
-import { useTranslation } from 'language/LanguageProvider';
+import { LanguageProvider, useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
@@ -17,7 +18,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const lang = useTranslation();
   const [values, modifyValues] = Storage.useValues();
 
-  const { iconSizes } = useTheme();
+  const { iconSizes, colors } = useTheme();
   const steps = 1;
 
   const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
@@ -64,6 +65,17 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     console.log(choises);
   };
 
+  const [value, setValue] = React.useState(5);
+  const [entertainment, setEntertainment] = React.useState(5);
+
+  const onConfirm = () => {
+    
+  };
+
+  const onCancel = () => {
+    
+  };
+  
   return (
     <View style={{ padding: 10 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -73,8 +85,42 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       <View style={{ flexDirection: 'row' }}>
         <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} toTime={toTime} setToTime={setToTime} />
       </View>
-      <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} choises={ choises } choise={choise} setChoise={setChoise} />
+      <SuggestiveComboBox label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} choises={ choises } choise={choise} setChoise={setChoise} />
       
+      <View style={{ flexDirection: 'row' }}>
+        <Text>{lang.activityRegistratorValueLabel + ": "}</Text>
+        <Text>{value}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row' }}>
+        <Text>0</Text>
+        <Slider
+          style={{flex: 1}} value={5} step={1}
+          minimumValue={0} maximumValue={10}
+          onValueChange={(value: number) => {setValue(value)}}
+          minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+          />
+        <Text>10</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row' }}>
+        <Text>{lang.activityRegistratorEntertainmentLabel + ": "}</Text>
+        <Text>{entertainment}</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row' }}>
+        <Text>0</Text>
+        <Slider style={{flex: 1}} value={5} step={1}
+        minimumValue={0} maximumValue={10}
+        onValueChange={(value: number) => {setEntertainment(value)}}
+        minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000" />
+        <Text>10</Text>
+      </View>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+        <IconButton icon='cancel' size={iconSizes.large} onPress={() => {onCancel()}} color={colors.cancel} />
+        <IconButton icon='check' size={iconSizes.large} onPress={() => {onConfirm()}} color={colors.confirm} />
+      </View>
     </View>
   );
 };

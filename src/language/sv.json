@@ -13,5 +13,7 @@
     "datePickerMoreLabel": "",
 
     "activityRegistratorTextInputLabel": "Aktivitet",
-    "activityRegistratorActivityDefaultChoise": "Skriv text"
+    "activityRegistratorActivityDefaultChoise": "Skriv text",
+    "activityRegistratorValueLabel": "Meningsfullt",
+    "activityRegistratorEntertainmentLabel": "Underhållande"
 }
