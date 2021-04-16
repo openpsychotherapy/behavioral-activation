@@ -15,5 +15,7 @@
     "activityRegistratorTextInputLabel": "Aktivitet",
     "activityRegistratorActivityDefaultChoise": "Skriv text",
     "activityRegistratorValueLabel": "Meningsfullt",
-    "activityRegistratorEntertainmentLabel": "Underhållande"
+    "activityRegistratorEntertainmentLabel": "Underhållande",
+
+    "suggestiveTextInputChangeLabel": "Byt"
 }

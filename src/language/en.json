@@ -15,5 +15,8 @@
     "activityRegistratorTextInputLabel": "Activity",
     "activityRegistratorActivityDefaultChoise": "Write text",
     "activityRegistratorValueLabel" : "Enjoyment",
-    "activityRegistratorEntertainmentLabel": "Importance"
+    "activityRegistratorEntertainmentLabel": "Importance",
+    
+    "suggestiveTextInputChangeLabel": "Change"
+    
 }

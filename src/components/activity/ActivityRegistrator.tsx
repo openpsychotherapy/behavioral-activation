@@ -1,12 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
 
 import { DatePicker } from '../DatePicker';
 import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
-import { SuggestiveComboBox } from '../SuggestiveComboBox';
+import { SuggestiveTextInput } from '../SuggestiveTextInput';
 
 
 import { LanguageProvider, useTranslation } from 'language/LanguageProvider';
@@ -31,10 +31,15 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     isDefault: true
   }
 
+  const test = {
+    value: 'wooho',
+    isDefault: false
+  }
+
   const [choise, setChoise] = React.useState(defaultChoise);
   const [activityText, setActivityText] = React.useState('');
 
-  let choises = [ defaultChoise ];
+  let choises = [ defaultChoise, test, test];
 
 
   //Found topics to choose from depending on icon 
@@ -77,7 +82,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   };
   
   return (
-    <View style={{ padding: 10 }}>
+    <View style={{ padding: 10, flexDirection: 'column', flex:1,  justifyContent: 'space-evenly'}}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
         <DatePicker date={date} setDate={setDate}  />
@@ -85,8 +90,11 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       <View style={{ flexDirection: 'row' }}>
         <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} toTime={toTime} setToTime={setToTime} />
       </View>
-      <SuggestiveComboBox label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} choises={ choises } choise={choise} setChoise={setChoise} />
-      
+
+      <KeyboardAvoidingView>
+        <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} choises={ choises } choise={choise} setChoise={setChoise} />
+      </KeyboardAvoidingView>
+
       <View style={{ flexDirection: 'row' }}>
         <Text>{lang.activityRegistratorValueLabel + ": "}</Text>
         <Text>{value}</Text>
@@ -118,8 +126,8 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       </View>
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-        <IconButton icon='cancel' size={iconSizes.large} onPress={() => {onCancel()}} color={colors.cancel} />
-        <IconButton icon='check' size={iconSizes.large} onPress={() => {onConfirm()}} color={colors.confirm} />
+        <IconButton icon='cancel' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
+        <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
       </View>
     </View>
   );
