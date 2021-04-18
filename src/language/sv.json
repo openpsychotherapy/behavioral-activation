@@ -12,10 +12,14 @@
     "datePickerEmptyLabel": "",
     "datePickerMoreLabel": "",
 
+    "timePickerLabel": "Tidsintervall",
+
     "activityRegistratorTextInputLabel": "Vad har du gjort?",
     "activityRegistratorActivityDefaultChoise": "Skriv text",
-    "activityRegistratorValueLabel": "Meningsfullt",
-    "activityRegistratorEntertainmentLabel": "Underhållande",
+    "activityRegistratorImporanceLabel": "Meningsfullt",
+    "activityRegistratorEnjoymentLabel": "Underhållande",
 
-    "suggestiveTextInputChangeLabel": "Byt"
+    "suggestiveTextInputChangeLabel": "Byt",
+    
+    "activiesSnackBarAdded": "Aktiviteten lades till"
 }

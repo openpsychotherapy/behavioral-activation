@@ -12,11 +12,15 @@
     "datePickerEmptyLabel": "",
     "datePickerMoreLabel": "",
 
+    "timePickerLabel": "Time interval",
+
     "activityRegistratorTextInputLabel": "What have you been doing?",
     "activityRegistratorActivityDefaultChoise": "Write text",
-    "activityRegistratorValueLabel" : "Enjoyment",
-    "activityRegistratorEntertainmentLabel": "Importance",
+    "activityRegistratorImporanceLabel" : "Importance",
+    "activityRegistratorEnjoymentLabel": "Enjoyment",
 
-    "suggestiveTextInputChangeLabel": "Change"
+    "suggestiveTextInputChangeLabel": "Change",
+
+    "activiesSnackBarAdded" : "Activity added" 
     
 }

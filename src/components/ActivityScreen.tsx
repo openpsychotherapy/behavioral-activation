@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { Text, Button, Surface, IconButton, useTheme } from 'react-native-paper';
+import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -8,6 +8,8 @@ import { CustomNavigationBar } from './CustomNavigationBar';
 import { IconMeny } from './IconMeny';
 import { IconList } from './activity/IconList';
 import { ActivityRegistrator } from './activity/ActivityRegistrator';
+
+import { useTranslation } from 'language/LanguageProvider';
 
 const ActivityStack = createStackNavigator();
 
@@ -34,11 +36,15 @@ const CircleButton = (props: any) => {
 const ViewContent = ({ navigation }: any) => {
   const { colors } = useTheme();
 
-  const [visible, setVisible] = React.useState(false);
+  const lang = useTranslation();
+
+  const [iconListVisible, setIconListVisible] = React.useState(false);
+  const [snackBarVisible, setSnackBarVisible] = React.useState(false);
+
   const navigationButtonSize = 40;
 
   const iconListButton = () => {
-    setVisible(true);
+    setIconListVisible(true);
   };
 
   const historyButton = () => {
@@ -49,15 +55,19 @@ const ViewContent = ({ navigation }: any) => {
     navigation.navigate('IconSettings');
   };
 
+  const onBackCallback = (success: boolean) => {
+    setSnackBarVisible(success);
+  }
+
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     console.log(pressedIcon + " - " + icon);
-    setVisible(false);
-    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
+    setIconListVisible(false);
+    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon, onBackCallback: onBackCallback });
   };
 
   return (
     <View style={{ flex: 1 }}>
-      <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
+      <IconList pressCallback={iconPressCallback} visible={iconListVisible} setVisible={setIconListVisible} />
       <IconMeny pressCallback={iconPressCallback} />
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
@@ -65,6 +75,10 @@ const ViewContent = ({ navigation }: any) => {
         <CircleButton icon='calendar-check' size={navigationButtonSize} backgroundColor={colors.accent} />
         <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
+
+      <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} >
+        {lang.activiesSnackBarAdded}
+      </Snackbar>
     </View>
   );
 }
