@@ -52,7 +52,6 @@ const ViewContent = ({ route, navigation }: any) => {
   };
 
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
-    console.log(pressedIcon + " - " + icon);
     setIconListVisible(false);
     navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
   };

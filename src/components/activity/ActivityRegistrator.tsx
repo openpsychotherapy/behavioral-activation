@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
@@ -107,10 +107,20 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
-  
+
+  const [absHeight, setAbsHeight] = React.useState(-1);
+  const onLayoutSet = (event: any) => {
+    if(absHeight === -1) {
+      console.log(absHeight);
+      var {x, y, width, height} = event.nativeEvent.layout;
+      console.log(x  + ' - ' +  y + ' - ' + width + ' - ' + height);
+      setAbsHeight(height);
+    }
+  };
+
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} style={{backgroundColor: 'red'}}>
-      <View style={{ padding: 10, flexDirection: 'column', height: '100%',  justifyContent: 'space-evenly'}}>
+      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', padding: 10, flexDirection: 'column',  justifyContent: 'space-evenly'}}>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{flex: 1, flexGrow: 1}}>
@@ -124,7 +134,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
             toTime={toTime} setToTime={setToTime} />
         </View>
 
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100}>
           <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
             choises={ choises } choise={choise} setChoise={setChoise} />
         </KeyboardAvoidingView>
