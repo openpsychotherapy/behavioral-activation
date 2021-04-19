@@ -10,7 +10,32 @@ type Choise = {
   isDefault: boolean
 }
 
-export const SuggestiveTextInput = (props: {label: string, activityText: string, setActivityText: React.Dispatch<React.SetStateAction<string>>, 
+/**
+ * A text input component that gives prescribed alternatives.
+ *
+ * @example
+ * ```
+ * const [choise, setChoise] = React.useState(defaultChoise);
+ * const [activityText, setActivityText] = React.useState('');
+ * 
+ * return (
+ *   <SuggestiveTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText} 
+ *     choises={ ['Write text'] } choise={choise} setChoise={setChoise} />
+ * );
+ * 
+ * ```
+ * 
+ * @param label - A text label depending on language
+ * @param textInputText - Text value for default choise (eg a hook)
+ * @param setTextInputText - Set function for default choise text (eg a hook)
+ * @param choises - A list with all the prescribed choises
+ * @param choise - Choise value as a Date object (eg a hook)
+ * @param setChoise - Choise time set function (eg a hook)
+ * 
+ * @returns The SuggestiveTextInput component
+ *
+ */
+export const SuggestiveTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>, 
   choises: Choise[], choise: Choise, setChoise: React.Dispatch<React.SetStateAction<Choise>>}) => {
   
   const lang = useTranslation();
@@ -20,6 +45,7 @@ export const SuggestiveTextInput = (props: {label: string, activityText: string,
   for (let i = 0; i < props.choises.length; ++i) {
     const choise = props.choises[i];
     
+    // List of all items as surface components
     choiseComponents.push(
       <TouchableWithoutFeedback onPress={()=>{ props.setChoise(choise); setVisible(false) }} key={'c_' + i}>
         <Surface style={{ flexDirection: 'row', elevation: visible ? 5 : 0, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
@@ -48,12 +74,12 @@ export const SuggestiveTextInput = (props: {label: string, activityText: string,
       </Surface>
       
       <TextInput
-        mode = 'outlined'
+        mode='outlined'
         label={props.label}
         editable={props.choise.isDefault}
-        value={!props.choise.isDefault ? props.choise.value : props.activityText}
+        value={!props.choise.isDefault ? props.choise.value : props.textInputText}
         placeholder={''}
-        onChangeText={(text: string) => {props.setActivityText(text)}}
+        onChangeText={(text: string) => {props.setTextInputText(text)}}
       />
     </View>
   );

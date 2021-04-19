@@ -6,9 +6,9 @@
     "monday": "Monday",
 
     "datePickerLabel": "Pick a date",
+    "datePickerSaveLabel": "Save",
     "datePickerStartLabel": "From",
     "datePickerEndLabel": "To",
-    "datePickerSaveLabel": "Save",
     "datePickerEmptyLabel": "",
     "datePickerMoreLabel": "",
 

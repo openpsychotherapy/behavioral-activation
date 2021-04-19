@@ -6,9 +6,9 @@
     "monday": "Måndag",
 
     "datePickerLabel": "Välj ett datum",
+    "datePickerSaveLabel": "Spara",
     "datePickerStartLabel": "Från",
     "datePickerEndLabel": "Till",
-    "datePickerSaveLabel": "Spara",
     "datePickerEmptyLabel": "",
     "datePickerMoreLabel": "",
 

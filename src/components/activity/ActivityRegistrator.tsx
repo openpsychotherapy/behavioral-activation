@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
@@ -93,91 +93,96 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       modifyActivities.add(isoDateString, i, entry);
     }
 
-    // Signal parent that we succeeded
-    route.params.onBackCallback(true);
     // Go back
-    navigation.goBack();
+    navigation.navigate('Activities', {activityRegistered: true})
   };
 
 
   const onCancel = () => {
-    // Signal parent that we canceled
-    route.params.onBackCallback(false);
     // Go back
-    navigation.goBack();
+    navigation.navigate('Activities', {activityRegistered: false})
+  };
+
+  // Attempts to dissmiss the keyboard when the 
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
   };
   
   return (
-    <View style={{ padding: 10, flexDirection: 'column', flex: 1,  justifyContent: 'space-evenly'}}>
+    <TouchableWithoutFeedback onPress={dismissKeyboard} style={{backgroundColor: 'red'}}>
+      <View style={{ padding: 10, flexDirection: 'column', height: '100%',  justifyContent: 'space-evenly'}}>
 
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
-        <DatePicker date={date} setDate={setDate}  />
-      </View>
-
-      <View style={{ flexDirection: 'row' }}>
-        <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
-          toTime={toTime} setToTime={setToTime} />
-      </View>
-
-      <KeyboardAvoidingView>
-        <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} activityText={activityText} setActivityText={setActivityText} 
-          choises={ choises } choise={choise} setChoise={setChoise} />
-      </KeyboardAvoidingView>
-
-
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-
-        <View style={{flexDirection: 'column', width: '80%'}}>
-          
-          <View style={{ flexDirection: 'row'}}>
-            <Text>{lang.activityRegistratorImporanceLabel + ": "}</Text>
-            <Text>{importance}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flex: 1, flexGrow: 1}}>
+            <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
           </View>
+          <DatePicker date={date} setDate={setDate}  />
+        </View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-            <Text>0</Text>
-            <Slider
-              style={{flex: 1}} value={5} step={1}
-              minimumValue={0} maximumValue={10}
-              onValueChange={(value: number) => {setImportance(value)}}
-              minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
-            />
-            <Text>10</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+            toTime={toTime} setToTime={setToTime} />
+        </View>
+
+        <KeyboardAvoidingView>
+          <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
+            choises={ choises } choise={choise} setChoise={setChoise} />
+        </KeyboardAvoidingView>
+
+
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+
+          <View style={{flexDirection: 'column', width: '80%'}}>
+            
+            <View style={{ flexDirection: 'row'}}>
+              <Text>{lang.activityRegistratorImporanceLabel + ": "}</Text>
+              <Text>{importance}</Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+              <Text>0</Text>
+              <Slider
+                style={{flex: 1}} value={5} step={1}
+                minimumValue={0} maximumValue={10}
+                onValueChange={(value: number) => {setImportance(value)}}
+                minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+              />
+              <Text>10</Text>
+            </View>
+
           </View>
 
         </View>
 
-      </View>
+        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
 
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+          <View style={{flexDirection: 'column', width: '80%'}}>
 
-        <View style={{flexDirection: 'column', width: '80%'}}>
+            <View style={{ flexDirection: 'row'}}>
+              <Text>{lang.activityRegistratorEnjoymentLabel + ": "}</Text>
+              <Text>{enjoyment}</Text>
+            </View>
 
-          <View style={{ flexDirection: 'row'}}>
-            <Text>{lang.activityRegistratorEnjoymentLabel + ": "}</Text>
-            <Text>{enjoyment}</Text>
-          </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+              <Text>0</Text>
+              <Slider style={{flex: 1}} value={5} step={1}
+                minimumValue={0} maximumValue={10}
+                onValueChange={(value: number) => {setEnjoyment(value)}}
+                minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+              />
+              <Text>10</Text>
+            </View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-            <Text>0</Text>
-            <Slider style={{flex: 1}} value={5} step={1}
-              minimumValue={0} maximumValue={10}
-              onValueChange={(value: number) => {setEnjoyment(value)}}
-              minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
-            />
-            <Text>10</Text>
           </View>
 
         </View>
 
-      </View>
 
-
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
-        <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
-        <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+          <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
+          <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };

@@ -19,12 +19,6 @@ const HistoryView = () => (
   </View>
 );
 
-const IconSettingsView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Icon Settings</Text>
-  </View>
-);
-
 const CircleButton = (props: any) => {
   return (
     <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
@@ -33,7 +27,7 @@ const CircleButton = (props: any) => {
   );
 }
 
-const ViewContent = ({ navigation }: any) => {
+const ViewContent = ({ route, navigation }: any) => {
   const { colors } = useTheme();
 
   const lang = useTranslation();
@@ -43,6 +37,12 @@ const ViewContent = ({ navigation }: any) => {
 
   const navigationButtonSize = 40;
 
+  // Trigger snackbar to show once
+  if(route.params.activityRegistered) {
+    setSnackBarVisible(true);
+    route.params.activityRegistered = false;
+  }
+
   const iconListButton = () => {
     setIconListVisible(true);
   };
@@ -51,18 +51,10 @@ const ViewContent = ({ navigation }: any) => {
     navigation.navigate('History');
   };
 
-  const iconSettingsButton = () => {
-    navigation.navigate('IconSettings');
-  };
-
-  const onBackCallback = (success: boolean) => {
-    setSnackBarVisible(success);
-  }
-
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     console.log(pressedIcon + " - " + icon);
     setIconListVisible(false);
-    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon, onBackCallback: onBackCallback });
+    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
   };
 
   return (
@@ -76,7 +68,7 @@ const ViewContent = ({ navigation }: any) => {
         <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
-      <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} >
+      <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} duration={4000} >
         {lang.activiesSnackBarAdded}
       </Snackbar>
     </View>
@@ -90,9 +82,8 @@ export const ActivityScreen = ({ navigation }: any) => {
         header: (props) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ActivityStack.Screen name="Activities" component={ViewContent} />
+      <ActivityStack.Screen name="Activities" component={ViewContent} initialParams={{activityRegistered: false}} />
       <ActivityStack.Screen name="History" component={HistoryView} />
-      <ActivityStack.Screen name="IconSettings" component={IconSettingsView} />
       <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
     </ActivityStack.Navigator>
   );

@@ -12,21 +12,21 @@ const getOffsetDate = (date: Date, hours: number, minutes: number) : Date => {
 };
 
 /**
-   * Returns the current date and time with a give offset rouded down to the closest step match.
-   *
-   * @example
-   * ```
-   * // Current time and date is: 2021-04-19 - 14.25
-   * const timeRounded = getCurrentTimeRounded(1, 4);
-   * // timeRounded should now equal to: Date(2021, 04, 19, 15, 15)
-   * 
-   * ```
-   * 
-   * @param offset - Offset in hours
-   * @param steps - Number of steps per hour
-   * @returns A date object containing rounded time
-   *
-   */
+ * Returns the current date and time with a give offset rouded down to the closest step match.
+ *
+ * @example
+ * ```
+ * // Current time and date is: 2021-04-19 - 14.25
+ * const timeRounded = getCurrentTimeRounded(1, 4);
+ * // timeRounded should now equal to: Date(2021, 04, 19, 15, 15)
+ * 
+ * ```
+ * 
+ * @param offset - Offset in hours
+ * @param steps - Number of steps per hour
+ * @returns A date object containing the rounded time
+ *
+ */
 export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
   const now = new Date();
   const stepSize = 60 / steps;
@@ -38,9 +38,36 @@ export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
   const currentHours = Math.floor(currentMinutes / 60);
   currentMinutes = currentMinutes % 60;
 
- return getOffsetDate(now, currentHours+offset, currentMinutes);
+  return getOffsetDate(now, currentHours+offset, currentMinutes);
 }
 
+/**
+ * A time picker component with dynamic step size.
+ *
+ * @example
+ * ```
+ * const steps = 1;
+ * const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
+ * const [toTime, setToTime] = React.useState(getCurrentTimeRounded(1, steps));
+ * 
+ * return (
+ *  <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+ *     toTime={toTime} setToTime={setToTime} />
+ * );
+ * 
+ * ```
+ * 
+ * @param now - The date and time right now as a Date object
+ * @param defaultTimeOffset - The default length, in minutes, of an interval if a overlap occures
+ * @param steps - Number of steps per hour
+ * @param fromTime - Start time value as a Date object (eg a hook)
+ * @param setFromTime - Start time set function (eg a hook)
+ * @param toTime - End time value as a Date object (eg a hook)
+ * @param setToTime -End time set function (eg a hook)
+ * 
+ * @returns The TimePicker component
+ *
+ */
 export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps: number, 
   fromTime: Date, setFromTime: React.Dispatch<React.SetStateAction<Date>>,
   toTime: Date, setToTime: React.Dispatch<React.SetStateAction<Date>>}) => {
@@ -84,27 +111,30 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const fromDate = timeStepDates[itemIndex]; // index: 0 - 24
     props.setFromTime(fromDate);
     
+    // If overlapp occures, calculate the opposites sides new value
     if (fromDate >= props.toTime) {
       let newToDate = new Date(fromDate);
       newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
       props.setToTime(newToDate);
     }
-  }
+  };
 
   const onValueChangeTo = (itemIndex: number) => {
     const toDate = timeStepDates[itemIndex+1]; // index: 1 - 25
     props.setToTime(toDate);
 
+    // If overlapp occures, calculate the opposites sides new value
     if (toDate <= props.fromTime) {
       let newFromDate = new Date(toDate);
       newFromDate.setMinutes(newFromDate.getMinutes() - props.defaultTimeOffset);
       props.setFromTime(newFromDate);
     }
-  }
+  };
 
   return (
     <View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch'}}>
       <Subheading>{lang.timePickerLabel}</Subheading>
+      
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Picker style={{flex: 1, flexGrow: 1}}
           selectedValue={getFormattedTime(props.fromTime)}
