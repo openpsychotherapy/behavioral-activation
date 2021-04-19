@@ -6,7 +6,7 @@ export const CustomNavigationBar = ({ navigation, previous }: any) => {
     <Appbar.Header>
       {previous ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
       <Appbar.Content title="" subtitle="" />
-      {!previous ? <Appbar.Action icon="cog" onPress={() => {}} />: null}
+      {!previous ? <Appbar.Action icon="cog" onPress={() => navigation.push("Settings")} />: null}
     </Appbar.Header>
   );
 }

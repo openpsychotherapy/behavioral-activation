@@ -4,6 +4,7 @@ import { Text, Button, Surface, IconButton, useTheme } from 'react-native-paper'
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
+import { SettingsScreen } from './SettingsScreen';
 
 import { IconMeny } from './IconMeny';
 import { IconList } from './IconList';
@@ -77,6 +78,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name="Activities" component={ViewContent} />
       <ActivityStack.Screen name="History" component={HistoryView} />
       <ActivityStack.Screen name="IconSettings" component={IconSettingsView} />
+      <ActivityStack.Screen name="Settings" component={SettingsScreen} />
     </ActivityStack.Navigator>
   );
 }
