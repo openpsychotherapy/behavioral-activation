@@ -5,9 +5,9 @@ interface Languages{
     [index: string]: any;
 }
 
-const languages: Languages = {
-    "sv": sv,
+export const languages: Languages = {
     "en": en,
+    "sv": sv,
 }
 
 export default languages;

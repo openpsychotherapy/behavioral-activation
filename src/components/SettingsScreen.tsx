@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
-import { Button, Menu, Surface, Text } from 'react-native-paper';
+import { Button, IconButton, Menu, Surface, Text } from 'react-native-paper';
 
 import Storage from 'storage';
+import { languages } from 'language';
 import { useTranslation } from 'language/LanguageProvider';
 
 const NotificationSwitch = () => {
@@ -18,7 +19,7 @@ const NotificationSwitch = () => {
   );
 }
 
-const LanguagePicker = () => {
+const LanguageMenu = () => {
   const [settings, modifySettings] = Storage.useSettings()
   const dict = useTranslation();
 
@@ -38,35 +39,39 @@ const LanguagePicker = () => {
         visible={visible}
         onDismiss={closeMenu}
         anchor={<Button onPress={openMenu}>{dict.name}</Button>}>
-        <Menu.Item onPress={() => {modifySettings.setLanguage("en"); closeMenu();}} title="English" />
-        <Menu.Item onPress={() => {modifySettings.setLanguage("sv"); closeMenu();}} title="Svenska" />
+          {Object.keys(languages).map((language, index) => 
+            <Menu.Item
+              onPress={() => {
+                modifySettings.setLanguage(language);
+                closeMenu();
+              }}
+              title={languages[language].name}
+              key={index}/>
+          )}
       </Menu>
     </View>
   );
 }
 
-const LanguageScreen = () => {
+const IconWithText: React.FC<{icon: string, text: string}> = ({icon, text}) => {
   return (
-    <View>
-      <Surface style={styles.surface}>
-        <Text>English</Text>
-      </Surface>
-      <Surface style={styles.surface}>
-        <Text>Svenska</Text>
-      </Surface>
+    <View style={styles.iconWithText}>
+      <IconButton icon={icon}/>
+      <Text>{text}</Text>
     </View>
   );
 }
 
 export const SettingsScreen = () => {
+  const dict = useTranslation();
   return (
     <View>
       <Surface style={styles.surface}>
-        <Text>Language</Text>
-        <LanguagePicker />
+        <IconWithText icon="translate" text={dict["settingsSurfaceLanguage"]} />
+        <LanguageMenu />
       </Surface>
       <Surface style={styles.surface}>
-        <Text>Notifications</Text>
+        <IconWithText icon="bell" text={dict["settingsSurfaceNotifications"]} />
         <NotificationSwitch />
       </Surface>
     </View>
@@ -82,5 +87,10 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 5,
     marginBottom: 0,
-  }
+  },
+  iconWithText: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 })
