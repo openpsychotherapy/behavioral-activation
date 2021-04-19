@@ -14,6 +14,13 @@ declare global {
         large: number,
         avatar: number
       }
+      title: {
+        fontSize: number
+      }
+      calendar: {
+        dateViewSize: number
+        dateViewMargin: number
+      }
     }
   }
 }
@@ -32,7 +39,13 @@ export const CustomTheme = {
     small: 30,
     medium: 40,
     large: 60,
-    
     avatar: 70
-  }
+  },
+  title: {
+    fontSize: 24,
+  },
+  calendar: {
+    dateViewSize: 60,
+    dateViewMargin: 10,
+  },
 };

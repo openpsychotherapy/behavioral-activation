@@ -3,7 +3,6 @@
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
     "january": "Januari",
-    "monday": "Måndag",
 
     "datePickerLabel": "Välj ett datum",
     "datePickerSaveLabel": "Spara",
@@ -22,4 +21,28 @@
     "suggestiveTextInputChangeLabel": "Byt",
     
     "activiesSnackBarAdded": "Aktiviteten lades till"
+  
+    "weekdays": [
+        "Sön",
+        "Mån",
+        "Tis",
+        "Ons",
+        "Tor",
+        "Fre",
+        "Lör"
+    ],
+    "months": [
+        "Januari",
+        "Februari",
+        "Mars",
+        "April",
+        "Maj",
+        "Juni",
+        "Juli",
+        "Augusti",
+        "September",
+        "Oktober",
+        "November",
+        "December"
+    ]
 }

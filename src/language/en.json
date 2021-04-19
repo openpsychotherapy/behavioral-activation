@@ -3,7 +3,6 @@
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
     "january": "January",
-    "monday": "Monday",
 
     "datePickerLabel": "Pick a date",
     "datePickerSaveLabel": "Save",
@@ -23,4 +22,27 @@
 
     "activiesSnackBarAdded" : "Activity added" 
     
+    "weekdays": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ],
+    "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
 }
