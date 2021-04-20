@@ -1,12 +1,20 @@
 import React, { useState, useMemo, useEffect, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { activitiesKey, activitiesDefault } from './activities';
-import { calendarKey, calendarDefault } from './calendar';
-import { iconsKey, iconsDefault } from './icons';
-import { peopleKey, peopleDefault } from './people';
-import { settingsKey, settingsDefault } from './settings';
-import { valuesKey, valuesDefault } from './values';
+import {
+  activitiesKey,
+  activitiesDefault,
+  calendarKey,
+  calendarDefault,
+  iconsKey,
+  iconsDefault,
+  peopleKey,
+  peopleDefault,
+  settingsKey,
+  settingsDefault,
+  valuesKey,
+  valuesDefault,
+} from './constants';
 
 interface StorageContextType {
   store: {

@@ -1,125 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type Icons = string[];
-type ModifyIcons = {
-  add: (icon: string) => boolean;
-  swap: (i1: number, i2: number) => boolean;
-};
+import {
+  Icons,
+  ModifyIcons,
+} from './types';
 
-export const iconsKey: string = "icons";
-export const iconsDefault: Icons = [
-  // Default front side
-  'format-text',
-  'bed-empty',
-  'brush',
-  'dumbbell',
-
-  'food-fork-drink',
-  'account-supervisor',
-  'tree',
-  'music',
-
-  'run',
-  'gamepad-variant',
-  'chat',
-  'car-hatchback',
-
-  // More icons
-  // Sports
-  'basketball',
-  'bowling',
-
-  // Transport
-  'bike',
-  'bus',
-  'airplane',
-  'anchor',
-  'walk',
-  'tractor',
-  'subway-variant',
-
-  // Food and drinks
-  'beer',
-  'coffee',
-  'glass-cocktail',
-  'grill',
-  'candycane',
-  'cake-layered',
-
-  // Activities
-  'book-open-variant',
-  'laptop',
-  'monitor',
-  'cellphone',
-  'phone',
-  'microphone',
-  'speaker',
-  'television-classic',
-  'movie',
-  'cards',
-
-  // Work
-  'desk-lamp',
-  'file-document-edit',
-  'email',
-  'calendar-blank',
-  'console-line',
-  'presentation',
-  'school',
-
-  // WC
-  'shower-head',
-  'toilet',
-  'washing-machine',
-
-  // Tools
-  'hammer',
-  'axe',
-
-  // Shopping
-  'cart',
-  'shopping',
-  'briefcase',
-  'shoe-heel',
-
-  // Nature
-  'cloud',
-  'cactus',
-  'flower',
-  'fire',
-  'compass',
-  'map',
-  'web',
-  'bug',
-
-  // Family
-  'cat',
-  'dog-side',
-  'heart',
-  'baby-buggy',
-
-  // Services
-  'hospital',
-
-  // Home
-  'key-variant',
-  'home',
-  'home-city',
-
-  // People
-  'human-female-female',
-  'human-male-female',
-  'human-female-girl',
-  'human-male-boy',
-
-  // Religion
-  'islam',
-  'judaism',
-  'christianity',
-  'buddhism',
-  'hinduism'
-];
+import {
+  iconsKey,
+  iconsDefault,
+} from './constants';
 
 /**
  * Hook returning a list of icons and functions to modify the list.

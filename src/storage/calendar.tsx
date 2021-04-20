@@ -2,23 +2,16 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 import { isDate, isTime } from './utils';
 
-export interface CalendarEntry {
-  date: string;
-  start: string;
-  end: string;
-  text: string;
-  icon: string;
-  person: string;
-}
+import {
+  CalendarEntry,
+  Calendar,
+  ModifyCalendar,
+} from './types';
 
-export type Calendar = CalendarEntry[];
-
-interface ModifyCalendar {
-  add: (entry: CalendarEntry) => boolean;
-}
-
-export const calendarKey: string = "calendar";
-export const calendarDefault: Calendar = [];
+import {
+  calendarKey,
+  calendarDefault,
+} from './constants';
 
 /**
  * Compares two calendar entries and returns `true` if they are equal.

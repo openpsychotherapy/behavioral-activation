@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { StorageContext } from './context';
 
-type People = string[];
+import {
+  People,
+  ModifyPeople,
+} from './types';
 
-interface ModifyPeople {
-  add: (person: string) => boolean;
-}
-
-export const peopleKey: string = "people";
-export const peopleDefault: People = [];
+import {
+  peopleKey,
+  peopleDefault,
+} from './constants';
 
 /**
  * Hook returning a list of people and functions to modify the list.

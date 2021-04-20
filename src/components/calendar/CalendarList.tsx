@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FlatList} from 'react-native';
 import { Divider, Title, useTheme } from 'react-native-paper';
 
-import { Calendar, entryGt } from 'storage/calendar';
+import { entryGt } from 'storage/calendar';
+import { Calendar } from 'storage/types';
 import { CalendarListSection } from './CalendarListSection';
 
 /**
