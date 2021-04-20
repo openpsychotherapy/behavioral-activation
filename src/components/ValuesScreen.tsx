@@ -4,6 +4,7 @@ import { Text } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
+import { SettingsScreen } from './SettingsScreen';
 
 const ValuesStack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export const ValuesScreen = () => {
       }}
     >
       <ValuesStack.Screen name="Values" component={ViewContent} />
+      <ValuesStack.Screen name="Settings" component={SettingsScreen} />
     </ValuesStack.Navigator>
   );
 }

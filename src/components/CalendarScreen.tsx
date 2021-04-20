@@ -7,6 +7,7 @@ import { CustomNavigationBar } from './CustomNavigationBar';
 import { CalendarList } from './calendar/CalendarList';
 
 import Storage from 'storage';
+import { SettingsScreen } from './SettingsScreen';
 
 const CalendarStack = createStackNavigator();
 
@@ -58,6 +59,7 @@ export const CalendarScreen = () => {
       }}
     >
       <CalendarStack.Screen name="Calendar" component={ViewContent} />
+      <CalendarStack.Screen name="Settings" component={SettingsScreen} />
     </CalendarStack.Navigator>
   );
 }
