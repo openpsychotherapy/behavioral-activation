@@ -19,10 +19,6 @@
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/slider": "3.0.3",
-<<<<<<< HEAD
-    "@react-native-picker/picker": "1.9.2",
-=======
->>>>>>> 687278da3476a738a0238bc6eb503813c87095cb
     "@react-navigation/material-bottom-tabs": "^5.3.14",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
