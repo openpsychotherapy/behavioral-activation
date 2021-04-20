@@ -26,7 +26,7 @@ export const IconList = (props: any) => {
         style={style}
         key={value}
         icon={value}
-        size={iconSizes.large}
+        size={(iconSizes.medium + iconSizes.large) / 2}
         onPress={() => { props.pressCallback(i, icons[i]) }}
       />
     );
