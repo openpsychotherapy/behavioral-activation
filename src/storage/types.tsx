@@ -3,8 +3,8 @@ export interface ActivitiesEntry {
   text: string;
   icon: string;
   person: string;
-  meaningful: number;
-  entertaining: number;
+  importance: number;
+  enjoyment: number;
 }
 
 export interface ActivitiesDay {
