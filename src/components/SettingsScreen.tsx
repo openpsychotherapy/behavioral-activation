@@ -38,14 +38,14 @@ const LanguageMenu = () => {
       <Menu
         visible={visible}
         onDismiss={closeMenu}
-        anchor={<Button onPress={openMenu}>{dict.name}</Button>}>
+        anchor={<Button onPress={openMenu}>{dict.languageName}</Button>}>
           {Object.keys(languages).map((language, index) => 
             <Menu.Item
               onPress={() => {
                 modifySettings.setLanguage(language);
                 closeMenu();
               }}
-              title={languages[language].name}
+              title={languages[language].languageName}
               key={index}/>
           )}
       </Menu>
