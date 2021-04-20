@@ -121,22 +121,23 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} style={{backgroundColor: 'red'}}>
       <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', padding: 10, flexDirection: 'column',  justifyContent: 'space-evenly'}}>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{flex: 1, flexGrow: 1}}>
-            <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
+        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{ paddingVertical: 10 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flex: 1, flexGrow: 1}}>
+              <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
+            </View>
+            <DatePicker date={date} setDate={setDate}  />
           </View>
-          <DatePicker date={date} setDate={setDate}  />
-        </View>
 
-        <View style={{ flexDirection: 'row' }}>
-          <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
-            toTime={toTime} setToTime={setToTime} />
-        </View>
+          <View style={{ flexDirection: 'row' }}>
+            <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+              toTime={toTime} setToTime={setToTime} />
+          </View>
 
-        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100}>
-          <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
-            choises={ choises } choise={choise} setChoise={setChoise} />
+          <View>
+            <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
+              choises={ choises } choise={choise} setChoise={setChoise} />
+          </View>
         </KeyboardAvoidingView>
 
 

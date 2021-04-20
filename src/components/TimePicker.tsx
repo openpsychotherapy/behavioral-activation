@@ -1,7 +1,7 @@
 import React, { ReactText } from 'react';
 import { View } from 'react-native';
 import { List, Subheading } from 'react-native-paper';
-import { Picker } from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import Storage from 'storage';
 import { useTranslation } from 'language/LanguageProvider';
@@ -103,7 +103,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     
     timeStepDates[i] = stepDate;
     timeSteps.push(
-      <Picker.Item label={timeString} value={timeString} key={'tp_' + i} />
+      {label: timeString, value: timeString}
     );
   }
 
@@ -119,8 +119,8 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     }
   };
 
-  const onValueChangeTo = (itemIndex: number) => {
-    const toDate = timeStepDates[itemIndex+1]; // index: 1 - 25
+  const onValueChangeTo = (index: number) => {
+    const toDate = timeStepDates[index+1]; // index: 1 - 25
     props.setToTime(toDate);
 
     // If overlapp occures, calculate the opposites sides new value
@@ -136,22 +136,22 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
       <Subheading>{lang.timePickerLabel}</Subheading>
       
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Picker style={{flex: 1, flexGrow: 1}}
-          selectedValue={getFormattedTime(props.fromTime)}
-          mode='dropdown'
-          onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeFrom(itemIndex)}
-          >
-          { timeSteps.slice(0, count-1) }
-        </Picker>
+        <DropDownPicker containerStyle ={{flex: 1, flexGrow: 1}}
+          defaultValue={getFormattedTime(props.fromTime)}
+          items={timeSteps.slice(0, count-1)}
+          onChangeItem={(item: any, index: number) => onValueChangeFrom(index)}
+          itemStyle={{ justifyContent: 'space-evenly' }}
+          autoScrollToDefaultValue={true}
+          />
         <List.Icon icon='clock' style={{margin: 0}} />
 
-        <Picker style={{flex: 1, flexGrow: 1}}
-          selectedValue={getFormattedTime(props.toTime)}
-          mode='dropdown'
-          onValueChange={(itemValue: ReactText, itemIndex: number) => onValueChangeTo(itemIndex)}
-          >
-          { timeSteps.slice(1) }
-        </Picker>
+        <DropDownPicker containerStyle={{flex: 1, flexGrow: 1}}
+          items={timeSteps.slice(1)}
+          defaultValue={getFormattedTime(props.toTime)}
+          onChangeItem={(item: any, index: number) => onValueChangeTo(index)}
+          itemStyle={{ justifyContent: 'space-evenly' }}
+          autoScrollToDefaultValue={true}
+          />
         <List.Icon icon='clock' style={{margin: 0}} />
       </View>
     </View>

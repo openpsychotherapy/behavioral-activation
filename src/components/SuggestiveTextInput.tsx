@@ -68,7 +68,7 @@ export const SuggestiveTextInput = (props: {label: string, textInputText: string
         </Dialog>
       </Portal >
 
-      <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 2 }}>
+      <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 0 }}>
           <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choise.value}</Text>
           <Button onPress={()=> setVisible(true)}>{lang.suggestiveTextInputChangeLabel}</Button>
       </Surface>
