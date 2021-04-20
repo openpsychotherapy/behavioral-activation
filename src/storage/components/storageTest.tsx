@@ -58,7 +58,7 @@ export default function StorageTest() {
                     value={text}
                     multiline={false}
                     mode="outlined"
-                    onChangeText={text => {setText(text)}} />
+                    onChangeText={(text: any) => {setText(text)}} />
                 <Button onPress={() => modifyPeople.add(text)}>Add person</Button>
 
                 <pre>Icons: {JSON.stringify(icons, null, 4)}</pre>

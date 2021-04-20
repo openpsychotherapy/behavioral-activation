@@ -68,10 +68,8 @@ const TopicTextInputView = ({route, navigation}: any) => {
 
 const CareerView = ({navigation, route}: any) => {
   const [values, modifyValues] = Storage.useValues();
-  console.log(values.work)
+  console.log(values.work[0].name)
  
-  const numbers = [1, 2, 3, 4, 5];
-  console.log(numbers)
   
   React.useEffect(() => {
     if (route.params?.post) {

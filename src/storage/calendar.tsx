@@ -2,23 +2,16 @@ import React, { useContext } from 'react';
 import { StorageContext } from './context';
 import { isDate, isTime } from './utils';
 
-interface CalendarEntry {
-  date: string;
-  start: string;
-  end: string;
-  text: string;
-  icon: string;
-  person: string;
-}
+import {
+  CalendarEntry,
+  Calendar,
+  ModifyCalendar,
+} from './types';
 
-type Calendar = CalendarEntry[];
-
-interface ModifyCalendar {
-  add: (entry: CalendarEntry) => boolean;
-}
-
-export const calendarKey: string = "calendar";
-export const calendarDefault: Calendar = [];
+import {
+  calendarKey,
+  calendarDefault,
+} from './constants';
 
 /**
  * Compares two calendar entries and returns `true` if they are equal.
@@ -34,6 +27,17 @@ const entryEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
       && a.text === b.text
       && a.icon === b.icon
       && a.person === b.person;
+}
+
+/**
+ * Compares two calendar entries and returns if a comes after b.
+ *
+ * @param a - The first calendar entry
+ * @param b - The second calendar entry
+ * @returns a.date > b.date || (a.date == b.date && a.start > b.start)
+ */
+export const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
+  return a.date > b.date || (a.date == b.date && a.start > b.start);
 }
 
 /**
@@ -66,7 +70,8 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
   const calendar: Calendar = store[calendarKey];
 
   /**
-   * Adds an entry to the calendar and updates the store.
+   * Adds an entry to the calendar and updates the store. The entry is inserted
+   * in chronological order.
    *
    * @param entry - The entry to be added
    * @returns `true` if the entry was added, `false` otherwise
@@ -77,7 +82,18 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
                        && isTime(entry.end)
                        && !calendar.some(elem => entryEq(elem, entry));
     if (isValidEntry) {
-      setStoreItem(calendarKey, [...calendar, entry]);
+      const index = calendar.findIndex(elem => entryGt(elem, entry));
+      let newCalendar = [];
+      if (index === -1) {
+        newCalendar = [...calendar, entry];
+      } else {
+        newCalendar = [
+          ...calendar.slice(0, index),
+          entry,
+          ...calendar.slice(index)
+        ];
+      }
+      setStoreItem(calendarKey, newCalendar);
       return true;
     }
     return false;

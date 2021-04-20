@@ -9,5 +9,29 @@
     "valuesButtonInterests": "Spare time/Interests",
     "valuesButtonMind": "Mind/Body/Spiritually",
     "valuesButtonResponsibility": "Daily responibility",
-    "valuesButtonSupport": "Support persons"
+    "valuesButtonSupport": "Support persons",
+    "weekdays": [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat"
+    ],
+    "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
+
 }

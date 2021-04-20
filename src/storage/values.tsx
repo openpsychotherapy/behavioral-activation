@@ -1,38 +1,17 @@
 import React, { useContext } from 'react';
 import { StorageContext } from './context';
 
-interface ValuesEntry {
-  text: string;
-  icon: string;
-}
+import {
+  ValuesEntry,
+  ValuesTopic,
+  Values,
+  ModifyValues,
+} from './types';
 
-interface ValuesTopic {
-  name: string;
-  entries: ValuesEntry[];
-}
-
-interface Values {
-  responsibilities: ValuesTopic[];
-  relations: ValuesTopic[];
-  enjoyment: ValuesTopic[];
-  health: ValuesTopic[];
-  work: ValuesTopic[];
-  [index: string]: ValuesTopic[];
-}
-
-interface ModifyValues {
-  addTopic: (category: string, topic: string) => boolean;
-  addEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
-}
-
-export const valuesKey: string = "values";
-export const valuesDefault: Values = {
-  responsibilities: [],
-  relations: [],
-  enjoyment: [],
-  health: [],
-  work: [],
-};
+import {
+  valuesKey,
+  valuesDefault,
+} from './constants';
 
 /**
  * Compares two value entries and returns `true` if they are equal.
