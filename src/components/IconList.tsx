@@ -1,32 +1,40 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-import { Portal, Dialog, IconButton, useTheme, } from 'react-native-paper';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { Portal, Dialog, IconButton, useTheme } from 'react-native-paper';
 import Storage from 'storage';
 
 export const IconList = (props: any) => {
   const [icons, modifyIcons] = Storage.useIcons();
-  const { iconSizes } = useTheme();
+  const { colors, iconSizes } = useTheme();
 
   const hideDialog = () => props.setVisible(false);
 
   const items = [];
-  const iconsPerRow = 3;
-  const startIndex = 12; // Index offset to exlude default items
+  const iconsPerRow = props.iconsPerRow ?? 3;
+  const startIndex = props.startIndex ?? 12; // Index offset to exlude default items
+  const selectedIndex = props.selectedIndex ?? null;
 
   let currentSegment = [];
 
   for (let i = startIndex; i < icons.length; ++i) {
     const value = icons[i];
+    const style = (selectedIndex === i) ? {backgroundColor: colors.accent} : {};
 
     // Add iconbutton to current segment
     currentSegment.push(
-      <IconButton key={'item' + i} icon={value} size={iconSizes.large} onPress={() => { props.pressCallback(i, icons[i]) }} />
+      <IconButton
+        style={style}
+        key={value}
+        icon={value}
+        size={iconSizes.large}
+        onPress={() => { props.pressCallback(i, icons[i]) }}
+      />
     );
 
     // Complete segment if we have enough items or we reached the end
     if (i !== 0 && ((i + 1) % iconsPerRow === 0 || i === icons.length - 1)) {
       items.push(
-        <View key={'group' + i} style={{ flexDirection: 'row', justifyContent: 'center', paddingRight: 20, paddingLeft: 20 }}>
+        <View key={currentSegment.map(e => e.key).join()} style={{ flexDirection: 'row', justifyContent: 'center', paddingRight: 20, paddingLeft: 20 }}>
           {currentSegment}
         </View>
       );
@@ -47,4 +55,3 @@ export const IconList = (props: any) => {
     </Portal >
   );
 };
-

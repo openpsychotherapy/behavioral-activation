@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import { Button, IconButton, Menu, Surface, Text } from 'react-native-paper';
 
 import Storage from 'storage';
 import { languages } from 'language';
 import { useTranslation } from 'language/LanguageProvider';
+import { IconList } from './IconList';
 
 const NotificationSwitch = () => {
   const [settings, modifySettings] = Storage.useSettings();
@@ -53,6 +54,44 @@ const LanguageMenu = () => {
   );
 }
 
+const IconCustomizer = () => {
+  const dict = useTranslation();
+  const [visible, setVisible] = React.useState(false);
+  const [selected, setSelected] = React.useState<number|null>(null);
+  const [icons, modifyIcons] = Storage.useIcons();
+
+  const callback = (index: number, icon: string) => {
+    if (selected == null) {
+      setSelected(index);
+    } else {
+      modifyIcons.swap(selected, index);
+      setSelected(null);
+    }
+  }
+
+  const setVisible2 = (v: boolean) => {
+    if (!v) {
+      setSelected(null);
+    }
+    setVisible(v);
+  }
+
+  return (
+    <>
+      <Button onPress={() => setVisible(true)}>
+        {dict["settingsSurfaceIconCustomize"]}
+      </Button>
+      <IconList
+        startIndex={0}
+        selectedIndex={selected}
+        pressCallback={callback}
+        setVisible={setVisible2}
+        visible={visible}
+      />
+    </>
+  );
+}
+
 const IconWithText: React.FC<{icon: string, text: string}> = ({icon, text}) => {
   return (
     <View style={styles.iconWithText}>
@@ -73,6 +112,10 @@ export const SettingsScreen = () => {
       <Surface style={styles.surface}>
         <IconWithText icon="bell" text={dict["settingsSurfaceNotifications"]} />
         <NotificationSwitch />
+      </Surface>
+      <Surface style={styles.surface}>
+        <IconWithText icon="apps" text={dict["settingsSurfaceIcons"]} />
+        <IconCustomizer />
       </Surface>
     </View>
   );

@@ -5,6 +5,8 @@
     "activitiesSliderRateDay": "Today's rating",
     "settingsSurfaceLanguage": "Language",
     "settingsSurfaceNotifications": "Notifications",
+    "settingsSurfaceIcons": "Icons",
+    "settingsSurfaceIconCustomize": "Customize",
     "weekdays": [
         "Sun",
         "Mon",
