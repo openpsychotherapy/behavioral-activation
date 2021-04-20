@@ -6,7 +6,7 @@ import Slider from '@react-native-community/slider';
 
 import { DatePicker } from '../DatePicker';
 import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
-import { SuggestiveTextInput } from '../SuggestiveTextInput';
+import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
@@ -15,14 +15,15 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   // route.params contains information from activity screen
 
   const lang = useTranslation();
+  const [settings, modifySettings] = Storage.useSettings();
   const { iconSizes, colors } = useTheme();
 
   const steps = 1;
-  const defaultChoise = {
-    value: lang.activityRegistratorActivityDefaultChoise,
+  const defaultChoice = {
+    value: lang.activityRegistratorActivityDefaultChoice,
     isDefault: true
   }
-  let choises = [ defaultChoise ];
+  let choices = [ defaultChoice ];
 
 
   const [values, modifyValues] = Storage.useValues();
@@ -33,7 +34,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   
   const [date, setDate] = React.useState(new Date());
   
-  const [choise, setChoise] = React.useState(defaultChoise);
+  const [choice, setChoice] = React.useState(defaultChoice);
   const [activityText, setActivityText] = React.useState('');
 
   const [importance, setImportance] = React.useState(5); 
@@ -42,13 +43,13 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
   // Find topics to choose from depending on input icon
   const addTopicEntries = (topics: any) => {
-    for(let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
-      for(let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
+    for (let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
+      for (let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
         const entry = topics[topicIndex].entries[entryIndex];
 
-        // If icons match, include it in choises
+        // If icons match, include it in choices
         if (entry.icon == route.params.icon) {
-          choises.push({
+          choices.push({
             value: entry.text,
             isDefault: false
           });
@@ -67,13 +68,13 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
   const onConfirm = () => {
     // Check if custom text has been entered
-    const entryText = choise.isDefault ? activityText : choise.value;
+    const entryText = choice.isDefault ? activityText : choice.value;
     
     // Create entry from information entered by user
     const entry = {
       text: entryText,
       icon: route.params.icon,
-      person: '', // TODO: link to value based on choise
+      person: '', // TODO: link to value based on choie
       meaningful: importance,
       entertaining: enjoyment,
     };
@@ -84,11 +85,10 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       toHour = 24;
     }
 
-    // Splitting at 'T' to extract only the date from the ISO string.
-    const isoDateString = date.toISOString().split('T')[0];
+    const isoDateString = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
 
     // Add entry att every applicable hour
-    for(let i = fromTime.getHours(); i < toHour; ++i) {
+    for (let i = fromTime.getHours(); i < toHour; ++i) {
       modifyActivities.add(isoDateString, i, entry);
     }
 
@@ -114,37 +114,39 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const [absHeight, setAbsHeight] = React.useState(-1);
   const onLayoutSet = (event: any) => {
     // If absHeight has not been set
-    if(absHeight === -1) {
-      var {x, y, width, height} = event.nativeEvent.layout;
+    if (absHeight === -1) {
+      let {x, y, width, height} = event.nativeEvent.layout;
       setAbsHeight(height);
     }
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard} style={{backgroundColor: 'red'}}>
-      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', padding: 10, flexDirection: 'column',  justifyContent: 'space-evenly'}}>
+    <TouchableWithoutFeedback onPress={dismissKeyboard} >
+      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column',  justifyContent: 'space-around'}}>
         
-        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{ paddingVertical: 10, zIndex: 1}}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View style={{flex: 1, flexGrow: 1}}>
-              <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
+        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{zIndex: 1}} >
+          {/* DateRow */}
+          <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10}}>
+            <View style={{flexGrow: 1, paddingLeft: 20}}>
+              <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} style={{}}/>
             </View>
             <DatePicker date={date} setDate={setDate} />
           </View>
-
-          <View style={{ flexDirection: 'row', ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
+          {/* TimeRow */}
+          <View style={{ flexDirection: 'row', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
             <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
               toTime={toTime} setToTime={setToTime} />
-          </View>
+            </View>
 
+          {/* TextInputRow */}
           <View>
-            <SuggestiveTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
-              choises={ choises } choise={choise} setChoise={setChoise} />
+            <ChoiceBasedTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
+              choices={ choices } choice={choice} setChoice={setChoice} />
           </View>
         </KeyboardAvoidingView>
         
-
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        {/*Importance slider */}
+        <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 10}}>
           <View style={{flexDirection: 'column', width: '80%'}}>
             <View style={{ flexDirection: 'row' }}>
               <Text>{lang.activityRegistratorImporanceLabel + ": "}</Text>
@@ -164,16 +166,18 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
           </View>
         </View>
 
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        {/* Enjoyment slider */}
+        <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 10}}>
           <View style={{flexDirection: 'column', width: '80%'}}>
-            <View style={{ flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <Text>{lang.activityRegistratorEnjoymentLabel + ": "}</Text>
               <Text>{enjoyment}</Text>
             </View>
 
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
               <Text>0</Text>
-              <Slider style={{flex: 1}} value={5} step={1}
+              <Slider
+                style={{flex: 1}} value={5} step={1}
                 minimumValue={0} maximumValue={10}
                 onValueChange={(value: number) => {setEnjoyment(value)}}
                 minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
@@ -183,7 +187,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
           </View>
         </View>
 
-
+        {/* Cancel / Confirm row */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
           <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
           <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />

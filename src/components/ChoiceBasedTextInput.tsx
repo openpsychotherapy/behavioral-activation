@@ -17,7 +17,7 @@ type Choice = {
  * const [activityText, setActivityText] = React.useState('');
  * 
  * return (
- *   <SuggestiveTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText} 
+ *   <ChoiceBasedTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText} 
  *     choices={ ['Write text'] } choice={choice} setChoice={setChoice} />
  * );
  * 
@@ -30,10 +30,10 @@ type Choice = {
  * @param choice - Choice value as a Date object (eg a hook)
  * @param setChoice - Choice time set function (eg a hook)
  * 
- * @returns The SuggestiveTextInput component
+ * @returns The ChoiceBasedTextInput component
  *
  */
-export const SuggestiveTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>, 
+export const ChoiceBasedTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>, 
   choices: Choice[], choice: Choice, setChoice: React.Dispatch<React.SetStateAction<Choice>>}) => {
   
   const lang = useTranslation();
@@ -45,9 +45,9 @@ export const SuggestiveTextInput = (props: {label: string, textInputText: string
     
     // List of all items as surface components
     choiceComponents.push(
-      <TouchableWithoutFeedback onPress={()=>{ props.setChoise(choise); setVisible(false) }} key={'c_' + i}>
+      <TouchableWithoutFeedback onPress={()=>{ props.setChoice(choice); setVisible(false) }} key={'c_' + i}>
         <Surface style={{ flexDirection: 'row', elevation: visible ? 5 : 0, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
-          <Text style={{ padding: 10}}>{choise.value}</Text>
+          <Text style={{ padding: 10}}>{choice.value}</Text>
         </Surface>
       </TouchableWithoutFeedback>
     );
@@ -67,8 +67,8 @@ export const SuggestiveTextInput = (props: {label: string, textInputText: string
       </Portal >
 
       <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 0 }}>
-          <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choise.value}</Text>
-          <Button onPress={()=> setVisible(true)}>{lang.suggestiveTextInputChangeLabel}</Button>
+          <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choice.value}</Text>
+          <Button onPress={()=> setVisible(true)}>{lang.ChoiceBasedTextInputChangeLabel}</Button>
       </Surface>
       
       <TextInput

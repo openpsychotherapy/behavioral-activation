@@ -34,17 +34,14 @@ export const DatePicker = (props: {date: Date, setDate: React.Dispatch<React.Set
   const [settings, modifySettings] = Storage.useSettings();
   const [open, setOpen] = React.useState(false);
 
-  const onDismissSingle = React.useCallback(() => {
+  const onDismissSingle = () => {
     setOpen(false);
-  }, [setOpen]);
+  };
 
-  const onConfirmSingle = React.useCallback(
-    (params) => {
+  const onConfirmSingle = (params: any) => {
       setOpen(false);
       props.setDate(params.date);
-    },
-    [setOpen, props.setDate]
-  );
+  };
   
   return (
     <View style={{flexDirection: 'row', alignItems: 'center', ...props.containerStyle}}>

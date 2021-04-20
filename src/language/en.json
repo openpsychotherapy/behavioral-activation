@@ -14,11 +14,11 @@
     "timePickerLabel": "Time interval",
 
     "activityRegistratorTextInputLabel": "What have you been doing?",
-    "activityRegistratorActivityDefaultChoise": "Write text",
+    "activityRegistratorActivityDefaultChoice": "Write text",
     "activityRegistratorImporanceLabel" : "Importance",
     "activityRegistratorEnjoymentLabel": "Enjoyment",
 
-    "suggestiveTextInputChangeLabel": "Change",
+    "choiceBasedTextInputChangeLabel": "Change",
 
     "activiesSnackBarAdded" : "Activity added",
     

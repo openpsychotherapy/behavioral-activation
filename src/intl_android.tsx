@@ -16,7 +16,7 @@ const isAndroid = Platform.OS === 'android';
 // This could possible be change to be using ES6 synatax but then the
 //  conditional android check won't function.
 
-if(isAndroid) {
+if (isAndroid) {
 
   require('@formatjs/intl-getcanonicallocales/polyfill');
   require('@formatjs/intl-locale/polyfill');
@@ -48,7 +48,7 @@ if(isAndroid) {
   // TODO: Figure out why TS is mad
   if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
     // @ts-ignore TODO: Find proper fix for this. This line of code works.
-    Intl.DateTimeFormat.__setDefaultTimeZone( // <-- "Never" type causes problems
+      Intl.DateTimeFormat.__setDefaultTimeZone( // <-- "Never" type causes problems
       require("expo-localization").timezone // <-- Is required on Android
     );
   }

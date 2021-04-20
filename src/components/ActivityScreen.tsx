@@ -38,7 +38,7 @@ const ViewContent = ({ route, navigation }: any) => {
   const navigationButtonSize = 40;
 
   // Trigger snackbar to show once
-  if(route.params.activityRegistered) {
+  if (route.params.activityRegistered) {
     setSnackBarVisible(true);
     route.params.activityRegistered = false;
   }

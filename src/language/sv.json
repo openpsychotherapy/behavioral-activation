@@ -14,11 +14,11 @@
     "timePickerLabel": "Tidsintervall",
 
     "activityRegistratorTextInputLabel": "Vad har du gjort?",
-    "activityRegistratorActivityDefaultChoise": "Skriv text",
+    "activityRegistratorActivityDefaultChoice": "Skriv text",
     "activityRegistratorImporanceLabel": "Meningsfullt",
     "activityRegistratorEnjoymentLabel": "Underhållande",
 
-    "suggestiveTextInputChangeLabel": "Byt",
+    "choiceBasedTextInputChangeLabel": "Byt",
     
     "activiesSnackBarAdded": "Aktiviteten lades till",
   
