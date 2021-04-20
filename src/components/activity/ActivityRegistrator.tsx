@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
@@ -108,12 +108,15 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     Keyboard.dismiss();
   };
 
+  /**
+   * This hook/function saves the auto-scaled height in order to keep that height
+   *  when then keyboard is presented.
+   */
   const [absHeight, setAbsHeight] = React.useState(-1);
   const onLayoutSet = (event: any) => {
+    // If absHeight has not been set
     if(absHeight === -1) {
-      console.log(absHeight);
       var {x, y, width, height} = event.nativeEvent.layout;
-      console.log(x  + ' - ' +  y + ' - ' + width + ' - ' + height);
       setAbsHeight(height);
     }
   };
@@ -121,15 +124,16 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} style={{backgroundColor: 'red'}}>
       <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', padding: 10, flexDirection: 'column',  justifyContent: 'space-evenly'}}>
-        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{ paddingVertical: 10 }}>
+        
+        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{ paddingVertical: 10, zIndex: 1}}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style={{flex: 1, flexGrow: 1}}>
               <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
             </View>
-            <DatePicker date={date} setDate={setDate}  />
+            <DatePicker date={date} setDate={setDate} />
           </View>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
             <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
               toTime={toTime} setToTime={setToTime} />
           </View>
@@ -139,13 +143,11 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
               choises={ choises } choise={choise} setChoise={setChoise} />
           </View>
         </KeyboardAvoidingView>
-
+        
 
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-
           <View style={{flexDirection: 'column', width: '80%'}}>
-            
-            <View style={{ flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <Text>{lang.activityRegistratorImporanceLabel + ": "}</Text>
               <Text>{importance}</Text>
             </View>
@@ -160,15 +162,11 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
               />
               <Text>10</Text>
             </View>
-
           </View>
-
         </View>
 
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-
           <View style={{flexDirection: 'column', width: '80%'}}>
-
             <View style={{ flexDirection: 'row'}}>
               <Text>{lang.activityRegistratorEnjoymentLabel + ": "}</Text>
               <Text>{enjoyment}</Text>
@@ -183,9 +181,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
               />
               <Text>10</Text>
             </View>
-
           </View>
-
         </View>
 
 

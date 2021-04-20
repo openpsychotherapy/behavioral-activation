@@ -85,7 +85,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   };
 
   // JSX Picker.Item components
-  let timeSteps = [];
+  let timeSteps: any[] = [];
   let timeStepDates : {[key: string]: Date} = {};
 
   // props.steps is number of steps per hour
