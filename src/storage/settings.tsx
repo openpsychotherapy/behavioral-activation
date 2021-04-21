@@ -14,7 +14,7 @@ interface ModifySettings {
 export const settingsKey: string = "settings";
 export const settingsDefault: Settings = {
   notifications: false,
-  language: "en",
+  language: "sv",
 };
 
 /**
