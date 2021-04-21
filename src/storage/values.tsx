@@ -69,6 +69,24 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
+    /**
+   * Deletes a topic from the values object and updates the store.
+   *
+   * @param category - The category where the topic should be deleted
+   * @param topic - The name of the topic
+   * @returns `true` if the topic was deleted, `false` otherwise
+   */
+  const deleteTopic = (category: string, topic: string): boolean =>{
+    if (values.hasOwnProperty(category)) {
+      const index = values[category].findIndex(t => t.name === topic);
+      const newValues = JSON.parse(JSON.stringify(values));
+      newValues[category].splice(index, 1);
+      setStoreItem(valuesKey, newValues);
+      return true
+  }
+  return false
+}
+
   /**
    * Adds an entry to the values object and updates the store.
    *
@@ -92,6 +110,7 @@ export const useValues = (): [Values, ModifyValues] => {
   const modifyValues: ModifyValues = {
     addTopic: addTopic,
     addEntry: addEntry,
+    deleteTopic: deleteTopic,
   };
 
   return [values, modifyValues];

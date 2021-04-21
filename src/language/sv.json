@@ -1,16 +1,17 @@
 {
-    "valuesHeaderEvaluation": "Värdering",
+    "valuesHeaderEvaluation": "Värderingar",
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
     "january": "Januari",
 
     "monday": "Måndag",
-    "valuesButtonRelationships": "Relation",
-    "valuesButtonCareer": "Studier/Karriär",
-    "valuesButtonInterests": "Fritid/Intressen",
-    "valuesButtonMind": "Sinne/Kropp/Spirituellt",
-    "valuesButtonResponsibility": "Dagliga ansvar",
-    "valuesButtonSupport": "Stödpersoner",
+    "valuesButtonRelations": "Relationer",
+    "valuesButtonWork": "Studier/Karriär",
+    "valuesButtonEnjoyment": "Fritid/Intressen",
+    "valuesButtonHealth": "Sinne/Kropp/Spirituellt",
+    "valuesButtonResponsibilities": "Ansvar",
+    "valuesButtonPeople": "Stödpersoner",
+
 
     "weekdays": [
         "Sön",

@@ -48,6 +48,7 @@ export type People = string[];
 
 export interface ModifyPeople {
   add: (person: string) => boolean;
+  deletePerson: (person: string) => boolean;
 }
 
 // Settings
@@ -84,4 +85,5 @@ export interface Values {
 export interface ModifyValues {
   addTopic: (category: string, topic: string) => boolean;
   addEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
+  deleteTopic: (category: string, topic: string) => boolean;
 }
