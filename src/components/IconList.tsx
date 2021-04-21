@@ -9,7 +9,7 @@ interface IconListProps {
   pressCallback: (index: number, icon: string) => void;
   iconsPerRow?: number;
   startIndex?: number;
-  selectedIndex?: number;
+  selectedIndex?: number | null;
   dividerAfterRow?: number;
 }
 
