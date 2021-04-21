@@ -35,6 +35,7 @@ export const IconCustomizer = () => {
       <IconList
         startIndex={0}
         selectedIndex={selected}
+        dividerAfterRow={4}
         pressCallback={callback}
         setVisible={setVisible2}
         visible={visible}
