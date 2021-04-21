@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Portal, Dialog, IconButton, useTheme } from 'react-native-paper';
 import Storage from 'storage';
 
@@ -46,11 +46,11 @@ export const IconList = (props: any) => {
   return (
     <Portal>
       <Dialog visible={props.visible} onDismiss={hideDialog} style={{ flex: 1, marginVertical: 80, marginHorizontal: 30 }}>
-        <Dialog.ScrollArea>
-          <ScrollView contentContainerStyle={{ paddingVertical: 12 }}>
-            {items}
-          </ScrollView>
-        </Dialog.ScrollArea>
+        <FlatList
+          style={{ paddingVertical: 12 }}
+          data={items}
+          renderItem={({item}) => item}
+        />
       </Dialog>
     </Portal >
   );
