@@ -107,10 +107,26 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
+  const deleteEntry = (category: string, topic: string, entry: ValuesEntry): boolean => {
+    if (values.hasOwnProperty(category)){
+      const index = values[category].findIndex(t => t.name === topic);
+      const indexEntry = values[category][index].entries.findIndex(e => entryEq(entry, e));
+      console.log("topic: ", topic)
+      console.log("category: ", category)
+      console.log("indexentry: ", indexEntry)
+      const newValues = JSON.parse(JSON.stringify(values));
+      newValues[category][index].entries.splice(indexEntry, 1);
+      setStoreItem(valuesKey, newValues);
+      return true
+    }
+    return false
+  }
+
   const modifyValues: ModifyValues = {
     addTopic: addTopic,
     addEntry: addEntry,
     deleteTopic: deleteTopic,
+    deleteEntry: deleteEntry,
   };
 
   return [values, modifyValues];

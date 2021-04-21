@@ -86,4 +86,5 @@ export interface ModifyValues {
   addTopic: (category: string, topic: string) => boolean;
   addEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
   deleteTopic: (category: string, topic: string) => boolean;
+  deleteEntry: (category: string, topic: string, entry: ValuesEntry) => boolean;
 }

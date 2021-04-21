@@ -71,7 +71,7 @@ export const ActivityScreen = ({ navigation }: any) => {
   return (
     <ActivityStack.Navigator initialRouteName="Activities" headerMode="float"
       screenOptions={{
-        header: (props) => <CustomNavigationBar {...props} />,
+        header: (props: any) => <CustomNavigationBar {...props} />,
       }}
     >
       <ActivityStack.Screen name="Activities" component={ViewContent} />
