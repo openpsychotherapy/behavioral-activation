@@ -40,7 +40,6 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const [enjoyment, setEnjoyment] = React.useState(5);
 
 
-
   // Find topics to choose from depending on input icon
   const addTopicEntries = (topics: any) => {
     for(let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
@@ -48,7 +47,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
         const entry = topics[topicIndex].entries[entryIndex];
 
         // If icons match, include it in choises
-        if(entry.icon == route.params.icon) {
+        if (entry.icon == route.params.icon) {
           choises.push({
             value: entry.text,
             isDefault: false

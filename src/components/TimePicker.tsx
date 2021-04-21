@@ -12,7 +12,7 @@ const getOffsetDate = (date: Date, hours: number, minutes: number) : Date => {
 };
 
 /**
- * Returns the current date and time with a give offset rouded down to the closest step match.
+ * Returns the current date and time with a give offset rounded down to the closest step match.
  *
  * @example
  * ```
@@ -111,7 +111,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const fromDate = timeStepDates[itemIndex]; // index: 0 - 24
     props.setFromTime(fromDate);
     
-    // If overlapp occures, calculate the opposites sides new value
+    // If overlap occurs, calculate the opposite sides new value
     if (fromDate >= props.toTime) {
       let newToDate = new Date(fromDate);
       newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
@@ -123,7 +123,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const toDate = timeStepDates[index+1]; // index: 1 - 25
     props.setToTime(toDate);
 
-    // If overlapp occures, calculate the opposites sides new value
+    // If overlap occurs, calculate the opposite sides new value
     if (toDate <= props.fromTime) {
       let newFromDate = new Date(toDate);
       newFromDate.setMinutes(newFromDate.getMinutes() - props.defaultTimeOffset);
