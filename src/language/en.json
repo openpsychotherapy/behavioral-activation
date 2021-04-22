@@ -10,6 +10,11 @@
     "valuesButtonHealth": "Mind/Body/Spiritually",
     "valuesButtonResponsibilities": "Daily responibility",
     "valuesButtonPeople": "Support persons",
+    "valuesDialogText": "Are you sure?",
+    "valuesDialogYes": "Ok",
+    "valuesDialogNo": "Cancel",
+
+
     "weekdays": [
         "Sun",
         "Mon",

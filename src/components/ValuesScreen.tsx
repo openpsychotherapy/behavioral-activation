@@ -19,39 +19,51 @@ const RoundButton = (props: any) => {
     </Surface >
   );
   }
-  const CircleButton = (props: any) => {
-    return (
-      <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
-        <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
-      </Surface >
-    );
+  
+const CircleButton = (props: any) => {
+  return (
+    <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
+      <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
+    </Surface >
+  );
+}
+
+//Button that deletes topics, persons or entities
+const DeleteButton = (props: any) => {
+  const [values, modifyValues] = Storage.useValues();
+  const [people, modifyPeople] = Storage.usePeople();
+  const [visible, setVisible] = useState(false);
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+  const lang = useTranslation();
+  const deleteElement = () => {
+  switch(props.itemToDelete){
+    case "topic":
+      modifyValues.deleteTopic(props.category, props.topic);
+      break;
+    case "entry":
+      modifyValues.deleteEntry(props.category, props.topic, props.entry);
+      break;
+    case "person":
+      modifyPeople.deletePerson(props.person);
+      hideDialog;
+      break;
+    }
   }
 
-//Button that deletes topics and persons
-const DeleteTopicButton = (props: any) => {
-  
-  const [values, modifyValues] = Storage.useValues();
-  const [people, modifyPeople] = Storage.usePeople();
-  const [visible, setVisible] = useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-
   return (
     <Surface style={{ borderRadius: 100, elevation: 3}}>
       <IconButton icon={"close"} size={40} onPress={showDialog} />
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
           <Dialog.Content>
-            <Paragraph>Are you sure?</Paragraph>
+            <Paragraph>{lang.valuesDialogText}</Paragraph>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={hideDialog}>
-              CANCEL
+              {lang.valuesDialogNo}
             </Button>
-            <Button onPress={()=> {
-            modifyValues.deleteTopic(props.category, props.name);
-    
-            }}>OK</Button>
+            <Button onPress={deleteElement}>{lang.valuesDialogYes}</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
@@ -59,90 +71,27 @@ const DeleteTopicButton = (props: any) => {
 
   )
 
-}
-
-const DeletePersonButton = (props: any) => {
-  
-  const [values, modifyValues] = Storage.useValues();
-  const [people, modifyPeople] = Storage.usePeople();
-  const [visible, setVisible] = useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-
-  return (
-    <Surface style={{ borderRadius: 100, elevation: 3}}>
-      <IconButton icon={"close"} size={40} onPress={showDialog} />
-      <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Content>
-            <Paragraph>Are you sure?</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={hideDialog}>
-              CANCEL
-            </Button>
-            <Button onPress={()=> {
-             modifyPeople.deletePerson(props.name);
-            }}>OK</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
-    </Surface >
-
-  )
-}
-
-const DeleteEntryButton = (props: any) => {
-  const [values, modifyValues] = Storage.useValues();
-  const [people, modifyPeople] = Storage.usePeople();
-  const [visible, setVisible] = useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-
-  return (
-    <Surface style={{ borderRadius: 100, elevation: 3}}>
-      <IconButton icon={"close"} size={40} onPress={showDialog} />
-      <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Content>
-            <Paragraph>Are you sure?</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={hideDialog}>
-            CANCEL
-            </Button>
-            <Button onPress={()=> {
-              modifyValues.deleteEntry(props.category, props.name, props.entry);
-            }}>OK</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
-    </Surface >
-
-  )
-}
-
+}  
 
 
 //Template for buttons used
 const StyledButton = (props: any) => {
   return (
-    
       <Button theme={{ roundness: 30 }} contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={props.categoryButton}>
         <Text>{props.name}</Text>
       </Button>
   )
 }
+
 const EntryButton = (props: any) => {
   return (
-    
-      <Button theme={{ roundness: 30 }} labelstyle={{fontSize: 100}}contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
+      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: 240, height: 70, flexDirection: 'row', justifyContent: 'center'}} compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
         <Text>{props.name}</Text>
       </Button>
   )
 }
 
-
+//View for adding entry
 const addEntryView = ({route, navigation}: any) => {
   const [values, modifyValues] = Storage.useValues();
   const [text, setText] = React.useState('');
@@ -190,7 +139,7 @@ const addEntryView = ({route, navigation}: any) => {
 
 }
 
-
+//Icon view
 const chooseEntryIconView = ({route, navigation}: any) => {
   const [visible, setVisible] = React.useState(false);
   const { colors } = useTheme();
@@ -222,6 +171,7 @@ const chooseEntryIconView = ({route, navigation}: any) => {
   )
 }
 
+//View for entries
 const EntryView = ({route, navigation}: any) => {
   const {title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
@@ -253,13 +203,13 @@ const EntryView = ({route, navigation}: any) => {
       category = values.relations;
   }
   index = values[categoryString].findIndex(t => t.name === title);
-  console.log("entirers: ", category[index].entries)
+  //Creates all the entries for the right topic
   const content = category[index].entries.map((entry: ValuesEntry) => 
       <>
       <View style={{flex: 1, flexDirection: 'row'}}>
       <EntryButton name={entry.text} categoryButton={null} icon={entry.icon}/>
       <View style={{ width: 10, height: 10 }} />
-      <DeleteEntryButton category= {categoryString} name={category[index].name} entry={entry}/>
+      <DeleteButton category= {categoryString} topic={category[index].name} entry={entry} itemToDelete="entry"/>
       </View>
       <View style={{ width: 20, height: 20 }} />
       </> 
@@ -339,8 +289,8 @@ const TopicTextInputView = ({route, navigation}: any) => {
   )
 }
 
-//View for each topic
-const TopicView = ({route, navigation}: any) => {
+//View for each category
+const CategoryView = ({route, navigation}: any) => {
   const { title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
   const [people, modifyPeople] = Storage.usePeople();
@@ -398,7 +348,7 @@ const TopicView = ({route, navigation}: any) => {
         <Text>{topic.name}</Text>
         </Button>
       <View style={{ width: 10, height: 10 }} />
-      <DeleteTopicButton category= {categoryString} name={topic.name}/>
+      <DeleteButton category= {categoryString} topic={topic.name} itemToDelete = "topic" />
       </View>
       <View style={{ width: 20, height: 20 }} />
       
@@ -411,7 +361,7 @@ const TopicView = ({route, navigation}: any) => {
   <View style={{flex: 1, flexDirection: 'row'}}>
   <StyledButton name={person} categoryButton={null}/>
   <View style={{ width: 10, height: 10 }} />
-  <DeletePersonButton category= {categoryString} name={person}/>
+  <DeleteButton category= {categoryString} person={person} itemToDelete = "person" />
   </View>
   <View style={{ width: 20, height: 20 }} />
   
@@ -546,12 +496,12 @@ export const ValuesScreen = () => {
       }}
     >
       <ValuesStack.Screen name="StartScreenView" component= {StartScreenView} />
-      <ValuesStack.Screen name="Relations" component={TopicView} />
-      <ValuesStack.Screen name="Work" component={TopicView} />
-      <ValuesStack.Screen name="Enjoyment" component={TopicView} />
-      <ValuesStack.Screen name="Health" component={TopicView} />
-      <ValuesStack.Screen name="Responsibilities" component={TopicView} />
-      <ValuesStack.Screen name="People" component={TopicView} />
+      <ValuesStack.Screen name="Relations" component={CategoryView} />
+      <ValuesStack.Screen name="Work" component={CategoryView} />
+      <ValuesStack.Screen name="Enjoyment" component={CategoryView} />
+      <ValuesStack.Screen name="Health" component={CategoryView} />
+      <ValuesStack.Screen name="Responsibilities" component={CategoryView} />
+      <ValuesStack.Screen name="People" component={CategoryView} />
 
       <ValuesStack.Screen name="TopicTextInputView" component={TopicTextInputView}/>
       <ValuesStack.Screen name="EntryView" component={EntryView}/>

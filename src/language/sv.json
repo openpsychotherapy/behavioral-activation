@@ -11,7 +11,10 @@
     "valuesButtonHealth": "Sinne/Kropp/Spirituellt",
     "valuesButtonResponsibilities": "Ansvar",
     "valuesButtonPeople": "Stödpersoner",
-
+    "valuesDialogText": "Är du säker?",
+    "valuesDialogYes": "Ok",
+    "valuesDialogNo": "Avbryt",
+    
 
     "weekdays": [
         "Sön",
