@@ -85,8 +85,14 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     if (toHour === 0) {
       toHour = 24;
     }
+    
+    // Add a 0 infront of numbers lower than 10
+    const zeroPadding = (value: number) => {
+      if(value < 10) return '0' + value
+      return value.toString()
+    };
 
-    const isoDateString = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+    const isoDateString = date.getFullYear() + '-' + zeroPadding(date.getMonth()) + '-' + zeroPadding(date.getDate());
 
     // Add entry att every applicable hour
     for (let i = fromTime.getHours(); i < toHour; ++i) {
