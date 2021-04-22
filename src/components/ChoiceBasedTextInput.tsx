@@ -68,7 +68,7 @@ export const ChoiceBasedTextInput = (props: {label: string, textInputText: strin
 
       <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 0 }}>
           <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choice.value}</Text>
-          <Button onPress={()=> setVisible(true)}>{lang.ChoiceBasedTextInputChangeLabel}</Button>
+          <Button onPress={()=> setVisible(true)}>{lang.choiceBasedTextInputChangeLabel}</Button>
       </Surface>
       
       <TextInput
