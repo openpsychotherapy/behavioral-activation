@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import { Text, Title, Button, TextInput, FAB, IconButton, Surface, useTheme, Portal, Dialog, Paragraph} from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -9,6 +9,7 @@ import { ValuesTopic, People, ValuesEntry } from 'storage/types';
 import { IconMeny } from './IconMeny';
 import { IconList } from './IconList';
 import { useLinkProps } from '@react-navigation/native';
+
  
 const ValuesStack = createStackNavigator();
 
@@ -77,7 +78,7 @@ const DeleteButton = (props: any) => {
 //Template for buttons used
 const StyledButton = (props: any) => {
   return (
-      <Button theme={{ roundness: 30 }} contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={props.categoryButton}>
+      <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  compact={true} mode="outlined" onPress={props.categoryButton}>
         <Text>{props.name}</Text>
       </Button>
   )
@@ -85,7 +86,7 @@ const StyledButton = (props: any) => {
 
 const EntryButton = (props: any) => {
   return (
-      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: 240, height: 70, flexDirection: 'row', justifyContent: 'center'}} compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
+      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: "100%", height: 70, flexDirection: 'row', justifyContent: 'center'}} compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
         <Text>{props.name}</Text>
       </Button>
   )
@@ -104,7 +105,7 @@ const addEntryView = ({route, navigation}: any) => {
         <IconButton icon={icon} size={30} />
       </Surface > 
       <View style={{ width: 15, height: 15 }} />
-        <Title style={{fontSize: 30}}>{title}</Title>
+        <Title>{title}</Title>
         
       </View>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
@@ -254,25 +255,28 @@ const TopicTextInputView = ({route, navigation}: any) => {
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-        <Title style={{fontSize: 30}}>{title}</Title>
+        <Title>{title}</Title>
       </View>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
       <TextInput
       value={text}
       onChangeText={setText}
       mode={"outlined"} 
-      style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start', fontSize: 20}}
+      style={{flex: 0.5, paddingHorizontal: "15%", justifyContent: 'flex-start'}}
       placeholder={"Skriv här"}
       multiline={true}
     />
       </View>
-      <View style={{ flex: 0.3, paddingBottom: 60, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-evenly'}}>
-        <RoundButton icon="close" size={40} onPress={() => {
+      <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <RoundButton icon="close" onPress={() => {
           navigation.navigate({
             name: navigateBack
           })
         }} />
-        <RoundButton icon="check" size={40} onPress={() =>{
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <RoundButton icon="check" onPress={() =>{
           navigation.navigate({
             name: navigateBack,
           },);
@@ -284,6 +288,8 @@ const TopicTextInputView = ({route, navigation}: any) => {
           }
 
         } } />  
+        </View>
+        
       </View>
      </View>
   )
@@ -376,7 +382,7 @@ const CategoryView = ({route, navigation}: any) => {
   return (
     <View style={{ flex: 1}}>
     <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
-      <Title style={{fontSize: 30}}>{title}</Title>
+      <Title>{title}</Title>
     </View>
     <ScrollView style={{flex: 0.8}}>
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
