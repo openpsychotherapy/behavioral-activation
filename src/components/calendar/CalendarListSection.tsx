@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Calendar, CalendarEntry } from 'storage/calendar';
+import { Calendar, CalendarEntry } from 'storage/types';
 import { CalendarListItem } from './CalendarListItem';
 import { List, useTheme } from 'react-native-paper';
 import { useTranslation } from 'language/LanguageProvider';

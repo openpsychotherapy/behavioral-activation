@@ -6,7 +6,7 @@ import Storage from 'storage';
 export const IconMeny = (props: any) => {
   const [icons, modifyIcons] = Storage.useIcons();
   const { iconSizes } = useTheme();
-  let iconSize = iconSizes.large;
+  const iconSize = iconSizes.large;
 
   return (
     <View style={{ flexGrow: 1, flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center', paddingRight: 20, paddingLeft: 20 }}>

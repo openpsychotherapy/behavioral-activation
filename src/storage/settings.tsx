@@ -1,21 +1,15 @@
 import React, { useContext } from 'react';
 import { StorageContext } from './context';
 
-interface Settings {
-  notifications: boolean;
-  language: string;
-}
+import {
+  Settings,
+  ModifySettings,
+} from './types';
 
-interface ModifySettings {
-  setNotifications: (value: boolean) => void;
-  setLanguage: (value: string) => void;
-}
-
-export const settingsKey: string = "settings";
-export const settingsDefault: Settings = {
-  notifications: false,
-  language: "sv",
-};
+import {
+  settingsKey,
+  settingsDefault
+} from './constants';
 
 /**
  * Hook returning the settings and functions to modify the settings.

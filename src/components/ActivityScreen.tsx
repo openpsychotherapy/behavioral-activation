@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { Text, Button, Surface, IconButton, useTheme } from 'react-native-paper';
+import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { SettingsScreen } from './SettingsScreen';
 
 import { IconMeny } from './IconMeny';
-import { IconList } from './IconList';
+import { IconList } from './activity/IconList';
+import { ActivityRegistrator } from './activity/ActivityRegistrator';
+
+import { useTranslation } from 'language/LanguageProvider';
 
 const ActivityStack = createStackNavigator();
 
 const HistoryView = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>History</Text>
-  </View>
-);
-
-const IconSettingsView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Icon Settings</Text>
   </View>
 );
 
@@ -31,32 +28,38 @@ const CircleButton = (props: any) => {
   );
 }
 
-const ViewContent = ({ navigation }: any) => {
+const ViewContent = ({ route, navigation }: any) => {
   const { colors } = useTheme();
 
-  const [visible, setVisible] = React.useState(false);
+  const lang = useTranslation();
+
+  const [iconListVisible, setIconListVisible] = React.useState(false);
+  const [snackBarVisible, setSnackBarVisible] = React.useState(false);
+
   const navigationButtonSize = 40;
 
+  // Trigger snackbar to show once
+  if (route.params.activityRegistered) {
+    setSnackBarVisible(true);
+    route.params.activityRegistered = false;
+  }
+
   const iconListButton = () => {
-    setVisible(true);
+    setIconListVisible(true);
   };
 
   const historyButton = () => {
     navigation.navigate('History');
   };
 
-  const iconSettingsButton = () => {
-    navigation.navigate('IconSettings');
-  };
-
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
-    console.log(pressedIcon + " - " + icon);
+    setIconListVisible(false);
+    navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
   };
-
 
   return (
     <View style={{ flex: 1 }}>
-      <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
+      <IconList pressCallback={iconPressCallback} visible={iconListVisible} setVisible={setIconListVisible} />
       <IconMeny pressCallback={iconPressCallback} />
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
@@ -64,6 +67,10 @@ const ViewContent = ({ navigation }: any) => {
         <CircleButton icon='calendar-check' size={navigationButtonSize} backgroundColor={colors.accent} />
         <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
+
+      <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} duration={4000} >
+        {lang.activiesSnackBarAdded}
+      </Snackbar>
     </View>
   );
 }
@@ -75,9 +82,9 @@ export const ActivityScreen = ({ navigation }: any) => {
         header: (props) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ActivityStack.Screen name="Activities" component={ViewContent} />
+      <ActivityStack.Screen name="Activities" component={ViewContent} initialParams={{activityRegistered: false}} />
       <ActivityStack.Screen name="History" component={HistoryView} />
-      <ActivityStack.Screen name="IconSettings" component={IconSettingsView} />
+      <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
       <ActivityStack.Screen name="Settings" component={SettingsScreen} />
     </ActivityStack.Navigator>
   );

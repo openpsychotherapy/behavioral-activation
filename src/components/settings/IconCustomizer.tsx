@@ -1,7 +1,7 @@
 import React from 'react';
 import Storage from 'storage';
 import { Button } from 'react-native-paper';
-import { IconList } from '../IconList';
+import { IconList } from '../activity/IconList';
 
 import { useTranslation } from 'language/LanguageProvider';
 

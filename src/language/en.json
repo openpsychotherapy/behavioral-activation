@@ -1,12 +1,34 @@
 {
     "languageName": "English",
+     
     "valuesHeaderEvaluation": "Evaluation",
+     
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
+     
     "settingsSurfaceLanguage": "Language",
     "settingsSurfaceNotifications": "Notifications",
     "settingsSurfaceIcons": "Icons",
     "settingsSurfaceIconCustomize": "Customize",
+
+    "datePickerLabel": "Pick a date",
+    "datePickerSaveLabel": "Save",
+    "datePickerStartLabel": "From",
+    "datePickerEndLabel": "To",
+    "datePickerEmptyLabel": "",
+    "datePickerMoreLabel": "",
+
+    "timePickerLabel": "Time interval",
+
+    "activityRegistratorTextInputLabel": "What have you been doing?",
+    "activityRegistratorActivityDefaultChoice": "Write text",
+    "activityRegistratorImporanceLabel" : "Importance",
+    "activityRegistratorEnjoymentLabel": "Enjoyment",
+
+    "choiceBasedTextInputChangeLabel": "Change",
+
+    "activiesSnackBarAdded" : "Activity added",
+    
     "weekdays": [
         "Sun",
         "Mon",
