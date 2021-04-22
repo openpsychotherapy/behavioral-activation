@@ -1,8 +1,15 @@
 {
+    "languageName": "English",
+     
     "valuesHeaderEvaluation": "Evaluation",
+     
     "activitiesButtonRateDay": "Rate day",
     "activitiesSliderRateDay": "Today's rating",
-    "january": "January",
+     
+    "settingsSurfaceLanguage": "Language",
+    "settingsSurfaceNotifications": "Notifications",
+    "settingsSurfaceIcons": "Icons",
+    "settingsSurfaceIconCustomize": "Customize",
 
     "datePickerLabel": "Pick a date",
     "datePickerSaveLabel": "Save",

@@ -1,8 +1,15 @@
 {
+    "languageName": "Svenska",
+
     "valuesHeaderEvaluation": "Värdering",
+
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
-    "january": "Januari",
+
+    "settingsSurfaceLanguage": "Språk",
+    "settingsSurfaceNotifications": "Notifikationer",
+    "settingsSurfaceIcons": "Ikoner",
+    "settingsSurfaceIconCustomize": "Anpassa",
 
     "datePickerLabel": "Välj ett datum",
     "datePickerSaveLabel": "Spara",

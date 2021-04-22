@@ -4,6 +4,7 @@ import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-pape
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
+import { SettingsScreen } from './SettingsScreen';
 
 import { IconMeny } from './IconMeny';
 import { IconList } from './activity/IconList';
@@ -84,6 +85,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name="Activities" component={ViewContent} initialParams={{activityRegistered: false}} />
       <ActivityStack.Screen name="History" component={HistoryView} />
       <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
+      <ActivityStack.Screen name="Settings" component={SettingsScreen} />
     </ActivityStack.Navigator>
   );
 }

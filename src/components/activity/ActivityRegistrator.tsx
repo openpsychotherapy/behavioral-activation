@@ -10,6 +10,7 @@ import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
+import { ActivitiesEntry } from 'storage/types';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
   // route.params contains information from activity screen
@@ -69,14 +70,14 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   const onConfirm = () => {
     // Check if custom text has been entered
     const entryText = choice.isDefault ? activityText : choice.value;
-    
+
     // Create entry from information entered by user
-    const entry = {
+    const entry: ActivitiesEntry = {
       text: entryText,
       icon: route.params.icon,
-      person: '', // TODO: link to value based on choie
-      meaningful: importance,
-      entertaining: enjoyment,
+      person: '', // TODO: link to value based on choice
+      importance: importance,
+      enjoyment: enjoyment,
     };
 
     // If toTime returns 0 hours its the next day, count it as 24.
