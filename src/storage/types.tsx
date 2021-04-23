@@ -33,6 +33,7 @@ export type Calendar = CalendarEntry[];
 
 export interface ModifyCalendar {
   add: (entry: CalendarEntry) => boolean;
+  remove: (entry: CalendarEntry) => boolean;
 }
 
 // Icons

@@ -99,8 +99,22 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
     return false;
   }
 
+  const remove = (entry: CalendarEntry): boolean => {
+    const index = calendar.findIndex(elem => entryEq(elem, entry));
+    if (index !== -1) {
+      const newCalendar = [
+        ...calendar.slice(0, index),
+        ...calendar.slice(index + 1)
+      ];
+      setStoreItem(calendarKey, newCalendar);
+      return true;
+    }
+    return false;
+  }
+
   const modifyCalendar: ModifyCalendar = {
     add: add,
+    remove: remove,
   };
 
   return [calendar, modifyCalendar];
