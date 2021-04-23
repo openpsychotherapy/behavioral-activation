@@ -51,5 +51,8 @@
         "October",
         "November",
         "December"
-    ]
+    ],
+
+    "activityHistoryRateDayLabel" : "Rate day"
+
 }

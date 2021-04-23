@@ -10,6 +10,7 @@ import { IconMeny } from './IconMeny';
 import { IconList } from './activity/IconList';
 import { ActivityRegistrator } from './activity/ActivityRegistrator';
 import { ActivityHistory } from './activity/ActivityHistory';
+import { ActivityRateDay } from './activity/ActivityRateDay';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -82,6 +83,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name="History" component={ActivityHistory} />
       <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
       <ActivityStack.Screen name="Settings" component={SettingsScreen} />
+      <ActivityStack.Screen name="RateDay" component={ActivityRateDay} />
     </ActivityStack.Navigator>
   );
 }

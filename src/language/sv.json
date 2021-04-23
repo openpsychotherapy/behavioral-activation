@@ -51,5 +51,7 @@
         "Oktober",
         "November",
         "December"
-    ]
+    ],
+    
+    "activityHistoryRateDayLabel": "Betygsätt dag"
 }

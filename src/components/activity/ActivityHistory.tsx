@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
-import { Text, Surface, List, Caption } from 'react-native-paper';
+import { View, FlatList, Pressable } from 'react-native';
+import { Text, Surface, List, Caption, FAB, Title } from 'react-native-paper';
+
+import { useTranslation } from 'language/LanguageProvider';
 
 import Storage from 'storage';
+
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 // Returns a date base on ISO string and adds an hour offset
 const getDateFromStringWithOffset = (value: string, offset: number) => {
@@ -11,9 +16,10 @@ const getDateFromStringWithOffset = (value: string, offset: number) => {
   return date;
 };
 
-export const ActivityHistory = () => {
+export const ActivityHistory = ({navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
+  const lang = useTranslation();
 
   let historyItems: any = [];
 
@@ -26,7 +32,7 @@ export const ActivityHistory = () => {
     };
     return Intl.DateTimeFormat(settings.language, options).format(date);
   };
-
+  
   if (activities.length !== 0) {
     const day = activities[currentDay];
 
@@ -34,20 +40,26 @@ export const ActivityHistory = () => {
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
       const activity = day.entries[activityIndex];
       
-      const outside = activityIndex+1-day.entries.length === 0;
-      
-      // Should check if the comming activity is null not the current.
-      const shouldBreak = !activity || outside || (!outside && activity !== day.entries[activityIndex+1]);
-
-      if (!shouldBreak) {
-        // Don't break streak
-        ++activityCount;
+      // Ignore if null
+      if (activity == null) {
         continue;
       }
 
+      // const haveNext = activityIndex+1 < day.entries.length;
+      // const isNextValid = day.entries[activityIndex+1] != null;
+      // const isNextSame = JSON.stringify(activity) === JSON.stringify(day.entries[activityIndex+1]);
+
+      // Check if we have a valid next element
+      if (activityIndex+1 < day.entries.length && day.entries[activityIndex+1] != null && JSON.stringify(activity) === JSON.stringify(day.entries[activityIndex+1])) {
+        // Continue segment
+        ++activityCount;
+        continue;
+      }
+      
+
       // Apply segment
       const fromDate = getDateFromStringWithOffset(day.date, activityIndex-activityCount);
-      const toDate = getDateFromStringWithOffset(day.date, activityIndex);
+      const toDate = getDateFromStringWithOffset(day.date, activityIndex+1);
       const fromTimeString = getFormattedTime(fromDate);
       const toTimeString = getFormattedTime(toDate);
 
@@ -73,10 +85,34 @@ export const ActivityHistory = () => {
       </View>
     );
   }
-  
+
+  const onRateDay = () => {
+    navigation.navigate('RateDay');
+  };
+
+  const onMonthPressed = () => {
+    console.log('Month');
+  };
+
   return (
     <View style={{flex: 1}}>
-      <FlatList style={{}} data={historyItems} renderItem={({item}) => item}/>
+      <Surface style={{ elevation: 10 }}>
+        <Pressable style={{ padding: 10 }} onPress={onMonthPressed}>
+          <Title>Some month</Title>
+        </Pressable>
+      </Surface>
+      <FlatList style={{}} data={historyItems} renderItem={({item}) => item}
+        contentContainerStyle={{
+          paddingBottom: 75
+        }}
+      />
+      <View style={{ position: 'absolute', bottom: 0, width: '100%', alignItems: 'center' }}>
+        <FAB icon='check'
+          label={lang.activityHistoryRateDayLabel}
+          style={{ margin: 16 }}
+          onPress={() => onRateDay()}
+        />
+      </View>
     </View>
   );
 };
