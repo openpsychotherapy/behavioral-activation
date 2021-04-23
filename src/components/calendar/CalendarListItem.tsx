@@ -5,8 +5,11 @@ import { CalendarEntry } from 'storage/types';
 import { List, Surface, Text, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
+import Storage from 'storage';
+
 export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
   const { title, calendar: calStyle } = useTheme();
+  const [calender, modifyCalendar] = Storage.useCalendar();
   return (
     <View style={{ flexDirection: "row", width: "100%", marginBottom: 10 }}>
       <View style={{ justifyContent: 'center' }}>
@@ -31,6 +34,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
           title={`${entry.start} - ${entry.end}`}
           description={entry.text}
           right={() => <List.Icon icon={entry.icon} />}
+          onPress={() => modifyCalendar.remove(entry)}
         />
       </Surface>
     </View>

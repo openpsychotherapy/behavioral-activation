@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { FAB, Snackbar } from 'react-native-paper';
 import { IconList } from './activity/IconList';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { CalendarList } from './calendar/CalendarList';
 
@@ -12,10 +12,31 @@ import { SettingsScreen } from './SettingsScreen';
 import { CalendarRegistrator } from './calendar/CalendarRegistrator';
 
 import { useTranslation } from 'language/LanguageProvider';
+import { RouteProp } from '@react-navigation/core';
 
-const CalendarStack = createStackNavigator();
+export type CalendarStackParamList = {
+  Calendar: { activityRegistered: boolean };
+  CalendarRegistration: { pressedIcon: number, icon: string };
+  Settings: {};
+};
 
-const ViewContent = ({ route, navigation }: any) => {
+type ViewContentRouteProp = RouteProp<
+  CalendarStackParamList,
+  'Calendar'
+>;
+type ViewContentNavigationProp = StackNavigationProp<
+  CalendarStackParamList,
+  'Calendar'
+>;
+
+const CalendarStack = createStackNavigator<CalendarStackParamList>();
+
+type Props = {
+  route: ViewContentRouteProp;
+  navigation: ViewContentNavigationProp;
+};
+
+const ViewContent = ({ route, navigation }: Props) => {
   const [calendar, modifyCalendar] = Storage.useCalendar();
   const [iconListVisible, setIconListVisible] = React.useState(false);
   const [snackBarVisible, setSnackBarVisible] = React.useState(false);
@@ -31,8 +52,6 @@ const ViewContent = ({ route, navigation }: any) => {
   }, [route.params]);
 
   const callback = (index: number, icon: string) => {
-    //console.log("Add " + index + "-" + icon);
-
     setIconListVisible(false);
     navigation.push('CalendarRegistration', { pressedIcon: index, icon: icon });
   }

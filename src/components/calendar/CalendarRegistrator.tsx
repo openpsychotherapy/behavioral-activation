@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
-import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
-
-import Slider from '@react-native-community/slider';
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform  } from 'react-native';
+import { IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import { DatePicker } from '../DatePicker';
 import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
@@ -10,7 +8,10 @@ import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
-import { ActivitiesEntry, CalendarEntry } from 'storage/types';
+import { CalendarEntry } from 'storage/types';
+import { RouteProp } from '@react-navigation/core';
+import { CalendarStackParamList } from '../CalendarScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 /**
  * Returns the date in ISO format. Normal programming languages use
@@ -47,7 +48,22 @@ const ISOTime = (date: Date): string => {
   return hour + ':' + minute;
 }
 
-export const CalendarRegistrator = ({ route, navigation }: any) => {
+type CalendarRegistratorRouteProp = RouteProp<
+  CalendarStackParamList,
+  'CalendarRegistration'
+>;
+
+type CalendarRegistratorNavigationProp = StackNavigationProp<
+  CalendarStackParamList,
+  'CalendarRegistration'
+>;
+
+type Props = {
+  route: CalendarRegistratorRouteProp,
+  navigation: CalendarRegistratorNavigationProp,
+};
+
+export const CalendarRegistrator = ({ route, navigation }: Props) => {
   const lang = useTranslation();
   const { iconSizes, colors } = useTheme();
 
