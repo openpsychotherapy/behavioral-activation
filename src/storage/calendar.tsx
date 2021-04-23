@@ -70,13 +70,13 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
   const calendar: Calendar = store[calendarKey];
 
   /**
-   * Adds an entry to the calendar and updates the store. The entry is inserted
-   * in chronological order.
+   * Adds an entry to the specified calendar. The entry is inserted in
+   * chronological order.
    *
    * @param entry - The entry to be added
-   * @returns `true` if the entry was added, `false` otherwise
+   * @returns A new calendar with the entry added
    */
-  const add = (entry: CalendarEntry): boolean => {
+  const add = (calendar: Calendar, entry: CalendarEntry): Calendar => {
     const isValidEntry = isDate(entry.date)
                        && isTime(entry.start)
                        && isTime(entry.end)
@@ -93,28 +93,34 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
           ...calendar.slice(index)
         ];
       }
-      setStoreItem(calendarKey, newCalendar);
-      return true;
+      return newCalendar;
     }
-    return false;
+    return [...calendar];
   }
 
-  const remove = (entry: CalendarEntry): boolean => {
+  /**
+   * Removes an entry to the specified calendar.
+   *
+   * @param entry - The entry to be removed
+   * @returns A new calendar with the entry removed
+   */
+  const remove = (calendar: Calendar, entry: CalendarEntry): Calendar => {
     const index = calendar.findIndex(elem => entryEq(elem, entry));
     if (index !== -1) {
       const newCalendar = [
         ...calendar.slice(0, index),
         ...calendar.slice(index + 1)
       ];
-      setStoreItem(calendarKey, newCalendar);
-      return true;
+      return newCalendar;
     }
-    return false;
+    return [...calendar];
   }
 
   const modifyCalendar: ModifyCalendar = {
-    add: add,
-    remove: remove,
+    add: entry => setStoreItem(calendarKey, add(calendar, entry)),
+    remove: entry => setStoreItem(calendarKey, remove(calendar, entry)),
+    replace: (oldEntry, newEntry) =>
+      setStoreItem(calendarKey, add(remove(calendar, oldEntry), newEntry)),
   };
 
   return [calendar, modifyCalendar];

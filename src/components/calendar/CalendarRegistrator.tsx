@@ -74,17 +74,44 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   }
   let choices = [ defaultChoice ];
 
+  let activityTextDefault = '';
+  let dateDefault = new Date();
+  let fromTimeDefault = getCurrentTimeRounded(0, steps);
+  let toTimeDefault = getCurrentTimeRounded(1, steps);
+
+  // Overwrite default values from entry
+  if (route.params?.entry) {
+    const entry = route.params?.entry;
+    activityTextDefault = entry.text;
+    dateDefault = new Date(entry.date);
+    const [fromHour, fromMinute] = entry.start.split(':').map(n => parseInt(n))
+    const [toHour, toMinute] = entry.end.split(':').map(n => parseInt(n))
+    fromTimeDefault = new Date(
+      dateDefault.getFullYear(),
+      dateDefault.getMonth(),
+      dateDefault.getDate(),
+      fromHour,
+      fromMinute
+    );
+    toTimeDefault = new Date(
+      dateDefault.getFullYear(),
+      dateDefault.getMonth(),
+      dateDefault.getDate(),
+      toHour,
+      toMinute
+    );
+  }
 
   const [values, modifyValues] = Storage.useValues();
   const [calendar, modifyCalendar] = Storage.useCalendar();
   
-  const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
-  const [toTime, setToTime] = React.useState(getCurrentTimeRounded(1, steps));
+  const [fromTime, setFromTime] = React.useState(fromTimeDefault);
+  const [toTime, setToTime] = React.useState(toTimeDefault);
   
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState(dateDefault);
   
   const [choice, setChoice] = React.useState(defaultChoice);
-  const [activityText, setActivityText] = React.useState('');
+  const [activityText, setActivityText] = React.useState(activityTextDefault);
 
 
   // Find topics to choose from depending on input icon
@@ -128,7 +155,11 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
       end: ISOTime(toTime),
     };
 
-    modifyCalendar.add(entry);
+    if (route.params?.entry) {
+      modifyCalendar.replace(route.params.entry, entry);
+    } else {
+      modifyCalendar.add(entry);
+    }
 
     // Go back
     navigation.navigate('Calendar', {activityRegistered: true})
@@ -183,8 +214,18 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
           </View>
         </KeyboardAvoidingView>
 
-        {/* Cancel / Confirm row */}
+        {/* Trash / Cancel / Confirm row */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+          {route.params?.entry &&
+            <IconButton
+              icon='delete'
+              size={iconSizes.large}
+              onPress={() => {
+                modifyCalendar.remove(route.params.entry as CalendarEntry);
+                onCancel();
+              }}
+              color={colors.cancel}
+            />}
           <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
           <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
         </View>

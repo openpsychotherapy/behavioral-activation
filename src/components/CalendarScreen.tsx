@@ -13,10 +13,11 @@ import { CalendarRegistrator } from './calendar/CalendarRegistrator';
 
 import { useTranslation } from 'language/LanguageProvider';
 import { RouteProp } from '@react-navigation/core';
+import { CalendarEntry } from 'storage/types';
 
 export type CalendarStackParamList = {
   Calendar: { activityRegistered: boolean };
-  CalendarRegistration: { pressedIcon: number, icon: string };
+  CalendarRegistration: { entry?: CalendarEntry, pressedIcon: number, icon: string };
   Settings: {};
 };
 
