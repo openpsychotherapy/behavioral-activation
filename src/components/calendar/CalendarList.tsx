@@ -141,11 +141,11 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
       renderItem={({item}) =>
         typeof(item) === "string" ? (
           <>
-            <Divider/>
+            <Divider style={{ height: 2 }}/>
             <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
               {`${dict.months[new Date(item).getMonth()]} ${item.slice(0, 4)}`}
             </Title>
-            <Divider/>
+            <Divider style={{ height: 2 }}/>
           </>
         ) : (
           <CalendarListSection entries={item}/>
