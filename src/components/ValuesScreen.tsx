@@ -29,6 +29,7 @@ const CircleButton = (props: any) => {
   );
 }
 
+
 //Button that deletes topics, persons or entities
 const DeleteButton = (props: any) => {
   const [values, modifyValues] = Storage.useValues();
@@ -38,23 +39,23 @@ const DeleteButton = (props: any) => {
   const hideDialog = () => setVisible(false);
   const lang = useTranslation();
   const deleteElement = () => {
-  switch(props.itemToDelete){
-    case "topic":
-      modifyValues.deleteTopic(props.category, props.topic);
-      break;
-    case "entry":
-      modifyValues.deleteEntry(props.category, props.topic, props.entry);
-      break;
-    case "person":
-      modifyPeople.deletePerson(props.person);
-      hideDialog;
-      break;
+    switch(props.itemToDelete){
+      case "topic":
+        modifyValues.deleteTopic(props.category, props.topic);
+        break;
+      case "entry":
+        modifyValues.deleteEntry(props.category, props.topic, props.entry);
+        break;
+      case "person":
+        modifyPeople.deletePerson(props.person);
+        break;
     }
+    hideDialog();  
   }
 
   return (
     <Surface style={{ borderRadius: 100, elevation: 3}}>
-      <IconButton icon={"close"} size={40} onPress={showDialog} />
+      <IconButton icon={"close"} onPress={showDialog} />
       <Portal>
         <Dialog visible={visible} onDismiss={hideDialog}>
           <Dialog.Content>
@@ -72,13 +73,15 @@ const DeleteButton = (props: any) => {
 
   )
 
-}  
+}
+
 
 
 //Template for buttons used
 const StyledButton = (props: any) => {
   return (
-      <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  compact={true} mode="outlined" onPress={props.categoryButton}>
+      <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  
+      compact={true} mode="outlined" onPress={props.categoryButton}>
         <Text>{props.name}</Text>
       </Button>
   )
@@ -86,7 +89,8 @@ const StyledButton = (props: any) => {
 
 const EntryButton = (props: any) => {
   return (
-      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: "100%", height: 70, flexDirection: 'row', justifyContent: 'center'}} compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
+      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: "100%", height: 70, flexDirection: 'row', justifyContent: 'center'}} 
+      compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
         <Text>{props.name}</Text>
       </Button>
   )
@@ -102,29 +106,32 @@ const addEntryView = ({route, navigation}: any) => {
     <View style={{flex: 1}}>
       <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
       <Surface style={{ borderRadius: 100, elevation: 3}}>
-        <IconButton icon={icon} size={30} />
+        <IconButton icon={icon} />
       </Surface > 
-      <View style={{ width: 15, height: 15 }} />
+      <View style={{ width: "5%", height: "5%" }} />
         <Title>{title}</Title>
         
       </View>
-      <View style={{flex: 0.2, justifyContent: 'center'}}>
+      <View style={{flex: 0.3, justifyContent: 'center'}}>
       <TextInput
       value={text}
       onChangeText={setText}
       mode={"outlined"} 
-      style={{flex: 0.5, paddingHorizontal: 50, justifyContent: 'flex-start', fontSize: 20}}
+      style={{paddingHorizontal: "15%"}}
       placeholder={"Skriv här"}
       multiline={true}
     />
       </View>
-      <View style={{ flex: 0.3, paddingBottom: 60, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-evenly'}}>
-        <RoundButton icon="close" size={40} onPress={() => {
+      <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <RoundButton icon="close" onPress={() => {
           navigation.navigate({
             name: 'EntryView'
           })
         }} />
-        <RoundButton icon="check" size={40} onPress={() =>{
+        </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <RoundButton icon="check" onPress={() =>{
           navigation.navigate({
             name: 'EntryView',
           },);
@@ -134,6 +141,8 @@ const addEntryView = ({route, navigation}: any) => {
               text: text,
             })
           }}  />  
+        </View>
+        
       </View>
      </View>
   )
@@ -257,37 +266,37 @@ const TopicTextInputView = ({route, navigation}: any) => {
       <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
         <Title>{title}</Title>
       </View>
-      <View style={{flex: 0.2, justifyContent: 'center'}}>
-      <TextInput
-      value={text}
-      onChangeText={setText}
-      mode={"outlined"} 
-      style={{flex: 0.5, paddingHorizontal: "15%", justifyContent: 'flex-start'}}
-      placeholder={"Skriv här"}
-      multiline={true}
-    />
+      <View style={{flex: 0.3, justifyContent: 'center'}}>
+        <TextInput
+        value={text}
+        onChangeText={setText}
+        mode={"outlined"} 
+        style={{paddingHorizontal: "15%"}}
+        placeholder={"Skriv här"}
+        multiline={true}
+       />
       </View>
       <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <RoundButton icon="close" onPress={() => {
-          navigation.navigate({
-            name: navigateBack
-          })
-        }} />
+          <RoundButton icon="close" onPress={() => {
+            navigation.navigate({
+              name: navigateBack
+            })
+          }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <RoundButton icon="check" onPress={() =>{
-          navigation.navigate({
-            name: navigateBack,
-          },);
-          if(categoryString != 'people'){
-            modifyValues.addTopic(categoryString, text);
-          }
-          else{
-            modifyPeople.add(text);
-          }
+          <RoundButton icon="check" onPress={() =>{
+            navigation.navigate({
+              name: navigateBack,
+            },);
+            if(categoryString != 'people'){
+              modifyValues.addTopic(categoryString, text);
+            }
+            else{
+              modifyPeople.add(text);
+            }
 
-        } } />  
+          } } />  
         </View>
         
       </View>
@@ -343,8 +352,9 @@ const CategoryView = ({route, navigation}: any) => {
   //creates a list of buttons with the right topic in the right category
   const buttons = category.map((topic: ValuesTopic) => 
       <>
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <Button theme={{ roundness: 30 }} contentStyle={{width: 240, height: 70}} compact={true} mode="outlined" onPress={() => {
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+        <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
+        compact={true} mode="outlined" onPress={() => {
         navigation.navigate('EntryView', {
           title: topic.name,
           navigateBack: navigateBack,
@@ -353,10 +363,9 @@ const CategoryView = ({route, navigation}: any) => {
       }}>
         <Text>{topic.name}</Text>
         </Button>
-      <View style={{ width: 10, height: 10 }} />
+      <View style={{ width: "5%", height: "5%" }} />
       <DeleteButton category= {categoryString} topic={topic.name} itemToDelete = "topic" />
       </View>
-      <View style={{ width: 20, height: 20 }} />
       
       </> 
   );
@@ -381,31 +390,32 @@ const CategoryView = ({route, navigation}: any) => {
     }
   return (
     <View style={{ flex: 1}}>
-    <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
-      <Title>{title}</Title>
-    </View>
-    <ScrollView style={{flex: 0.8}}>
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      {content}
+      <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
+        <Title>{title}</Title>
       </View>
-    </ScrollView>
-    <FAB
-      style={{
-      position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
-      }}
-      icon="pencil"
-      onPress={() => {
-        navigation.navigate('TopicTextInputView', {
-          title: title,
-          navigateBack: navigateBack,
-          categoryString: categoryString,
-        });
-      }}
-    />
-  </View>
+      <View style={{ width: "5%", height: "5%"}} />
+      <ScrollView style={{flex: 0.1}}>
+
+        {content}
+
+      </ScrollView>
+      <FAB
+        style={{
+        position: 'absolute',
+        margin: 15,
+        right: 0,
+        bottom: 0,
+        }}
+        icon="pencil"
+        onPress={() => {
+          navigation.navigate('TopicTextInputView', {
+            title: title,
+            navigateBack: navigateBack,
+            categoryString: categoryString,
+          });
+        }}
+      />
+    </View>
   );
 }
 
