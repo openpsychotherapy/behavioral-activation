@@ -42,7 +42,7 @@ export const ActivityHistory = ({navigation}: any) => {
 
     // Save month as string
     const date = new Date(day.date);
-    const options: Intl.DateTimeFormatOptions = { dateStyle: 'long' };
+    const options: any = { dateStyle: "long" };
     titleString = Intl.DateTimeFormat(settings.language, options).format(date);
     // Set rating
     dayRating = day.score == null ? '' : day.score.toString();
