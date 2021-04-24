@@ -128,6 +128,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
     if (isDate(date) && 0 <= score && score <= 10) {
       const newActivities = [ ...activities ];
       const index = newActivities.findIndex(a => a.date === date);
+      if (index === -1) return false; // If date not found
       newActivities[index].score = score;
       setStoreItem(activitiesKey, newActivities);
       return true;

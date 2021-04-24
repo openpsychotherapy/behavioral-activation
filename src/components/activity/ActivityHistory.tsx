@@ -22,7 +22,7 @@ export const ActivityHistory = ({navigation}: any) => {
   const lang = useTranslation();
   const { colors } = useTheme();
 
-  let historyItems: any = [];
+  let historyItems = [];
 
   const [currentDay, setCurrentDay] = React.useState(activities.length-1); // TODO: Default to current day
 
