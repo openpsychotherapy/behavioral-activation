@@ -7,14 +7,16 @@ import Slider from '@react-native-community/slider';
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 
-export const ActivityRateDay = ({navigation} : any) =>{
+export const ActivityRateDay = ({ route, navigation } : any) =>{
 
   const lang = useTranslation();
+  const [activities, modifyActivities] = Storage.useActivities();
+
   const [rateOfDay, setRateOfDay] = React.useState(5);
   const { iconSizes, colors } = useTheme();
 
   const onConfirm = () => {
-    // Add implemention to storage
+    modifyActivities.setRating(route.params.date, rateOfDay);
     
     // Go back
     navigation.navigate('History');

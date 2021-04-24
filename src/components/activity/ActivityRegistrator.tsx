@@ -92,12 +92,10 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       return value.toString()
     };
 
-    const isoDateString = date.getFullYear() + '-' + zeroPadding(date.getMonth()) + '-' + zeroPadding(date.getDate());
+    const isoDateString = date.getFullYear() + '-' + zeroPadding(date.getMonth()+1) + '-' + zeroPadding(date.getDate());
 
     // Add entry att every applicable hour
-    for (let i = fromTime.getHours(); i < toHour; ++i) {
-      modifyActivities.add(isoDateString, i, entry);
-    }
+    modifyActivities.addInterval(isoDateString, fromTime.getHours(), toHour, entry);
 
     // Go back
     navigation.navigate('Activities', {activityRegistered: true})

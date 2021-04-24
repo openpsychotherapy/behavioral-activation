@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
-import { Text, Surface, List, Caption, FAB, Title } from 'react-native-paper';
+import { Text, Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -20,6 +20,7 @@ export const ActivityHistory = ({navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
+  const { colors } = useTheme();
 
   let historyItems: any = [];
 
@@ -32,9 +33,18 @@ export const ActivityHistory = ({navigation}: any) => {
     };
     return Intl.DateTimeFormat(settings.language, options).format(date);
   };
+
+  let titleString = '';
+  let dayRating = '';
   
   if (activities.length !== 0) {
     const day = activities[currentDay];
+
+    // Save month as string
+    const date = new Date(day.date);
+    titleString = Intl.DateTimeFormat(settings.language, { dateStyle: 'long'}).format(date);
+    // Set rating
+    dayRating = day.score == null ? '' : day.score.toString();
 
     let activityCount = 0; // Used for merging activities
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
@@ -78,16 +88,11 @@ export const ActivityHistory = ({navigation}: any) => {
       activityCount = 0;
     }
   }
-  else {
-    return(
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text>No activities added yet</Text>
-      </View>
-    );
-  }
 
   const onRateDay = () => {
-    navigation.navigate('RateDay');
+    if (activities.length !== 0) {
+      navigation.push('RateDay', { date: activities[currentDay].date });
+    }
   };
 
   const onMonthPressed = () => {
@@ -96,16 +101,30 @@ export const ActivityHistory = ({navigation}: any) => {
 
   return (
     <View style={{flex: 1}}>
-      <Surface style={{ elevation: 10 }}>
-        <Pressable style={{ padding: 10 }} onPress={onMonthPressed}>
-          <Title>Some month</Title>
+      {/* Title bar */}
+      <Surface style={{ elevation: 10, flexDirection: 'row', alignItems:'center'}}>
+        {/* Title */}
+        <Pressable style={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 10 }} onPress={onMonthPressed}>
+          <Title>{titleString}</Title>
         </Pressable>
+
+        {/* Day rating */}
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ paddingVertical: 2, paddingHorizontal: 4, borderRadius: 20, borderWidth: 2, borderColor: colors.placeholder, minWidth: 50, alignItems: 'center', justifyContent: 'center'}}>
+            <Title>{dayRating}</Title>
+          </View>
+          <List.Icon icon='star'/>
+        </View>
       </Surface>
+
+      {/* List */}
       <FlatList style={{}} data={historyItems} renderItem={({item}) => item}
         contentContainerStyle={{
           paddingBottom: 75
         }}
       />
+
+      {/* FAB + container */}
       <View style={{ position: 'absolute', bottom: 0, width: '100%', alignItems: 'center' }}>
         <FAB icon='check'
           label={lang.activityHistoryRateDayLabel}
