@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, ScrollView, Dimensions } from 'react-native';
+import { View, ScrollView, Dimensions, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text, Title, Button, TextInput, FAB, IconButton, Surface, useTheme, Portal, Dialog, Paragraph} from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -10,7 +10,6 @@ import { IconMeny } from './IconMeny';
 import { IconList } from './IconList';
 import { useLinkProps } from '@react-navigation/native';
 
- 
 const ValuesStack = createStackNavigator();
 
 const RoundButton = (props: any) => {
@@ -28,7 +27,6 @@ const CircleButton = (props: any) => {
     </Surface >
   );
 }
-
 
 //Button that deletes topics, persons or entities
 const DeleteButton = (props: any) => {
@@ -70,29 +68,25 @@ const DeleteButton = (props: any) => {
         </Dialog>
       </Portal>
     </Surface >
-
   )
-
 }
-
-
 
 //Template for buttons used
 const StyledButton = (props: any) => {
   return (
-      <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  
-      compact={true} mode="outlined" onPress={props.categoryButton}>
-        <Text>{props.name}</Text>
-      </Button>
+    <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  
+    compact={true} mode="outlined" onPress={props.categoryButton}>
+      <Text>{props.name}</Text>
+    </Button>
   )
 }
 
 const EntryButton = (props: any) => {
   return (
-      <Button theme={{ roundness: 30 }} labelStyle={{fontSize: 20}} contentStyle={{width: "100%", height: 70, flexDirection: 'row', justifyContent: 'center'}} 
-      compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
-        <Text>{props.name}</Text>
-      </Button>
+    <Button theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", flexDirection: 'row', justifyContent: 'center'}} 
+    compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
+      <Text>{props.name}</Text>
+    </Button>
   )
 }
 
@@ -102,51 +96,52 @@ const addEntryView = ({route, navigation}: any) => {
   const [text, setText] = React.useState('');
   const [people, modifyPeople] = Storage.usePeople();
   const { title, navigateBack, categoryString, icon } = route.params;
+  const lang = useTranslation();
+
   return (
-    <View style={{flex: 1}}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={{flex: 1}}>
       <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-      <Surface style={{ borderRadius: 100, elevation: 3}}>
-        <IconButton icon={icon} />
-      </Surface > 
+        <Surface style={{ borderRadius: 100, elevation: 3}}>
+          <IconButton icon={icon} />
+        </Surface > 
       <View style={{ width: "5%", height: "5%" }} />
         <Title>{title}</Title>
         
       </View>
       <View style={{flex: 0.3, justifyContent: 'center'}}>
-      <TextInput
-      value={text}
-      onChangeText={setText}
-      mode={"outlined"} 
-      style={{paddingHorizontal: "15%"}}
-      placeholder={"Skriv här"}
-      multiline={true}
-    />
+        <TextInput
+          value={text}
+          onChangeText={setText}
+          mode={"outlined"} 
+          style={{paddingHorizontal: "15%"}}
+          placeholder={lang.valuesPlaceholder}
+          multiline={true} />
       </View>
       <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <RoundButton icon="close" onPress={() => {
-          navigation.navigate({
-            name: 'EntryView'
-          })
-        }} />
+          <RoundButton icon="close" onPress={() => {
+            navigation.navigate({
+              name: 'EntryView'
+            })
+          }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <RoundButton icon="check" onPress={() =>{
-          navigation.navigate({
-            name: 'EntryView',
-          },);
-          
-            modifyValues.addEntry(categoryString, title, {
-              icon: icon,
-              text: text,
-            })
-          }}  />  
-        </View>
-        
+          <RoundButton icon="check" onPress={() =>{
+            navigation.navigate({
+              name: 'EntryView',
+            },);
+            
+              modifyValues.addEntry(categoryString, title, {
+                icon: icon,
+                text: text,
+              })
+            }} />  
+        </View>  
       </View>
-     </View>
+    </View>
+    </TouchableWithoutFeedback>
   )
-
 }
 
 //Icon view
@@ -192,77 +187,61 @@ const EntryView = ({route, navigation}: any) => {
     content
   }, [values])
 
-   switch(categoryString){
-    case "relations":
-      category = values.relations;
-      break;
-    case "work":
-      category = values.work;
-      break;
-    case "health":
-      category = values.health;
-      break;
-    case "enjoyment":
-      category = values.enjoyment;
-      break;
-    case "responsibilities":
-      category = values.responsibilities;
-      break;
-    //Category needs to be set to something
-    default:
-      category = values.relations;
-  }
+  category = values[categoryString];
   index = values[categoryString].findIndex(t => t.name === title);
   //Creates all the entries for the right topic
   const content = category[index].entries.map((entry: ValuesEntry) => 
-      <>
+    <>
       <View style={{flex: 1, flexDirection: 'row'}}>
-      <EntryButton name={entry.text} categoryButton={null} icon={entry.icon}/>
-      <View style={{ width: 10, height: 10 }} />
-      <DeleteButton category= {categoryString} topic={category[index].name} entry={entry} itemToDelete="entry"/>
-      </View>
+        <EntryButton name={entry.text} categoryButton={null} icon={entry.icon}/>
+        <View style={{ width: 10, height: 10 }} />
+        <DeleteButton category= {categoryString} topic={category[index].name} entry={entry} itemToDelete="entry"/>
+        </View>
       <View style={{ width: 20, height: 20 }} />
-      </> 
+    </> 
   );
 
   return(
     <View style={{ flex: 1}}>
-    <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
-      <Title style={{fontSize: 30}}>{title}</Title>
-    </View>
-    <ScrollView style={{flex: 0.8}}>
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      {content}
+      <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
+        <Title>{title}</Title>
       </View>
-    </ScrollView>
-    <FAB
-      style={{
-      position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
-      }}
-      icon="pencil"
-      onPress={() => {
-        navigation.navigate('chooseEntryIconView', {
-          title: title,
-          navigateBack: navigateBack,
-          categoryString: categoryString
-        });
-      }}
-    />
+      <ScrollView style={{flex: 0.8}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          {content}
+        </View>
+      </ScrollView>
+      <FAB
+        style={{
+        position: 'absolute',
+        margin: 15,
+        right: 0,
+        bottom: 0,
+        }}
+        icon="pencil"
+        onPress={() => {
+          navigation.navigate('chooseEntryIconView', {
+            title: title,
+            navigateBack: navigateBack,
+            categoryString: categoryString
+          });
+        }}
+      />
   </View>
   )
 }
 
 //View when adding a new topic
-const TopicTextInputView = ({route, navigation}: any) => {
+const AddTopicView = ({route, navigation}: any) => {
   const [values, modifyValues] = Storage.useValues();
   const [text, setText] = React.useState('');
   const [people, modifyPeople] = Storage.usePeople();
   const { title, navigateBack, categoryString } = route.params;
+  const lang = useTranslation();
+
   return (
-    <View style={{flex: 1}}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={{flex: 1}}>
       <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
         <Title>{title}</Title>
       </View>
@@ -272,7 +251,7 @@ const TopicTextInputView = ({route, navigation}: any) => {
         onChangeText={setText}
         mode={"outlined"} 
         style={{paddingHorizontal: "15%"}}
-        placeholder={"Skriv här"}
+        placeholder={lang.valuesPlaceholder}
         multiline={true}
        />
       </View>
@@ -298,9 +277,10 @@ const TopicTextInputView = ({route, navigation}: any) => {
 
           } } />  
         </View>
-        
       </View>
      </View>
+    </TouchableWithoutFeedback>
+    
   )
 }
 
@@ -324,77 +304,61 @@ const CategoryView = ({route, navigation}: any) => {
     textBoxes
   }, [people])
 
-  //To find the right category
-  switch(categoryString){
-    case "relations":
-      category = values.relations;
-      break;
-    case "work":
-      category = values.work;
-      break;
-    case "health":
-      category = values.health;
-      break;
-    case "enjoyment":
-      category = values.enjoyment;
-      break;
-    case "responsibilities":
-      category = values.responsibilities;
-      break;
-    case "people":
-      category = people;
-      break;
-    //Category needs to be set to something
-    default:
-      category = values.relations;
-
+  if(categoryString != 'people'){
+    category = values[categoryString];
+  }else{
+    category = people;
   }
+  
   //creates a list of buttons with the right topic in the right category
   const buttons = category.map((topic: ValuesTopic) => 
-      <>
-      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-        <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
-        compact={true} mode="outlined" onPress={() => {
-        navigation.navigate('EntryView', {
-          title: topic.name,
-          navigateBack: navigateBack,
-          categoryString: categoryString
-        });
-      }}>
+    <>
+    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+      <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
+      compact={true} mode="outlined" onPress={() => {
+      navigation.navigate('EntryView', {
+        title: topic.name,
+        navigateBack: navigateBack,
+        categoryString: categoryString
+      });
+    }}>
         <Text>{topic.name}</Text>
-        </Button>
+      </Button>
       <View style={{ width: "5%", height: "5%" }} />
       <DeleteButton category= {categoryString} topic={topic.name} itemToDelete = "topic" />
-      </View>
-      
-      </> 
+    </View>
+    <View style={{ width: 20, height: 20 }} />
+    
+    </> 
   );
 
   //create a list of text boxes for people
   const textBoxes = category.map((person: People) =>    
-  <>
-  <View style={{flex: 1, flexDirection: 'row'}}>
-  <StyledButton name={person} categoryButton={null}/>
-  <View style={{ width: 10, height: 10 }} />
-  <DeleteButton category= {categoryString} person={person} itemToDelete = "person" />
-  </View>
-  <View style={{ width: 20, height: 20 }} />
-  
-  </> 
+    <>
+    <View style={{flex: 1, flexDirection: 'row'}}>
+      <StyledButton name={person} categoryButton={null}/>
+      <View style={{ width: 10, height: 10 }} />
+      <DeleteButton category= {categoryString} person={person} itemToDelete = "person" />
+      </View>
+    <View style={{ width: 20, height: 20 }} />
+    
+    </> 
   );
-    if(categoryString!='people'){
-      content=buttons;
-    }
-    else{
-      content=textBoxes;
-    }
+
+  //Decides what to show in the scrollview
+  if(categoryString != 'people'){
+    content = buttons;
+  }
+  else{
+    content = textBoxes;
+  }
   return (
     <View style={{ flex: 1}}>
       <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
         <Title>{title}</Title>
       </View>
       <View style={{ width: "5%", height: "5%"}} />
-      <ScrollView style={{flex: 0.1}}>
+      <ScrollView style={{flex: 1}}>
 
         {content}
 
@@ -408,7 +372,7 @@ const CategoryView = ({route, navigation}: any) => {
         }}
         icon="pencil"
         onPress={() => {
-          navigation.navigate('TopicTextInputView', {
+          navigation.navigate('AddTopicView', {
             title: title,
             navigateBack: navigateBack,
             categoryString: categoryString,
@@ -419,56 +383,54 @@ const CategoryView = ({route, navigation}: any) => {
   );
 }
 
-
-
- //View for the first screen in values 
+//View for the first screen in values 
 const StartScreenView = ({navigation}: any) => {
   const lang = useTranslation();
   
   const relationsButton = () => {
-    navigation.navigate('Relations', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonRelations,
-      navigateBack: 'Relations',
+      navigateBack: 'CategoryView',
       categoryString: 'relations',
     });
   };
 
   const workButton = () => {
-    navigation.navigate('Work', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonWork,
-      navigateBack: 'Work',
+      navigateBack: 'CategoryView',
       categoryString: "work",
     });
   };
 
   const enjoymentButton = () => {
-    navigation.navigate('Enjoyment', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonEnjoyment,
-      navigateBack: 'Enjoyment',
+      navigateBack: 'CategoryView',
       categoryString: 'enjoyment',
     });
   };
 
   const healthButton = () => {
-    navigation.navigate('Health', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonHealth,
-      navigateBack: 'Health',
+      navigateBack: 'CategoryView',
       categoryString: 'health',
     });
   };
 
   const responsibilitiesButton = () => {
-    navigation.navigate('Responsibilities', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonResponsibilities,
-      navigateBack: 'Responsibilities',
+      navigateBack: 'CategoryView',
       categoryString: 'responsibilities',
     });
   };
 
   const peopleButton = () => {
-    navigation.navigate('People', {
+    navigation.navigate('CategoryView', {
       title: lang.valuesButtonPeople,
-      navigateBack: 'People',
+      navigateBack: 'CategoryView',
       categoryString: 'people',
 
     });
@@ -512,14 +474,8 @@ export const ValuesScreen = () => {
       }}
     >
       <ValuesStack.Screen name="StartScreenView" component= {StartScreenView} />
-      <ValuesStack.Screen name="Relations" component={CategoryView} />
-      <ValuesStack.Screen name="Work" component={CategoryView} />
-      <ValuesStack.Screen name="Enjoyment" component={CategoryView} />
-      <ValuesStack.Screen name="Health" component={CategoryView} />
-      <ValuesStack.Screen name="Responsibilities" component={CategoryView} />
-      <ValuesStack.Screen name="People" component={CategoryView} />
-
-      <ValuesStack.Screen name="TopicTextInputView" component={TopicTextInputView}/>
+      <ValuesStack.Screen name="CategoryView" component={CategoryView} />
+      <ValuesStack.Screen name="AddTopicView" component={AddTopicView}/>
       <ValuesStack.Screen name="EntryView" component={EntryView}/>
       <ValuesStack.Screen name="chooseEntryIconView" component={chooseEntryIconView}/>
       <ValuesStack.Screen name="addEntryView" component={addEntryView}/>
