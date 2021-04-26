@@ -12,41 +12,7 @@ import { CalendarEntry } from 'storage/types';
 import { RouteProp } from '@react-navigation/core';
 import { CalendarStackParamList } from '../CalendarScreen';
 import { StackNavigationProp } from '@react-navigation/stack';
-
-/**
- * Returns the date in ISO format. Normal programming languages use
- * something like date.strftime("%Y-%m-%d").
- *
- * @returns A ISO-formatted date
- */
-const ISODate = (date: Date): string => {
-  const year = date.getFullYear();
-  let month = '' + (date.getMonth() + 1);
-  let day = '' + date.getDate();
-
-  if (month.length < 2) {
-    month = '0' + month;
-  }
-  if (day.length < 2) {
-    day = '0' + day;
-  }
-
-  return [year, month, day].join('-');
-}
-
-const ISOTime = (date: Date): string => {
-  let hour = '' + date.getHours();
-  let minute = '' + date.getMinutes();
-
-  if (hour.length < 2) {
-    hour = '0' + hour;
-  }
-  if (minute.length < 2) {
-    minute = '0' + minute;
-  }
-
-  return hour + ':' + minute;
-}
+import { ISODate, ISOTime } from 'utils';
 
 type CalendarRegistratorRouteProp = RouteProp<
   CalendarStackParamList,
@@ -67,7 +33,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   const lang = useTranslation();
   const { iconSizes, colors } = useTheme();
 
-  const steps = 2;
+  const steps = 4;
   const defaultChoice = {
     value: lang.activityRegistratorActivityDefaultChoice,
     isDefault: true
@@ -79,7 +45,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   let fromTimeDefault = getCurrentTimeRounded(0, steps);
   let toTimeDefault = getCurrentTimeRounded(1, steps);
 
-  // Overwrite default values from entry
+  // Overwrite default values from entry (if it exists)
   if (route.params?.entry) {
     const entry = route.params?.entry;
     activityTextDefault = entry.text;
@@ -171,7 +137,6 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
     navigation.navigate('Calendar', {activityRegistered: false})
   };
 
-  // Attempts to dissmiss the keyboard when the 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -184,7 +149,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   const onLayoutSet = (event: any) => {
     // If absHeight has not been set
     if (absHeight === -1) {
-      let {x, y, width, height} = event.nativeEvent.layout;
+      let { height } = event.nativeEvent.layout;
       setAbsHeight(height);
     }
   };
