@@ -5,6 +5,7 @@ import { Divider, Title, useTheme } from 'react-native-paper';
 
 import { entryGt } from 'storage/calendar';
 import { Calendar } from 'storage/types';
+import { ISODate } from 'utils';
 import { CalendarListSection } from './CalendarListSection';
 
 /**
@@ -66,38 +67,16 @@ const insertMonthHeaders = (groups: Calendar[]): (Calendar | string)[] => {
   return groupsWithHeaders;
 }
 
-/**
- * Returns the current date in ISO format. Normal programming languages use
- * something like date.strftime("%Y-%m-%d").
- *
- * @returns A ISO-formatted date
- */
-const ISODate = (): string => {
-  const date = new Date();
-  const year = date.getFullYear();
-  let month = '' + (date.getMonth() + 1);
-  let day = '' + date.getDate();
+type ListState = { groups: Calendar[], entryCount: number };
 
-  if (month.length < 2) {
-    month = '0' + month;
-  }
-  if (day.length < 2) {
-    day = '0' + day;
-  }
-
-  return [year, month, day].join('-');
-}
-
-type ListState = {groups: Calendar[], entryCount: number};
-
-export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
+export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
   const dict = useTranslation();
   const { title } = useTheme();
 
   useEffect(() => {
     // Load upcoming calendar entries when initializing
-    const today = ISODate();
+    const today = ISODate(new Date());
     const upcomingEntries = calendar.filter(entry => {
       return entryGt(entry, {...entry, date: today, start: "00:00"})
     });
@@ -141,11 +120,11 @@ export const CalendarList: React.FC<{calendar: Calendar}> = ({ calendar }) => {
       renderItem={({item}) =>
         typeof(item) === "string" ? (
           <>
-            <Divider/>
+            <Divider style={{ height: 2 }}/>
             <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
               {`${dict.months[new Date(item).getMonth()]} ${item.slice(0, 4)}`}
             </Title>
-            <Divider/>
+            <Divider style={{ height: 2 }}/>
           </>
         ) : (
           <CalendarListSection entries={item}/>
