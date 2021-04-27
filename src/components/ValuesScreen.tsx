@@ -28,47 +28,30 @@ const CircleButton = (props: any) => {
   );
 }
 
-//Button that deletes topics, persons or entities
-const DeleteButton = (props: any) => {
-  const [values, modifyValues] = Storage.useValues();
-  const [people, modifyPeople] = Storage.usePeople();
-  const [visible, setVisible] = useState(false);
-  const showDialog = () => setVisible(true);
+const DeletePortal = (props: any) => {
+  const [visible, setVisible] = [props.showPortal, props.setShowPortal];
   const hideDialog = () => setVisible(false);
   const lang = useTranslation();
   const deleteElement = () => {
-    switch(props.itemToDelete){
-      case "topic":
-        modifyValues.deleteTopic(props.category, props.topic);
-        break;
-      case "entry":
-        modifyValues.deleteEntry(props.category, props.topic, props.entry);
-        break;
-      case "person":
-        modifyPeople.deletePerson(props.person);
-        break;
-    }
+    props.deleteElement();
     hideDialog();  
   }
 
   return (
-    <Surface style={{ borderRadius: 100, elevation: 3}}>
-      <IconButton icon={"close"} onPress={showDialog} />
-      <Portal>
-        <Dialog visible={visible} onDismiss={hideDialog}>
-          <Dialog.Content>
-            <Paragraph>{lang.valuesDialogText}</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={hideDialog}>
-              {lang.valuesDialogNo}
-            </Button>
-            <Button onPress={deleteElement}>{lang.valuesDialogYes}</Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
-    </Surface >
-  )
+    <Portal>
+      <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog.Content>
+          <Paragraph>{lang.valuesDialogText}</Paragraph>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={hideDialog}>
+            {lang.valuesDialogNo}
+          </Button>
+          <Button onPress={deleteElement}>{lang.valuesDialogYes}</Button>
+        </Dialog.Actions>
+      </Dialog>
+    </Portal>
+  );
 }
 
 //Template for buttons used
@@ -82,10 +65,19 @@ const StyledButton = (props: any) => {
 }
 
 const EntryButton = (props: any) => {
+  const [values, modifyValues] = Storage.useValues();
+  const [showPortal, setShowPortal] = useState(false);
+  const lang = useTranslation();
+
+  const deleteElement = () => {
+    modifyValues.deleteEntry(props.category, props.topic, props.entry);
+  }
+
   return (
     <Button theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", flexDirection: 'row', justifyContent: 'center'}} 
-    compact={true} mode="outlined" onPress={props.categoryButton} icon={props.icon}>
+    compact={true} mode="outlined" onPress={() => {}} onLongPress={() => setShowPortal(true)} icon={props.icon}>
       <Text>{props.name}</Text>
+      <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
     </Button>
   )
 }
@@ -180,25 +172,24 @@ const chooseEntryIconView = ({route, navigation}: any) => {
 const EntryView = ({route, navigation}: any) => {
   const {title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
-  let index: number;
-  let category: any;
 
   useEffect(() => {
     content
   }, [values])
 
-  category = values[categoryString];
-  index = values[categoryString].findIndex(t => t.name === title);
+  const category = values[categoryString as string];
+  const index = values[categoryString].findIndex(t => t.name === title);
   //Creates all the entries for the right topic
   const content = category[index].entries.map((entry: ValuesEntry) => 
-    <>
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <EntryButton name={entry.text} categoryButton={null} icon={entry.icon}/>
-        <View style={{ width: 10, height: 10 }} />
-        <DeleteButton category= {categoryString} topic={category[index].name} entry={entry} itemToDelete="entry"/>
-        </View>
-      <View style={{ width: 20, height: 20 }} />
-    </> 
+    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginBottom: 20 }}>
+      <EntryButton
+        name={entry.text}
+        icon={entry.icon}
+        category={categoryString}
+        topic={category[index].name}
+        entry={entry}
+        itemToDelete="entry" />
+    </View>
   );
 
   return(
@@ -207,9 +198,7 @@ const EntryView = ({route, navigation}: any) => {
         <Title>{title}</Title>
       </View>
       <ScrollView style={{flex: 0.8}}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          {content}
-        </View>
+        {content}
       </ScrollView>
       <FAB
         style={{
@@ -284,74 +273,67 @@ const AddTopicView = ({route, navigation}: any) => {
   )
 }
 
+const CategoryButton = (props: any) => {
+  const [values, modifyValues] = Storage.useValues();
+  const [people, modifyPeople] = Storage.usePeople();
+  const [showPortal, setShowPortal] = useState(false);
+  const deleteElement = () => {
+    if (props.categoryString == 'people') {
+      modifyPeople.deletePerson(props.topic.name);
+    } else {
+      modifyValues.deleteTopic(props.categoryString, props.topic.name);
+    }
+  }
+
+  return (
+  <View>
+  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+    <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
+    compact={true} mode="outlined" onLongPress={() => setShowPortal(true)} onPress={props.onPress} >
+      <Text>{props.topic.name}</Text>
+    </Button>
+  </View>
+  <View style={{ width: 20, height: 20 }} />
+  
+  <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
+  </View> 
+  );
+}
+
 //View for each category
 const CategoryView = ({route, navigation}: any) => {
   const { title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
   const [people, modifyPeople] = Storage.usePeople();
 
-  let category: any;
-  let buttonText: any;
   let content: any;
-  
-  //Create buttons to each topic whenever we add or delete a topic
-  useEffect(() => {
-    buttons
-  }, [values])
 
-  //Create text boxes to people whenever we add or delete a people
-  useEffect(() => {
-    textBoxes
-  }, [people])
-
-  if(categoryString != 'people'){
-    category = values[categoryString];
-  }else{
-    category = people;
+  if (categoryString != 'people') {
+    //creates a list of buttons with the right topic in the right category
+    content = values[categoryString].map((topic: ValuesTopic, i: number) => 
+      <CategoryButton
+        topic={topic}
+        categoryString={categoryString}
+        onPress={() => {
+          navigation.navigate('EntryView', {
+            title: topic.name,
+            navigateBack: navigateBack,
+            categoryString: categoryString
+          })
+        }}
+      />
+    );
+  } else {
+    //create a list of text boxes for people
+    content = people.map((person: string, i: number) =>    
+      <CategoryButton
+        topic={{name: person}}
+        categoryString={categoryString}
+        onPress={() => {}}
+      />
+    );
   }
-  
-  //creates a list of buttons with the right topic in the right category
-  const buttons = category.map((topic: ValuesTopic) => 
-    <>
-    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-      <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
-      compact={true} mode="outlined" onPress={() => {
-      navigation.navigate('EntryView', {
-        title: topic.name,
-        navigateBack: navigateBack,
-        categoryString: categoryString
-      });
-    }}>
-        <Text>{topic.name}</Text>
-      </Button>
-      <View style={{ width: "5%", height: "5%" }} />
-      <DeleteButton category= {categoryString} topic={topic.name} itemToDelete = "topic" />
-    </View>
-    <View style={{ width: 20, height: 20 }} />
-    
-    </> 
-  );
 
-  //create a list of text boxes for people
-  const textBoxes = category.map((person: People) =>    
-    <>
-    <View style={{flex: 1, flexDirection: 'row'}}>
-      <StyledButton name={person} categoryButton={null}/>
-      <View style={{ width: 10, height: 10 }} />
-      <DeleteButton category= {categoryString} person={person} itemToDelete = "person" />
-      </View>
-    <View style={{ width: 20, height: 20 }} />
-    
-    </> 
-  );
-
-  //Decides what to show in the scrollview
-  if(categoryString != 'people'){
-    content = buttons;
-  }
-  else{
-    content = textBoxes;
-  }
   return (
     <View style={{ flex: 1}}>
       <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
