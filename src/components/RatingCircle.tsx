@@ -5,7 +5,7 @@ import { Title, useTheme } from 'react-native-paper';
 export const RatingCircle = (props: {score: number | null}) => {
   const { gradingColors } = useTheme();
 
-  let color = gradingColors[props.score ? props.score : 11]; // 11 represents empty
+  let color = gradingColors[props.score != null ? props.score : 11]; // 11 represents empty
 
   return (
     <View style={{
@@ -18,7 +18,7 @@ export const RatingCircle = (props: {score: number | null}) => {
         backgroundColor: color
       }}
     >
-      <Title>{props.score}</Title>
+      <Title>{props.score == null ? " " : props.score}</Title>
     </View>
   );
 };

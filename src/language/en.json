@@ -55,6 +55,7 @@
 
     "activityHistoryRateDayLabel" : "Rate day",
     "activityWeekHistoryRateDay": "Today's rating",
-    "activityWeekHistoryNumberOfActivities": "Number of activities"
-
+    "activityWeekHistoryNumberOfActivities": "Number of activities",
+    "activityWeekHistoryTitleDay": "Today's history",   
+    "activityWeekHistoryTitleWeek": "Activity history"
 }

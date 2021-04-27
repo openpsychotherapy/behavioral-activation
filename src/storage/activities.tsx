@@ -15,6 +15,17 @@ import {
 } from './constants';
 
 /**
+ * Compares two activity days and returns if a comes after b.
+ *
+ * @param a - The first activity day
+ * @param b - The second activity day
+ * @returns a.date > b.date
+ */
+export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
+  return a.date > b.date;
+}
+
+/**
  * Hook returning a object with recorded activities and functions to modify the
  * object.
  *
@@ -53,18 +64,33 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns The activities object with specified date inserted
    */
   const _insertDay = (date: string): Activities => {
-    const newActivities = [ ...activities ];
+    
     if (!activities.some(a => a.date === date)) {
-      newActivities.push({
+      const newActivityDay = {
         date: date,
         score: null,
         entries: [null, null, null, null, null, null,
                   null, null, null, null, null, null,
                   null, null, null, null, null, null,
                   null, null, null, null, null, null],
-      });
+      };
+
+      const index = activities.findIndex(elem => activityDayGt(elem, newActivityDay));
+      let newActivities = [ ...activities ];
+
+      if (index === -1) {
+        newActivities = [ ...activities, newActivityDay ];
+      }
+      else {
+        newActivities = [
+          ...newActivities.slice(0, index),
+          newActivityDay,
+          ...newActivities.slice(index)
+        ];
+      }
+      return newActivities;
     }
-    return newActivities;
+    return [ ...activities ];
   }
 
   /**

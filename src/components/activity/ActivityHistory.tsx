@@ -23,12 +23,14 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
   let historyItems = [];
 
-  const [currentDay, setCurrentDay] = React.useState(activities.length-1); // TODO: Default to current day
+  const [currentDay, setCurrentDay] = React.useState(activities.length-1);
 
-  if (route.params && route.params.currentDay !== -1) {
-    setCurrentDay(route.params.currentDay);
-    route.params.currentDay = -1; // Reset to prevent loop. TODO: There must be a better way to do this..
-  }
+  React.useEffect(() => {
+    if (route.params && route.params.currentDay !== -1) {
+      setCurrentDay(route.params.currentDay);
+      route.params.setParams({currentDay: -1});
+    }
+  }, [route.params]);
 
   // Formats a date into a locale time string.
   const getFormattedTime = (date: Date): string => {
@@ -109,9 +111,12 @@ export const ActivityHistory = ({route, navigation}: any) => {
       {/* Title bar */}
       <Surface style={{ elevation: 10, flexDirection: 'row', alignItems:'center'}}>
         {/* Title */}
-        <Pressable style={{ flexGrow: 1, paddingHorizontal: 20, paddingVertical: 10 }} onPress={onMonthPressed}>
-          <Title>{titleString}</Title>
-        </Pressable>
+        <View style={{ flexGrow: 1, alignItems: 'baseline'}}>
+          <Pressable style={{ flexDirection:'row', alignItems: 'center', paddingRight: 20}} onPress={onMonthPressed}>
+            <List.Icon icon='calendar-week'/>
+            <Title>{titleString}</Title>
+          </Pressable>
+        </View>
 
         {/* Day rating */}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>

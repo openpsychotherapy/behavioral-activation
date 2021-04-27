@@ -62,8 +62,8 @@ const ViewContent = ({ route, navigation }: any) => {
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={navigationButtonSize} backgroundColor={colors.accent} onPress={iconListButton} />
-        <CircleButton icon='calendar-check' size={navigationButtonSize} backgroundColor={colors.accent} />
-        <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
+        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} />
+        <CircleButton icon='calendar-clock' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
       <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} duration={4000} >

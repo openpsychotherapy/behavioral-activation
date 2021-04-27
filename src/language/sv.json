@@ -55,5 +55,7 @@
     
     "activityHistoryRateDayLabel": "Betygsätt dag",
     "activityWeekHistoryRateDay": "Dagens betyg",
-    "activityWeekHistoryNumberOfActivities": "Antal aktiviteter"
+    "activityWeekHistoryNumberOfActivities": "Antal aktiviteter",
+    "activityWeekHistoryTitleDay": "Dagens historik",
+    "activityWeekHistoryTitleWeek": "Aktivitetshistorik"
 }
