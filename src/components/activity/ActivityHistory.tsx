@@ -28,7 +28,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
   React.useEffect(() => {
     if (route.params && route.params.currentDay !== -1) {
       setCurrentDay(route.params.currentDay);
-      route.params.setParams({currentDay: -1});
+      navigation.setParams({currentDay: -1});
     }
   }, [route.params]);
 
