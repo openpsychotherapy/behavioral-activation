@@ -173,7 +173,7 @@ const ChooseEntryIconView = ({route, navigation}: any) => {
   return (
     <View style={{flex: 1}}>
       <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
-      <IconMeny pressCallback={iconPressCallback} />
+      <IconMeny pressCallback={iconPressCallback}/>
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={40} backgroundColor={colors.accent} onPress={iconListButton} />

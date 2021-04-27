@@ -12,10 +12,10 @@
     "valuesButtonHealth": "Sinne/Kropp/Spirituellt",
     "valuesButtonResponsibilities": "Ansvar",
     "valuesButtonPeople": "Stödpersoner",
-    "valuesDialogText": "Är du säker?",
+    "valuesDialogText": "Är du säker på att du vill ta bort?",
     "valuesDialogYes": "Ok",
     "valuesDialogNo": "Avbryt",
-    "valuesPlaceholder": "skriv här",
+    "valuesPlaceholder": "Skriv här",
 
     "settingsSurfaceLanguage": "Språk",
     "settingsSurfaceNotifications": "Notifikationer",
