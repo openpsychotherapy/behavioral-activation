@@ -69,7 +69,7 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
-    /**
+  /**
    * Deletes a topic from the values object and updates the store.
    *
    * @param category - The category where the topic should be deleted
@@ -82,10 +82,10 @@ export const useValues = (): [Values, ModifyValues] => {
       const newValues = JSON.parse(JSON.stringify(values));
       newValues[category].splice(index, 1);
       setStoreItem(valuesKey, newValues);
-      return true
+      return true;
+    }
+    return false;
   }
-  return false
-}
 
   /**
    * Adds an entry to the values object and updates the store.
@@ -107,19 +107,27 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
+  /**
+   * Deletes an entry to the values object and updates the store.
+   *
+   * @param category - The category where the topic should be deleted
+   * @param topic - The topic in which the entry should be deleted
+   * @returns `true` if the entry was deleted, `false` otherwise
+   */
   const deleteEntry = (category: string, topic: string, entry: ValuesEntry): boolean => {
     if (values.hasOwnProperty(category)){
       const index = values[category].findIndex(t => t.name === topic);
-      const indexEntry = values[category][index].entries.findIndex(e => entryEq(entry, e));
-      console.log("topic: ", topic)
-      console.log("category: ", category)
-      console.log("indexentry: ", indexEntry)
-      const newValues = JSON.parse(JSON.stringify(values));
-      newValues[category][index].entries.splice(indexEntry, 1);
-      setStoreItem(valuesKey, newValues);
-      return true
+      if (index != -1) {
+        const indexEntry = values[category][index].entries.findIndex(e => entryEq(entry, e));
+        if (indexEntry != -1) {
+          const newValues = JSON.parse(JSON.stringify(values));
+          newValues[category][index].entries.splice(indexEntry, 1);
+          setStoreItem(valuesKey, newValues);
+          return true;
+        }
+      }
     }
-    return false
+    return false;
   }
 
   const modifyValues: ModifyValues = {

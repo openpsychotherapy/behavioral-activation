@@ -52,19 +52,12 @@ export const usePeople = (): [People, ModifyPeople] => {
    * @param person - The person to be deleted from the list
    * @returns `true` if the person was deleted, `false` otherwise
    */
-  const deletePerson = (person: string) : boolean=>{
-    if (people.includes(person)){
-      for (var i=0; i < people.length; i++){
-        if (people[i] == person){
-          people.splice(i, 1)
-          setStoreItem(peopleKey, people)
-          return true
-        }
-
-      }
-      
-    }return false
-    
+  const deletePerson = (person: string): boolean => {
+    if (people.includes(person)) {
+      setStoreItem(peopleKey, people.filter(p => p != person));
+      return true;
+    }
+    return false;
   }
 
   const modifyPeople: ModifyPeople = {
