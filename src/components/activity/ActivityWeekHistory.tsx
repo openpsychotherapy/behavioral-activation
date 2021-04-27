@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Pressable, LayoutChangeEvent } from 'react-native';
-import { Text, Surface, List, Caption, FAB, Title, Headline, useTheme, Subheading } from 'react-native-paper';
+import { Text, Surface, Title, Headline, Subheading } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -32,7 +32,7 @@ export const ActivityWeekHistory = ({route, navigation}: any) => {
   const [layoutSize, setLayoutSize] = React.useState({ 'width': 0, 'height': 0 });
 
   const onSaveSize = (event: LayoutChangeEvent) => {
-    let {x, y, width, height} = event.nativeEvent.layout;
+    let {width, height} = event.nativeEvent.layout;
     setLayoutSize({ 'width': width, 'height': height })
   };
 

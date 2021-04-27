@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
