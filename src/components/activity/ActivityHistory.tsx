@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
-import { Text, Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
+import { Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
+import { RatingCircle } from './../RatingCircle';
+
 import Storage from 'storage';
-
-// import AsyncStorage from '@react-native-async-storage/async-storage'
-
 
 // Returns a date base on ISO string and adds an hour offset
 const getDateFromStringWithOffset = (value: string, offset: number) => {
@@ -16,7 +15,7 @@ const getDateFromStringWithOffset = (value: string, offset: number) => {
   return date;
 };
 
-export const ActivityHistory = ({navigation}: any) => {
+export const ActivityHistory = ({route, navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
@@ -25,6 +24,11 @@ export const ActivityHistory = ({navigation}: any) => {
   let historyItems = [];
 
   const [currentDay, setCurrentDay] = React.useState(activities.length-1); // TODO: Default to current day
+
+  if (route.params && route.params.currentDay !== -1) {
+    setCurrentDay(route.params.currentDay);
+    route.params.currentDay = -1; // Reset to prevent loop. TODO: There must be a better way to do this..
+  }
 
   // Formats a date into a locale time string.
   const getFormattedTime = (date: Date): string => {
@@ -35,7 +39,7 @@ export const ActivityHistory = ({navigation}: any) => {
   };
 
   let titleString = '';
-  let dayRating = '';
+  let dayRating = null;
   
   if (activities.length !== 0) {
     const day = activities[currentDay];
@@ -45,7 +49,7 @@ export const ActivityHistory = ({navigation}: any) => {
     const options: any = { dateStyle: "long" };
     titleString = Intl.DateTimeFormat(settings.language, options).format(date);
     // Set rating
-    dayRating = day.score == null ? '' : day.score.toString();
+    dayRating = day.score;
 
     let activityCount = 0; // Used for merging activities
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
@@ -97,7 +101,7 @@ export const ActivityHistory = ({navigation}: any) => {
   };
 
   const onMonthPressed = () => {
-    console.log('Month');
+    navigation.push('WeekHistory', { currentDay: currentDay });
   };
 
   return (
@@ -111,9 +115,7 @@ export const ActivityHistory = ({navigation}: any) => {
 
         {/* Day rating */}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ paddingVertical: 2, paddingHorizontal: 4, borderRadius: 20, borderWidth: 2, borderColor: colors.placeholder, minWidth: 50, alignItems: 'center', justifyContent: 'center'}}>
-            <Title>{dayRating}</Title>
-          </View>
+          <RatingCircle score={dayRating}/>
           <List.Icon icon='star'/>
         </View>
       </Surface>

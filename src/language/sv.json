@@ -53,5 +53,7 @@
         "December"
     ],
     
-    "activityHistoryRateDayLabel": "Betygsätt dag"
+    "activityHistoryRateDayLabel": "Betygsätt dag",
+    "activityWeekHistoryRateDay": "Dagens betyg",
+    "activityWeekHistoryNumberOfActivities": "Antal aktiviteter"
 }

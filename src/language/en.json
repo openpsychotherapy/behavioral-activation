@@ -53,6 +53,8 @@
         "December"
     ],
 
-    "activityHistoryRateDayLabel" : "Rate day"
+    "activityHistoryRateDayLabel" : "Rate day",
+    "activityWeekHistoryRateDay": "Today's rating",
+    "activityWeekHistoryNumberOfActivities": "Number of activities"
 
 }
