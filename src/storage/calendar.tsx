@@ -99,7 +99,7 @@ export const useCalendar = (): [Calendar, ModifyCalendar] => {
   }
 
   /**
-   * Removes an entry to the specified calendar.
+   * Removes an entry from the specified calendar.
    *
    * @param entry - The entry to be removed
    * @returns A new calendar with the entry removed
