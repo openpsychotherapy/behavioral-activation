@@ -54,11 +54,17 @@ const DeletePortal = (props: any) => {
   );
 }
 
-//Template for buttons used
+// Template for buttons used
 const StyledButton = (props: any) => {
   return (
-    <Button style={{ width: '80%', ...props.style}} theme={{ roundness: 30 }}  
-    compact={true} mode="outlined" onPress={props.categoryButton}>
+    <Button
+      style={{ justifyContent: 'center' }}
+      contentStyle={{ height: 50 }}
+      theme={{ roundness: 30 }}  
+      compact={true}
+      mode="outlined"
+      onPress={props.categoryButton}
+    >
       <Text>{props.name}</Text>
     </Button>
   )
@@ -74,16 +80,24 @@ const EntryButton = (props: any) => {
   }
 
   return (
-    <Button theme={{ roundness: 30 }} style={{ marginBottom: 20 }}
-    compact={true} mode="outlined" onPress={() => {}} onLongPress={() => setShowPortal(true)} icon={props.icon}>
+    <Button
+      theme={{ roundness: 30 }}
+      style={{ marginBottom: 20 }}
+      contentStyle={{ height: 50 }}
+      compact={true}
+      mode="outlined"
+      onPress={() => {}}
+      onLongPress={() => setShowPortal(true)}
+      icon={props.icon}
+    >
       <Text>{props.name}</Text>
       <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
     </Button>
   )
 }
 
-//View for adding entry
-const addEntryView = ({route, navigation}: any) => {
+// View for adding entry
+const AddEntryView = ({route, navigation}: any) => {
   const [values, modifyValues] = Storage.useValues();
   const [text, setText] = React.useState('');
   const [people, modifyPeople] = Storage.usePeople();
@@ -106,7 +120,7 @@ const addEntryView = ({route, navigation}: any) => {
           value={text}
           onChangeText={setText}
           mode={"outlined"} 
-          style={{paddingHorizontal: "15%"}}
+          style={{ paddingHorizontal: "15%" }}
           placeholder={lang.valuesPlaceholder}
           multiline={true} />
       </View>
@@ -136,14 +150,14 @@ const addEntryView = ({route, navigation}: any) => {
   )
 }
 
-//Icon view
-const chooseEntryIconView = ({route, navigation}: any) => {
+// Icon view
+const ChooseEntryIconView = ({route, navigation}: any) => {
   const [visible, setVisible] = React.useState(false);
   const { colors } = useTheme();
   const {title, navigateBack, categoryString} = route.params;
 
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
-    navigation.navigate('addEntryView', {
+    navigation.navigate('AddEntryView', {
       title: title,
       navigateBack: navigateBack,
       categoryString: categoryString,
@@ -155,7 +169,7 @@ const chooseEntryIconView = ({route, navigation}: any) => {
     setVisible(true);
   };
 
-  return(
+  return (
     <View style={{flex: 1}}>
       <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
       <IconMeny pressCallback={iconPressCallback} />
@@ -164,24 +178,20 @@ const chooseEntryIconView = ({route, navigation}: any) => {
         <CircleButton icon='menu' size={40} backgroundColor={colors.accent} onPress={iconListButton} />
       </View>
     </View>
-
-  )
+  );
 }
 
-//View for entries
+// View for entries
 const EntryView = ({route, navigation}: any) => {
   const {title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
 
-  useEffect(() => {
-    content
-  }, [values])
-
   const category = values[categoryString as string];
   const index = values[categoryString].findIndex(t => t.name === title);
-  //Creates all the entries for the right topic
-  const content = category[index].entries.map((entry: ValuesEntry) => 
+  // Creates all the entries for the right topic
+  const content = category[index].entries.map((entry: ValuesEntry, i: number) => 
     <EntryButton
+      key={i}
       name={entry.text}
       icon={entry.icon}
       category={categoryString}
@@ -190,24 +200,22 @@ const EntryView = ({route, navigation}: any) => {
       itemToDelete="entry" />
   );
 
-  return(
-    <View style={{ flex: 1}}>
-      <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
-        <Title>{title}</Title>
-      </View>
-      <ScrollView style={{flex: 0.8, paddingHorizontal: 20 }}>
+  return (
+    <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly' }}>
+      <Title style={{ textAlign: 'center', marginTop: 20 }}>{title}</Title>
+      <ScrollView style={{ flex: 1, padding: 20 }}>
         {content}
       </ScrollView>
       <FAB
         style={{
-        position: 'absolute',
-        margin: 15,
-        right: 0,
-        bottom: 0,
+          position: 'absolute',
+          margin: 15,
+          right: 0,
+          bottom: 0,
         }}
         icon="pencil"
         onPress={() => {
-          navigation.navigate('chooseEntryIconView', {
+          navigation.navigate('ChooseEntryIconView', {
             title: title,
             navigateBack: navigateBack,
             categoryString: categoryString
@@ -218,7 +226,7 @@ const EntryView = ({route, navigation}: any) => {
   )
 }
 
-//View when adding a new topic
+// View when adding a new topic
 const AddTopicView = ({route, navigation}: any) => {
   const [values, modifyValues] = Storage.useValues();
   const [text, setText] = React.useState('');
@@ -251,24 +259,19 @@ const AddTopicView = ({route, navigation}: any) => {
           }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon="check" onPress={() =>{
-            navigation.navigate({
-              name: navigateBack,
-            },);
-            if(categoryString != 'people'){
+          <RoundButton icon="check" onPress={() => {
+            navigation.navigate({ name: navigateBack });
+            if (categoryString != 'people') {
               modifyValues.addTopic(categoryString, text);
-            }
-            else{
+            } else {
               modifyPeople.add(text);
             }
-
-          } } />  
+          }} />  
         </View>
       </View>
      </View>
     </TouchableWithoutFeedback>
-    
-  )
+  );
 }
 
 const CategoryButton = (props: any) => {
@@ -284,26 +287,31 @@ const CategoryButton = (props: any) => {
   }
 
   return (
-    <Button theme={{ roundness: 30 }} style={{ marginBottom: 20 }}
-    compact={true} mode="outlined" onLongPress={() => setShowPortal(true)} onPress={props.onPress} >
+    <Button
+      theme={{ roundness: 30 }}
+      style={{ marginBottom: 20 }}
+      contentStyle={{ height: 50 }}
+      compact={true}
+      mode="outlined"
+      onLongPress={() => setShowPortal(true)}
+      onPress={props.onPress}
+    >
       <Text>{props.topic.name}</Text>
       <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
     </Button>
   );
 }
 
-//View for each category
+// View for each category
 const CategoryView = ({route, navigation}: any) => {
   const { title, navigateBack, categoryString} = route.params;
   const [values, modifyValues] = Storage.useValues();
   const [people, modifyPeople] = Storage.usePeople();
 
-  let content: any;
-
-  if (categoryString != 'people') {
-    //creates a list of buttons with the right topic in the right category
-    content = values[categoryString].map((topic: ValuesTopic) => 
+  const content = categoryString != 'people' ?
+    values[categoryString].map((topic: ValuesTopic, i: number) => 
       <CategoryButton
+        key={i}
         topic={topic}
         categoryString={categoryString}
         onPress={() => {
@@ -314,27 +322,21 @@ const CategoryView = ({route, navigation}: any) => {
           })
         }}
       />
-    );
-  } else {
-    //create a list of text boxes for people
-    content = people.map((person: string) =>    
+    ) :
+    people.map((person: string, i: number) =>    
       <CategoryButton
+        key={i}
         topic={{name: person}}
         categoryString={categoryString}
         onPress={() => {}}
       />
     );
-  }
 
   return (
-    <View style={{ flex: 1}}>
-      <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
-        <Title>{title}</Title>
-      </View>
+    <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly' }}>
+      <Title style={{ textAlign: 'center', marginTop: 20 }}>{title}</Title>
       <ScrollView style={{ flex: 1, padding: 20 }}>
-
         {content}
-
       </ScrollView>
       <FAB
         style={{
@@ -356,7 +358,7 @@ const CategoryView = ({route, navigation}: any) => {
   );
 }
 
-//View for the first screen in values 
+// View for the first screen in values 
 const StartScreenView = ({navigation}: any) => {
   const lang = useTranslation();
   
@@ -410,8 +412,8 @@ const StartScreenView = ({navigation}: any) => {
   };
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-evenly'}}>
-      <Title>{lang.valuesHeaderEvaluation}</Title>
+    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly', paddingHorizontal: 20 }}>
+      <Title style={{ textAlign: 'center' }}>{lang.valuesHeaderEvaluation}</Title>
       <StyledButton name={lang.valuesButtonRelations} categoryButton={relationsButton}/>
       <StyledButton name={lang.valuesButtonWork} categoryButton={workButton}/>
       <StyledButton name={lang.valuesButtonEnjoyment} categoryButton={enjoymentButton}/>
@@ -419,12 +421,11 @@ const StartScreenView = ({navigation}: any) => {
       <StyledButton name={lang.valuesButtonResponsibilities} categoryButton={responsibilitiesButton}/>
       <StyledButton name={lang.valuesButtonPeople} categoryButton={peopleButton}/>
     </View>
-  )
+  );
 }
 
 export const ValuesScreen = () => {
   return (
-    
     <ValuesStack.Navigator initialRouteName="Values" headerMode="float"
       screenOptions={{
         header: (props: any) => <CustomNavigationBar {...props} />,
@@ -434,10 +435,8 @@ export const ValuesScreen = () => {
       <ValuesStack.Screen name="CategoryView" component={CategoryView} />
       <ValuesStack.Screen name="AddTopicView" component={AddTopicView}/>
       <ValuesStack.Screen name="EntryView" component={EntryView}/>
-      <ValuesStack.Screen name="chooseEntryIconView" component={chooseEntryIconView}/>
-      <ValuesStack.Screen name="addEntryView" component={addEntryView}/>
-
-
+      <ValuesStack.Screen name="ChooseEntryIconView" component={ChooseEntryIconView}/>
+      <ValuesStack.Screen name="AddEntryView" component={AddEntryView}/>
     </ValuesStack.Navigator>
   );
 }
