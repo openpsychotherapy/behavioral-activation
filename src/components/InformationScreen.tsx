@@ -4,6 +4,7 @@ import { Text } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
+import { SettingsScreen } from './SettingsScreen';
 
 const InformationStack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export const InformationScreen = () => {
       }}
     >
       <InformationStack.Screen name="Information" component={ViewContent} />
+      <InformationStack.Screen name="Settings" component={SettingsScreen} />
     </InformationStack.Navigator>
   );
 }

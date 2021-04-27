@@ -36,8 +36,8 @@ export default function StorageTest() {
             text: "sadness",
             icon: "crying",
             person: "Erik",
-            meaningful: 10,
-            entertaining: 0,
+            importance: 10,
+            enjoyment: 0,
         });
     }
 
@@ -58,7 +58,7 @@ export default function StorageTest() {
                     value={text}
                     multiline={false}
                     mode="outlined"
-                    onChangeText={(text: any) => {setText(text)}} />
+                    onChangeText={(text: string) => {setText(text)}} />
                 <Button onPress={() => modifyPeople.add(text)}>Add person</Button>
 
                 <pre>Icons: {JSON.stringify(icons, null, 4)}</pre>

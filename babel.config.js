@@ -11,6 +11,10 @@ module.exports = function(api) {
             'storage/*': './src/storage/*',
             'language': './src/language',
             'language/*': './src/language/*',
+            'settings': './src/components/settings',
+            'settings/*': './src/components/settings/*',
+            'utils': './src/utils',
+            'utils/*': './src/utils/*',
           }
         }
       ]

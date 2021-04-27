@@ -1,10 +1,11 @@
 {
-    "valuesHeaderEvaluation": "Värderingar",
+    "languageName": "Svenska",
+
+    "valuesHeaderEvaluation": "Värdering",
+
     "activitiesButtonRateDay": "Betygsätt dag",
     "activitiesSliderRateDay": "Dagens betyg",
-    "january": "Januari",
 
-    "monday": "Måndag",
     "valuesButtonRelations": "Relationer",
     "valuesButtonWork": "Studier/Karriär",
     "valuesButtonEnjoyment": "Fritid/Intressen",
@@ -15,8 +16,30 @@
     "valuesDialogYes": "Ok",
     "valuesDialogNo": "Avbryt",
     "valuesPlaceholder": "skriv här",
-    
 
+    "settingsSurfaceLanguage": "Språk",
+    "settingsSurfaceNotifications": "Notifikationer",
+    "settingsSurfaceIcons": "Ikoner",
+    "settingsSurfaceIconCustomize": "Anpassa",
+
+    "datePickerLabel": "Välj ett datum",
+    "datePickerSaveLabel": "Spara",
+    "datePickerStartLabel": "Från",
+    "datePickerEndLabel": "Till",
+    "datePickerEmptyLabel": "",
+    "datePickerMoreLabel": "",
+
+    "timePickerLabel": "Tidsintervall",
+
+    "activityRegistratorTextInputLabel": "Vad har du gjort?",
+    "activityRegistratorActivityDefaultChoice": "Skriv text",
+    "activityRegistratorImporanceLabel": "Meningsfullt",
+    "activityRegistratorEnjoymentLabel": "Underhållande",
+
+    "choiceBasedTextInputChangeLabel": "Byt",
+    
+    "activiesSnackBarAdded": "Aktiviteten lades till",
+  
     "weekdays": [
         "Sön",
         "Mån",

@@ -5,8 +5,13 @@ import { CalendarEntry } from 'storage/types';
 import { List, Surface, Text, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
+import Storage from 'storage';
+import { useNavigation } from '@react-navigation/native';
+
 export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
   const { title, calendar: calStyle } = useTheme();
+  const [calender, modifyCalendar] = Storage.useCalendar();
+  const navigation = useNavigation();
   return (
     <View style={{ flexDirection: "row", width: "100%", marginBottom: 10 }}>
       <View style={{ justifyContent: 'center' }}>
@@ -31,6 +36,13 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
           title={`${entry.start} - ${entry.end}`}
           description={entry.text}
           right={() => <List.Icon icon={entry.icon} />}
+          onPress={() => {
+            navigation.navigate("CalendarRegistration", {
+              entry,
+              pressedIcon: index,
+              icon: entry.icon
+            });
+          }}
         />
       </Surface>
     </View>

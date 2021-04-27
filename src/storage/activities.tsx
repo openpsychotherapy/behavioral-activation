@@ -34,8 +34,8 @@ import {
  *     text: "Went out walking",
  *     icon: "tree",
  *     person: "Erik",
- *     meaningful: 9,
- *     entertaining: 4,
+ *     importance: 9,
+ *     enjoyment: 4,
  * });
  * ```
  */

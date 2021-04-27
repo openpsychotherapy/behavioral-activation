@@ -3,8 +3,8 @@ export interface ActivitiesEntry {
   text: string;
   icon: string;
   person: string;
-  meaningful: number;
-  entertaining: number;
+  importance: number;
+  enjoyment: number;
 }
 
 export interface ActivitiesDay {
@@ -32,7 +32,9 @@ export interface CalendarEntry {
 export type Calendar = CalendarEntry[];
 
 export interface ModifyCalendar {
-  add: (entry: CalendarEntry) => boolean;
+  add: (entry: CalendarEntry) => void;
+  remove: (entry: CalendarEntry) => void;
+  replace: (oldEntry: CalendarEntry, newEntry: CalendarEntry) => void;
 }
 
 // Icons

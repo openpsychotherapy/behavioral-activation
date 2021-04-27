@@ -7,8 +7,9 @@ import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { ValuesTopic, People, ValuesEntry } from 'storage/types';
 import { IconMeny } from './IconMeny';
-import { IconList } from './IconList';
+import { IconList } from './activity/IconList';
 import { useLinkProps } from '@react-navigation/native';
+import { SettingsScreen } from './SettingsScreen';
 
 const ValuesStack = createStackNavigator();
 
@@ -437,6 +438,7 @@ export const ValuesScreen = () => {
       <ValuesStack.Screen name="EntryView" component={EntryView}/>
       <ValuesStack.Screen name="ChooseEntryIconView" component={ChooseEntryIconView}/>
       <ValuesStack.Screen name="AddEntryView" component={AddEntryView}/>
+      <ValuesStack.Screen name="Settings" component={SettingsScreen} />
     </ValuesStack.Navigator>
   );
 }
