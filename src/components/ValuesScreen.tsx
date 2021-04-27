@@ -57,7 +57,7 @@ const DeletePortal = (props: any) => {
 //Template for buttons used
 const StyledButton = (props: any) => {
   return (
-    <Button style={{width: "80%", height: "80%"}} contentStyle={{width: "100%",height: "100%", justifyContent: 'center', alignItems: 'center'}} theme={{ roundness: 30 }}  
+    <Button style={{ width: '80%', ...props.style}} theme={{ roundness: 30 }}  
     compact={true} mode="outlined" onPress={props.categoryButton}>
       <Text>{props.name}</Text>
     </Button>
@@ -74,7 +74,7 @@ const EntryButton = (props: any) => {
   }
 
   return (
-    <Button theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", flexDirection: 'row', justifyContent: 'center'}} 
+    <Button theme={{ roundness: 30 }} style={{ marginBottom: 20 }}
     compact={true} mode="outlined" onPress={() => {}} onLongPress={() => setShowPortal(true)} icon={props.icon}>
       <Text>{props.name}</Text>
       <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
@@ -181,15 +181,13 @@ const EntryView = ({route, navigation}: any) => {
   const index = values[categoryString].findIndex(t => t.name === title);
   //Creates all the entries for the right topic
   const content = category[index].entries.map((entry: ValuesEntry) => 
-    <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginBottom: 20 }}>
-      <EntryButton
-        name={entry.text}
-        icon={entry.icon}
-        category={categoryString}
-        topic={category[index].name}
-        entry={entry}
-        itemToDelete="entry" />
-    </View>
+    <EntryButton
+      name={entry.text}
+      icon={entry.icon}
+      category={categoryString}
+      topic={category[index].name}
+      entry={entry}
+      itemToDelete="entry" />
   );
 
   return(
@@ -197,7 +195,7 @@ const EntryView = ({route, navigation}: any) => {
       <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
         <Title>{title}</Title>
       </View>
-      <ScrollView style={{flex: 0.8}}>
+      <ScrollView style={{flex: 0.8, paddingHorizontal: 20 }}>
         {content}
       </ScrollView>
       <FAB
@@ -286,17 +284,11 @@ const CategoryButton = (props: any) => {
   }
 
   return (
-  <View>
-  <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-    <Button style={{width: "70%", height: "90%"}} theme={{ roundness: 30 }} contentStyle={{width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center'}} 
+    <Button theme={{ roundness: 30 }} style={{ marginBottom: 20 }}
     compact={true} mode="outlined" onLongPress={() => setShowPortal(true)} onPress={props.onPress} >
       <Text>{props.topic.name}</Text>
+      <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
     </Button>
-  </View>
-  <View style={{ width: 20, height: 20 }} />
-  
-  <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal}/>
-  </View> 
   );
 }
 
@@ -310,7 +302,7 @@ const CategoryView = ({route, navigation}: any) => {
 
   if (categoryString != 'people') {
     //creates a list of buttons with the right topic in the right category
-    content = values[categoryString].map((topic: ValuesTopic, i: number) => 
+    content = values[categoryString].map((topic: ValuesTopic) => 
       <CategoryButton
         topic={topic}
         categoryString={categoryString}
@@ -325,7 +317,7 @@ const CategoryView = ({route, navigation}: any) => {
     );
   } else {
     //create a list of text boxes for people
-    content = people.map((person: string, i: number) =>    
+    content = people.map((person: string) =>    
       <CategoryButton
         topic={{name: person}}
         categoryString={categoryString}
@@ -339,8 +331,7 @@ const CategoryView = ({route, navigation}: any) => {
       <View style={{flex: 0.14, justifyContent: 'center', alignItems: 'center'}}>
         <Title>{title}</Title>
       </View>
-      <View style={{ width: "5%", height: "5%"}} />
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1, padding: 20 }}>
 
         {content}
 
@@ -419,31 +410,15 @@ const StartScreenView = ({navigation}: any) => {
   };
 
   return (
-    <View style={{flex: 1}}>
-    <View style={{flex: 0.10, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-evenly'}}>
       <Title>{lang.valuesHeaderEvaluation}</Title>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonRelations} categoryButton={relationsButton}/>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonWork} categoryButton={workButton}/>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonEnjoyment} categoryButton={enjoymentButton}/>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonHealth} categoryButton={healthButton}/>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonResponsibilities} categoryButton={responsibilitiesButton}/>
-    </View>
-    <View style={{flex: 0.02, alignItems: 'center', justifyContent: 'center'}}>
-    </View>
-    <View style={{flex: 0.14, alignItems: 'center', justifyContent: 'center'}}>
       <StyledButton name={lang.valuesButtonPeople} categoryButton={peopleButton}/>
     </View>
-  </View>
   )
 }
 
