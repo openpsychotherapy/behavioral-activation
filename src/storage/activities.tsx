@@ -102,10 +102,10 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns `true` if the entry was inserted, `false` otherwise
    */
   const addInterval = (date: string, startHour: number, endHour: number, entry: ActivitiesEntry): boolean => {
-    if(isDate(date) && 0 <= startHour && startHour < endHour && endHour <= 24) {
+    if (isDate(date) && 0 <= startHour && startHour < endHour && endHour <= 24) {
       const newActivities = _insertDay(date);
       const index = newActivities.findIndex(a => a.date === date);
-      for(let hour = startHour; hour < endHour; ++hour) {
+      for (let hour = startHour; hour < endHour; ++hour) {
         newActivities[index].entries[hour] = entry;
       }
       setStoreItem(activitiesKey, newActivities);
@@ -115,7 +115,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
   };
 
   /**
-   * Modifies the score of a give date.
+   * Modifies the score of a given date.
    *
    * @remarks
    * Requires date to exist.
@@ -125,7 +125,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns `true` if the entry was inserted, `false` otherwise
    */
   const setRating = (date: string, score: number): boolean => {
-    if(isDate(date) && 0 <= score && score <= 10) {
+    if (isDate(date) && 0 <= score && score <= 10) {
       const newActivities = [ ...activities ];
       const index = newActivities.findIndex(a => a.date === date);
       newActivities[index].score = score;
