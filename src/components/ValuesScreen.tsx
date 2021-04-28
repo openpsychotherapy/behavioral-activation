@@ -118,7 +118,7 @@ const AddEntryView = ({route, navigation}: any) => {
         <TextInput
           value={text}
           onChangeText={setText}
-          mode={"outlined"} 
+          mode={'outlined'} 
           style={{ paddingHorizontal: "15%" }}
           placeholder={lang.valuesPlaceholder}
           multiline={true} />
