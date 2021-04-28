@@ -252,7 +252,7 @@ const AddTopicView = ({route, navigation}: any) => {
       </View>
       <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon="close" onPress={() => {
+          <RoundButton icon='close' onPress={() => {
             navigation.navigate({
               name: navigateBack
             })
