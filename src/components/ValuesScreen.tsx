@@ -259,7 +259,7 @@ const AddTopicView = ({route, navigation}: any) => {
           }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon="check" onPress={() => {
+          <RoundButton icon='check' onPress={() => {
             navigation.navigate({ name: navigateBack });
             if (categoryString != 'people') {
               modifyValues.addTopic(categoryString, text);
