@@ -73,7 +73,6 @@ const StyledButton = (props: any) => {
 const EntryButton = (props: any) => {
   const [values, modifyValues] = Storage.useValues();
   const [showPortal, setShowPortal] = useState(false);
-  const lang = useTranslation();
 
   const deleteElement = () => {
     modifyValues.deleteEntry(props.category, props.topic, props.entry);
