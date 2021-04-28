@@ -110,7 +110,7 @@ const AddEntryView = ({route, navigation}: any) => {
         <Surface style={{ borderRadius: 100, elevation: 3}}>
           <IconButton icon={icon} />
         </Surface > 
-      <View style={{ width: "5%", height: "5%" }} />
+      <View style={{ width: '5%', height: '5%' }} />
         <Title>{title}</Title>
         
       </View>
