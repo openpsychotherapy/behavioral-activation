@@ -374,7 +374,7 @@ const StartScreenView = ({navigation}: any) => {
     navigation.navigate('CategoryView', {
       title: lang.valuesButtonWork,
       navigateBack: 'CategoryView',
-      categoryString: "work",
+      categoryString: 'work',
     });
   };
 
