@@ -292,7 +292,7 @@ const CategoryButton = (props: any) => {
       style={{ marginBottom: 20 }}
       contentStyle={{ height: 50 }}
       compact={true}
-      mode="outlined"
+      mode='outlined'
       onLongPress={() => setShowPortal(true)}
       onPress={props.onPress}
     >
