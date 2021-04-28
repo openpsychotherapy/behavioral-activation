@@ -24,33 +24,32 @@ interface ChooseEntryIconViewProps {
 }
 
 export const ChooseEntryIconView = ({route, navigation}: ChooseEntryIconViewProps) => {
-    const [visible, setVisible] = React.useState(false);
-    const { colors } = useTheme();
-    const { title, navigateBack, categoryString } = route.params;
-  
-    const iconPressCallback = (pressedIcon: Number, icon: string) => {
-      navigation.navigate('AddEntryView', {
-        title: title,
-        navigateBack: navigateBack,
-        categoryString: categoryString,
-        icon: icon,
-      });
-      setVisible(false);
-    };
-  
-    const iconListButton = () => {
-      setVisible(true);
-    };
-  
-    return (
-      <View style={{flex: 1}}>
-        <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
-        <IconMeny pressCallback={iconPressCallback}/>
-  
-        <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-          <CircleButton icon='menu' size={40} backgroundColor={colors.accent} onPress={iconListButton} />
-        </View>
+  const [visible, setVisible] = React.useState(false);
+  const { colors } = useTheme();
+  const { title, navigateBack, categoryString } = route.params;
+
+  const iconPressCallback = (pressedIcon: Number, icon: string) => {
+    navigation.navigate('AddEntryView', {
+      title: title,
+      navigateBack: navigateBack,
+      categoryString: categoryString,
+      icon: icon,
+    });
+    setVisible(false);
+  };
+
+  const iconListButton = () => {
+    setVisible(true);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <IconList pressCallback={iconPressCallback} visible={visible} setVisible={setVisible} />
+      <IconMeny pressCallback={iconPressCallback} />
+
+      <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+        <CircleButton icon='menu' size={40} backgroundColor={colors.accent} onPress={iconListButton} />
       </View>
-    );
-  }
-  
+    </View>
+  );
+}

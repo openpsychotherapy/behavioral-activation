@@ -11,6 +11,7 @@ import { ChooseEntryIconView } from './values/ChooseEntryIconView';
 import { AddTopicView } from './values/AddTopicView';
 import { AddEntryView } from './values/AddEntryView';
 import { EntryView } from './values/EntryView';
+import { Values } from 'storage/types';
 
 export type ValuesStackParamList = {
   StartScreenView: {},
@@ -57,64 +58,28 @@ interface StartScreenViewProps {
 // View for the first screen in values 
 const StartScreenView = ({navigation}: StartScreenViewProps) => {
   const lang = useTranslation();
-  
-  const relationsButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonRelations,
-      navigateBack: 'CategoryView',
-      categoryString: 'relations',
-    });
-  };
 
-  const workButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonWork,
-      navigateBack: 'CategoryView',
-      categoryString: 'work',
-    });
-  };
-
-  const enjoymentButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonEnjoyment,
-      navigateBack: 'CategoryView',
-      categoryString: 'enjoyment',
-    });
-  };
-
-  const healthButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonHealth,
-      navigateBack: 'CategoryView',
-      categoryString: 'health',
-    });
-  };
-
-  const responsibilitiesButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonResponsibilities,
-      navigateBack: 'CategoryView',
-      categoryString: 'responsibilities',
-    });
-  };
-
-  const peopleButton = () => {
-    navigation.navigate('CategoryView', {
-      title: lang.valuesButtonPeople,
-      navigateBack: 'CategoryView',
-      categoryString: 'people',
-    });
-  };
+  const buttons: [string, keyof Values][] = [
+    [lang.valuesButtonRelations, 'relations'],
+    [lang.valuesButtonWork, 'work'],
+    [lang.valuesButtonEnjoyment, 'enjoyment'],
+    [lang.valuesButtonHealth, 'health'],
+    [lang.valuesButtonResponsibilities, 'responsibilities'],
+    [lang.valuesButtonPeople, 'people'],
+  ];
 
   return (
     <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly', paddingHorizontal: 20 }}>
       <Title style={{ textAlign: 'center' }}>{lang.valuesHeaderEvaluation}</Title>
-      <StyledButton name={lang.valuesButtonRelations} categoryButton={relationsButton}/>
-      <StyledButton name={lang.valuesButtonWork} categoryButton={workButton}/>
-      <StyledButton name={lang.valuesButtonEnjoyment} categoryButton={enjoymentButton}/>
-      <StyledButton name={lang.valuesButtonHealth} categoryButton={healthButton}/>
-      <StyledButton name={lang.valuesButtonResponsibilities} categoryButton={responsibilitiesButton}/>
-      <StyledButton name={lang.valuesButtonPeople} categoryButton={peopleButton}/>
+        {buttons.map(([title, categoryString], index: number) => 
+          <StyledButton key={index} name={title} categoryButton={() => {
+            navigation.navigate('CategoryView', {
+              title,
+              categoryString: categoryString as string,
+              navigateBack: 'CategoryView',
+            });
+          }}/>
+        )}
     </View>
   );
 }
