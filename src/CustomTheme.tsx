@@ -21,6 +21,7 @@ declare global {
         dateViewSize: number
         dateViewMargin: number
       }
+      gradingColors: string[]
     }
   }
 }
@@ -48,4 +49,19 @@ export const CustomTheme = {
     dateViewSize: 60,
     dateViewMargin: 10,
   },
+  gradingColors: [
+    '#FF0000', // red
+    '#FF3A00',
+    '#FF7300',
+    '#FFAC00',
+    '#FFC900',
+    '#FFE500', // yellow
+    '#E2E000',
+    '#C4DB00',
+    '#88D100',
+    '#4CC700',
+    '#10BC00', // green
+    'white' // Empty
+  ],
+
 };

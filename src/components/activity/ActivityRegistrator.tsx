@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
 import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
@@ -11,6 +11,8 @@ import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { ActivitiesEntry } from 'storage/types';
+
+import { ISODate } from 'utils';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
   // route.params contains information from activity screen
@@ -86,12 +88,8 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       toHour = 24;
     }
 
-    const isoDateString = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-
     // Add entry att every applicable hour
-    for (let i = fromTime.getHours(); i < toHour; ++i) {
-      modifyActivities.add(isoDateString, i, entry);
-    }
+    modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour, entry);
 
     // Go back
     navigation.navigate('Activities', {activityRegistered: true})

@@ -4,6 +4,7 @@
     "valuesHeaderEvaluation": "Värdering",
 
     "activitiesButtonRateDay": "Betygsätt dag",
+    "activitiesButtonRateDayModify": "Ändra betyg",
     "activitiesSliderRateDay": "Dagens betyg",
 
     "settingsSurfaceLanguage": "Språk",
@@ -51,5 +52,11 @@
         "Oktober",
         "November",
         "December"
-    ]
+    ],
+    
+    "activityHistoryRateDayLabel": "Betygsätt dag",
+    "activityWeekHistoryRateDay": "Dagens betyg",
+    "activityWeekHistoryNumberOfActivities": "Antal aktiviteter",
+    "activityWeekHistoryTitleDay": "Dagens historik", 
+    "activityWeekHistoryTitleWeek": "Aktivitetshistorik"
 }
