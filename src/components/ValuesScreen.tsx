@@ -164,6 +164,7 @@ const ChooseEntryIconView = ({route, navigation}: any) => {
       categoryString: categoryString,
       icon: icon,
     });
+    setVisible(false);
   };
 
   const iconListButton = () => {
