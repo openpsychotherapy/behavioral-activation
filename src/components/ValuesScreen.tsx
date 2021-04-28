@@ -86,7 +86,7 @@ const StartScreenView = ({navigation}: StartScreenViewProps) => {
 
 export const ValuesScreen = () => {
   return (
-    <ValuesStack.Navigator initialRouteName="Values" headerMode="float"
+    <ValuesStack.Navigator initialRouteName="StartScreenView" headerMode="float"
       screenOptions={{
         header: (props: any) => <CustomNavigationBar {...props} />,
       }}
