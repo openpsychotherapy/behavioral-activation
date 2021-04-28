@@ -213,7 +213,7 @@ const EntryView = ({route, navigation}: any) => {
           right: 0,
           bottom: 0,
         }}
-        icon="pencil"
+        icon='pencil'
         onPress={() => {
           navigation.navigate('ChooseEntryIconView', {
             title: title,
