@@ -62,7 +62,7 @@ const StyledButton = (props: any) => {
       contentStyle={{ height: 50 }}
       theme={{ roundness: 30 }}  
       compact={true}
-      mode="outlined"
+      mode='outlined'
       onPress={props.categoryButton}
     >
       <Text>{props.name}</Text>
