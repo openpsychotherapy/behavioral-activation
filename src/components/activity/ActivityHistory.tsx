@@ -120,7 +120,9 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
         {/* Day rating */}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <RatingCircle score={dayRating}/>
+          <Pressable onPress={() => onRateDay()}>
+            <RatingCircle score={dayRating}/>
+          </Pressable>
           <List.Icon icon='star'/>
         </View>
       </Surface>
@@ -135,7 +137,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
       {/* FAB + container */}
       <View style={{ position: 'absolute', bottom: 0, width: '100%', alignItems: 'center' }}>
         <FAB icon='check'
-          label={lang.activityHistoryRateDayLabel}
+          label={dayRating == null ? lang.activityHistoryRateDayLabel : lang.activitiesButtonRateDayModify}
           style={{ margin: 16 }}
           onPress={() => onRateDay()}
         />

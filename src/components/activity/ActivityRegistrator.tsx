@@ -12,6 +12,8 @@ import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { ActivitiesEntry } from 'storage/types';
 
+import { ISODate } from 'utils';
+
 export const ActivityRegistrator = ({ route, navigation }: any) => {
   // route.params contains information from activity screen
 
@@ -85,17 +87,9 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     if (toHour === 0) {
       toHour = 24;
     }
-    
-    // Add a 0 infront of numbers lower than 10
-    const zeroPadding = (value: number) => {
-      if(value < 10) return '0' + value
-      return value.toString()
-    };
-
-    const isoDateString = date.getFullYear() + '-' + zeroPadding(date.getMonth()+1) + '-' + zeroPadding(date.getDate());
 
     // Add entry att every applicable hour
-    modifyActivities.addInterval(isoDateString, fromTime.getHours(), toHour, entry);
+    modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour, entry);
 
     // Go back
     navigation.navigate('Activities', {activityRegistered: true})

@@ -10,9 +10,10 @@ export const RatingCircle = (props: {score: number | null}) => {
   return (
     <View style={{
         paddingVertical: 2,
-        borderRadius: 20,
+        borderRadius: 22.5,
         borderWidth: 2,
-        minWidth: 40,
+        width: 45,
+        height: 45,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: color
