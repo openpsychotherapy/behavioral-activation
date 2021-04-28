@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { Text, Title, Button, TextInput, FAB, IconButton, Surface, useTheme, Portal, Dialog, Paragraph} from 'react-native-paper';
+import { Text, Title, Button, TextInput, FAB, IconButton, Surface, useTheme, Portal, Dialog, Paragraph, Avatar} from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { useTranslation } from 'language/LanguageProvider';
@@ -11,14 +11,6 @@ import { IconList } from './activity/IconList';
 import { SettingsScreen } from './SettingsScreen';
 
 const ValuesStack = createStackNavigator();
-
-const RoundButton = (props: any) => {
-  return (
-    <Surface style={{ borderRadius: 100, elevation: 3}}>
-      <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
-    </Surface >
-  );
-  }
   
 const CircleButton = (props: any) => {
   return (
@@ -102,13 +94,14 @@ const AddEntryView = ({route, navigation}: any) => {
   const [people, modifyPeople] = Storage.usePeople();
   const { title, navigateBack, categoryString, icon } = route.params;
   const lang = useTranslation();
+  const {colors, iconSizes} = useTheme();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{flex: 1}}>
       <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
         <Surface style={{ borderRadius: 100, elevation: 3}}>
-          <IconButton icon={icon} />
+          <Avatar.Icon icon={icon} size={iconSizes.avatar} />
         </Surface > 
       <View style={{ width: '5%', height: '5%' }} />
         <Title>{title}</Title>
@@ -125,14 +118,14 @@ const AddEntryView = ({route, navigation}: any) => {
       </View>
       <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon='close' onPress={() => {
+          <IconButton icon='close' size={iconSizes.large} color={colors.cancel} onPress={() => {
             navigation.navigate({
               name: 'EntryView'
             })
           }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon='check' onPress={() =>{
+          <IconButton icon='check' size={iconSizes.large} color={colors.confirm} onPress={() =>{
             navigation.navigate({
               name: 'EntryView',
             },);
@@ -233,7 +226,7 @@ const AddTopicView = ({route, navigation}: any) => {
   const [people, modifyPeople] = Storage.usePeople();
   const { title, navigateBack, categoryString } = route.params;
   const lang = useTranslation();
-
+  const {colors, iconSizes} = useTheme();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{flex: 1}}>
@@ -252,14 +245,14 @@ const AddTopicView = ({route, navigation}: any) => {
       </View>
       <View style={{ flex: 0.3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon='close' onPress={() => {
+          <IconButton icon='close' size={iconSizes.large} color={colors.cancel} onPress={() => {
             navigation.navigate({
               name: navigateBack
             })
           }} />
         </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <RoundButton icon='check' onPress={() => {
+          <IconButton icon='check' size={iconSizes.large} color={colors.confirm} onPress={() => {
             navigation.navigate({ name: navigateBack });
             if (categoryString != 'people') {
               modifyValues.addTopic(categoryString, text);
