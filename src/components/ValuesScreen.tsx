@@ -84,7 +84,7 @@ const EntryButton = (props: any) => {
       style={{ marginBottom: 20 }}
       contentStyle={{ height: 50 }}
       compact={true}
-      mode="outlined"
+      mode='outlined'
       onPress={() => {}}
       onLongPress={() => setShowPortal(true)}
       icon={props.icon}
