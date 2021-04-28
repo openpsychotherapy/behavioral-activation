@@ -345,7 +345,7 @@ const CategoryView = ({route, navigation}: any) => {
         right: 0,
         bottom: 0,
         }}
-        icon="pencil"
+        icon='pencil'
         onPress={() => {
           navigation.navigate('AddTopicView', {
             title: title,
