@@ -76,19 +76,16 @@ export const useActivities = (): [Activities, ModifyActivities] => {
       };
 
       const index = activities.findIndex(elem => activityDayGt(elem, newActivityDay));
-      let newActivities = [ ...activities ];
 
       if (index === -1) {
-        newActivities = [ ...activities, newActivityDay ];
-      }
-      else {
-        newActivities = [
+        return [ ...activities, newActivityDay ];
+      } else {
+        return [
           ...newActivities.slice(0, index),
           newActivityDay,
           ...newActivities.slice(index)
         ];
       }
-      return newActivities;
     }
     return [ ...activities ];
   }
