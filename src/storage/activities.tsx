@@ -81,9 +81,9 @@ export const useActivities = (): [Activities, ModifyActivities] => {
         return [ ...activities, newActivityDay ];
       } else {
         return [
-          ...newActivities.slice(0, index),
+          ...activities.slice(0, index),
           newActivityDay,
-          ...newActivities.slice(index)
+          ...activities.slice(index)
         ];
       }
     }
