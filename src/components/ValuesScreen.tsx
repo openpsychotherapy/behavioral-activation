@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { View, ScrollView, Dimensions, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Text, Title, Button, TextInput, FAB, IconButton, Surface, useTheme, Portal, Dialog, Paragraph} from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -8,7 +8,6 @@ import Storage from 'storage';
 import { ValuesTopic, People, ValuesEntry } from 'storage/types';
 import { IconMeny } from './IconMeny';
 import { IconList } from './activity/IconList';
-import { useLinkProps } from '@react-navigation/native';
 import { SettingsScreen } from './SettingsScreen';
 
 const ValuesStack = createStackNavigator();
