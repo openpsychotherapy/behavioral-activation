@@ -9,16 +9,14 @@ import { SettingsScreen } from './SettingsScreen';
 import { IconMeny } from './IconMeny';
 import { IconList } from './activity/IconList';
 import { ActivityRegistrator } from './activity/ActivityRegistrator';
+import { ActivityHistory } from './activity/ActivityHistory';
+import { ActivityRateDay } from './activity/ActivityRateDay';
+import { ActivityWeekHistory } from './activity/ActivityWeekHistory';
 
 import { useTranslation } from 'language/LanguageProvider';
 
 const ActivityStack = createStackNavigator();
 
-const HistoryView = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>History</Text>
-  </View>
-);
 
 const CircleButton = (props: any) => {
   return (
@@ -64,8 +62,8 @@ const ViewContent = ({ route, navigation }: any) => {
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={navigationButtonSize} backgroundColor={colors.accent} onPress={iconListButton} />
-        <CircleButton icon='calendar-check' size={navigationButtonSize} backgroundColor={colors.accent} />
-        <CircleButton icon='clock-fast' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
+        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} />
+        <CircleButton icon='calendar-clock' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
       <Snackbar visible={snackBarVisible} onDismiss={()=>{setSnackBarVisible(false)}} duration={4000} >
@@ -83,9 +81,11 @@ export const ActivityScreen = ({ navigation }: any) => {
       }}
     >
       <ActivityStack.Screen name="Activities" component={ViewContent} initialParams={{activityRegistered: false}} />
-      <ActivityStack.Screen name="History" component={HistoryView} />
+      <ActivityStack.Screen name="History" component={ActivityHistory} initialParams={{currentDay: -1}} />
       <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
       <ActivityStack.Screen name="Settings" component={SettingsScreen} />
+      <ActivityStack.Screen name="RateDay" component={ActivityRateDay} />
+      <ActivityStack.Screen name="WeekHistory" component={ActivityWeekHistory} />
     </ActivityStack.Navigator>
   );
 }

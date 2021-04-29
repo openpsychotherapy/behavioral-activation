@@ -4,6 +4,7 @@
     "valuesHeaderEvaluation": "Evaluation",
      
     "activitiesButtonRateDay": "Rate day",
+    "activitiesButtonRateDayModify": "Change rating",
     "activitiesSliderRateDay": "Today's rating",
 
     "valuesButtonRelations": "Relationship",
@@ -62,6 +63,14 @@
         "October",
         "November",
         "December"
-    ]
 
+
+
+    ],
+
+    "activityHistoryRateDayLabel" : "Rate day",
+    "activityWeekHistoryRateDay": "Today's rating",
+    "activityWeekHistoryNumberOfActivities": "Number of activities",
+    "activityWeekHistoryTitleDay": "Today's history",   
+    "activityWeekHistoryTitleWeek": "Activity history"
 }
