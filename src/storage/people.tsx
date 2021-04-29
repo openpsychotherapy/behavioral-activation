@@ -46,8 +46,23 @@ export const usePeople = (): [People, ModifyPeople] => {
     return false;
   }
 
+  /**
+   * Deletes a person from the list of people and updates the store.
+   *
+   * @param person - The person to be deleted from the list
+   * @returns `true` if the person was deleted, `false` otherwise
+   */
+  const deletePerson = (person: string): boolean => {
+    if (people.includes(person)) {
+      setStoreItem(peopleKey, people.filter(p => p != person));
+      return true;
+    }
+    return false;
+  }
+
   const modifyPeople: ModifyPeople = {
     add: add,
+    deletePerson: deletePerson,
   };
 
   return [people, modifyPeople];

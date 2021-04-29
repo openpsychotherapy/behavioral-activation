@@ -6,6 +6,17 @@
     "activitiesButtonRateDay": "Rate day",
     "activitiesButtonRateDayModify": "Change rating",
     "activitiesSliderRateDay": "Today's rating",
+
+    "valuesButtonRelations": "Relationship",
+    "valuesButtonWork": "Studies/Career",
+    "valuesButtonEnjoyment": "Spare time/Interests",
+    "valuesButtonHealth": "Mind/Body/Spiritually",
+    "valuesButtonResponsibilities": "Daily responibility",
+    "valuesButtonPeople": "Support persons",
+    "valuesDialogText": "Are you sure you want to delete?",
+    "valuesDialogYes": "Ok",
+    "valuesDialogNo": "Cancel",
+    "valuesPlaceholder": "Write here",
      
     "settingsSurfaceLanguage": "Language",
     "settingsSurfaceNotifications": "Notifications",
@@ -52,6 +63,9 @@
         "October",
         "November",
         "December"
+
+
+
     ],
 
     "activityHistoryRateDayLabel" : "Rate day",

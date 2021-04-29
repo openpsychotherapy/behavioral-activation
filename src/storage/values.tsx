@@ -70,6 +70,24 @@ export const useValues = (): [Values, ModifyValues] => {
   }
 
   /**
+   * Deletes a topic from the values object and updates the store.
+   *
+   * @param category - The category where the topic should be deleted
+   * @param topic - The name of the topic
+   * @returns `true` if the topic was deleted, `false` otherwise
+   */
+  const deleteTopic = (category: string, topic: string): boolean =>{
+    if (values.hasOwnProperty(category)) {
+      const index = values[category].findIndex(t => t.name === topic);
+      const newValues = JSON.parse(JSON.stringify(values));
+      newValues[category].splice(index, 1);
+      setStoreItem(valuesKey, newValues);
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Adds an entry to the values object and updates the store.
    *
    * @param category - The category where the topic should be added
@@ -89,9 +107,34 @@ export const useValues = (): [Values, ModifyValues] => {
     return false;
   }
 
+  /**
+   * Deletes an entry to the values object and updates the store.
+   *
+   * @param category - The category where the topic should be deleted
+   * @param topic - The topic in which the entry should be deleted
+   * @returns `true` if the entry was deleted, `false` otherwise
+   */
+  const deleteEntry = (category: string, topic: string, entry: ValuesEntry): boolean => {
+    if (values.hasOwnProperty(category)){
+      const index = values[category].findIndex(t => t.name === topic);
+      if (index != -1) {
+        const indexEntry = values[category][index].entries.findIndex(e => entryEq(entry, e));
+        if (indexEntry != -1) {
+          const newValues = JSON.parse(JSON.stringify(values));
+          newValues[category][index].entries.splice(indexEntry, 1);
+          setStoreItem(valuesKey, newValues);
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   const modifyValues: ModifyValues = {
     addTopic: addTopic,
     addEntry: addEntry,
+    deleteTopic: deleteTopic,
+    deleteEntry: deleteEntry,
   };
 
   return [values, modifyValues];
