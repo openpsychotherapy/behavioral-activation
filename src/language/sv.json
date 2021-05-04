@@ -37,33 +37,11 @@
     "activityRegistratorImporanceLabel": "Meningsfullt",
     "activityRegistratorEnjoymentLabel": "Underhållande",
 
+    "calenderRegistratorTextInputLabel": "Vad vill du planera in?",
+
     "choiceBasedTextInputChangeLabel": "Byt",
     
     "activiesSnackBarAdded": "Aktiviteten lades till",
-  
-    "weekdays": [
-        "Sön",
-        "Mån",
-        "Tis",
-        "Ons",
-        "Tor",
-        "Fre",
-        "Lör"
-    ],
-    "months": [
-        "Januari",
-        "Februari",
-        "Mars",
-        "April",
-        "Maj",
-        "Juni",
-        "Juli",
-        "Augusti",
-        "September",
-        "Oktober",
-        "November",
-        "December"
-    ],
     
     "activityHistoryRateDayLabel": "Betygsätt dag",
     "activityWeekHistoryRateDay": "Dagens betyg",

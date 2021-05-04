@@ -37,37 +37,12 @@
     "activityRegistratorImporanceLabel" : "Importance",
     "activityRegistratorEnjoymentLabel": "Enjoyment",
 
+    "calenderRegistratorTextInputLabel": "What would you like to plan?",
+
     "choiceBasedTextInputChangeLabel": "Change",
 
     "activiesSnackBarAdded" : "Activity added",
     
-    "weekdays": [
-        "Sun",
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat"
-    ],
-    "months": [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-
-
-
-    ],
-
     "activityHistoryRateDayLabel" : "Rate day",
     "activityWeekHistoryRateDay": "Today's rating",
     "activityWeekHistoryNumberOfActivities": "Number of activities",
