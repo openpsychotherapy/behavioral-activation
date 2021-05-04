@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { StorageContext } from './context';
+import { LanguageName } from 'language';
 
 import {
   Settings,
@@ -46,7 +47,7 @@ export const useSettings = (): [Settings, ModifySettings] => {
    *
    * @param value - The two letter language code
    */
-  const setLanguage = (value: string): void => {
+  const setLanguage = (value: LanguageName): void => {
       setStoreItem(settingsKey, { ...settings, language: value });
   }
 

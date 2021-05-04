@@ -4,7 +4,7 @@ import { Menu, Button } from 'react-native-paper';
 import Storage from 'storage';
 
 import { useTranslation } from 'language/LanguageProvider';
-import languages from 'language';
+import languages, { LanguageName } from 'language';
 
 export const LanguageMenu = () => {
   const [settings, modifySettings] = Storage.useSettings()
@@ -26,7 +26,7 @@ export const LanguageMenu = () => {
         visible={visible}
         onDismiss={closeMenu}
         anchor={<Button onPress={openMenu}>{dict.languageName}</Button>}>
-          {Object.keys(languages).map((language, index) => 
+          {(Object.keys(languages) as LanguageName[]).map((language, index) => 
             <Menu.Item
               onPress={() => {
                 modifySettings.setLanguage(language);

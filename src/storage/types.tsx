@@ -1,3 +1,5 @@
+import { LanguageName } from 'language';
+
 // Activities
 export interface ActivitiesEntry {
   text: string;
@@ -58,12 +60,12 @@ export interface ModifyPeople {
 // Settings
 export interface Settings {
   notifications: boolean;
-  language: string;
+  language: LanguageName;
 }
 
 export interface ModifySettings {
   setNotifications: (value: boolean) => void;
-  setLanguage: (value: string) => void;
+  setLanguage: (value: LanguageName) => void;
 }
 
 // Values

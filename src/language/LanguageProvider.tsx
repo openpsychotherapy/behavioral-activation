@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import sv from "language/sv.json";
+import sv from "language/sv";
 
 import languages from 'language';
 import Storage from 'storage';

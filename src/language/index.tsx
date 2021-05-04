@@ -1,13 +1,17 @@
-import en from 'language/en.json';
-import sv from 'language/sv.json';
+import en from 'language/en';
+import sv from 'language/sv';
 
-interface Languages{
-    [index: string]: any;
-}
+export type LanguageName = 'sv' | 'en';
+
+type Language = typeof en;
+
+type Languages = {
+    [index in LanguageName]: Language;
+};
 
 export const languages: Languages = {
-    "en": en,
-    "sv": sv,
+    'en': en,
+    'sv': sv,
 }
 
 export default languages;
