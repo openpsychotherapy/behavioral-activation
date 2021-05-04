@@ -65,7 +65,7 @@ export const CategoryView = ({route, navigation}: CategoryViewProps) => {
         right: 0,
         bottom: 0,
         }}
-        icon='pencil'
+        icon='plus'
         onPress={() => {
           navigation.navigate('AddTopicView', {
             title: title,
