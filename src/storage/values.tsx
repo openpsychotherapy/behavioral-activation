@@ -40,9 +40,9 @@ const entryEq = (a: ValuesEntry, b: ValuesEntry): boolean => {
  * Add a new value:
  * ```
  * const [values, modifyValues] = Storage.useValues();
- * modifyValues.addEntry("health", "working out", {
- *     icon: "pumpingiron", 
- *     text: "Go to gym",
+ * modifyValues.addEntry('health', 'working out', {
+ *     icon: 'pumpingiron', 
+ *     text: 'Go to gym',
  * });
  * ```
  */

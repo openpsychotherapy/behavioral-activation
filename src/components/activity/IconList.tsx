@@ -57,7 +57,7 @@ export const IconList = (props: IconListProps) => {
       );
 
       if (props.dividerAfterRow === items.length) {
-        items.push(<Divider style={{height: 2}} key="divider"/>);
+        items.push(<Divider style={{height: 2}} key='divider'/>);
       }
 
       currentSegment = [];

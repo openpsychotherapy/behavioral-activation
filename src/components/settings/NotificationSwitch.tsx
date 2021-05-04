@@ -8,8 +8,8 @@ export const NotificationSwitch = () => {
   return  (
     <Switch
         trackColor={{false: 'gray', true: 'teal'}}
-        thumbColor="white"
-        ios_backgroundColor="gray"
+        thumbColor='white'
+        ios_backgroundColor='gray'
         onValueChange={(value) => modifySettings.setNotifications(value)}
         value={settings.notifications}
       />

@@ -19,7 +19,7 @@ const localizeTime = (language: string, time: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     hour: 'numeric', minute: 'numeric'
   };
-  const [hour, minute] = time.split(":").map(n => parseInt(n));
+  const [hour, minute] = time.split(':').map(n => parseInt(n));
   return Intl.DateTimeFormat(language, options).format(new Date(1970, 1, 1, hour, minute));
 }
 
@@ -30,7 +30,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
   const start = localizeTime(settings.language, entry.start);
   const end = localizeTime(settings.language, entry.end);
   return (
-    <View style={{ flexDirection: "row", width: "100%", marginBottom: 10 }}>
+    <View style={{ flexDirection: 'row', width: '100%', marginBottom: 10 }}>
       <View style={{ justifyContent: 'center' }}>
         <Surface
           style={{
@@ -54,7 +54,7 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
           description={entry.text}
           right={() => <List.Icon icon={entry.icon} />}
           onPress={() => {
-            navigation.navigate("CalendarRegistration", {
+            navigation.navigate('CalendarRegistration', {
               entry,
               pressedIcon: index,
               icon: entry.icon

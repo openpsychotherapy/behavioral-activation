@@ -86,18 +86,18 @@ const StartScreenView = ({navigation}: StartScreenViewProps) => {
 
 export const ValuesScreen = () => {
   return (
-    <ValuesStack.Navigator initialRouteName="StartScreenView" headerMode="float"
+    <ValuesStack.Navigator initialRouteName='StartScreenView' headerMode='float'
       screenOptions={{
         header: (props: any) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ValuesStack.Screen name="StartScreenView" component={StartScreenView} />
-      <ValuesStack.Screen name="CategoryView" component={CategoryView} />
-      <ValuesStack.Screen name="AddTopicView" component={AddTopicView}/>
-      <ValuesStack.Screen name="EntryView" component={EntryView}/>
-      <ValuesStack.Screen name="ChooseEntryIconView" component={ChooseEntryIconView}/>
-      <ValuesStack.Screen name="AddEntryView" component={AddEntryView}/>
-      <ValuesStack.Screen name="Settings" component={SettingsScreen} />
+      <ValuesStack.Screen name='StartScreenView' component={StartScreenView} />
+      <ValuesStack.Screen name='CategoryView' component={CategoryView} />
+      <ValuesStack.Screen name='AddTopicView' component={AddTopicView}/>
+      <ValuesStack.Screen name='EntryView' component={EntryView}/>
+      <ValuesStack.Screen name='ChooseEntryIconView' component={ChooseEntryIconView}/>
+      <ValuesStack.Screen name='AddEntryView' component={AddEntryView}/>
+      <ValuesStack.Screen name='Settings' component={SettingsScreen} />
     </ValuesStack.Navigator>
   );
 }

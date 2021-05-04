@@ -18,13 +18,13 @@ const ViewContent = () => {
 
 export const InformationScreen = () => {
   return (
-    <InformationStack.Navigator initialRouteName="Information" headerMode="float"
+    <InformationStack.Navigator initialRouteName='Information' headerMode='float'
       screenOptions={{
         header: (props) => <CustomNavigationBar {...props} />,
       }}
     >
-      <InformationStack.Screen name="Information" component={ViewContent} />
-      <InformationStack.Screen name="Settings" component={SettingsScreen} />
+      <InformationStack.Screen name='Information' component={ViewContent} />
+      <InformationStack.Screen name='Settings' component={SettingsScreen} />
     </InformationStack.Navigator>
   );
 }

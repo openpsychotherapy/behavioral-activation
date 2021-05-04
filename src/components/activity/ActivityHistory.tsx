@@ -48,7 +48,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
     // Save month as string
     const date = new Date(day.date);
-    const options: any = { dateStyle: "long" };
+    const options: any = { dateStyle: 'long' };
     titleString = Intl.DateTimeFormat(settings.language, options).format(date);
     // Set rating
     dayRating = day.score;

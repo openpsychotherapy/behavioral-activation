@@ -14,28 +14,28 @@ export default function StorageTest() {
 
     const addCalendarEntry = () => {
         modifyCalendar.add({
-            date: "2021-03-12",
-            start: "15:00",
-            end: "16:00",
-            text: "Hello",
-            icon: "person",
-            person: "Erik",
+            date: '2021-03-12',
+            start: '15:00',
+            end: '16:00',
+            text: 'Hello',
+            icon: 'person',
+            person: 'Erik',
         });
     };
 
     const addValuesEntry = () => {
-        modifyValues.addTopic("health", "working out");
-        modifyValues.addEntry("health", "working out", {
-            icon: "pumpingiron", 
-            text: "sick gainz",
+        modifyValues.addTopic('health', 'working out');
+        modifyValues.addEntry('health', 'working out', {
+            icon: 'pumpingiron', 
+            text: 'sick gainz',
         });
     }
 
     const addActivity = () => {
-        modifyActivities.add("2021-03-14", 0, {
-            text: "sadness",
-            icon: "crying",
-            person: "Erik",
+        modifyActivities.add('2021-03-14', 0, {
+            text: 'sadness',
+            icon: 'crying',
+            person: 'Erik',
             importance: 10,
             enjoyment: 0,
         });
@@ -54,10 +54,10 @@ export default function StorageTest() {
 
                 <pre>People: {JSON.stringify(people, null, 4)}</pre>
                 <TextInput
-                    label="Person name"
+                    label='Person name'
                     value={text}
                     multiline={false}
-                    mode="outlined"
+                    mode='outlined'
                     onChangeText={(text: string) => {setText(text)}} />
                 <Button onPress={() => modifyPeople.add(text)}>Add person</Button>
 

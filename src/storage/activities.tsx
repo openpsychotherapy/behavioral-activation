@@ -41,10 +41,10 @@ export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
  * ```
  * // Add a new activity
  * const [activities, modifyActivities] = Storage.useActivities();
- * modifyActivities.add("2021-03-15", 17, {
- *     text: "Went out walking",
- *     icon: "tree",
- *     person: "Erik",
+ * modifyActivities.add('2021-03-15', 17, {
+ *     text: 'Went out walking',
+ *     icon: 'tree',
+ *     person: 'Erik',
  *     importance: 9,
  *     enjoyment: 4,
  * });

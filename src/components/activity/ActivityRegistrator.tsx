@@ -148,7 +148,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
         <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 10}}>
           <View style={{flexDirection: 'column', width: '80%'}}>
             <View style={{ flexDirection: 'row' }}>
-              <Text>{lang.activityRegistratorImporanceLabel + ": "}</Text>
+              <Text>{lang.activityRegistratorImporanceLabel + ': '}</Text>
               <Text>{importance}</Text>
             </View>
 
@@ -158,7 +158,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
                 style={{flex: 1}} value={5} step={1}
                 minimumValue={0} maximumValue={10}
                 onValueChange={(value: number) => {setImportance(value)}}
-                minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+                minimumTrackTintColor={colors.accent} maximumTrackTintColor='#000000'
               />
               <Text>10</Text>
             </View>
@@ -169,7 +169,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
         <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 10}}>
           <View style={{flexDirection: 'column', width: '80%'}}>
             <View style={{ flexDirection: 'row' }}>
-              <Text>{lang.activityRegistratorEnjoymentLabel + ": "}</Text>
+              <Text>{lang.activityRegistratorEnjoymentLabel + ': '}</Text>
               <Text>{enjoyment}</Text>
             </View>
 
@@ -179,7 +179,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
                 style={{flex: 1}} value={5} step={1}
                 minimumValue={0} maximumValue={10}
                 onValueChange={(value: number) => {setEnjoyment(value)}}
-                minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+                minimumTrackTintColor={colors.accent} maximumTrackTintColor='#000000'
               />
               <Text>10</Text>
             </View>

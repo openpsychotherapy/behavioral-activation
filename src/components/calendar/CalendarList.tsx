@@ -21,7 +21,7 @@ import Storage from 'storage';
 const groupByDate = (calendar: Calendar): Calendar[] => {
   let groups: Calendar[] = [];
   let currentGroup: Calendar = [];
-  let date = "";
+  let date = '';
 
   calendar.forEach((entry) => {
     if (entry.date == date) {
@@ -54,7 +54,7 @@ const groupByDate = (calendar: Calendar): Calendar[] => {
  */
 const insertMonthHeaders = (groups: Calendar[]): (Calendar | string)[] => {
   let groupsWithHeaders: (Calendar | string)[] = [];
-  let currentMonth = "";
+  let currentMonth = '';
 
   groups.forEach(group => {
     const month = group[0].date.slice(0, 7); // YYYY-mm
@@ -79,7 +79,7 @@ export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
     // Load upcoming calendar entries when initializing
     const today = ISODate(new Date());
     const upcomingEntries = calendar.filter(entry => {
-      return entryGt(entry, {...entry, date: today, start: "00:00"})
+      return entryGt(entry, {...entry, date: today, start: '00:00'})
     });
     setListState({
       groups: groupByDate(upcomingEntries),
@@ -113,13 +113,13 @@ export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
 
   return (
     <FlatList
-      style={{ width: "100%" }}
+      style={{ width: '100%' }}
       data={insertMonthHeaders(listState.groups)}
       refreshing={false}
       onRefresh={onRefresh}
       keyExtractor={(item) => JSON.stringify(item)}
       renderItem={({item}) =>
-        typeof(item) === "string" ? (
+        typeof(item) === 'string' ? (
           <>
             <Divider style={{ height: 2 }}/>
             <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>

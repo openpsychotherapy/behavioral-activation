@@ -19,7 +19,7 @@ export const RatingCircle = (props: {score: number | null}) => {
         backgroundColor: color
       }}
     >
-      <Title>{props.score == null ? " " : props.score}</Title>
+      <Title>{props.score == null ? ' ' : props.score}</Title>
     </View>
   );
 };
