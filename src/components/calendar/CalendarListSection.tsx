@@ -3,12 +3,13 @@ import React from 'react';
 import { Calendar, CalendarEntry } from 'storage/types';
 import { CalendarListItem } from './CalendarListItem';
 import { List, useTheme } from 'react-native-paper';
-import { useTranslation } from 'language/LanguageProvider';
+import Storage from 'storage';
 
 export const CalendarListSection: React.FC<{entries: Calendar}> = ({ entries }) => {
-  const dict = useTranslation();
-  const weekday = dict.weekdays[new Date(entries[0].date).getDay()];
+  const [settings, modifySettings] = Storage.useSettings();
   const { title, calendar: calStyle } = useTheme();
+  const formatter = Intl.DateTimeFormat(settings.language, { weekday: 'short' });
+  const weekday = formatter.format(new Date(entries[0].date));
   return (
     <List.Section>
       <List.Subheader

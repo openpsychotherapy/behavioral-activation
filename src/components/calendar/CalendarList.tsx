@@ -7,6 +7,7 @@ import { entryGt } from 'storage/calendar';
 import { Calendar } from 'storage/types';
 import { ISODate } from 'utils';
 import { CalendarListSection } from './CalendarListSection';
+import Storage from 'storage';
 
 /**
  * Returns a new calendar grouped by date.
@@ -71,7 +72,7 @@ type ListState = { groups: Calendar[], entryCount: number };
 
 export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
-  const dict = useTranslation();
+  const [settings, modifySettings] = Storage.useSettings();
   const { title } = useTheme();
 
   useEffect(() => {
@@ -122,7 +123,8 @@ export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
           <>
             <Divider style={{ height: 2 }}/>
             <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
-              {`${dict.months[new Date(item).getMonth()]} ${item.slice(0, 4)}`}
+              {Intl.DateTimeFormat(settings.language, { year: 'numeric', month: 'long' })
+                .format(new Date(item))}
             </Title>
             <Divider style={{ height: 2 }}/>
           </>

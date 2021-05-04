@@ -174,7 +174,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
           {/* TextInputRow */}
           <View>
-            <ChoiceBasedTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
+            <ChoiceBasedTextInput label={lang.calenderRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
               choices={ choices } choice={choice} setChoice={setChoice} />
           </View>
         </KeyboardAvoidingView>
