@@ -1,8 +1,8 @@
 const en = {
     languageName: 'English',
-     
+
     valuesHeaderEvaluation: 'Values',
-     
+
     activitiesButtonRateDay: 'Rate day',
     activitiesButtonRateDayModify: 'Change rating',
     activitiesSliderRateDay: 'Today\'s rating',
@@ -17,7 +17,7 @@ const en = {
     valuesDialogYes: 'Ok',
     valuesDialogNo: 'Cancel',
     valuesPlaceholder: 'Write here',
-     
+
     settingsSurfaceLanguage: 'Language',
     settingsSurfaceNotifications: 'Notifications',
     settingsSurfaceIcons: 'Icons',
@@ -42,11 +42,11 @@ const en = {
     choiceBasedTextInputChangeLabel: 'Change',
 
     activiesSnackBarAdded : 'Activity added',
-    
+
     activityHistoryRateDayLabel : 'Rate day',
     activityWeekHistoryRateDay: 'Today\'s rating',
     activityWeekHistoryNumberOfActivities: 'Number of activities',
-    activityWeekHistoryTitleDay: 'Today\'s history',   
+    activityWeekHistoryTitleDay: 'Today\'s history',
     activityWeekHistoryTitleWeek: 'Activity history'
 }
 

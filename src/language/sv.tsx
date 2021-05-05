@@ -40,13 +40,13 @@ const sv = {
     calenderRegistratorTextInputLabel: 'Vad vill du planera in?',
 
     choiceBasedTextInputChangeLabel: 'Byt',
-    
+
     activiesSnackBarAdded: 'Aktiviteten lades till',
-    
+
     activityHistoryRateDayLabel: 'Betygsätt dag',
     activityWeekHistoryRateDay: 'Dagens betyg',
     activityWeekHistoryNumberOfActivities: 'Antal aktiviteter',
-    activityWeekHistoryTitleDay: 'Dagens historik', 
+    activityWeekHistoryTitleDay: 'Dagens historik',
     activityWeekHistoryTitleWeek: 'Aktivitetshistorik'
 }
 

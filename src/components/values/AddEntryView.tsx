@@ -35,16 +35,16 @@ export const AddEntryView = ({route, navigation}: AddEntryViewProps) => {
       <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
         <Surface style={{ borderRadius: 100, elevation: 3}}>
           <Avatar.Icon icon={icon} size={iconSizes.avatar} />
-        </Surface > 
+        </Surface >
       <View style={{ width: '5%', height: '5%' }} />
         <Title>{title}</Title>
-        
+
       </View>
       <View style={{flex: 0.3, justifyContent: 'center'}}>
         <TextInput
           value={text}
           onChangeText={setText}
-          mode={'outlined'} 
+          mode={'outlined'}
           style={{ paddingHorizontal: '15%' }}
           placeholder={lang.valuesPlaceholder}
           multiline={true} />
@@ -62,8 +62,8 @@ export const AddEntryView = ({route, navigation}: AddEntryViewProps) => {
               text: text,
             });
             navigation.pop(2);
-          }} />  
-        </View>  
+          }} />
+        </View>
       </View>
     </View>
     </TouchableWithoutFeedback>

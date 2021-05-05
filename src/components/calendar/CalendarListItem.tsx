@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 
 /**
  * Converts an ISO-time to a localized time string
- * 
+ *
  * @param language - The language to localize in
  * @param time - The ISO time to localize
  * @returns A localized time string

@@ -11,7 +11,7 @@ export const StyledButton = (props: StyledButtonProps) => {
     <Button
       style={{ justifyContent: 'center' }}
       contentStyle={{ height: 50 }}
-      theme={{ roundness: 30 }}  
+      theme={{ roundness: 30 }}
       compact={true}
       mode='outlined'
       onPress={props.categoryButton}

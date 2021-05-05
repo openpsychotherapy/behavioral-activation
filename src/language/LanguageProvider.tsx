@@ -22,18 +22,18 @@ export const LanguageProvider: React.FC = ({children}) => {
 
 /**
  * Function returning the current language dictionary.
- * 
+ *
  * Language is changed from the useSettings hook.
- * 
- * @example 
+ *
+ * @example
  * ```
  * const dict = useTranslation();
  * dict['valuesHeaderEvaluation']; // 'Värdering' if swedish is the current language.
  * ```
- * 
+ *
  * keyvalues can be found in the respective json, and new translations should
  * be added in every file (src/language/??.json).
- * 
+ *
  * @returns dictionary for the current language.
  */
 export const useTranslation = () => {

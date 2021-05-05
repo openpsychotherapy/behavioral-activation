@@ -26,7 +26,7 @@ export const LanguageMenu = () => {
         visible={visible}
         onDismiss={closeMenu}
         anchor={<Button onPress={openMenu}>{dict.languageName}</Button>}>
-          {(Object.keys(languages) as LanguageName[]).map((language, index) => 
+          {(Object.keys(languages) as LanguageName[]).map((language, index) =>
             <Menu.Item
               onPress={() => {
                 modifySettings.setLanguage(language);

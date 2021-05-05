@@ -29,7 +29,7 @@ export const CategoryView = ({route, navigation}: CategoryViewProps) => {
   const [people, modifyPeople] = Storage.usePeople();
 
   const content = categoryString != 'people' ?
-    values[categoryString].map((topic: ValuesTopic, i: number) => 
+    values[categoryString].map((topic: ValuesTopic, i: number) =>
       <CategoryButton
         key={i}
         topic={topic}
@@ -43,7 +43,7 @@ export const CategoryView = ({route, navigation}: CategoryViewProps) => {
         }}
       />
     ) :
-    people.map((person: string, i: number) =>    
+    people.map((person: string, i: number) =>
       <CategoryButton
         key={i}
         topic={{name: person, entries: []}}

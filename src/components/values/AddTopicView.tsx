@@ -40,7 +40,7 @@ export const AddTopicView = ({route, navigation}: AddTopicViewProps) => {
         <TextInput
         value={text}
         onChangeText={setText}
-        mode={'outlined'} 
+        mode={'outlined'}
         style={{paddingHorizontal: '15%'}}
         placeholder={lang.valuesPlaceholder}
         multiline={true}
@@ -63,7 +63,7 @@ export const AddTopicView = ({route, navigation}: AddTopicViewProps) => {
             } else {
               modifyPeople.add(text);
             }
-          }} />  
+          }} />
         </View>
       </View>
      </View>

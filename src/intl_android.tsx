@@ -28,7 +28,7 @@ if (isAndroid) {
   require('@formatjs/intl-relativetimeformat/polyfill');
   require('@formatjs/intl-datetimeformat/polyfill');
   require('@formatjs/intl-datetimeformat/add-golden-tz.js');
-  
+
   // SV
   require('@formatjs/intl-pluralrules/locale-data/sv.js');
   require('@formatjs/intl-displaynames/locale-data/sv.js');

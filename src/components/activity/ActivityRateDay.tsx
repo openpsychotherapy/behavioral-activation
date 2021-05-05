@@ -17,7 +17,7 @@ export const ActivityRateDay = ({ route, navigation } : any) =>{
 
   const onConfirm = () => {
     modifyActivities.setRating(route.params.date, rateOfDay);
-    
+
     // Go back
     navigation.navigate('History');
   };

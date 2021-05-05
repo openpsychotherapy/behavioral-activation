@@ -55,7 +55,7 @@ interface StartScreenViewProps {
   navigation: StartScreenViewNavigationProp;
 }
 
-// View for the first screen in values 
+// View for the first screen in values
 const StartScreenView = ({navigation}: StartScreenViewProps) => {
   const lang = useTranslation();
 
@@ -71,7 +71,7 @@ const StartScreenView = ({navigation}: StartScreenViewProps) => {
   return (
     <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'space-evenly', paddingHorizontal: 20 }}>
       <Title style={{ textAlign: 'center' }}>{lang.valuesHeaderEvaluation}</Title>
-        {buttons.map(([title, categoryString], index: number) => 
+        {buttons.map(([title, categoryString], index: number) =>
           <StyledButton key={index} name={title} categoryButton={() => {
             navigation.navigate('CategoryView', {
               title,

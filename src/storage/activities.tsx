@@ -64,7 +64,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @returns The activities object with specified date inserted
    */
   const _insertDay = (date: string): Activities => {
-    
+
     if (!activities.some(a => a.date === date)) {
       const newActivityDay = {
         date: date,

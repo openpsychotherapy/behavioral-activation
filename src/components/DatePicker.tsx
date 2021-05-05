@@ -13,19 +13,19 @@ import Storage from 'storage';
  * @example
  * ```
  * const [date, setDate] = React.useState(new Date());
- * 
+ *
  * return (
  *   <DatePicker date={date} setDate={setDate} />
  * );
- * 
+ *
  * ```
- * 
+ *
  * @param date - End time value as a Date object (eg a hook)
  * @param setDate -End time set function (eg a hook)
- * 
+ *
  * @param style - Optional styling of the button
  * @param containerStyle - Optional styling of the view container
- * 
+ *
  * @returns The TimePicker component
  *
  */
@@ -42,12 +42,12 @@ export const DatePicker = (props: {date: Date, setDate: React.Dispatch<React.Set
       setOpen(false);
       props.setDate(params.date);
   };
-  
+
   return (
     <View style={{flexDirection: 'row', alignItems: 'center', ...props.containerStyle}}>
       <Button mode='outlined' style={{padding: 5, ...props.style}} onPress={() => setOpen(true)} >{Intl.DateTimeFormat(settings.language).format(props.date)}</Button>
       <List.Icon icon='calendar' />
-      
+
       <DatePickerModal
         mode='single'
         visible={open}

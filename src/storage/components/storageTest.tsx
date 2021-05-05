@@ -26,7 +26,7 @@ export default function StorageTest() {
     const addValuesEntry = () => {
         modifyValues.addTopic('health', 'working out');
         modifyValues.addEntry('health', 'working out', {
-            icon: 'pumpingiron', 
+            icon: 'pumpingiron',
             text: 'sick gainz',
         });
     }
