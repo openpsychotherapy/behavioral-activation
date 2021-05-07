@@ -39,7 +39,7 @@ export const ActivityWeekHistory = ({route, navigation}: any) => {
   const getItemLayout = (data: any, index: number) => {
       return {length: layoutSize.height, offset: layoutSize.height * index, index};
   };
-  
+
   for (let activityIndex = 0; activityIndex < activities.length; ++activityIndex) {
     const day = activities[activityIndex];
 

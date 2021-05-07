@@ -42,13 +42,13 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
   let titleString = '';
   let dayRating = null;
-  
+
   if (activities.length !== 0) {
     const day = activities[currentDay];
 
     // Save month as string
     const date = new Date(day.date);
-    const options: any = { dateStyle: "long" };
+    const options: any = { dateStyle: 'long' };
     titleString = Intl.DateTimeFormat(settings.language, options).format(date);
     // Set rating
     dayRating = day.score;
@@ -56,7 +56,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
     let activityCount = 0; // Used for merging activities
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
       const activity = day.entries[activityIndex];
-      
+
       // Ignore if null
       if (activity == null) {
         continue;
@@ -72,7 +72,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
         ++activityCount;
         continue;
       }
-      
+
 
       // Apply segment
       const fromDate = getDateFromStringWithOffset(day.date, activityIndex-activityCount);
@@ -90,7 +90,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
           }/>
         </Surface>
       );
-      
+
       // Reset segment
       activityCount = 0;
     }

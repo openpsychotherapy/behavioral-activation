@@ -11,11 +11,11 @@ const Tab = createMaterialBottomTabNavigator();
 
 export const RootNavigator = () => {
   return (
-    <Tab.Navigator initialRouteName="Activity" shifting={true} sceneAnimationEnabled={false} labeled={false}>
-      <Tab.Screen name="Activites" component={ActivityScreen} options={{ tabBarIcon: 'plus' }} />
-      <Tab.Screen name="Values" component={ValuesScreen} options={{ tabBarIcon: 'heart' }} />
-      <Tab.Screen name="Calendar" component={CalendarScreen} options={{ tabBarIcon: 'calendar' }} />
-      <Tab.Screen name="Information" component={InformationScreen} options={{ tabBarIcon: 'information' }} />
+    <Tab.Navigator initialRouteName='Activity' shifting={true} sceneAnimationEnabled={false} labeled={false}>
+      <Tab.Screen name='Activites' component={ActivityScreen} options={{ tabBarIcon: 'plus' }} />
+      <Tab.Screen name='Values' component={ValuesScreen} options={{ tabBarIcon: 'heart' }} />
+      <Tab.Screen name='Calendar' component={CalendarScreen} options={{ tabBarIcon: 'calendar' }} />
+      <Tab.Screen name='Information' component={InformationScreen} options={{ tabBarIcon: 'information' }} />
     </Tab.Navigator>
   );
 }

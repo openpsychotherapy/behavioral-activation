@@ -17,7 +17,7 @@ export const ActivityRateDay = ({ route, navigation } : any) =>{
 
   const onConfirm = () => {
     modifyActivities.setRating(route.params.date, rateOfDay);
-    
+
     // Go back
     navigation.navigate('History');
   };
@@ -33,7 +33,7 @@ export const ActivityRateDay = ({ route, navigation } : any) =>{
       <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 10}}>
         <View style={{flexDirection: 'column', width: '80%'}}>
           <View style={{ flexDirection: 'row' }}>
-            <Text>{lang.activityHistoryRateDayLabel + ": "}</Text>
+            <Text>{lang.activityHistoryRateDayLabel + ': '}</Text>
             <Text>{rateOfDay}</Text>
           </View>
 
@@ -43,7 +43,7 @@ export const ActivityRateDay = ({ route, navigation } : any) =>{
               style={{flex: 1}} value={5} step={1}
               minimumValue={0} maximumValue={10}
               onValueChange={(value: number) => {setRateOfDay(value)}}
-              minimumTrackTintColor={colors.accent} maximumTrackTintColor="#000000"
+              minimumTrackTintColor={colors.accent} maximumTrackTintColor='#000000'
             />
             <Text>10</Text>
           </View>

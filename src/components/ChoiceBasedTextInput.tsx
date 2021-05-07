@@ -15,34 +15,34 @@ type Choice = {
  * ```
  * const [choice, setChoice] = React.useState(defaultChoice);
  * const [activityText, setActivityText] = React.useState('');
- * 
+ *
  * return (
- *   <ChoiceBasedTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText} 
+ *   <ChoiceBasedTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText}
  *     choices={ ['Write text'] } choice={choice} setChoice={setChoice} />
  * );
- * 
+ *
  * ```
- * 
+ *
  * @param label - A text label depending on language
  * @param textInputText - Text value for default choice (eg a hook)
  * @param setTextInputText - Set function for default choice text (eg a hook)
  * @param choices - A list with all the prescribed choices
  * @param choice - Choice value as a Date object (eg a hook)
  * @param setChoice - Choice time set function (eg a hook)
- * 
+ *
  * @returns The ChoiceBasedTextInput component
  *
  */
-export const ChoiceBasedTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>, 
+export const ChoiceBasedTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>,
   choices: Choice[], choice: Choice, setChoice: React.Dispatch<React.SetStateAction<Choice>>}) => {
-  
+
   const lang = useTranslation();
   const [visible, setVisible] = React.useState(false);
 
   let choiceComponents = []
   for (let i = 0; i < props.choices.length; ++i) {
     const choice = props.choices[i];
-    
+
     // List of all items as surface components
     choiceComponents.push(
       <TouchableWithoutFeedback onPress={()=>{ props.setChoice(choice); setVisible(false) }} key={'c_' + i}>
@@ -70,7 +70,7 @@ export const ChoiceBasedTextInput = (props: {label: string, textInputText: strin
           <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choice.value}</Text>
           <Button onPress={()=> setVisible(true)}>{lang.choiceBasedTextInputChangeLabel}</Button>
       </Surface>
-      
+
       <TextInput
         mode='outlined'
         label={props.label}

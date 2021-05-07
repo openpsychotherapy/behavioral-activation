@@ -1,6 +1,6 @@
 /**
  * Returns the date in ISO format. Normal programming languages use something
- * like date.strftime("%Y-%m-%d").
+ * like date.strftime('%Y-%m-%d').
  *
  * @returns A ISO-formatted date
  */
@@ -21,7 +21,7 @@ export const ISODate = (date: Date): string => {
 
 /**
  * Returns the time in ISO format. Normal programming languages use something
- * like date.strftime("%h:%M").
+ * like date.strftime('%h:%M').
  *
  * @returns A ISO-formatted date
  */

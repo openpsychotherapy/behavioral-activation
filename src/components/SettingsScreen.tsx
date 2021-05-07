@@ -13,15 +13,15 @@ export const SettingsScreen = () => {
   return (
     <View>
       <Surface style={styles.surface}>
-        <IconWithText icon="translate" text={dict["settingsSurfaceLanguage"]} />
+        <IconWithText icon='translate' text={dict['settingsSurfaceLanguage']} />
         <LanguageMenu />
       </Surface>
       <Surface style={styles.surface}>
-        <IconWithText icon="bell" text={dict["settingsSurfaceNotifications"]} />
+        <IconWithText icon='bell' text={dict['settingsSurfaceNotifications']} />
         <NotificationSwitch />
       </Surface>
       <Surface style={styles.surface}>
-        <IconWithText icon="apps" text={dict["settingsSurfaceIcons"]} />
+        <IconWithText icon='apps' text={dict['settingsSurfaceIcons']} />
         <IconCustomizer />
       </Surface>
     </View>

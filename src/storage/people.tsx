@@ -25,7 +25,7 @@ import {
  * ```
  * // Add a new person to the list
  * const [people, modifyPeople] = Storage.usePeople();
- * modifyPeople.add("Erik");
+ * modifyPeople.add('Erik');
  * ```
  */
 export const usePeople = (): [People, ModifyPeople] => {

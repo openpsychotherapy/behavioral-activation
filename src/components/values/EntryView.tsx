@@ -54,7 +54,7 @@ export const EntryView = ({ route, navigation }: EntryViewProps) => {
           right: 0,
           bottom: 0,
         }}
-        icon='pencil'
+        icon='plus'
         onPress={() => {
           navigation.navigate('ChooseEntryIconView', {
             title: title,

@@ -76,7 +76,7 @@ const ViewContent = ({ route, navigation }: Props) => {
           right: 0,
           bottom: 0,
         }}
-        icon="plus"
+        icon='plus'
         onPress={openIconMenu}
       />
 
@@ -89,14 +89,14 @@ const ViewContent = ({ route, navigation }: Props) => {
 
 export const CalendarScreen = () => {
   return (
-    <CalendarStack.Navigator initialRouteName="Calendar" headerMode="float"
+    <CalendarStack.Navigator initialRouteName='Calendar' headerMode='float'
       screenOptions={{
         header: (props) => <CustomNavigationBar {...props} />,
       }}
     >
-      <CalendarStack.Screen name="Calendar" component={ViewContent} />
-      <CalendarStack.Screen name="CalendarRegistration" component={CalendarRegistrator} />
-      <CalendarStack.Screen name="Settings" component={SettingsScreen} />
+      <CalendarStack.Screen name='Calendar' component={ViewContent} />
+      <CalendarStack.Screen name='CalendarRegistration' component={CalendarRegistrator} />
+      <CalendarStack.Screen name='Settings' component={SettingsScreen} />
     </CalendarStack.Navigator>
   );
 }

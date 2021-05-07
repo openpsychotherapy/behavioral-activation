@@ -56,12 +56,12 @@ export const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
  * // Add an event to the calendar
  * const [calendar, modifyCalendar] = Storage.useCalendar();
  * modifyCalendar.add({
- *     date: "2021-03-12",
- *     start: "15:00",
- *     end: "16:00",
- *     text: "Game night",
- *     icon: "pawn",
- *     person: "Erik",
+ *     date: '2021-03-12',
+ *     start: '15:00',
+ *     end: '16:00',
+ *     text: 'Game night',
+ *     icon: 'pawn',
+ *     person: 'Erik',
  * });
  * ```
  */

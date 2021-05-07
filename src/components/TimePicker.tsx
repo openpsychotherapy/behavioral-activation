@@ -19,9 +19,9 @@ const getOffsetDate = (date: Date, hours: number, minutes: number) : Date => {
  * // Current time and date is: 2021-04-19 - 14.25
  * const timeRounded = getCurrentTimeRounded(1, 4);
  * // timeRounded should now equal to: Date(2021, 04, 19, 15, 15)
- * 
+ *
  * ```
- * 
+ *
  * @param offset - Offset in hours
  * @param steps - Number of steps per hour
  * @returns A date object containing the rounded time
@@ -31,9 +31,9 @@ export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
   const now = new Date();
   const stepSize = 60 / steps;
 
-  // Rounds current time to the closes multiple of stepSize 
+  // Rounds current time to the closes multiple of stepSize
   let currentMinutes = Math.floor((now.getHours() * 60 + now.getMinutes()) / stepSize) * stepSize;
-  
+
   // Calculate the hours / minutes from total minutes
   const currentHours = Math.floor(currentMinutes / 60);
   currentMinutes = currentMinutes % 60;
@@ -49,14 +49,14 @@ export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
  * const steps = 1;
  * const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
  * const [toTime, setToTime] = React.useState(getCurrentTimeRounded(1, steps));
- * 
+ *
  * return (
- *  <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+ *  <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime}
  *     toTime={toTime} setToTime={setToTime} />
  * );
- * 
+ *
  * ```
- * 
+ *
  * @param now - The date and time right now as a Date object
  * @param defaultTimeOffset - The default length, in minutes, of an interval if a overlap occures
  * @param steps - Number of steps per hour
@@ -64,14 +64,14 @@ export const getCurrentTimeRounded = (offset: number, steps: number): Date => {
  * @param setFromTime - Start time set function (eg a hook)
  * @param toTime - End time value as a Date object (eg a hook)
  * @param setToTime -End time set function (eg a hook)
- * 
+ *
  * @returns The TimePicker component
  *
  */
-export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps: number, 
+export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps: number,
   fromTime: Date, setFromTime: React.Dispatch<React.SetStateAction<Date>>,
   toTime: Date, setToTime: React.Dispatch<React.SetStateAction<Date>>}) => {
-  
+
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
 
@@ -91,7 +91,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   // props.steps is number of steps per hour
   const count = 24 * props.steps + 1;
   const stepSize = 60 / props.steps;
-  
+
   // Divide the time depending on stepsize (props.steps)
   for (let i = 0; i < count; ++i) {
     let minutes = i * stepSize;
@@ -100,7 +100,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
 
     const stepDate = getOffsetDate(props.now,hours, minutes);
     const timeString = getFormattedTime(stepDate);
-    
+
     timeStepDates[i] = stepDate;
     timeSteps.push(
       {label: timeString, value: timeString}
@@ -110,7 +110,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   const onValueChangeFrom = (itemIndex: number) => {
     const fromDate = timeStepDates[itemIndex]; // index: 0 - 24
     props.setFromTime(fromDate);
-    
+
     // If overlap occurs, calculate the opposite sides new value
     if (fromDate >= props.toTime) {
       let newToDate = new Date(fromDate);
@@ -134,7 +134,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
   return (
     <View style={{flex: 1, flexDirection: 'column', alignItems: 'stretch'}}>
       <Subheading>{lang.timePickerLabel}</Subheading>
-      
+
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <DropDownPicker containerStyle ={{flex: 1, flexGrow: 1}}
           defaultValue={getFormattedTime(props.fromTime)}

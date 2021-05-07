@@ -75,17 +75,17 @@ const ViewContent = ({ route, navigation }: any) => {
 
 export const ActivityScreen = ({ navigation }: any) => {
   return (
-    <ActivityStack.Navigator initialRouteName="Activities" headerMode="float"
+    <ActivityStack.Navigator initialRouteName='Activities' headerMode='float'
       screenOptions={{
         header: (props: any) => <CustomNavigationBar {...props} />,
       }}
     >
-      <ActivityStack.Screen name="Activities" component={ViewContent} initialParams={{activityRegistered: false}} />
-      <ActivityStack.Screen name="History" component={ActivityHistory} initialParams={{currentDay: -1}} />
-      <ActivityStack.Screen name="ActivityRegistration" component={ActivityRegistrator} />
-      <ActivityStack.Screen name="Settings" component={SettingsScreen} />
-      <ActivityStack.Screen name="RateDay" component={ActivityRateDay} />
-      <ActivityStack.Screen name="WeekHistory" component={ActivityWeekHistory} />
+      <ActivityStack.Screen name='Activities' component={ViewContent} initialParams={{activityRegistered: false}} />
+      <ActivityStack.Screen name='History' component={ActivityHistory} initialParams={{currentDay: -1}} />
+      <ActivityStack.Screen name='ActivityRegistration' component={ActivityRegistrator} />
+      <ActivityStack.Screen name='Settings' component={SettingsScreen} />
+      <ActivityStack.Screen name='RateDay' component={ActivityRateDay} />
+      <ActivityStack.Screen name='WeekHistory' component={ActivityWeekHistory} />
     </ActivityStack.Navigator>
   );
 }

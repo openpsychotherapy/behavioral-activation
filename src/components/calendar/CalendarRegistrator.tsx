@@ -70,12 +70,12 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
   const [values, modifyValues] = Storage.useValues();
   const [calendar, modifyCalendar] = Storage.useCalendar();
-  
+
   const [fromTime, setFromTime] = React.useState(fromTimeDefault);
   const [toTime, setToTime] = React.useState(toTimeDefault);
-  
+
   const [date, setDate] = React.useState(dateDefault);
-  
+
   const [choice, setChoice] = React.useState(defaultChoice);
   const [activityText, setActivityText] = React.useState(activityTextDefault);
 
@@ -157,7 +157,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} >
       <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column',  justifyContent: 'space-around'}}>
-        
+
         <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{zIndex: 1}} >
           {/* DateRow */}
           <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10}}>
@@ -168,13 +168,13 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
           </View>
           {/* TimeRow */}
           <View style={{ flexDirection: 'row', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
-            <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime} 
+            <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime}
               toTime={toTime} setToTime={setToTime} />
             </View>
 
           {/* TextInputRow */}
           <View>
-            <ChoiceBasedTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText} 
+            <ChoiceBasedTextInput label={lang.calenderRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
               choices={ choices } choice={choice} setChoice={setChoice} />
           </View>
         </KeyboardAvoidingView>

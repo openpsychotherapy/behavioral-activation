@@ -30,7 +30,7 @@ export const IconCustomizer = () => {
   return (
     <>
       <Button onPress={() => setVisible(true)}>
-        {dict["settingsSurfaceIconCustomize"]}
+        {dict['settingsSurfaceIconCustomize']}
       </Button>
       <IconList
         startIndex={0}

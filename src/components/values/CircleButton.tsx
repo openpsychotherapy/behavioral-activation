@@ -7,7 +7,7 @@ interface CircleButtonProps {
   backgroundColor: string;
   onPress: () => void;
 }
-    
+
 export const CircleButton = (props: CircleButtonProps) => {
   return (
     <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>

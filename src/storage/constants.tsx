@@ -7,13 +7,13 @@ import {
   Values,
 } from './types';
 
-export const activitiesKey: string = "activities";
+export const activitiesKey: string = 'activities';
 export const activitiesDefault: Activities = [];
 
-export const calendarKey: string = "calendar";
+export const calendarKey: string = 'calendar';
 export const calendarDefault: Calendar = [];
 
-export const iconsKey: string = "icons";
+export const iconsKey: string = 'icons';
 export const iconsDefault: Icons = [
   // Default front side
   'format-text',
@@ -127,16 +127,16 @@ export const iconsDefault: Icons = [
   'hinduism'
 ];
 
-export const peopleKey: string = "people";
+export const peopleKey: string = 'people';
 export const peopleDefault: People = [];
 
-export const settingsKey: string = "settings";
+export const settingsKey: string = 'settings';
 export const settingsDefault: Settings = {
   notifications: false,
-  language: "sv",
+  language: 'sv',
 };
 
-export const valuesKey: string = "values";
+export const valuesKey: string = 'values';
 export const valuesDefault: Values = {
   responsibilities: [],
   relations: [],
