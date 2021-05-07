@@ -1,12 +1,6 @@
-import { useTranslation } from 'language/LanguageProvider';
-import React, { useEffect, useState } from 'react';
-import { View, FlatList, Pressable } from 'react-native';
-import { Surface, List, Caption, Title, useTheme } from 'react-native-paper';
+import React from 'react';
 
-import { entryGt } from 'storage/calendar';
-import { Calendar, CalendarEntry } from 'storage/types';
-import { ISODate } from 'utils';
-import { CalendarListSection } from '.././calendar/CalendarListSection';
+import { CalendarEntry } from 'storage/types';
 import Storage from 'storage';
 import { CalendarList } from '../calendar/CalendarList';
 

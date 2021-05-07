@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
+import { Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
