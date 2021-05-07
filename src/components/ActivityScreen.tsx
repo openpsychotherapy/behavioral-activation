@@ -12,6 +12,7 @@ import { ActivityRegistrator } from './activity/ActivityRegistrator';
 import { ActivityHistory } from './activity/ActivityHistory';
 import { ActivityRateDay } from './activity/ActivityRateDay';
 import { ActivityWeekHistory } from './activity/ActivityWeekHistory';
+import { ActivityPlanning } from './activity/ActivityPlanning';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -50,6 +51,10 @@ const ViewContent = ({ route, navigation }: any) => {
     navigation.navigate('History');
   };
 
+  const registerPlanningButton = () => {
+    navigation.navigate("RegisterPlanning")
+  }
+
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     setIconListVisible(false);
     navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
@@ -62,7 +67,7 @@ const ViewContent = ({ route, navigation }: any) => {
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={navigationButtonSize} backgroundColor={colors.accent} onPress={iconListButton} />
-        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} />
+        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} onPress={registerPlanningButton}/>
         <CircleButton icon='calendar-clock' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
@@ -86,6 +91,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name='Settings' component={SettingsScreen} />
       <ActivityStack.Screen name='RateDay' component={ActivityRateDay} />
       <ActivityStack.Screen name='WeekHistory' component={ActivityWeekHistory} />
+      <ActivityStack.Screen name='RegisterPlanning' component={ActivityPlanning} />
     </ActivityStack.Navigator>
   );
 }

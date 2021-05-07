@@ -4,7 +4,7 @@ import { FlatList} from 'react-native';
 import { Divider, Title, useTheme } from 'react-native-paper';
 
 import { entryGt } from 'storage/calendar';
-import { Calendar } from 'storage/types';
+import { Calendar, CalendarEntry } from 'storage/types';
 import { ISODate } from 'utils';
 import { CalendarListSection } from './CalendarListSection';
 import Storage from 'storage';
@@ -70,7 +70,12 @@ const insertMonthHeaders = (groups: Calendar[]): (Calendar | string)[] => {
 
 type ListState = { groups: Calendar[], entryCount: number };
 
-export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
+interface Props {
+  calendar: Calendar;
+  onEntryClick: (entry: CalendarEntry) => void;
+}
+
+export const CalendarList = ({ calendar, onEntryClick }: Props) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
   const [settings, modifySettings] = Storage.useSettings();
   const { title } = useTheme();
@@ -129,7 +134,7 @@ export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
             <Divider style={{ height: 2 }}/>
           </>
         ) : (
-          <CalendarListSection entries={item}/>
+          <CalendarListSection entries={item} onEntryClick={onEntryClick} />
         )
       }
     >
