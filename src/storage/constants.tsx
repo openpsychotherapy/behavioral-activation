@@ -7,6 +7,8 @@ import {
   Values,
 } from './types';
 
+export const storeVersionKey: string = 'storeVersion';
+
 export const activitiesKey: string = 'activities';
 export const activitiesDefault: Activities = [];
 

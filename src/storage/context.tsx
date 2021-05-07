@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, createContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { migrations, storeVersion } from 'storage/migration';
 import {
   activitiesKey,
   activitiesDefault,
@@ -14,6 +15,7 @@ import {
   settingsDefault,
   valuesKey,
   valuesDefault,
+  storeVersionKey,
 } from './constants';
 
 interface StorageContextType {
@@ -81,24 +83,23 @@ export const Provider = (props: any) => {
 
   useEffect(() => {
     (async () => {
-      /**
-       * Returns a value from AsyncStorage if it exists, def(ault) otherwise.
-       *
-       * @param key - The key of the desired value in AsyncStorage
-       * @param def - The object to use if no value is found
-       * @returns A value from AsyncStorage if it exists, def otherwise.
-       */
-      const getFromStorage = async (key: string, def: any): Promise<any> => {
-        const value = await AsyncStorage.getItem(key);
-        return value ? JSON.parse(value) : def;
+      let version = parseInt(await AsyncStorage.getItem(storeVersionKey) ?? "0");
+      while (version != storeVersion) {
+        version = await migrations[version]()
+        await AsyncStorage.setItem(storeVersionKey, version.toString());
       }
+
+      const getFromStorage = async (key: string): Promise<any> => {
+        return JSON.parse(await AsyncStorage.getItem(key) as string);
+      }
+
       const newStore = {
-        [activitiesKey]: await getFromStorage(activitiesKey, activitiesDefault),
-        [calendarKey]: await getFromStorage(calendarKey, calendarDefault),
-        [iconsKey]: await getFromStorage(iconsKey, iconsDefault),
-        [peopleKey]: await getFromStorage(peopleKey, peopleDefault),
-        [settingsKey]: await getFromStorage(settingsKey, settingsDefault),
-        [valuesKey]: await getFromStorage(valuesKey, valuesDefault),
+        [activitiesKey]: await getFromStorage(activitiesKey),
+        [calendarKey]: await getFromStorage(calendarKey),
+        [iconsKey]: await getFromStorage(iconsKey),
+        [peopleKey]: await getFromStorage(peopleKey),
+        [settingsKey]: await getFromStorage(settingsKey),
+        [valuesKey]: await getFromStorage(valuesKey),
       };
       setStore(newStore);
     })()
