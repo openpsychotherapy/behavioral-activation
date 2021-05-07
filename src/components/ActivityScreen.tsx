@@ -13,6 +13,7 @@ import { ActivityHistory } from './activity/ActivityHistory';
 import { ActivityRateDay } from './activity/ActivityRateDay';
 import { ActivityWeekHistory } from './activity/ActivityWeekHistory';
 import { ActivityPlanning } from './activity/ActivityPlanning';
+import { ActivityPlanningRate} from './activity/ActivityPlanningRate';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -92,6 +93,7 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name='RateDay' component={ActivityRateDay} />
       <ActivityStack.Screen name='WeekHistory' component={ActivityWeekHistory} />
       <ActivityStack.Screen name='RegisterPlanning' component={ActivityPlanning} />
+      <ActivityStack.Screen name='RegisterPlanningRate' component={ActivityPlanningRate} />
     </ActivityStack.Navigator>
   );
 }

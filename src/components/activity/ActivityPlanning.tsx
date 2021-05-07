@@ -36,8 +36,8 @@ export const ActivityPlanning = ({ navigation }: any) => {
   //  );
 
   const onEntryClick = (entry: CalendarEntry) => {
-    navigation.navigate("rateActivity")
+    navigation.navigate("RegisterPlanningRate")
   }
     
-  return <CalendarList calendar={calendar} onEntryClick={(entry: CalendarEntry) => {console.log(entry)}} />;
+  return <CalendarList calendar={calendar} onEntryClick={onEntryClick} />;
 }
