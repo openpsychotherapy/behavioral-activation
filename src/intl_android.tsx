@@ -48,7 +48,7 @@ if (isAndroid) {
   // TODO: Figure out why TS is mad
   if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
     // @ts-ignore TODO: Find proper fix for this. This line of code works.
-      Intl.DateTimeFormat.__setDefaultTimeZone( // <-- 'Never' type causes problems
+    Intl.DateTimeFormat.__setDefaultTimeZone( // <-- 'Never' type causes problems
       require('expo-localization').timezone // <-- Is required on Android
     );
   }
