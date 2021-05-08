@@ -7,6 +7,7 @@ import Slider from '@react-native-community/slider';
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { CalendarEntry, ActivitiesEntry } from 'storage/types';
+import { ConfrimPortal } from './ConfirmPortal';
 
 export const ActivityPlanningRate = ({ navigation, route }: any) => {
 
@@ -16,6 +17,7 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
   const { iconSizes, colors } = useTheme();
   const [activities, modifyActivities] = Storage.useActivities();
   const [calendar, modifyCalendar] = Storage.useCalendar();
+  const [portalState, setPortalState] = React.useState({ show: false, onConfirm: () => {} });
 
   const onConfirm = () => {
     //modify data
@@ -39,10 +41,24 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
       endHour = 24;
     }
 
-    modifyActivities.addInterval(calendarEntry.date, startHour, endHour - 1, entry)
-    modifyCalendar.replace(calendarEntry, { ...calendarEntry, isRegistered: true })
-    // Go back
-    navigation.navigate('RegisterPlanning');
+    const dayIndex = activities.findIndex(a => a.date == calendarEntry.date);
+    const isAlreadyRegistered = dayIndex != 1 &&
+      activities[dayIndex]
+      .entries
+      .slice(startHour, endHour)
+      .some(entry => entry != null);
+
+    const onCommit = () => {
+      modifyActivities.addInterval(calendarEntry.date, startHour, endHour - 1, entry)
+      modifyCalendar.replace(calendarEntry, { ...calendarEntry, isRegistered: true })
+      navigation.navigate('RegisterPlanning');
+    }
+
+    if (isAlreadyRegistered) {
+      setPortalState({ show: true, onConfirm: onCommit });
+    } else {
+      onCommit();
+    }
   };
 
   const onCancel = () => navigation.navigate('RegisterPlanning');
@@ -99,6 +115,13 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
       <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
         <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
         <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
+        <ConfrimPortal 
+          onConfirm={portalState.onConfirm}
+          showPortal={portalState.show}
+          setShowPortal={b => setPortalState({ ...portalState, show: b })}
+          text={lang.activitiesDialogConflict}
+          yes={lang.activitiesDialogYes}
+        />
       </View>
     </View>
   );

@@ -8,9 +8,10 @@ import Storage from 'storage';
 interface Props {
   entries: Calendar;
   onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
 }
 
-export const CalendarListSection = ({ entries, onEntryClick }: Props) => {
+export const CalendarListSection = ({ entries, onEntryClick, onLongPress }: Props) => {
   const [settings, modifySettings] = Storage.useSettings();
   const { title, calendar: calStyle } = useTheme();
   const formatter = Intl.DateTimeFormat(settings.language, { weekday: 'short' });
@@ -28,7 +29,12 @@ export const CalendarListSection = ({ entries, onEntryClick }: Props) => {
         {weekday}
       </List.Subheader>
       {entries.map((entry: CalendarEntry, i: number) =>
-      <CalendarListItem key={i} entry={entry} index={i} onEntryClick={onEntryClick} />)}
+      <CalendarListItem 
+        key={i}
+        entry={entry} 
+        index={i} 
+        onEntryClick={onEntryClick} 
+        onLongPress ={() => (onLongPress ?? (e => {}))(entry)}/>)}
     </List.Section>
   );
 }

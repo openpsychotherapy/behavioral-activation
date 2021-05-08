@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList} from 'react-native';
 import { Divider, Title, useTheme } from 'react-native-paper';
 
-import { entryGt } from 'storage/calendar';
+import { entryGtEq } from 'storage/calendar';
 import { Calendar, CalendarEntry } from 'storage/types';
 import { ISODate } from 'utils';
 import { CalendarListSection } from './CalendarListSection';
@@ -73,9 +73,10 @@ type ListState = { groups: Calendar[], entryCount: number };
 interface Props {
   calendar: Calendar;
   onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
 }
 
-export const CalendarList = ({ calendar, onEntryClick }: Props) => {
+export const CalendarList = ({ calendar, onEntryClick, onLongPress }: Props) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
   const [settings, modifySettings] = Storage.useSettings();
   const { title } = useTheme();
@@ -84,7 +85,7 @@ export const CalendarList = ({ calendar, onEntryClick }: Props) => {
     // Load upcoming calendar entries when initializing
     const today = ISODate(new Date());
     const upcomingEntries = calendar.filter(entry => {
-      return entryGt(entry, {...entry, date: today, start: '00:00'})
+      return entryGtEq(entry, {...entry, date: today, start: '00:00'})
     });
     setListState({
       groups: groupByDate(upcomingEntries),
@@ -134,7 +135,11 @@ export const CalendarList = ({ calendar, onEntryClick }: Props) => {
             <Divider style={{ height: 2 }}/>
           </>
         ) : (
-          <CalendarListSection entries={item} onEntryClick={onEntryClick} />
+          <CalendarListSection 
+            entries={item} 
+            onEntryClick={onEntryClick} 
+            onLongPress={onLongPress}
+          />
         )
       }
     >

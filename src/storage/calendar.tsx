@@ -41,6 +41,18 @@ export const entryGt = (a: CalendarEntry, b: CalendarEntry): boolean => {
 }
 
 /**
+ * Compares two calendar entries and returns if a comes after or at the same
+ * time as b.
+ *
+ * @param a - The first calendar entry
+ * @param b - The second calendar entry
+ * @returns a.date > b.date || (a.date == b.date && a.start >= b.start)
+ */
+export const entryGtEq = (a: CalendarEntry, b: CalendarEntry): boolean => {
+  return a.date > b.date || (a.date == b.date && a.start >= b.start);
+}
+
+/**
  * Hook returning the calendar and functions to modify the calendar.
  *
  * @example

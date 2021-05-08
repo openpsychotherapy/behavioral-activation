@@ -6,6 +6,8 @@ const en = {
     activitiesButtonRateDay: 'Rate day',
     activitiesButtonRateDayModify: 'Change rating',
     activitiesSliderRateDay: 'Today\'s rating',
+    activitiesDialogConflict: 'One or more activities will be replaced.',
+    activitiesDialogYes: 'ok',
 
     valuesButtonRelations: 'Relationship',
     valuesButtonWork: 'Studies/Career',

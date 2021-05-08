@@ -27,9 +27,10 @@ interface Props {
   entry: CalendarEntry;
   index: number;
   onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
 }
 
-export const CalendarListItem = ({ entry, index, onEntryClick }: Props) => {
+export const CalendarListItem = ({ entry, index, onEntryClick, onLongPress }: Props) => {
   const { title, calendar: calStyle } = useTheme();
   const [settings, modifySettings] = Storage.useSettings();
   const navigation = useNavigation();
@@ -60,6 +61,7 @@ export const CalendarListItem = ({ entry, index, onEntryClick }: Props) => {
           description={entry.text}
           right={() => <List.Icon icon={entry.icon} />}
           onPress={() => onEntryClick(entry)}
+          onLongPress ={() => (onLongPress ?? (e => {}))(entry)}
         />
       </Surface>
     </View>

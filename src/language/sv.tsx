@@ -6,6 +6,8 @@ const sv = {
     activitiesButtonRateDay: 'Betygsätt dag',
     activitiesButtonRateDayModify: 'Ändra betyg',
     activitiesSliderRateDay: 'Dagens betyg',
+    activitiesDialogConflict: 'En eller flera aktiviteter kommer att ersättas.',
+    activitiesDialogYes: 'ok',
 
     valuesButtonRelations: 'Relationer',
     valuesButtonWork: 'Studier/Karriär',

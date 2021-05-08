@@ -7,6 +7,7 @@ interface ConfrimPortalProps {
   setShowPortal: (showPortal: boolean) => void;
   onConfirm: () => void;
   text: string;
+  yes?: string;
 }
 
 export const ConfrimPortal = (props: ConfrimPortalProps) => {
@@ -31,7 +32,7 @@ export const ConfrimPortal = (props: ConfrimPortalProps) => {
             {lang.valuesDialogNo}
           </Button>
           <Button onPress={onConfirm}>
-            {lang.valuesDialogYes}
+            {props.yes ?? lang.valuesDialogYes}
           </Button>
         </Dialog.Actions>
       </Dialog>
