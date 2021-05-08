@@ -49,7 +49,9 @@ const en = {
     activityWeekHistoryRateDay: 'Today\'s rating',
     activityWeekHistoryNumberOfActivities: 'Number of activities',
     activityWeekHistoryTitleDay: 'Today\'s history',
-    activityWeekHistoryTitleWeek: 'Activity history'
+    activityWeekHistoryTitleWeek: 'Activity history',
+
+    calendarNoItem: 'You have no planned activities today.\nPull down to get earlier planned activities.'
 }
 
 export default en;

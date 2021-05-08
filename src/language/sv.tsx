@@ -49,7 +49,9 @@ const sv = {
     activityWeekHistoryRateDay: 'Dagens betyg',
     activityWeekHistoryNumberOfActivities: 'Antal aktiviteter',
     activityWeekHistoryTitleDay: 'Dagens historik',
-    activityWeekHistoryTitleWeek: 'Aktivitetshistorik'
+    activityWeekHistoryTitleWeek: 'Aktivitetshistorik',
+
+    calendarNoItem: 'Inga planerade aktiviter idag.\nDrag neråt för att få tidigare planerade aktiviteter'
 }
 
 export default sv;
