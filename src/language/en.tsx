@@ -14,7 +14,7 @@ const en = {
     valuesButtonResponsibilities: 'Daily responibility',
     valuesButtonPeople: 'Support persons',
     valuesDialogText: 'Are you sure you want to delete?',
-    valuesDialogYes: 'Ok',
+    valuesDialogYes: 'Yes',
     valuesDialogNo: 'Cancel',
     valuesPlaceholder: 'Write here',
 

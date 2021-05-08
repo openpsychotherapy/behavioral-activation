@@ -114,21 +114,22 @@ export const useActivities = (): [Activities, ModifyActivities] => {
 
   /**
    * Inserts multiple entries into the activities object and updates the store.
+   * The range in inclusive.
    *
    * @remarks
    * This function will add the date if not present.
    *
    * @param date - The date on which the entry will be inserted (YYYY-mm-dd)
-   * @param startHour - The start hour on which the entries will be inserted [0, 22]
-   * @param endHour - The end hour on which the entries will be inserted [1, 23]
+   * @param startHour - The start hour on which the entries will be inserted [0, 23]
+   * @param endHour - The end hour on which the entries will be inserted [0, 23]
    * @param entry - The entry to be inserted
    * @returns `true` if the entry was inserted, `false` otherwise
    */
   const addInterval = (date: string, startHour: number, endHour: number, entry: ActivitiesEntry): boolean => {
-    if (isDate(date) && 0 <= startHour && startHour < endHour && endHour <= 24) {
+    if (isDate(date) && 0 <= startHour && startHour <= endHour && endHour < 24) {
       const newActivities = _insertDay(date);
       const index = newActivities.findIndex(a => a.date === date);
-      for (let hour = startHour; hour < endHour; ++hour) {
+      for (let hour = startHour; hour <= endHour; ++hour) {
         newActivities[index].entries[hour] = entry;
       }
       setStoreItem(activitiesKey, newActivities);

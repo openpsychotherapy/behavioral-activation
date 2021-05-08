@@ -89,7 +89,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     }
 
     // Add entry att every applicable hour
-    modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour, entry);
+    modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour - 1, entry);
 
     // Go back
     navigation.navigate('Activities', {activityRegistered: true})

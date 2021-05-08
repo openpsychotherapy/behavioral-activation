@@ -14,7 +14,7 @@ const sv = {
     valuesButtonResponsibilities: 'Ansvar',
     valuesButtonPeople: 'Stödpersoner',
     valuesDialogText: 'Är du säker på att du vill ta bort?',
-    valuesDialogYes: 'Ok',
+    valuesDialogYes: 'Ja',
     valuesDialogNo: 'Avbryt',
     valuesPlaceholder: 'Skriv här',
 

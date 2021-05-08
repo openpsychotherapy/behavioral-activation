@@ -6,27 +6,46 @@ import Slider from '@react-native-community/slider';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
+import { CalendarEntry, ActivitiesEntry } from 'storage/types';
 
-export const ActivityPlanningRate = ({ navigation }: any) => {
+export const ActivityPlanningRate = ({ navigation, route }: any) => {
 
   const lang = useTranslation();
   const [importance, setImportance] = React.useState(5);
   const [enjoyment, setEnjoyment] = React.useState(5);
-
   const { iconSizes, colors } = useTheme();
+  const [activities, modifyActivities] = Storage.useActivities();
+  const [calendar, modifyCalendar] = Storage.useCalendar();
 
   const onConfirm = () => {
     //modify data
+    const calendarEntry: CalendarEntry = route.params.entry;
 
+    const entry: ActivitiesEntry = {
+      text: calendarEntry.text,
+      icon: calendarEntry.icon,
+      person: calendarEntry.person,
+      importance: importance,
+      enjoyment: enjoyment,
+    };
+
+    const startHour = parseInt(calendarEntry.start.split(":")[0]);
+    let [endHour, endMinute] = calendarEntry.end.split(":").map(n => parseInt(n));
+
+    if (endMinute > 0) {
+      endHour += 1;
+    }
+    if (endHour == 0) {
+      endHour = 24;
+    }
+
+    modifyActivities.addInterval(calendarEntry.date, startHour, endHour - 1, entry)
+    modifyCalendar.replace(calendarEntry, { ...calendarEntry, isRegistered: true })
     // Go back
     navigation.navigate('RegisterPlanning');
   };
 
-
-  const onCancel = () => {
-    // Go back
-    navigation.navigate('RegisterPlanning');
-  };
+  const onCancel = () => navigation.navigate('RegisterPlanning');
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column', justifyContent: 'space-evenly' }}>
