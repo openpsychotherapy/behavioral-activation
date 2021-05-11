@@ -42,7 +42,7 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
     }
 
     const dayIndex = activities.findIndex(a => a.date == calendarEntry.date);
-    const isAlreadyRegistered = dayIndex != 1 &&
+    const isAlreadyRegistered = dayIndex != -1 &&
       activities[dayIndex]
       .entries
       .slice(startHour, endHour)
