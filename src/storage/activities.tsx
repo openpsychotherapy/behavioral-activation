@@ -114,7 +114,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
 
   /**
    * Inserts multiple entries into the activities object and updates the store.
-   * The range in inclusive.
+   * The range is inclusive.
    *
    * @remarks
    * This function will add the date if not present.
