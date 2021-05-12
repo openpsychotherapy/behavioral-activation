@@ -119,39 +119,39 @@ export const CalendarList = ({ calendar, onEntryClick, onLongPress }: Props) => 
   }
 
   return (
-      <FlatList
-        style={{ width: '100%' }}
-        data={insertMonthHeaders(listState.groups)}
-        refreshing={false}
-        onRefresh={onRefresh}
-        keyExtractor={(item) => JSON.stringify(item)}
-        renderItem={({item}) =>
-          typeof(item) === 'string' ? (
-            <>
-              <Divider style={{ height: 2 }}/>
-              <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
-                {Intl.DateTimeFormat(settings.language, { year: 'numeric', month: 'long' })
-                  .format(new Date(item))}
-              </Title>
-              <Divider style={{ height: 2 }}/>
-            </>
-          ) : (
-            <CalendarListSection 
-              entries={item} 
-              onEntryClick={onEntryClick} 
-              onLongPress={onLongPress}
-            />
-          )
-        }
-        contentContainerStyle={listState.groups.length == 0 ? {flexGrow: 1} : {}}
-        ListEmptyComponent={() =>
-          <View style={{flex: 1, height: '100%', justifyContent: 'center'}}>
-            <Text style={{textAlign: 'center'}}>
-              {lang.calendarNoItem}
-            </Text>
-          </View>
-        }
-      >
-      </FlatList>
+    <FlatList
+      style={{ width: '100%' }}
+      data={insertMonthHeaders(listState.groups)}
+      refreshing={false}
+      onRefresh={onRefresh}
+      keyExtractor={(item) => JSON.stringify(item)}
+      renderItem={({item}) =>
+        typeof(item) === 'string' ? (
+          <>
+            <Divider style={{ height: 2 }}/>
+            <Title style={{ ...title, textAlign: 'center', marginVertical: 10 }}>
+              {Intl.DateTimeFormat(settings.language, { year: 'numeric', month: 'long' })
+                .format(new Date(item))}
+            </Title>
+            <Divider style={{ height: 2 }}/>
+          </>
+        ) : (
+          <CalendarListSection 
+            entries={item} 
+            onEntryClick={onEntryClick} 
+            onLongPress={onLongPress}
+          />
+        )
+      }
+      contentContainerStyle={listState.groups.length == 0 ? {flexGrow: 1} : {}}
+      ListEmptyComponent={() =>
+        <View style={{flex: 1, height: '100%', justifyContent: 'center'}}>
+          <Text style={{textAlign: 'center'}}>
+            {lang.calendarNoItem}
+          </Text>
+        </View>
+      }
+    >
+    </FlatList>
   );
 }
