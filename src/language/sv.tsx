@@ -1,6 +1,11 @@
 const sv = {
     languageName: 'Svenska',
 
+    navigationLabelActivites: 'Registrera',
+    navigationLabelCalendar: 'Planera',
+    navigationLabelValues: 'Värderingar',
+    navigationLabelInformation: 'Information',
+
     valuesHeaderEvaluation: 'Värdering',
 
     activitiesButtonRateDay: 'Betygsätt dag',
@@ -53,6 +58,28 @@ const sv = {
     informationCardValuesscreen: 'Värderingsvy',
     informationCardCalenderscreen: 'Kalendervy',
     informationCardBehaviouralactivation: 'Beteendeaktivering',
+
+    routeNames: {
+        Settings: 'Inställningar',
+        History: 'Aktivitetshistorik',
+        Activities: 'Registrera aktivitet',
+        ActivityRegistration: 'Registrera aktivitet',
+        RateDay: 'Betygsätt dag',
+        WeekHistory: 'Veckans historik',
+        Calendar: 'Kalender',
+        CalendarRegistration: "Planera/Ändra aktivitet",
+        StartScreenView: 'Värderingar',
+        CategoryView: 'Värderingar',
+        AddTopicView: 'Lägg till värdering',
+        EntryView: 'Aktiviteter',
+        ChooseEntryIconView: 'Välj ikon',
+        AddEntryView: 'Lägg till aktivitet',
+        Information: 'Information',
+        BehaviouralActivation: 'Beteendeaktivering',
+        ActivityInfo: 'Aktivitetsvyn',
+        ValuesInfo: 'Värderingsvyn',
+        CalenderInfo: 'Kalendervyn',
+    },
 }
 
 export default sv;

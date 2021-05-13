@@ -1,6 +1,11 @@
 const en = {
     languageName: 'English',
 
+    navigationLabelActivites: 'Registation',
+    navigationLabelCalendar: 'Planning',
+    navigationLabelValues: 'Values',
+    navigationLabelInformation: 'Information',
+
     valuesHeaderEvaluation: 'Values',
 
     activitiesButtonRateDay: 'Rate day',
@@ -53,6 +58,10 @@ const en = {
     informationCardValuesscreen: 'Valuesscreen',
     informationCardCalenderscreen: 'Calenderscreen',
     informationCardBehaviouralactivation: 'Behavioural activation',
+
+    routeNames: {
+        Settings: "Settings",
+    },
 }
 
 export default en;
