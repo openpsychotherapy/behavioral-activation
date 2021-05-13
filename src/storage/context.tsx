@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, createContext } from 'react';
+import React, { useMemo, useEffect, createContext, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { migrations, storeVersion } from 'storage/migration';
@@ -47,6 +47,17 @@ const contextDefault: StorageContextType = {
  */
 export const StorageContext = createContext<StorageContextType>(contextDefault);
 
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case 'setKey':
+      return  { ...state, [action.payload.key]: action.payload.value };
+    case 'setValue':
+      return action.payload;
+    default:
+      throw new Error();
+  }
+}
+
 /**
  * A context provider which wraps StorageContext.Provider with additional
  * functionality.
@@ -67,7 +78,7 @@ export const StorageContext = createContext<StorageContextType>(contextDefault);
  * ```
  */
 export const Provider = (props: any) => {
-  const [store, setStore] = useState(contextDefault.store);
+  const [store, dispatch] = useReducer(reducer, contextDefault.store);
 
   /**
    * Inserts key-value pairs into both AsyncStorage and the store kept in the
@@ -77,9 +88,49 @@ export const Provider = (props: any) => {
    * @param value - The object to set as the value
    */
   const setStoreItem = (key: string, value: any) => {
-    AsyncStorage.setItem(key, JSON.stringify(value));
-    setStore({ ...store, [key]: value });
+    dispatch({ type: 'setKey', payload: { key, value }});
   }
+
+  /**
+   * This had to be done because we tried using something too simple to handle
+   * complex state. The solution to this mess is probably to rewrite the
+   * storage to use something like Redux.
+   */
+  useEffect(() => {
+    if (store[activitiesKey] != contextDefault.store[activitiesKey]) {
+      AsyncStorage.setItem(activitiesKey, JSON.stringify(store[activitiesKey]));
+    }
+  }, [store[activitiesKey]]);
+
+  useEffect(() => {
+    if (store[calendarKey] != contextDefault.store[calendarKey]) {
+      AsyncStorage.setItem(calendarKey, JSON.stringify(store[calendarKey]));
+    }
+  }, [store[calendarKey]]);
+
+  useEffect(() => {
+    if (store[iconsKey] != contextDefault.store[iconsKey]) {
+      AsyncStorage.setItem(iconsKey, JSON.stringify(store[iconsKey]));
+    }
+  }, [store[iconsKey]]);
+
+  useEffect(() => {
+    if (store[peopleKey] != contextDefault.store[peopleKey]) {
+      AsyncStorage.setItem(peopleKey, JSON.stringify(store[peopleKey]));
+    }
+  }, [store[peopleKey]]);
+
+  useEffect(() => {
+    if (store[settingsKey] != contextDefault.store[settingsKey]) {
+      AsyncStorage.setItem(settingsKey, JSON.stringify(store[settingsKey]));
+    }
+  }, [store[settingsKey]]);
+
+  useEffect(() => {
+    if (store[valuesKey] != contextDefault.store[valuesKey]) {
+      AsyncStorage.setItem(valuesKey, JSON.stringify(store[valuesKey]));
+    }
+  }, [store[valuesKey]]);
 
   useEffect(() => {
     (async () => {
@@ -101,7 +152,7 @@ export const Provider = (props: any) => {
         [settingsKey]: await getFromStorage(settingsKey),
         [valuesKey]: await getFromStorage(valuesKey),
       };
-      setStore(newStore);
+      dispatch({ type: 'setValue', payload: newStore});
     })()
   }, []);
 
