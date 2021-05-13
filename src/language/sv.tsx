@@ -47,7 +47,12 @@ const sv = {
     activityWeekHistoryRateDay: 'Dagens betyg',
     activityWeekHistoryNumberOfActivities: 'Antal aktiviteter',
     activityWeekHistoryTitleDay: 'Dagens historik',
-    activityWeekHistoryTitleWeek: 'Aktivitetshistorik'
+    activityWeekHistoryTitleWeek: 'Aktivitetshistorik',
+
+    informationCardActivityscreen: 'Aktivitetsvy',
+    informationCardValuesscreen: 'Värderingsvy',
+    informationCardCalenderscreen: 'Kalendervy',
+    informationCardBehaviouralactivation: 'Beteendeaktivering',
 }
 
 export default sv;

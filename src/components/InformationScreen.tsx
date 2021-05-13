@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Image } from 'react-native';
 import { Text, Card, Title} from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,41 +9,43 @@ import { ActivityInfo } from './info/ActivityInfo';
 import { CalenderInfo } from './info/CalenderInfo';
 import { ValuesInfo } from './info/ValuesInfo';
 import { BehaviouralActivation } from './info/BehaviouralActivation';
+import { useTranslation } from 'language/LanguageProvider';
 
 const InformationStack = createStackNavigator();
 
-const cardsData = [
-  {
-    title: "BehaviouralActivation",
-    imageUri: "https://picsum.photos/700",
-    navigateTo: "BehaviouralActivation",
-  },
-  {
-    title: "The Activityscreen",
-    imageUri: "https://picsum.photos/700",
-    navigateTo: "ActivityInfo",
-  },
-  {
-    title: "The Valuesscreen",
-    imageUri: "https://picsum.photos/700",
-    navigateTo: "ValuesInfo",
-  },
-  {
-    title: "The Calendarscreen",
-    imageUri: "https://picsum.photos/700",
-    navigateTo: "CalenderInfo",
-  },
-];
-
 const ViewContent = ({navigation}: any) => {
+  const dict = useTranslation();
+
+  const cardsData = [
+    {
+      title: dict.informationCardBehaviouralactivation,
+      imageUri: {uri: "https://picsum.photos/700"},
+      navigateTo: "BehaviouralActivation",
+    },
+    {
+      title: dict.informationCardActivityscreen,
+      imageUri: require('../images/activityscreen.png'),
+      navigateTo: "ActivityInfo",
+    },
+    {
+      title: dict.informationCardValuesscreen,
+      imageUri: require('../images/valuesscreen.png'),
+      navigateTo: "ValuesInfo",
+    },
+    {
+      title: dict.informationCardCalenderscreen,
+      imageUri: require('../images/calendarscreen.png'),
+      navigateTo: "CalenderInfo",
+    },
+  ];
   const renderItem = ({item}:any) => (
     <Card
     onPress={() => navigation.navigate(item.navigateTo)}
-    style={{marginBottom: 20, padding: 10}}>
+    style={{justifyContent: 'space-evenly', marginHorizontal: 10, marginVertical: 10}}>
         <Card.Content style={{alignItems: 'center'}}>
           <Title>{item.title}</Title>
         </Card.Content>
-        <Card.Cover source={{uri: item.imageUri}} />
+         <Card.Cover source={item.imageUri} />
       </Card>
   );
 
@@ -51,7 +53,7 @@ const ViewContent = ({navigation}: any) => {
     <FlatList
       data={cardsData}
       renderItem={renderItem}
-      keyExtractor={(item) => JSON.stringify(item)}
+      keyExtractor={item => item.title}
     >
     </FlatList>
   );
