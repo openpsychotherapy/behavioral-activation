@@ -47,7 +47,12 @@ const en = {
     activityWeekHistoryRateDay: 'Today\'s rating',
     activityWeekHistoryNumberOfActivities: 'Number of activities',
     activityWeekHistoryTitleDay: 'Today\'s history',
-    activityWeekHistoryTitleWeek: 'Activity history'
+    activityWeekHistoryTitleWeek: 'Activity history',
+
+    informationCardActivityscreen: 'Activityscreen',
+    informationCardValuesscreen: 'Valuesscreen',
+    informationCardCalenderscreen: 'Calenderscreen',
+    informationCardBehaviouralactivation: 'Behavioural activation',
 }
 
 export default en;
