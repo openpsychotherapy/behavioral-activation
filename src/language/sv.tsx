@@ -1,12 +1,10 @@
 const sv = {
     languageName: 'Svenska',
 
-    navigationLabelActivites: 'Registrera',
-    navigationLabelCalendar: 'Planera',
-    navigationLabelValues: 'Värderingar',
-    navigationLabelInformation: 'Information',
-
-    valuesHeaderEvaluation: 'Värdering',
+    navigationLabelActivites: 'Registrera',     // Unused
+    navigationLabelCalendar: 'Kalender',        // Unused
+    navigationLabelValues: 'Värderingar',       // Unused
+    navigationLabelInformation: 'Information',  // Unused
 
     activitiesButtonRateDay: 'Betygsätt dag',
     activitiesButtonRateDayModify: 'Ändra betyg',
@@ -67,7 +65,7 @@ const sv = {
         RateDay: 'Betygsätt dag',
         WeekHistory: 'Veckans historik',
         Calendar: 'Kalender',
-        CalendarRegistration: "Planera/Ändra aktivitet",
+        CalendarRegistration: "Planera",
         StartScreenView: 'Värderingar',
         CategoryView: 'Värderingar',
         AddTopicView: 'Lägg till värdering',
@@ -76,9 +74,9 @@ const sv = {
         AddEntryView: 'Lägg till aktivitet',
         Information: 'Information',
         BehaviouralActivation: 'Beteendeaktivering',
-        ActivityInfo: 'Aktivitetsvyn',
-        ValuesInfo: 'Värderingsvyn',
-        CalenderInfo: 'Kalendervyn',
+        ActivityInfo: 'Aktivitetvy',
+        ValuesInfo: 'Värderingvy',
+        CalenderInfo: 'Kalendervy',
     },
 }
 

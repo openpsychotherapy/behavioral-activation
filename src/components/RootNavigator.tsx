@@ -13,7 +13,7 @@ const Tab = createMaterialBottomTabNavigator();
 export const RootNavigator = () => {
   const lang = useTranslation();
   return (
-    <Tab.Navigator initialRouteName='Activity' shifting={true} sceneAnimationEnabled={false} labeled={true}>
+    <Tab.Navigator initialRouteName='Activity' shifting={true} sceneAnimationEnabled={false} labeled={false}>
       <Tab.Screen name='Activites' component={ActivityScreen} options={{ tabBarIcon: 'plus', title: lang.navigationLabelActivites }} />
       <Tab.Screen name='Values' component={ValuesScreen} options={{ tabBarIcon: 'heart', title: lang.navigationLabelValues }} />
       <Tab.Screen name='Calendar' component={CalendarScreen} options={{ tabBarIcon: 'calendar', title: lang.navigationLabelCalendar }} />
