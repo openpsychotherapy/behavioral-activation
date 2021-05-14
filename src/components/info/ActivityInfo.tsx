@@ -52,7 +52,7 @@ export const ActivityInfo = () => {
         <Text style={styles.text}>
           I historiken finns alla aktiviteter som du har registrerat där du på varje aktivitet också kan se hur du graderade den. 
           Här kan du också betygsätta hela din dag. För att se historiken för en annan dag trycker du bara på kalendern längst
-          upp på sidan, där kan du också se hur du graderade hela dagen. 
+          upp på sidan, där kan du också se hur du graderade dagarna. 
         </Text>
         <Image
           style={styles.image}
@@ -60,8 +60,14 @@ export const ActivityInfo = () => {
         />
         <Subheading>Registrera planerade aktiviteter</Subheading>
         <Text style={styles.text}>
-          Vet inte hur den här funkar än. 
+          För att registrera en aktivitet som du redan har planerat in så trycker du bara på menyknappen som ligger i mitten på
+          startsidan. Där finns en vy för att se dagens inplanerade aktiviteter och bara genom att trycka på dem så kan du
+          registrera dem.
         </Text>
+        <Image
+          style={styles.image}
+          source={require('../../images/activityPlanning.png')}
+        />
       </ScrollView>
       
   );
