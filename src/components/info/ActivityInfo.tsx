@@ -37,17 +37,15 @@ export const ActivityInfo = () => {
         </Paragraph>
         <Subheading style={styles.subheading}>Startsidan</Subheading>
         <Paragraph style={styles.text}>
-          När du har navigerat till aktivitetsvyn möts du av en sida med 12 ikoner och 3 menyknappar som finns längst ner på skärmen.
-          De 12 ikonerna är dina favoritikoner och dessa kan ändras under iställningar. 
+          När du har navigerat till aktivitetsvyn möts du av en sida med 12 ikoner och 3 menyknappar som finns längst ner på 
+          skärmen. De 12 ikonerna är dina favoritikoner och dessa kan ändras under iställningar. 
         </Paragraph>
         <Paragraph style={styles.text}>
-          Menyknappen som är längst till vänster
-          innehåller massor av ikoner som är där om du känner att dina favoritikoner inte räcker till. Menyknappen som ligger i mitten
-          navigerar dig till en sida där du kan registrera planerade aktiviteter, mer om det senare. Menyknappen som är längst till höger 
-          navigerar dig till en sida där du kan se en historik på dina registrerade aktiviteter, mer om det senare. 
+          Menyknappen som är längst till vänster innehåller massor av ikoner som är där om du känner att dina favoritikoner 
+          inte räcker till. Menyknappen som ligger i mitten navigerar dig till en sida där du kan registrera planerade 
+          aktiviteter, mer om det senare. Menyknappen som är längst till höger navigerar dig till en sida där du kan se en 
+          historik på dina registrerade aktiviteter, mer om det senare. 
         </Paragraph>
-          
-        
         <Image
           style={styles.image}
           source={require('../../images/activityStartscreen.png')}
