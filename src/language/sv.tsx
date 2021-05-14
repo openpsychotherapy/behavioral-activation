@@ -49,9 +49,9 @@ const sv = {
     activityWeekHistoryTitleDay: 'Dagens historik',
     activityWeekHistoryTitleWeek: 'Aktivitetshistorik',
 
-    informationCardActivityscreen: 'Aktivitetsvy',
-    informationCardValuesscreen: 'Värderingsvy',
-    informationCardCalenderscreen: 'Kalendervy',
+    informationCardActivityscreen: 'Aktivitetsinfo',
+    informationCardValuesscreen: 'Värderingsinfo',
+    informationCardCalenderscreen: 'Kalenderinfo',
     informationCardBehaviouralactivation: 'Beteendeaktivering',
 }
 
