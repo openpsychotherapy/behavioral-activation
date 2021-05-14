@@ -11,10 +11,10 @@ export const ActivityInfo = () => {
       paddingTop: 10
     },
     image: {
-      width: 200, 
-      height: 400, 
+      width: 212, 
+      height: 420, 
       marginBottom: 20,
-      marginTop: 5
+      marginTop: 5,
     },
     heading: {
       fontSize: 30,
