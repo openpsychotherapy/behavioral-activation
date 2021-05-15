@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
+import { Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
 import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
@@ -19,8 +19,9 @@ const ActivityStack = createStackNavigator();
 
 
 const CircleButton = (props: any) => {
+  const { elevation } = useTheme();
   return (
-    <Surface style={{ borderRadius: 100, elevation: 3, backgroundColor: props.backgroundColor }}>
+    <Surface style={{ borderRadius: 100, elevation: elevation.small, backgroundColor: props.backgroundColor }}>
       <IconButton icon={props.icon} size={props.size} onPress={props.onPress} />
     </Surface >
   );

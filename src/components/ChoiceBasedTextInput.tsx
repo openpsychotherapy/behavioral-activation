@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, TouchableWithoutFeedback } from 'react-native';
-import { Text, Button, TextInput, Portal, Dialog, Surface } from 'react-native-paper';
+import { Text, Button, TextInput, Portal, Dialog, Surface, useTheme } from 'react-native-paper';
 import { useTranslation } from 'language/LanguageProvider';
 
 type Choice = {
@@ -37,6 +37,7 @@ export const ChoiceBasedTextInput = (props: {label: string, textInputText: strin
   choices: Choice[], choice: Choice, setChoice: React.Dispatch<React.SetStateAction<Choice>>}) => {
 
   const lang = useTranslation();
+  const { elevation } = useTheme();
   const [visible, setVisible] = React.useState(false);
 
   let choiceComponents = []
@@ -46,7 +47,7 @@ export const ChoiceBasedTextInput = (props: {label: string, textInputText: strin
     // List of all items as surface components
     choiceComponents.push(
       <TouchableWithoutFeedback onPress={()=>{ props.setChoice(choice); setVisible(false) }} key={'c_' + i}>
-        <Surface style={{ flexDirection: 'row', elevation: visible ? 5 : 0, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
+        <Surface style={{ flexDirection: 'row', elevation: visible ? elevation.medium : elevation.zero, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
           <Text style={{ padding: 10}}>{choice.value}</Text>
         </Surface>
       </TouchableWithoutFeedback>
@@ -66,7 +67,7 @@ export const ChoiceBasedTextInput = (props: {label: string, textInputText: strin
         </Dialog>
       </Portal >
 
-      <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 0 }}>
+      <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: elevation.zero }}>
           <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choice.value}</Text>
           <Button onPress={()=> setVisible(true)}>{lang.choiceBasedTextInputChangeLabel}</Button>
       </Surface>

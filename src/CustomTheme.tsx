@@ -23,8 +23,13 @@ declare global {
       text: {
         textsize: number
       }
-      roundnessNumber: {
-        roundnessSize: number       
+      roundness: number,
+
+      elevation: {
+        zero: number
+        small: number,
+        medium: number,
+        large: number
       }
       calendar: {
         dateViewSize: number
@@ -60,8 +65,14 @@ export const CustomTheme = {
   text:{
     textSize: 20
   },
-  roundnessNumber:{
-    roundnessSize: 30
+
+  roundness: 30,
+
+  elevation: {
+    zero: 0,
+    small: 3,
+    medium: 5,
+    large: 10
   },
   calendar: {
     dateViewSize: 60,
