@@ -21,7 +21,7 @@ declare global {
         fontSize: number
       }
       text: {
-        textsize: number
+        textSize: number
       }
       roundness: number,
 
