@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
-import { Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
+import { Surface, List, Caption, FAB, Title} from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -19,7 +19,6 @@ export const ActivityHistory = ({route, navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
-  const { colors } = useTheme();
 
   let historyItems = [];
 

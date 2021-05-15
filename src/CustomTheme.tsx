@@ -1,11 +1,14 @@
-import { DefaultTheme, DarkTheme } from 'react-native-paper';
+import { DefaultTheme, DarkTheme} from 'react-native-paper';
 
 // Typescript custom theme declaration
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
       cancel: string,
-      confirm: string
+      confirm: string,
+      primary: string,
+      accent: string,
+      surface: string,
     }
     interface Theme {
       iconSizes: {
@@ -16,6 +19,12 @@ declare global {
       }
       title: {
         fontSize: number
+      }
+      text: {
+        textsize: number
+      }
+      roundnessNumber: {
+        roundnessSize: number       
       }
       calendar: {
         dateViewSize: number
@@ -32,8 +41,11 @@ export const CustomTheme = {
   colors: {
     ...DefaultTheme.colors,
 
-    cancel: 'red',
-    confirm: 'green'
+    cancel: '#FF0000',
+    confirm: '#10BC00',
+    primary: '#6753D3',
+    accent: '#1DB6EC',
+    surface: '#E1E8ED',
   },
   iconSizes: {
     // IconButton
@@ -43,11 +55,17 @@ export const CustomTheme = {
     avatar: 70
   },
   title: {
-    fontSize: 24,
+    fontSize: 24
+  },
+  text:{
+    textSize: 20
+  },
+  roundnessNumber:{
+    roundnessSize: 30
   },
   calendar: {
     dateViewSize: 60,
-    dateViewMargin: 10,
+    dateViewMargin: 10
   },
   gradingColors: [
     '#FF0000', // red
