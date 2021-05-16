@@ -38,13 +38,13 @@ export const ActivityInfo = () => {
         <Subheading style={styles.subheading}>Startsidan</Subheading>
         <Paragraph style={styles.text}>
           När du har navigerat till aktivitetsvyn möts du av en sida med 12 ikoner och 3 menyknappar som finns längst ner på 
-          skärmen. De 12 ikonerna är dina favoritikoner och dessa kan ändras under iställningar. 
+          skärmen. De 12 ikonerna är dina favoritikoner och dessa kan ändras under inställningar. 
         </Paragraph>
         <Paragraph style={styles.text}>
-          Menyknappen som är längst till vänster innehåller massor av ikoner som är där om du känner att dina favoritikoner 
-          inte räcker till. Menyknappen som ligger i mitten navigerar dig till en sida där du kan registrera planerade 
-          aktiviteter, mer om det senare. Menyknappen som är längst till höger navigerar dig till en sida där du kan se en 
-          historik på dina registrerade aktiviteter, mer om det senare. 
+          Menyknappen som är längst till vänster tar upp en lista på resten av ikonerna, som är där om du känner att dina 
+          favoritikoner inte räcker till. Menyknappen som ligger i mitten navigerar dig till en sida där du kan registrera 
+          planerade aktiviteter. Menyknappen som är längst till höger navigerar dig till en sida där du 
+          kan se en historik på dina registrerade aktiviteter.
         </Paragraph>
         <Image
           style={styles.image}
@@ -53,9 +53,9 @@ export const ActivityInfo = () => {
         <Subheading style={styles.subheading}>Registrera en aktivitet</Subheading>
         <Paragraph style={styles.text}>
           För att registrera en aktivitet så trycker du bara på en ikon som bäst representerar den aktivitet som du har gjort. 
-          Det tar dig till en vy där du kan bestämma dagen och tiden som aktiviteten genomfördes. Här kan du också, om du vill,
-          beskriva aktiviteten mer detaljerat eller också koppla den till en aktivitet som du har definierat i värderingsvyn.
-          Därefter graderar du hur meningsfull och underhållande aktiviteten har varit.
+          Det tar dig till en vy där du kan bestämma dagen och tiden som aktiviteten genomfördes. Här kan du också beskriva aktiviteten 
+          mer detaljerat eller också koppla den till en aktivitet som du har definierat i värderingsvyn. Därefter graderar du hur 
+          meningsfull och underhållande aktiviteten har varit.
         </Paragraph>
         <Image
           style={styles.image}
@@ -63,9 +63,9 @@ export const ActivityInfo = () => {
         />
         <Subheading style={styles.subheading}>Registrera planerade aktiviteter</Subheading>
         <Paragraph style={styles.text}>
-          För att registrera en aktivitet som du redan har planerat in så trycker du bara på menyknappen som ligger i mitten på
-          startsidan. Där finns en vy för att se dagens inplanerade aktiviteter och bara genom att trycka på dem så kan du
-          registrera dem.
+          För att registrera en aktivitet som du redan har planerat in så trycker du på menyknappen som ligger i mitten på
+          startsidan. Där finns en vy för att se dagens inplanerade aktiviteter och genom att trycka på en så kan du
+          registrera den.
         </Paragraph>
         <Image
           style={styles.image}
@@ -74,7 +74,7 @@ export const ActivityInfo = () => {
         <Subheading style={styles.subheading}>Historik</Subheading>
         <Paragraph style={styles.text}>
           I historiken finns alla aktiviteter som du har registrerat där du på varje aktivitet också kan se hur du graderade den. 
-          Här kan du också betygsätta hela din dag. För att se historiken för en annan dag trycker du bara på kalendern längst
+          Här kan du också betygsätta hela din dag. För att se historiken för en annan dag trycker du bara på datumet längst
           upp på sidan, där kan du också se hur du graderade dagarna. 
         </Paragraph>
         <Image
