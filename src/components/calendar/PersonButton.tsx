@@ -30,13 +30,13 @@ export const PersonButton = ({ person, setPerson }: Props) => {
         </Button>
       }
     >
-        {people.map((p, index) =>
-          <Menu.Item
-            onPress={() => { setPerson(p); closeMenu(); }}
-            title={p}
-            key={index}
-          />
-        )}
+      {people.map((p, index) =>
+        <Menu.Item
+          onPress={() => { setPerson(p); closeMenu(); }}
+          title={p}
+          key={index}
+        />
+      )}
     </Menu>
   )
 }
