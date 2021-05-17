@@ -2,29 +2,9 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Headline, Subheading, Paragraph } from 'react-native-paper';
+import {styles} from './Styles';
 
 export const ActivityInfo = () => {
-  const styles = StyleSheet.create({
-    text: {
-      margin: 10,
-      fontSize: 18,
-      paddingTop: 10
-    },
-    image: {
-      width: 212, 
-      height: 420, 
-      marginBottom: 20,
-      marginTop: 5,
-    },
-    heading: {
-      fontSize: 30,
-    },
-    subheading: {
-      paddingTop: 15,
-      fontSize: 22,
-    },
-    
-  });
 
   return (
       <ScrollView 

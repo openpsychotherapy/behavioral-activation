@@ -49,9 +49,9 @@ const en = {
     activityWeekHistoryTitleDay: 'Today\'s history',
     activityWeekHistoryTitleWeek: 'Activity history',
 
-    informationCardActivityscreen: 'Activityinfo',
-    informationCardValuesscreen: 'Valuesinfo',
-    informationCardCalenderscreen: 'Calenderinfo',
+    informationCardActivityscreen: 'Activities',
+    informationCardValuesscreen: 'Values',
+    informationCardCalenderscreen: 'Calendar',
     informationCardBehaviouralactivation: 'Behavioural activation',
 }
 
