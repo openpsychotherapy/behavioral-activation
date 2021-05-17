@@ -120,6 +120,6 @@ be alarmed! We will go through everything you need change step by step.
 The language should now be available to the application. If you want to try it out yourself check out the Building section above on how to build a Development build.
 
 To include the translation with the published version of the application push your changes to its own branch and create a pull request for others to review.
-When the pull request has been approve a developer will merge your changes into the main branch and will be included with the next publishing build of the application.
+When the pull request has been approved a developer will merge your changes into the main branch and the translation will be included with the next publishing build of the application.
 
 Thank you for your contribution!
