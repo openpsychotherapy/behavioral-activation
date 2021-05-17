@@ -1,7 +1,10 @@
 const en = {
     languageName: 'English',
 
-    valuesHeaderEvaluation: 'Values',
+    navigationLabelActivites: 'Registation',    // Unused
+    navigationLabelCalendar: 'Calendar',        // Unused
+    navigationLabelValues: 'Values',            // Unused
+    navigationLabelInformation: 'Information',  // Unused
 
     activitiesButtonRateDay: 'Rate day',
     activitiesButtonRateDayModify: 'Change rating',
@@ -53,6 +56,28 @@ const en = {
     informationCardValuesscreen: 'Valuesscreen',
     informationCardCalenderscreen: 'Calenderscreen',
     informationCardBehaviouralactivation: 'Behavioural activation',
+
+    routeNames: {
+        Settings: 'Settings',
+        History: 'History',
+        Activities: 'Register activity',
+        ActivityRegistration: 'Register activity',
+        RateDay: 'Rate day',
+        WeekHistory: 'History',
+        Calendar: 'Calendar',
+        CalendarRegistration: "Planning",
+        StartScreenView: 'Values',
+        CategoryView: 'Values',
+        AddTopicView: 'Add value',
+        EntryView: 'Activities',
+        ChooseEntryIconView: 'Choose icon',
+        AddEntryView: 'Add activity',
+        Information: 'Information',
+        BehaviouralActivation: 'Behaviour Activation',
+        ActivityInfo: 'The Activity Screen',
+        ValuesInfo: 'The Value Screen',
+        CalenderInfo: 'The Calendar Screen',
+    },
 }
 
 export default en;
