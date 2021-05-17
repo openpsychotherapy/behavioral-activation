@@ -28,7 +28,7 @@ function f(a: number, b: number): number {
 ```
 
 ## Language implementation
-Format for keys:"navigationbarTypeText"
+Format for keys:'navigationbarTypeText'
 
 navigationbar: activities, values, calendar or info depending on location in the navigationbar.
 
@@ -38,9 +38,9 @@ Text: Short description of the text preferably one word.
 
 Some examples:
 ```Typescript
-"valuesHeaderEvaluation"
-"activitiesButtonGradeDay"
-"activitiesSliderGradeDay"
+'valuesHeaderEvaluation'
+'activitiesButtonGradeDay'
+'activitiesSliderGradeDay'
 ```
 Keys related to time follows different format.
 
@@ -55,12 +55,12 @@ dict.weekdays[1] // monday
 dict.months[0]   // january
 dict.months[11]  // december
 ```
-Get the word with the key "keyword" in the correct language using :
+Get the word with the key 'keyword' in the correct language using :
 ```Typescript
 import { useTranslation } from 'language/LanguageProvider';
 
 const dict = useTranslation();
-dict.keyword; // or dict["keyword"]
+dict.keyword; // or dict['keyword']
 ```
 
 ## Building
@@ -101,10 +101,10 @@ name it in accordance to the ISO 639-1 standard (if you're unsure what language 
 [here](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)). You can now open the file and change the occurrences of `en` at the start and end of the file to your
 language code. You're now ready to start translating!
 
-Each line contains a so called key-value pair. The "key" (left) represent where in the application the text is located and the "value" (right)
-represents the text that is displayed. **Note:** The "keys" should always be the same and should not be changed.
-To translate the application simply change the "value" within the two " (quotation marks) to the translated word/sentence. If you're unsure how
-to translate a specific sentence check out the "key" for a clue of the context. It's also recommended to use the application itself to see where
+Each line contains a so called key-value pair. The 'key' (left) represent where in the application the text is located and the 'value' (right)
+represents the text that is displayed. **Note:** The 'keys' should always be the same and should not be changed.
+To translate the application simply change the 'value' within the two ' (quotation marks) to the translated word/sentence. If you're unsure how
+to translate a specific sentence check out the 'key' for a clue of the context. It's also recommended to use the application itself to see where
 values are located.
 
 ### Adding a new language to the application
