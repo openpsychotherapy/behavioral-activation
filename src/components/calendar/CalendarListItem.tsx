@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CalendarEntry } from 'storage/types';
 
-import { List, Surface, Text, useTheme } from 'react-native-paper';
+import { Button, List, Surface, Text, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import Storage from 'storage';
@@ -24,7 +24,7 @@ const localizeTime = (language: string, time: string): string => {
 }
 
 export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
-  const { title, calendar: calStyle } = useTheme();
+  const { colors, title, calendar: calStyle } = useTheme();
   const [settings, modifySettings] = Storage.useSettings();
   const navigation = useNavigation();
   const start = localizeTime(settings.language, entry.start);
@@ -61,6 +61,16 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
             });
           }}
         />
+        {entry.person != '' &&
+          <Button
+            style={{alignSelf: 'flex-start'}}
+            color={colors.text}
+            icon='account'
+            uppercase={false}
+          >
+            {entry.person}
+          </Button>
+        }
       </Surface>
     </View>
   );
