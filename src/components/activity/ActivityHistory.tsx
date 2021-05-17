@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Pressable } from 'react-native';
-import { Surface, List, Caption, FAB, Title, useTheme} from 'react-native-paper';
+import { Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 

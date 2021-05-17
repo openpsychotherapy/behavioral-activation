@@ -1,4 +1,4 @@
-import { DefaultTheme, DarkTheme} from 'react-native-paper';
+import { DefaultTheme, DarkTheme } from 'react-native-paper';
 
 // Typescript custom theme declaration
 declare global {

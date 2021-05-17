@@ -1,5 +1,5 @@
 import React from 'react';
-import { Surface, IconButton, useTheme} from 'react-native-paper';
+import { Surface, IconButton, useTheme } from 'react-native-paper';
 
 interface CircleButtonProps {
   icon: string;

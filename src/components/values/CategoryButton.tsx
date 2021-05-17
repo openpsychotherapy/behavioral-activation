@@ -14,7 +14,7 @@ export const CategoryButton = (props: CategoryButtonProps) => {
   const [values, modifyValues] = Storage.useValues();
   const [people, modifyPeople] = Storage.usePeople();
   const [showPortal, setShowPortal] = useState(false);
-  const { colors, roundness} = useTheme();
+  const { colors, roundness } = useTheme();
   const deleteElement = () => {
     if (props.categoryString == 'people') {
       modifyPeople.deletePerson(props.topic.name);
