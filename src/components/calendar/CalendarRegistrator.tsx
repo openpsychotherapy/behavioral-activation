@@ -35,11 +35,6 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   const { iconSizes, colors } = useTheme();
 
   const steps = 4;
-  const defaultChoice = {
-    value: lang.activityRegistratorActivityDefaultChoice,
-    isDefault: true
-  }
-  let choices = [ defaultChoice ];
 
   let activityTextDefault = '';
   let dateDefault = new Date();
@@ -71,7 +66,6 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
     personDefault = entry.person;
   }
 
-  const [values, modifyValues] = Storage.useValues();
   const [calendar, modifyCalendar] = Storage.useCalendar();
 
   const [fromTime, setFromTime] = useState(fromTimeDefault);
@@ -79,46 +73,18 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
   const [date, setDate] = useState(dateDefault);
 
-  const [choice, setChoice] = useState(defaultChoice);
   const [activityText, setActivityText] = useState(activityTextDefault);
 
   const [person, setPerson] = useState(personDefault);
 
 
-  // Find topics to choose from depending on input icon
-  const addTopicEntries = (topics: any) => {
-    for (let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
-      for (let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
-        const entry = topics[topicIndex].entries[entryIndex];
-
-        // If icons match, include it in choices
-        if (entry.icon == route.params.icon) {
-          choices.push({
-            value: entry.text,
-            isDefault: false
-          });
-        }
-      }
-    }
-  };
-
-  // Go through all categories in values
-  addTopicEntries(values.responsibilities);
-  addTopicEntries(values.relations);
-  addTopicEntries(values.enjoyment);
-  addTopicEntries(values.health);
-  addTopicEntries(values.work);
-
 
   const onConfirm = () => {
-    // Check if custom text has been entered
-    const entryText = choice.isDefault ? activityText : choice.value;
-
     const isoDateString = ISODate(date);
 
     // Create entry from information entered by user
     const entry: CalendarEntry = {
-      text: entryText,
+      text: activityText,
       icon: route.params.icon,
       person: person,
       date: isoDateString,
@@ -179,9 +145,14 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
           </View>
 
           {/* TextInputRow */}
-          <View>
-            <ChoiceBasedTextInput label={lang.calendarRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
-              choices={ choices } choice={choice} setChoice={setChoice} />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            {activityText == '' ?
+              <ChoiceBasedTextInput label={lang.calendarRegistratorTextInputLabel} text={activityText} setText={setActivityText} />
+              :
+              <Button icon='close' onPress={() => setActivityText('')} mode='outlined' >
+                {activityText}
+              </Button>
+            }
           </View>
 
         </KeyboardAvoidingView>
@@ -191,12 +162,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
           {person == '' ?
             <PersonButton person={person} setPerson={setPerson} />
             :
-            <Button
-              icon='close'
-              onPress={() => setPerson('')}
-              mode='outlined'
-              style={{ borderRadius: 30 }}
-            >
+            <Button icon='close' onPress={() => setPerson('')} mode='outlined' >
               {person}
             </Button>
           }
