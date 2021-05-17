@@ -74,9 +74,9 @@ const sv = {
         AddEntryView: 'Lägg till aktivitet',
         Information: 'Information',
         BehaviouralActivation: 'Beteendeaktivering',
-        ActivityInfo: 'Aktivitetvy',
-        ValuesInfo: 'Värderingvy',
-        CalenderInfo: 'Kalendervy',
+        ActivityInfo: 'Aktiviteter',
+        ValuesInfo: 'Värderingar',
+        CalenderInfo: 'Kalender',
     },
 }
 

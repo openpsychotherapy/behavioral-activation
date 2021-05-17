@@ -74,9 +74,9 @@ const en = {
         AddEntryView: 'Add activity',
         Information: 'Information',
         BehaviouralActivation: 'Behaviour Activation',
-        ActivityInfo: 'The Activity Screen',
-        ValuesInfo: 'The Value Screen',
-        CalenderInfo: 'The Calendar Screen',
+        ActivityInfo: 'Activities',
+        ValuesInfo: 'Values',
+        CalenderInfo: 'Calendar',
     },
 }
 
