@@ -68,6 +68,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
       toHour,
       toMinute
     );
+    personDefault = entry.person;
   }
 
   const [values, modifyValues] = Storage.useValues();
@@ -179,7 +180,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
           {/* TextInputRow */}
           <View>
-            <ChoiceBasedTextInput label={lang.calenderRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
+            <ChoiceBasedTextInput label={lang.calendarRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
               choices={ choices } choice={choice} setChoice={setChoice} />
           </View>
 
@@ -187,12 +188,12 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
         {/* Person row */}
         <View style={{ alignItems: 'center', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
-          {person == personDefault ?
+          {person == '' ?
             <PersonButton person={person} setPerson={setPerson} />
             :
             <Button
               icon='close'
-              onPress={() => setPerson(personDefault)}
+              onPress={() => setPerson('')}
               mode='outlined'
               style={{ borderRadius: 30 }}
             >
