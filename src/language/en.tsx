@@ -37,7 +37,8 @@ const en = {
     activityRegistratorImporanceLabel : 'Importance',
     activityRegistratorEnjoymentLabel: 'Enjoyment',
 
-    calenderRegistratorTextInputLabel: 'What would you like to plan?',
+    calendarRegistratorTextInputLabel: 'What would you like to plan?',
+    calendarRegistratorPersonLabel: 'Support person',
 
     choiceBasedTextInputChangeLabel: 'Change',
 

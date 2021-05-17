@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Button } from 'react-native-paper';
 import Storage from 'storage';
+import { useTranslation } from 'language/LanguageProvider';
 
 interface Props {
   person: string;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const PersonButton = ({ person, setPerson }: Props) => {
+  const lang = useTranslation();
   const [visible, setVisible] = useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -24,7 +26,7 @@ export const PersonButton = ({ person, setPerson }: Props) => {
           mode='outlined'
           style={{ borderRadius: 30 }}
         >
-          stödperson
+          {lang.calendarRegistratorPersonLabel}
         </Button>
       }
     >
