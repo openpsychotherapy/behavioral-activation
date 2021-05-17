@@ -1,7 +1,10 @@
 const sv = {
     languageName: 'Svenska',
 
-    valuesHeaderEvaluation: 'Värdering',
+    navigationLabelActivites: 'Registrera',     // Unused
+    navigationLabelCalendar: 'Kalender',        // Unused
+    navigationLabelValues: 'Värderingar',       // Unused
+    navigationLabelInformation: 'Information',  // Unused
 
     activitiesButtonRateDay: 'Betygsätt dag',
     activitiesButtonRateDayModify: 'Ändra betyg',
@@ -51,7 +54,35 @@ const sv = {
     activityWeekHistoryTitleDay: 'Dagens historik',
     activityWeekHistoryTitleWeek: 'Aktivitetshistorik',
 
-    calendarNoItem: 'Inga planerade aktiviter idag.\nDrag neråt för att få tidigare planerade aktiviteter'
+
+    calendarNoItem: 'Inga planerade aktiviter idag.\nDrag neråt för att få tidigare planerade aktiviteter',
+
+    informationCardActivityscreen: 'Aktivitetsvy',
+    informationCardValuesscreen: 'Värderingsvy',
+    informationCardCalenderscreen: 'Kalendervy',
+    informationCardBehaviouralactivation: 'Beteendeaktivering',
+
+    routeNames: {
+        Settings: 'Inställningar',
+        History: 'Aktivitetshistorik',
+        Activities: 'Registrera aktivitet',
+        ActivityRegistration: 'Registrera aktivitet',
+        RateDay: 'Betygsätt dag',
+        WeekHistory: 'Veckans historik',
+        Calendar: 'Kalender',
+        CalendarRegistration: "Planera",
+        StartScreenView: 'Värderingar',
+        CategoryView: 'Värderingar',
+        AddTopicView: 'Lägg till värdering',
+        EntryView: 'Aktiviteter',
+        ChooseEntryIconView: 'Välj ikon',
+        AddEntryView: 'Lägg till aktivitet',
+        Information: 'Information',
+        BehaviouralActivation: 'Beteendeaktivering',
+        ActivityInfo: 'Aktivitetvy',
+        ValuesInfo: 'Värderingvy',
+        CalenderInfo: 'Kalendervy',
+    },
 }
 
 export default sv;

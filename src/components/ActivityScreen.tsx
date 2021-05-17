@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { SettingsScreen } from './SettingsScreen';
 
@@ -83,7 +83,7 @@ export const ActivityScreen = ({ navigation }: any) => {
   return (
     <ActivityStack.Navigator initialRouteName='Activities' headerMode='float'
       screenOptions={{
-        header: (props: any) => <CustomNavigationBar {...props} />,
+        header: (props: StackHeaderProps) => <CustomNavigationBar {...props} />,
       }}
     >
       <ActivityStack.Screen name='Activities' component={ViewContent} initialParams={{activityRegistered: false}} />
