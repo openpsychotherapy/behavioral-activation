@@ -11,8 +11,7 @@ export const ActivityInfo = () => {
   return (
       <ScrollView 
       style={{marginHorizontal: 10}}
-      contentContainerStyle={{alignItems: 'center'}}>
-      <Headline style={styles.heading}>{dict.activityInfo.headline}</Headline> 
+      contentContainerStyle={{alignItems: 'center'}}> 
         <Paragraph style={styles.text}>{dict.activityInfo.paragraph1}</Paragraph>
         <Subheading style={styles.subheading}>{dict.activityInfo.subheading1}</Subheading>
         <Paragraph style={styles.text}>{dict.activityInfo.paragraph2}</Paragraph>

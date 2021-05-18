@@ -83,15 +83,14 @@ const sv = {
         Information: 'Information',
         BehaviouralActivation: 'Beteendeaktivering',
 
-        ActivityInfo: 'Aktiviteter',
-        ValuesInfo: 'Värderingar',
-        CalenderInfo: 'Kalender',
+        ActivityInfo: 'Manual för registrering',
+        ValuesInfo: 'Manual för värdering',
+        CalenderInfo: 'Manual för kalendern',
 
         RegisterPlanning: 'Registrera planerad aktivitet',
         RegisterPlanningRate: 'Registrera planerad aktivitet',
     },
     activityInfo : {
-        headline: "Manual för registrering",
         paragraph1: "I aktivitetsvyn kan du både registrera aktiviteter "+
         "och se vilka aktiviteter som du redan har registrerat. "+
         "För att komma till aktivitetsvyn så navigerar du till "+
@@ -132,7 +131,6 @@ const sv = {
         "graderade dagarna."
     },
     valuesInfo: {
-        headline: "Manual för värdering",
         paragraph1: "I värderingsvyn kan du lägga till värderingar, " +
         "stödpersoner och aktiviteter. För att komma till värderingsvyn "+
         "så navigerar du till hjärtat som finns näst längst till vänster "+
@@ -159,7 +157,6 @@ const sv = {
         "plustecknet längst ner till höger. "
     },
     calendarInfo: {
-        headline: "Manual för kalendern",
         paragraph1: "I kalendervyn kan du både planera in aktiviteter och se "+
         "vilka aktiviteter som du redan har planerat in. För att navigera till "+
         "kalendervyn trycker du på kalendern som finns näst längst till höger i "+

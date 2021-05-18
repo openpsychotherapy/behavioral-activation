@@ -12,7 +12,6 @@ export const ValuesInfo = () => {
       <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}>
-      <Headline style={styles.heading}>{dict.valuesInfo.headline}</Headline> 
         <Paragraph style={styles.text}>{dict.valuesInfo.paragraph1}</Paragraph>
         <Subheading style={styles.subheading}>{dict.valuesInfo.subheading1}</Subheading>
         <Paragraph style={styles.text}>{dict.valuesInfo.paragraph2}</Paragraph>

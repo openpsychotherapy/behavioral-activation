@@ -83,12 +83,11 @@ const en = {
         Information: 'Information',
         BehaviouralActivation: 'Behaviour Activation',
 
-        ActivityInfo: 'Activities',
-        ValuesInfo: 'Values',
-        CalenderInfo: 'Calendar',
+        ActivityInfo: 'Activity registration manual',
+        ValuesInfo: 'Values manual',
+        CalenderInfo: 'Calendar manual',
     },
     activityInfo : {
-        headline: "Activity registration manual",
         paragraph1: "In the activityview you can both register activites "+
         "you have done and see past registered activites. To get to the "+
         "activityview you simply press the addition symbol furthest to the "+
@@ -121,7 +120,6 @@ const en = {
         "the page. Here you can also see how you graded each day."
     },
     valuesInfo: {
-        headline: "Values manual",
         paragraph1: "In the valuesview you can add values, support persons "+
         "and activities. To get to the valuesview you simply press the heart "+
         "symbol next to the furthest left in the navigationbar.",
@@ -146,7 +144,6 @@ const en = {
         "bottom right of the screen."
     },
     calendarInfo: {
-        headline: "Calendar manual",
         paragraph1: "In the calendarview you can both plan activites and see the "+
         "activites you have already planned. To get to the calendarview you simply "+
         "press the calendar icon next to the furthest right in the navigationbar.",

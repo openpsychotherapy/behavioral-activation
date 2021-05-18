@@ -11,8 +11,7 @@ export const CalendarInfo = () => {
   return (
       <ScrollView 
       style={{marginHorizontal: 10}}
-      contentContainerStyle={{alignItems: 'center'}}>
-      <Headline style={styles.heading}>{dict.calendarInfo.headline}</Headline> 
+      contentContainerStyle={{alignItems: 'center'}}> 
         <Paragraph style={styles.text}>{dict.calendarInfo.paragraph1}</Paragraph>
         <Subheading style={styles.subheading}>{dict.calendarInfo.subheading1}</Subheading>
         <Paragraph style={styles.text}>{dict.calendarInfo.paragraph2}</Paragraph>
