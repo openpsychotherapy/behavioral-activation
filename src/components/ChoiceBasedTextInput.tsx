@@ -10,7 +10,7 @@ interface Props {
   icon: string;
   text: string;
   setText: (text: string) => void;
-  style: { display: string | undefined };
+  style: any;
 }
 
 export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Props) => {
@@ -27,7 +27,7 @@ export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Prop
 
   // Find topics to choose from depending on input icon
   let choices: string[] = [];
-  const addTopicEntries = (topics: ValuesTopic) => {
+  const addTopicEntries = (topics: ValuesTopic[]) => {
     for (let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
       for (let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
         const entry = topics[topicIndex].entries[entryIndex];
