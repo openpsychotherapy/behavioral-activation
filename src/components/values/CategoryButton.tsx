@@ -14,7 +14,7 @@ export const CategoryButton = (props: CategoryButtonProps) => {
   const [values, modifyValues] = Storage.useValues();
   const [people, modifyPeople] = Storage.usePeople();
   const [showPortal, setShowPortal] = useState(false);
-  const { colors, roundness } = useTheme();
+  const { colors, roundedCorner } = useTheme();
   const deleteElement = () => {
     if (props.categoryString == 'people') {
       modifyPeople.deletePerson(props.topic.name);
@@ -25,7 +25,7 @@ export const CategoryButton = (props: CategoryButtonProps) => {
 
   return (
     <Button
-      theme={{ roundness: roundness }}
+      theme={{ roundness: roundedCorner.roundness }}
       style={{ marginBottom: 20 }}
       contentStyle={{ height: 50 }}
       compact={true}

@@ -8,13 +8,13 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = (props: StyledButtonProps) => {
-  const { colors, roundness } = useTheme();
+  const { colors, roundedCorner } = useTheme();
 
   return (
     <Button
       style={{ justifyContent: 'center' }}
       contentStyle={{ height: 50 }}
-      theme={{ roundness: roundness }}
+      theme={{ roundness: roundedCorner.roundness }}
       compact={true}
       mode='contained'
       onPress={props.categoryButton}

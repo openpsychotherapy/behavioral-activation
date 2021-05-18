@@ -15,7 +15,7 @@ interface EntryButtonProps {
 export const EntryButton = (props: EntryButtonProps) => {
   const [values, modifyValues] = Storage.useValues();
   const [showPortal, setShowPortal] = useState(false);
-  const { colors, roundness } = useTheme();
+  const { colors, roundedCorner } = useTheme();
 
   const deleteElement = () => {
     modifyValues.deleteEntry(props.category, props.topic, props.entry);
@@ -23,7 +23,7 @@ export const EntryButton = (props: EntryButtonProps) => {
 
   return (
     <Button
-      theme={{ roundness: roundness }}
+      theme={{ roundness: roundedCorner.roundness }}
       style={{ marginBottom: 20 }}
       contentStyle={{ height: 50 }}
       compact={true}

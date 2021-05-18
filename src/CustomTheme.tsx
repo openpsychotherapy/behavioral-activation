@@ -23,8 +23,9 @@ declare global {
       text: {
         textSize: number
       }
-      roundness: number,
-
+      roundedCorner:{
+        roundness: number,
+      }
       elevation: {
         zero: number
         small: number,
@@ -65,9 +66,9 @@ export const CustomTheme = {
   text:{
     textSize: 20
   },
-
-  roundness: 30,
-
+  roundedCorner:{
+    roundness: 30,
+  },
   elevation: {
     zero: 0,
     small: 3,
