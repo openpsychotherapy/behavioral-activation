@@ -67,7 +67,7 @@ const ViewContent = ({ route, navigation }: any) => {
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={iconSizes.medium} backgroundColor={colors.accent} onPress={iconListButton} />
-        <CircleButton icon='calendar-multiple-check' size={iconSizes.medium} backgroundColor={colors.accent} onPress={registerPlanningButton}/>
+        <CircleButton icon='calendar-multiple-check' size={iconSizes.medium} backgroundColor={colors.accent}/>
         <CircleButton icon='calendar-clock' size={iconSizes.medium} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
