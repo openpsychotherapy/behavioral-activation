@@ -82,6 +82,8 @@ const en = {
         ActivityInfo: 'The Activity Screen',
         ValuesInfo: 'The Value Screen',
         CalenderInfo: 'The Calendar Screen',
+        RegisterPlanning: 'Register planned activity',
+        RegisterPlanningRate:'Register planned activity',
     },
 
 }

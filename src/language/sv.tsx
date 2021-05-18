@@ -82,6 +82,8 @@ const sv = {
         ActivityInfo: 'Aktivitetvy',
         ValuesInfo: 'Värderingvy',
         CalenderInfo: 'Kalendervy',
+        RegisterPlanning: 'Registrera planerad aktivitet',
+        RegisterPlanningRate: 'Registrera planerad aktivitet',
     },
 }
 
