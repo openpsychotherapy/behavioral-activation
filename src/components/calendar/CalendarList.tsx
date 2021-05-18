@@ -1,10 +1,10 @@
 import { useTranslation } from 'language/LanguageProvider';
 import React, { useEffect, useState } from 'react';
-import { FlatList} from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 import { Divider, Title, useTheme } from 'react-native-paper';
 
-import { entryGt } from 'storage/calendar';
-import { Calendar } from 'storage/types';
+import { entryGtEq } from 'storage/calendar';
+import { Calendar, CalendarEntry } from 'storage/types';
 import { ISODate } from 'utils';
 import { CalendarListSection } from './CalendarListSection';
 import Storage from 'storage';
@@ -70,16 +70,23 @@ const insertMonthHeaders = (groups: Calendar[]): (Calendar | string)[] => {
 
 type ListState = { groups: Calendar[], entryCount: number };
 
-export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
+interface Props {
+  calendar: Calendar;
+  onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
+}
+
+export const CalendarList = ({ calendar, onEntryClick, onLongPress }: Props) => {
   const [listState, setListState] = useState<ListState>({groups: [], entryCount: 0});
   const [settings, modifySettings] = Storage.useSettings();
   const { title } = useTheme();
+  const lang = useTranslation();
 
   useEffect(() => {
     // Load upcoming calendar entries when initializing
     const today = ISODate(new Date());
     const upcomingEntries = calendar.filter(entry => {
-      return entryGt(entry, {...entry, date: today, start: '00:00'})
+      return entryGtEq(entry, {...entry, date: today, start: '00:00'})
     });
     setListState({
       groups: groupByDate(upcomingEntries),
@@ -129,8 +136,20 @@ export const CalendarList = ({ calendar }: { calendar: Calendar }) => {
             <Divider style={{ height: 2 }}/>
           </>
         ) : (
-          <CalendarListSection entries={item}/>
+          <CalendarListSection 
+            entries={item} 
+            onEntryClick={onEntryClick} 
+            onLongPress={onLongPress}
+          />
         )
+      }
+      contentContainerStyle={listState.groups.length == 0 ? {flexGrow: 1} : {}}
+      ListEmptyComponent={() =>
+        <View style={{flex: 1, height: '100%', justifyContent: 'center'}}>
+          <Text style={{textAlign: 'center'}}>
+            {lang.calendarNoItem}
+          </Text>
+        </View>
       }
     >
     </FlatList>

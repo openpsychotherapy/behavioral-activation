@@ -9,6 +9,8 @@ const sv = {
     activitiesButtonRateDay: 'Betygsätt dag',
     activitiesButtonRateDayModify: 'Ändra betyg',
     activitiesSliderRateDay: 'Dagens betyg',
+    activitiesDialogConflict: 'En eller flera aktiviteter kommer att ersättas.',
+    activitiesDialogYes: 'ok',
 
     valuesButtonRelations: 'Relationer',
     valuesButtonWork: 'Studier/Karriär',
@@ -17,7 +19,7 @@ const sv = {
     valuesButtonResponsibilities: 'Ansvar',
     valuesButtonPeople: 'Stödpersoner',
     valuesDialogText: 'Är du säker på att du vill ta bort?',
-    valuesDialogYes: 'Ok',
+    valuesDialogYes: 'Ja',
     valuesDialogNo: 'Avbryt',
     valuesPlaceholder: 'Skriv här',
 
@@ -40,7 +42,8 @@ const sv = {
     activityRegistratorImporanceLabel: 'Meningsfullt',
     activityRegistratorEnjoymentLabel: 'Underhållande',
 
-    calenderRegistratorTextInputLabel: 'Vad vill du planera in?',
+    calendarRegistratorTextInputLabel: 'Vad vill du planera in?',
+    calendarRegistratorPersonLabel: 'Stödperson',
 
     choiceBasedTextInputChangeLabel: 'Byt',
 
@@ -51,6 +54,9 @@ const sv = {
     activityWeekHistoryNumberOfActivities: 'Antal aktiviteter',
     activityWeekHistoryTitleDay: 'Dagens historik',
     activityWeekHistoryTitleWeek: 'Aktivitetshistorik',
+
+
+    calendarNoItem: 'Inga planerade aktiviter idag.\nDrag neråt för att få tidigare planerade aktiviteter',
 
     informationCardActivityscreen: 'Aktivitetsvy',
     informationCardValuesscreen: 'Värderingsvy',
@@ -77,6 +83,8 @@ const sv = {
         ActivityInfo: 'Aktivitetvy',
         ValuesInfo: 'Värderingvy',
         CalenderInfo: 'Kalendervy',
+        RegisterPlanning: 'Registrera planerad aktivitet',
+        RegisterPlanningRate: 'Registrera planerad aktivitet',
     },
 }
 

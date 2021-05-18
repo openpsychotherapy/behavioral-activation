@@ -20,7 +20,7 @@ export type Activities = ActivitiesDay[];
 export interface ModifyActivities {
   add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
   addInterval: (date: string, startHour: number, endHour: number, entry: ActivitiesEntry) => boolean;
-  setRating: (date: string, score: number) => boolean;
+  setRating: (date: string, score: number) => boolean
 }
 
 // Calendar
@@ -31,6 +31,7 @@ export interface CalendarEntry {
   text: string;
   icon: string;
   person: string;
+  isRegistered: boolean;
 }
 
 export type Calendar = CalendarEntry[];

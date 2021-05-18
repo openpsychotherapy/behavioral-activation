@@ -9,6 +9,8 @@ const en = {
     activitiesButtonRateDay: 'Rate day',
     activitiesButtonRateDayModify: 'Change rating',
     activitiesSliderRateDay: 'Today\'s rating',
+    activitiesDialogConflict: 'One or more activities will be replaced.',
+    activitiesDialogYes: 'ok',
 
     valuesButtonRelations: 'Relationship',
     valuesButtonWork: 'Studies/Career',
@@ -17,7 +19,7 @@ const en = {
     valuesButtonResponsibilities: 'Daily responibility',
     valuesButtonPeople: 'Support persons',
     valuesDialogText: 'Are you sure you want to delete?',
-    valuesDialogYes: 'Ok',
+    valuesDialogYes: 'Yes',
     valuesDialogNo: 'Cancel',
     valuesPlaceholder: 'Write here',
 
@@ -40,7 +42,8 @@ const en = {
     activityRegistratorImporanceLabel : 'Importance',
     activityRegistratorEnjoymentLabel: 'Enjoyment',
 
-    calenderRegistratorTextInputLabel: 'What would you like to plan?',
+    calendarRegistratorTextInputLabel: 'What would you like to plan?',
+    calendarRegistratorPersonLabel: 'Support person',
 
     choiceBasedTextInputChangeLabel: 'Change',
 
@@ -51,6 +54,9 @@ const en = {
     activityWeekHistoryNumberOfActivities: 'Number of activities',
     activityWeekHistoryTitleDay: 'Today\'s history',
     activityWeekHistoryTitleWeek: 'Activity history',
+
+
+    calendarNoItem: 'You have no planned activities today.\nPull down to get earlier planned activities.',
 
     informationCardActivityscreen: 'Activityscreen',
     informationCardValuesscreen: 'Valuesscreen',
@@ -77,7 +83,10 @@ const en = {
         ActivityInfo: 'The Activity Screen',
         ValuesInfo: 'The Value Screen',
         CalenderInfo: 'The Calendar Screen',
+        RegisterPlanning: 'Register planned activity',
+        RegisterPlanningRate:'Register planned activity',
     },
+
 }
 
 export default en;

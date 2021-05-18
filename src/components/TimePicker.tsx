@@ -143,7 +143,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
           itemStyle={{ justifyContent: 'space-evenly' }}
           autoScrollToDefaultValue={true}
           />
-        <List.Icon icon='clock' style={{margin: 0}} />
+        <List.Icon icon='arrow-right' style={{margin: 0}} />
 
         <DropDownPicker containerStyle={{flex: 1, flexGrow: 1}}
           items={timeSteps.slice(1)}

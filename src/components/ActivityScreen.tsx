@@ -12,6 +12,8 @@ import { ActivityRegistrator } from './activity/ActivityRegistrator';
 import { ActivityHistory } from './activity/ActivityHistory';
 import { ActivityRateDay } from './activity/ActivityRateDay';
 import { ActivityWeekHistory } from './activity/ActivityWeekHistory';
+import { ActivityPlanning } from './activity/ActivityPlanning';
+import { ActivityPlanningRate} from './activity/ActivityPlanningRate';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -49,6 +51,10 @@ const ViewContent = ({ route, navigation }: any) => {
     navigation.navigate('History');
   };
 
+  const registerPlanningButton = () => {
+    navigation.navigate("RegisterPlanning")
+  }
+
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     setIconListVisible(false);
     navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
@@ -85,6 +91,8 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name='Settings' component={SettingsScreen} />
       <ActivityStack.Screen name='RateDay' component={ActivityRateDay} />
       <ActivityStack.Screen name='WeekHistory' component={ActivityWeekHistory} />
+      <ActivityStack.Screen name='RegisterPlanning' component={ActivityPlanning} />
+      <ActivityStack.Screen name='RegisterPlanningRate' component={ActivityPlanningRate} />
     </ActivityStack.Navigator>
   );
 }
