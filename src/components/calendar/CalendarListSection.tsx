@@ -5,7 +5,13 @@ import { CalendarListItem } from './CalendarListItem';
 import { List, useTheme } from 'react-native-paper';
 import Storage from 'storage';
 
-export const CalendarListSection: React.FC<{entries: Calendar}> = ({ entries }) => {
+interface Props {
+  entries: Calendar;
+  onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
+}
+
+export const CalendarListSection = ({ entries, onEntryClick, onLongPress }: Props) => {
   const [settings, modifySettings] = Storage.useSettings();
   const { title, calendar: calStyle } = useTheme();
   const formatter = Intl.DateTimeFormat(settings.language, { weekday: 'short' });
@@ -23,7 +29,12 @@ export const CalendarListSection: React.FC<{entries: Calendar}> = ({ entries }) 
         {weekday}
       </List.Subheader>
       {entries.map((entry: CalendarEntry, i: number) =>
-      <CalendarListItem key={i} entry={entry} index={i} />)}
+      <CalendarListItem 
+        key={i}
+        entry={entry} 
+        index={i} 
+        onEntryClick={onEntryClick} 
+        onLongPress ={() => (onLongPress ?? (e => {}))(entry)}/>)}
     </List.Section>
   );
 }

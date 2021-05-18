@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text, Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
+import { Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { SettingsScreen } from './SettingsScreen';
 
@@ -12,6 +12,8 @@ import { ActivityRegistrator } from './activity/ActivityRegistrator';
 import { ActivityHistory } from './activity/ActivityHistory';
 import { ActivityRateDay } from './activity/ActivityRateDay';
 import { ActivityWeekHistory } from './activity/ActivityWeekHistory';
+import { ActivityPlanning } from './activity/ActivityPlanning';
+import { ActivityPlanningRate} from './activity/ActivityPlanningRate';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -50,6 +52,10 @@ const ViewContent = ({ route, navigation }: any) => {
     navigation.navigate('History');
   };
 
+  const registerPlanningButton = () => {
+    navigation.navigate("RegisterPlanning")
+  }
+
   const iconPressCallback = (pressedIcon: Number, icon: String) => {
     setIconListVisible(false);
     navigation.push('ActivityRegistration', { pressedIcon: pressedIcon, icon: icon });
@@ -62,7 +68,7 @@ const ViewContent = ({ route, navigation }: any) => {
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
         <CircleButton icon='menu' size={navigationButtonSize} backgroundColor={colors.accent} onPress={iconListButton} />
-        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} />
+        <CircleButton icon='calendar-multiple-check' size={navigationButtonSize} backgroundColor={colors.accent} onPress={registerPlanningButton}/>
         <CircleButton icon='calendar-clock' size={navigationButtonSize} backgroundColor={colors.accent} onPress={historyButton} />
       </View>
 
@@ -77,7 +83,7 @@ export const ActivityScreen = ({ navigation }: any) => {
   return (
     <ActivityStack.Navigator initialRouteName='Activities' headerMode='float'
       screenOptions={{
-        header: (props: any) => <CustomNavigationBar {...props} />,
+        header: (props: StackHeaderProps) => <CustomNavigationBar {...props} />,
       }}
     >
       <ActivityStack.Screen name='Activities' component={ViewContent} initialParams={{activityRegistered: false}} />
@@ -86,6 +92,8 @@ export const ActivityScreen = ({ navigation }: any) => {
       <ActivityStack.Screen name='Settings' component={SettingsScreen} />
       <ActivityStack.Screen name='RateDay' component={ActivityRateDay} />
       <ActivityStack.Screen name='WeekHistory' component={ActivityWeekHistory} />
+      <ActivityStack.Screen name='RegisterPlanning' component={ActivityPlanning} />
+      <ActivityStack.Screen name='RegisterPlanningRate' component={ActivityPlanningRate} />
     </ActivityStack.Navigator>
   );
 }
