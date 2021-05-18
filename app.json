@@ -25,6 +25,7 @@
     "android": {
       "package": "com.kandidatg11.behaviouractivation",
       "versionCode": 1,
+      "permissions": [],
 
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
