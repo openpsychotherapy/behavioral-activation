@@ -13,21 +13,15 @@ export const CalendarInfo = () => {
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}>
       <Headline style={styles.heading}>{dict.calendarInfo.headline}</Headline> 
-        <Paragraph style={styles.text}>
-        {dict.calendarInfo.paragraph1}
-        </Paragraph>
+        <Paragraph style={styles.text}>{dict.calendarInfo.paragraph1}</Paragraph>
         <Subheading style={styles.subheading}>{dict.calendarInfo.subheading1}</Subheading>
-        <Paragraph style={styles.text}>
-        {dict.calendarInfo.paragraph2}
-        </Paragraph>
+        <Paragraph style={styles.text}>{dict.calendarInfo.paragraph2}</Paragraph>
         <Image
           style={styles.image}
           source={require('../../images/calendarStartscreen.png')}
         />
         <Subheading style={styles.subheading}>{dict.calendarInfo.subheading2}</Subheading>
-        <Paragraph style={styles.text}>
-        {dict.calendarInfo.paragraph3}
-        </Paragraph>
+        <Paragraph style={styles.text}>{dict.calendarInfo.paragraph3}</Paragraph>
         <Image
           style={styles.image}
           source={require('../../images/calendarPlanning.png')}
