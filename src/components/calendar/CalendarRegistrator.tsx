@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform  } from 'react-native';
-import { Button, IconButton, Avatar, useTheme } from 'react-native-paper';
+import { Avatar, Button, IconButton, useTheme, Subheading } from 'react-native-paper';
 
 import { DatePicker } from '../DatePicker';
 import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
 import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 import { PersonButton } from './PersonButton';
+import { DeleteableText } from './DeleteableText';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
@@ -128,7 +129,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} >
-      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20,  justifyContent: 'space-between'}}>
+      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20,  justifyContent: 'space-around'}}>
 
         <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{zIndex: 1}} >
           {/* DateRow */}
@@ -146,26 +147,40 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
           </View>
 
           {/* TextInputRow */}
-          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            {activityText == '' ?
-              <ChoiceBasedTextInput label={lang.calendarRegistratorTextInputLabel} text={activityText} setText={setActivityText} />
-              :
-              <Button icon='close' onPress={() => setActivityText('')} mode='outlined' >
+          <View>
+            <Subheading>Aktivitet</Subheading>
+            <ChoiceBasedTextInput
+              style={{ display: activityText == '' ? undefined : 'none'}}
+              icon={route.params.icon}
+              label={lang.calendarRegistratorTextInputLabel}
+              text={activityText}
+              setText={setActivityText}
+            />
+            <View style={{ alignItems: 'center' }}>
+              <Button
+                style={{ display: activityText == '' ? 'none' : undefined }}
+                contentStyle={{ flexDirection: 'row-reverse' }}
+                icon='delete'
+                uppercase={false}
+                onPress={() => setActivityText('')}
+                mode='outlined'
+              >
                 {activityText}
               </Button>
-            }
+            </View>
           </View>
 
         </KeyboardAvoidingView>
 
         {/* Person row */}
-        <View style={{ alignItems: 'center', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
+        <View style={{ alignItems: 'center', ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
+          <Subheading style={{ alignSelf: 'flex-start' }}>
+            Stödperson
+          </Subheading>
           {person == '' ?
             <PersonButton person={person} setPerson={setPerson} />
             :
-            <Button icon='close' onPress={() => setPerson('')} mode='outlined' >
-              {person}
-            </Button>
+            <DeleteableText text={person} setText={setPerson} />
           }
         </View>
 
