@@ -42,7 +42,8 @@ const sv = {
     activityRegistratorImporanceLabel: 'Meningsfullt',
     activityRegistratorEnjoymentLabel: 'Underhållande',
 
-    calenderRegistratorTextInputLabel: 'Vad vill du planera in?',
+    calendarRegistratorTextInputLabel: 'Vad vill du planera in?',
+    calendarRegistratorPersonLabel: 'Stödperson',
 
     choiceBasedTextInputChangeLabel: 'Byt',
 

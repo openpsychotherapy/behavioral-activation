@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CalendarEntry } from 'storage/types';
 
-import { List, Surface, Text, useTheme } from 'react-native-paper';
+import { Button, List, Surface, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { View } from 'react-native';
 
 import Storage from 'storage';
@@ -31,13 +31,14 @@ interface Props {
 }
 
 export const CalendarListItem = ({ entry, index, onEntryClick, onLongPress }: Props) => {
-  const { title, calendar: calStyle } = useTheme();
+  const { colors, title, calendar: calStyle } = useTheme();
   const [settings, modifySettings] = Storage.useSettings();
   const navigation = useNavigation();
   const start = localizeTime(settings.language, entry.start);
   const end = localizeTime(settings.language, entry.end);
   return (
     <View style={{ flexDirection: 'row', width: '100%', marginBottom: 10 }}>
+      {/* Date */}
       <View style={{ justifyContent: 'center' }}>
         <Surface
           style={{
@@ -56,13 +57,29 @@ export const CalendarListItem = ({ entry, index, onEntryClick, onLongPress }: Pr
         </Surface>
       </View>
       <Surface style={{ flex: 1, flexGrow: 1, borderRadius: 5, marginRight: 10 }}>
-        <List.Item
-          title={`${start} - ${end}`}
-          description={entry.text}
-          right={() => <List.Icon icon={entry.icon} />}
+        <TouchableRipple
           onPress={() => onEntryClick(entry)}
           onLongPress ={() => (onLongPress ?? (e => {}))(entry)}
-        />
+        >
+          <>
+            {/* Entry */}
+            <List.Item
+              title={`${start} - ${end}`}
+              description={entry.text}
+              right={() => <List.Icon icon={entry.icon} />}
+            />
+            {entry.person != '' &&
+              <Button
+                style={{alignSelf: 'flex-start'}}
+                color={colors.text}
+                icon='account'
+                uppercase={false}
+              >
+                {entry.person}
+              </Button>
+            }
+          </>
+        </TouchableRipple>
       </Surface>
     </View>
   );

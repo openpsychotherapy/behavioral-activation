@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform  } from 'react-native';
-import { IconButton, Avatar, useTheme } from 'react-native-paper';
+import { Button, IconButton, Avatar, useTheme } from 'react-native-paper';
 
 import { DatePicker } from '../DatePicker';
 import { TimePicker, getCurrentTimeRounded } from '../TimePicker';
 import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
+import { PersonButton } from './PersonButton';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
@@ -44,6 +45,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
   let dateDefault = new Date();
   let fromTimeDefault = getCurrentTimeRounded(0, steps);
   let toTimeDefault = getCurrentTimeRounded(1, steps);
+  let personDefault = '';
 
   // Overwrite default values from entry (if it exists)
   if (route.params?.entry) {
@@ -66,18 +68,21 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
       toHour,
       toMinute
     );
+    personDefault = entry.person;
   }
 
   const [values, modifyValues] = Storage.useValues();
   const [calendar, modifyCalendar] = Storage.useCalendar();
 
-  const [fromTime, setFromTime] = React.useState(fromTimeDefault);
-  const [toTime, setToTime] = React.useState(toTimeDefault);
+  const [fromTime, setFromTime] = useState(fromTimeDefault);
+  const [toTime, setToTime] = useState(toTimeDefault);
 
-  const [date, setDate] = React.useState(dateDefault);
+  const [date, setDate] = useState(dateDefault);
 
-  const [choice, setChoice] = React.useState(defaultChoice);
-  const [activityText, setActivityText] = React.useState(activityTextDefault);
+  const [choice, setChoice] = useState(defaultChoice);
+  const [activityText, setActivityText] = useState(activityTextDefault);
+
+  const [person, setPerson] = useState(personDefault);
 
 
   // Find topics to choose from depending on input icon
@@ -115,7 +120,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
     const entry: CalendarEntry = {
       text: entryText,
       icon: route.params.icon,
-      person: '', // TODO: link to value based on choice
+      person: person,
       date: isoDateString,
       start: ISOTime(fromTime),
       end: ISOTime(toTime),
@@ -146,7 +151,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
    * This hook/function saves the auto-scaled height in order to keep that height
    *  when then keyboard is presented.
    */
-  const [absHeight, setAbsHeight] = React.useState(-1);
+  const [absHeight, setAbsHeight] = useState(-1);
   const onLayoutSet = (event: any) => {
     // If absHeight has not been set
     if (absHeight === -1) {
@@ -157,28 +162,46 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} >
-      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column',  justifyContent: 'space-around'}}>
+      <View onLayout={onLayoutSet} style={{height: absHeight !== -1 ? absHeight : '100%', paddingHorizontal: 10, paddingVertical: 20,  justifyContent: 'space-between'}}>
 
         <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={100} style={{zIndex: 1}} >
           {/* DateRow */}
           <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10}}>
             <View style={{flexGrow: 1, paddingLeft: 20}}>
-              <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} style={{}}/>
+              <Avatar.Icon icon={route.params.icon} size={iconSizes.avatar} />
             </View>
             <DatePicker date={date} setDate={setDate} />
           </View>
+
           {/* TimeRow */}
           <View style={{ flexDirection: 'row', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
             <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime}
               toTime={toTime} setToTime={setToTime} />
-            </View>
+          </View>
 
           {/* TextInputRow */}
           <View>
-            <ChoiceBasedTextInput label={lang.calenderRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
+            <ChoiceBasedTextInput label={lang.calendarRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
               choices={ choices } choice={choice} setChoice={setChoice} />
           </View>
+
         </KeyboardAvoidingView>
+
+        {/* Person row */}
+        <View style={{ alignItems: 'center', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
+          {person == '' ?
+            <PersonButton person={person} setPerson={setPerson} />
+            :
+            <Button
+              icon='close'
+              onPress={() => setPerson('')}
+              mode='outlined'
+              style={{ borderRadius: 30 }}
+            >
+              {person}
+            </Button>
+          }
+        </View>
 
         {/* Trash / Cancel / Confirm row */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
