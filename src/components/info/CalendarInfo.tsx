@@ -3,34 +3,30 @@ import { View, Image, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text, Headline, Subheading, Paragraph } from 'react-native-paper';
 import {styles} from './Styles';
+import { useTranslation } from 'language/LanguageProvider';
 
 export const CalendarInfo = () => {
+  const dict = useTranslation();
 
   return (
       <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}>
-      <Headline style={styles.heading}>Manual för kalendern</Headline> 
+      <Headline style={styles.heading}>{dict.calendarInfo.headline}</Headline> 
         <Paragraph style={styles.text}>
-          I kalendervyn kan du både planera in aktiviteter och se vilka aktiviteter som du redan har planerat in. 
-          För att navigera till kalendervyn trycker du på kalendern som finns näst längst till höger i navigationsbaren.
+        {dict.calendarInfo.paragraph1}
         </Paragraph>
-        <Subheading style={styles.subheading}>Startsidan</Subheading>
+        <Subheading style={styles.subheading}>{dict.calendarInfo.subheading1}</Subheading>
         <Paragraph style={styles.text}>
-          När du har navigerat till kalendervyn möts du av en sida med aktiviteter som du har planerat in för den här
-          veckan. Genom att trycka på aktiviteterna kan du ändra dem och genom att scrolla uppåt på sidan så kan du
-          se dina tidigare inplanerade aktiviteter. 
+        {dict.calendarInfo.paragraph2}
         </Paragraph>
         <Image
           style={styles.image}
           source={require('../../images/calendarStartscreen.png')}
         />
-        <Subheading style={styles.subheading}>Planera en aktivitet</Subheading>
+        <Subheading style={styles.subheading}>{dict.calendarInfo.subheading2}</Subheading>
         <Paragraph style={styles.text}>
-          För att planera en aktivitet så trycker du på plustecknet längst ner till höger och väljer sedan en ikon som bäst
-          passar aktiviteten. Därefter kan du välja vilken dag och tid som aktiviteten ska genomföras. Tillsist kan du skriva
-          vad du ska göra eller trycka på knappen "byt" som radar upp aktiviteterna som du har definierat under värderingar
-          för just den ikonen. 
+        {dict.calendarInfo.paragraph3}
         </Paragraph>
         <Image
           style={styles.image}
