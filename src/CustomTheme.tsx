@@ -5,7 +5,10 @@ declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
       cancel: string,
-      confirm: string
+      confirm: string,
+      primary: string,
+      accent: string,
+      surface: string,
     }
     interface Theme {
       iconSizes: {
@@ -16,6 +19,18 @@ declare global {
       }
       title: {
         fontSize: number
+      }
+      text: {
+        textSize: number
+      }
+      roundedCorner:{
+        roundness: number,
+      }
+      elevation: {
+        zero: number
+        small: number,
+        medium: number,
+        large: number
       }
       calendar: {
         dateViewSize: number
@@ -32,8 +47,11 @@ export const CustomTheme = {
   colors: {
     ...DefaultTheme.colors,
 
-    cancel: 'red',
-    confirm: 'green'
+    cancel: '#FF0000',
+    confirm: '#10BC00',
+    primary: '#6753D3',
+    accent: '#1DB6EC',
+    surface: '#E1E8ED',
   },
   iconSizes: {
     // IconButton
@@ -43,11 +61,23 @@ export const CustomTheme = {
     avatar: 70
   },
   title: {
-    fontSize: 24,
+    fontSize: 24
+  },
+  text:{
+    textSize: 20
+  },
+  roundedCorner:{
+    roundness: 30,
+  },
+  elevation: {
+    zero: 0,
+    small: 3,
+    medium: 5,
+    large: 10
   },
   calendar: {
     dateViewSize: 60,
-    dateViewMargin: 10,
+    dateViewMargin: 10
   },
   gradingColors: [
     '#FF0000', // red

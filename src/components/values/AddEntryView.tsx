@@ -27,13 +27,13 @@ export const AddEntryView = ({route, navigation}: AddEntryViewProps) => {
   const [text, setText] = React.useState('');
   const { title, navigateBack, categoryString, icon } = route.params;
   const lang = useTranslation();
-  const {colors, iconSizes} = useTheme();
+  const {colors, iconSizes, elevation} = useTheme();
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{flex: 1}}>
       <View style={{flex: 0.3, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-        <Surface style={{ borderRadius: 100, elevation: 3}}>
+        <Surface style={{ borderRadius: 100, elevation: elevation.small}}>
           <Avatar.Icon icon={icon} size={iconSizes.avatar} />
         </Surface >
       <View style={{ width: '5%', height: '5%' }} />

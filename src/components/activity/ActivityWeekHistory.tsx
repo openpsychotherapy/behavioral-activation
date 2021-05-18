@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Pressable, LayoutChangeEvent } from 'react-native';
-import { Text, Surface, Title, Headline, Subheading } from 'react-native-paper';
+import { Text, Surface, Title, Headline, Subheading, useTheme } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -13,6 +13,7 @@ export const ActivityWeekHistory = ({route, navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
+  const { elevation } = useTheme();
 
   let historyItems = [];
 
@@ -50,7 +51,7 @@ export const ActivityWeekHistory = ({route, navigation}: any) => {
 
     historyItems.push(
       <Pressable onLayout={onSaveSize} key={'whi_' + activityIndex} onPress={() => onDayPressed(activityIndex)}>
-        <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: 5, marginHorizontal: 10 , marginVertical: 5 }}>
+        <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
           {/* Date number */}
           <View style={{flexGrow: 1, alignItems: 'center', minWidth: 40}}>
             <Subheading>{monthName}</Subheading>

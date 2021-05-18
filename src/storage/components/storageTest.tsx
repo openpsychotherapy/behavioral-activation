@@ -20,6 +20,7 @@ export default function StorageTest() {
             text: 'Hello',
             icon: 'person',
             person: 'Erik',
+            isRegistered: false,
         });
     };
 

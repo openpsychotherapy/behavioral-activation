@@ -19,7 +19,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
-  const { colors } = useTheme();
+  const { elevation } = useTheme();
 
   let historyItems = [];
 
@@ -81,7 +81,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
       const toTimeString = getFormattedTime(toDate);
 
       historyItems.push(
-        <Surface key={'hi_' + fromDate.toString()} style={{ flexDirection: 'row', borderRadius: 5, elevation: 5, marginHorizontal: 10 , marginVertical: 5 }}>
+        <Surface key={'hi_' + fromDate.toString()} style={{ flexDirection: 'row', borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
           <List.Item style={{flex: 1, flexGrow: 1 }} title={fromTimeString + ' - ' + toTimeString} description={activity.text} right={() =>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Caption>{activity.importance + ' | ' + activity.enjoyment}</Caption>
@@ -109,7 +109,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
   return (
     <View style={{flex: 1}}>
       {/* Title bar */}
-      <Surface style={{ elevation: 10, flexDirection: 'row', alignItems:'center'}}>
+      <Surface style={{ elevation: elevation.large, flexDirection: 'row', alignItems:'center'}}>
         {/* Title */}
         <View style={{ flexGrow: 1, alignItems: 'baseline'}}>
           <Pressable style={{ flexDirection:'row', alignItems: 'center', paddingRight: 20}} onPress={onMonthPressed}>
