@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import sv from 'language/sv';
 
-import languages from 'language';
+import languages, { Language } from 'language';
 import Storage from 'storage';
 
 const LanguageContext = createContext(sv);
@@ -37,6 +37,6 @@ export const LanguageProvider: React.FC = ({children}) => {
  * @returns dictionary for the current language.
  */
 export const useTranslation = () => {
-  const dict = useContext<any>(LanguageContext);
+  const dict = useContext<Language>(LanguageContext);
   return dict;
 };
