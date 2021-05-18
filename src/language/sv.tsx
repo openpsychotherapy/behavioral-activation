@@ -46,6 +46,7 @@ const sv = {
     calendarRegistratorActivity: 'Aktivitet',
     calendarRegistratorTextInputLabel: 'Vad vill du planera in?',
     calendarRegistratorPersonLabel: 'Stödperson',
+    calendarRegistratorPersonButton: 'Person',
 
     activiesSnackBarAdded: 'Aktiviteten lades till',
 
