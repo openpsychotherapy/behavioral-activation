@@ -86,6 +86,9 @@ const en = {
         ActivityInfo: 'Activity registration manual',
         ValuesInfo: 'Values manual',
         CalenderInfo: 'Calendar manual',
+
+        RegisterPlanning: 'Register planned activity',
+        RegisterPlanningRate:'Register planned activity',
     },
     activityInfo : {
         paragraph1: "In the activityview you can both register activites "+
@@ -160,8 +163,7 @@ const en = {
         "which lists the activities you have defined under values with the same icon."
     },
       
-        RegisterPlanning: 'Register planned activity',
-        RegisterPlanningRate:'Register planned activity',
+        
 }
 
 export default en;
