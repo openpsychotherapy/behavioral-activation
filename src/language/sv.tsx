@@ -37,15 +37,15 @@ const sv = {
 
     timePickerLabel: 'Tidsintervall',
 
+    activityRegistratorActivity: 'Aktivitet',
     activityRegistratorTextInputLabel: 'Vad har du gjort?',
     activityRegistratorActivityDefaultChoice: 'Skriv text',
     activityRegistratorImporanceLabel: 'Meningsfullt',
     activityRegistratorEnjoymentLabel: 'Underhållande',
 
+    calendarRegistratorActivity: 'Aktivitet',
     calendarRegistratorTextInputLabel: 'Vad vill du planera in?',
     calendarRegistratorPersonLabel: 'Stödperson',
-
-    choiceBasedTextInputChangeLabel: 'Byt',
 
     activiesSnackBarAdded: 'Aktiviteten lades till',
 

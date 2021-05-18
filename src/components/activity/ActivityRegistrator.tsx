@@ -101,11 +101,11 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
           {/* TextInputRow */}
           <View>
-            <Subheading>Aktivitet</Subheading>
+            <Subheading>{lang.activityRegistratorActivity}</Subheading>
             <ChoiceBasedTextInput
               style={{ display: activityText == '' ? undefined : 'none'}}
               icon={route.params.icon}
-              label={lang.calendarRegistratorTextInputLabel}
+              label={lang.activityRegistratorTextInputLabel}
               text={activityText}
               setText={setActivityText}
             />

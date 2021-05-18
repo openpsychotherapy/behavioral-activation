@@ -20,8 +20,8 @@ export const PersonButton = ({ person, setPerson }: Props) => {
       visible={visible}
       onDismiss={closeMenu}
       anchor={
-        <Button icon='plus' onPress={openMenu} mode='outlined' >
-          {lang.calendarRegistratorPersonLabel}
+        <Button disabled={people.length == 0} icon='plus' onPress={openMenu} mode='outlined' >
+          {lang.calendarRegistratorPersonButton}
         </Button>
       }
     >

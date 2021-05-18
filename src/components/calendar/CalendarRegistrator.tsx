@@ -148,7 +148,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
 
           {/* TextInputRow */}
           <View>
-            <Subheading>Aktivitet</Subheading>
+            <Subheading>{lang.calendarRegistratorActivity}</Subheading>
             <ChoiceBasedTextInput
               style={{ display: activityText == '' ? undefined : 'none'}}
               icon={route.params.icon}
@@ -175,7 +175,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
         {/* Person row */}
         <View style={{ alignItems: 'center', ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
           <Subheading style={{ alignSelf: 'flex-start' }}>
-            Stödperson
+            {lang.calendarRegistratorPersonLabel}
           </Subheading>
           {person == '' ?
             <PersonButton person={person} setPerson={setPerson} />
