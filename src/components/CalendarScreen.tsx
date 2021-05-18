@@ -17,7 +17,7 @@ import { CalendarEntry } from 'storage/types';
 
 export type CalendarStackParamList = {
   Calendar: { activityRegistered: boolean };
-  CalendarRegistration: { entry?: CalendarEntry, pressedIcon: number, icon: string };
+  CalendarRegistration: { entry?: CalendarEntry, icon: string };
   Settings: {};
 };
 
@@ -54,12 +54,16 @@ const ViewContent = ({ route, navigation }: Props) => {
 
   const callback = (index: number, icon: string) => {
     setIconListVisible(false);
-    navigation.push('CalendarRegistration', { pressedIcon: index, icon: icon });
+    navigation.push('CalendarRegistration', { icon: icon });
+  }
+
+  const onEntryClick = (entry: CalendarEntry) => {
+    navigation.navigate('CalendarRegistration', { entry, icon: entry.icon });
   }
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <CalendarList calendar={calendar}/>
+      <CalendarList calendar={calendar} onEntryClick={onEntryClick} />
 
       <IconList
         startIndex={0}

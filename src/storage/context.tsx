@@ -1,6 +1,7 @@
-import React, { useState, useMemo, useEffect, createContext } from 'react';
+import React, { useMemo, useEffect, createContext, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { migrations, storeVersion } from 'storage/migration';
 import {
   activitiesKey,
   activitiesDefault,
@@ -14,6 +15,7 @@ import {
   settingsDefault,
   valuesKey,
   valuesDefault,
+  storeVersionKey,
 } from './constants';
 
 interface StorageContextType {
@@ -45,6 +47,17 @@ const contextDefault: StorageContextType = {
  */
 export const StorageContext = createContext<StorageContextType>(contextDefault);
 
+const reducer = (state: any, action: any) => {
+  switch (action.type) {
+    case 'setKey':
+      return  { ...state, [action.payload.key]: action.payload.value };
+    case 'setValue':
+      return action.payload;
+    default:
+      throw new Error();
+  }
+}
+
 /**
  * A context provider which wraps StorageContext.Provider with additional
  * functionality.
@@ -65,7 +78,7 @@ export const StorageContext = createContext<StorageContextType>(contextDefault);
  * ```
  */
 export const Provider = (props: any) => {
-  const [store, setStore] = useState(contextDefault.store);
+  const [store, dispatch] = useReducer(reducer, contextDefault.store);
 
   /**
    * Inserts key-value pairs into both AsyncStorage and the store kept in the
@@ -75,32 +88,71 @@ export const Provider = (props: any) => {
    * @param value - The object to set as the value
    */
   const setStoreItem = (key: string, value: any) => {
-    AsyncStorage.setItem(key, JSON.stringify(value));
-    setStore({ ...store, [key]: value });
+    dispatch({ type: 'setKey', payload: { key, value }});
   }
+
+  /**
+   * This had to be done because we tried using something too simple to handle
+   * complex state. The solution to this mess is probably to rewrite the
+   * storage to use something like Redux.
+   */
+  useEffect(() => {
+    if (store[activitiesKey] != contextDefault.store[activitiesKey]) {
+      AsyncStorage.setItem(activitiesKey, JSON.stringify(store[activitiesKey]));
+    }
+  }, [store[activitiesKey]]);
+
+  useEffect(() => {
+    if (store[calendarKey] != contextDefault.store[calendarKey]) {
+      AsyncStorage.setItem(calendarKey, JSON.stringify(store[calendarKey]));
+    }
+  }, [store[calendarKey]]);
+
+  useEffect(() => {
+    if (store[iconsKey] != contextDefault.store[iconsKey]) {
+      AsyncStorage.setItem(iconsKey, JSON.stringify(store[iconsKey]));
+    }
+  }, [store[iconsKey]]);
+
+  useEffect(() => {
+    if (store[peopleKey] != contextDefault.store[peopleKey]) {
+      AsyncStorage.setItem(peopleKey, JSON.stringify(store[peopleKey]));
+    }
+  }, [store[peopleKey]]);
+
+  useEffect(() => {
+    if (store[settingsKey] != contextDefault.store[settingsKey]) {
+      AsyncStorage.setItem(settingsKey, JSON.stringify(store[settingsKey]));
+    }
+  }, [store[settingsKey]]);
+
+  useEffect(() => {
+    if (store[valuesKey] != contextDefault.store[valuesKey]) {
+      AsyncStorage.setItem(valuesKey, JSON.stringify(store[valuesKey]));
+    }
+  }, [store[valuesKey]]);
 
   useEffect(() => {
     (async () => {
-      /**
-       * Returns a value from AsyncStorage if it exists, def(ault) otherwise.
-       *
-       * @param key - The key of the desired value in AsyncStorage
-       * @param def - The object to use if no value is found
-       * @returns A value from AsyncStorage if it exists, def otherwise.
-       */
-      const getFromStorage = async (key: string, def: any): Promise<any> => {
-        const value = await AsyncStorage.getItem(key);
-        return value ? JSON.parse(value) : def;
+      let version = parseInt(await AsyncStorage.getItem(storeVersionKey) ?? "0");
+      while (version != storeVersion) {
+        version = await migrations[version]()
+        await AsyncStorage.setItem(storeVersionKey, version.toString());
       }
+
+      const getFromStorage = async (key: string): Promise<any> => {
+        return JSON.parse(await AsyncStorage.getItem(key) as string);
+      }
+
       const newStore = {
-        [activitiesKey]: await getFromStorage(activitiesKey, activitiesDefault),
-        [calendarKey]: await getFromStorage(calendarKey, calendarDefault),
-        [iconsKey]: await getFromStorage(iconsKey, iconsDefault),
-        [peopleKey]: await getFromStorage(peopleKey, peopleDefault),
-        [settingsKey]: await getFromStorage(settingsKey, settingsDefault),
-        [valuesKey]: await getFromStorage(valuesKey, valuesDefault),
+        [activitiesKey]: await getFromStorage(activitiesKey),
+        [calendarKey]: await getFromStorage(calendarKey),
+        [iconsKey]: await getFromStorage(iconsKey),
+        [peopleKey]: await getFromStorage(peopleKey),
+        [settingsKey]: await getFromStorage(settingsKey),
+        [valuesKey]: await getFromStorage(valuesKey),
       };
-      setStore(newStore);
+      dispatch({ type: 'setValue', payload: newStore});
     })()
   }, []);
 

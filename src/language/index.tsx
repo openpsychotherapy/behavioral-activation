@@ -3,7 +3,7 @@ import sv from 'language/sv';
 
 export type LanguageName = 'sv' | 'en';
 
-type Language = typeof en;
+export type Language = typeof en;
 
 type Languages = {
     [index in LanguageName]: Language;

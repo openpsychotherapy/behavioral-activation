@@ -23,7 +23,14 @@ const localizeTime = (language: string, time: string): string => {
   return Intl.DateTimeFormat(language, options).format(new Date(1970, 1, 1, hour, minute));
 }
 
-export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> = ({ entry, index }) => {
+interface Props {
+  entry: CalendarEntry;
+  index: number;
+  onEntryClick: (entry: CalendarEntry) => void;
+  onLongPress?: (entry: CalendarEntry) => void;
+}
+
+export const CalendarListItem = ({ entry, index, onEntryClick, onLongPress }: Props) => {
   const { colors, title, calendar: calStyle } = useTheme();
   const [settings, modifySettings] = Storage.useSettings();
   const navigation = useNavigation();
@@ -51,13 +58,8 @@ export const CalendarListItem: React.FC<{entry: CalendarEntry, index: number}> =
       </View>
       <Surface style={{ flex: 1, flexGrow: 1, borderRadius: 5, marginRight: 10 }}>
         <TouchableRipple
-          onPress={() => {
-            navigation.navigate('CalendarRegistration', {
-              entry,
-              pressedIcon: index,
-              icon: entry.icon
-            });
-          }}
+          onPress={() => onEntryClick(entry)}
+          onLongPress ={() => (onLongPress ?? (e => {}))(entry)}
         >
           <>
             {/* Entry */}

@@ -90,6 +90,7 @@ export const CalendarRegistrator = ({ route, navigation }: Props) => {
       date: isoDateString,
       start: ISOTime(fromTime),
       end: ISOTime(toTime),
+      isRegistered: false,
     };
 
     if (route.params?.entry) {
