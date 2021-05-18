@@ -14,7 +14,6 @@ interface Props {
 }
 
 export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Props) => {
-
   const lang = useTranslation();
   const [values, modifyValues] = Storage.useValues();
   const [inputVisible, setInputVisible] = useState(false);
@@ -63,7 +62,7 @@ export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Prop
         />
         :
         <Button icon='plus' onPress={openInput} mode='outlined'>
-          text
+          {lang.registratorTextLabel}
         </Button>
       }
       {choices.length != 0 && !inputVisible &&
@@ -72,7 +71,7 @@ export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Prop
           onDismiss={closeMenu}
           anchor={
             <Button icon='plus' onPress={openMenu} mode='outlined'>
-              värdering
+              {lang.registratorValueLabel}
             </Button>
           }
         >

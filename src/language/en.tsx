@@ -48,6 +48,9 @@ const en = {
     calendarRegistratorPersonLabel: 'Support person',
     calendarRegistratorPersonButton: 'Person',
 
+    registratorTextLabel: 'Text',
+    registratorValueLabel: 'Value',
+
     activiesSnackBarAdded : 'Activity added',
 
     activityHistoryRateDayLabel : 'Rate day',

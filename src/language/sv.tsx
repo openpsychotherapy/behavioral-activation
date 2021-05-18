@@ -48,6 +48,9 @@ const sv = {
     calendarRegistratorPersonLabel: 'Stödperson',
     calendarRegistratorPersonButton: 'Person',
 
+    registratorTextLabel: 'Text',
+    registratorValueLabel: 'Värdering',
+
     activiesSnackBarAdded: 'Aktiviteten lades till',
 
     activityHistoryRateDayLabel: 'Betygsätt dag',
