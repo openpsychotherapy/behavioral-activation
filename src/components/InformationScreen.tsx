@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { SettingsScreen } from './SettingsScreen';
 import { ActivityInfo } from './info/ActivityInfo';
-import { CalenderInfo } from './info/CalenderInfo';
+import { CalendarInfo } from './info/CalendarInfo';
 import { ValuesInfo } from './info/ValuesInfo';
 import { BehaviouralActivation } from './info/BehaviouralActivation';
 import { useTranslation } from 'language/LanguageProvider';
@@ -69,7 +69,7 @@ export const InformationScreen = () => {
       <InformationStack.Screen name='Information' component={ViewContent} />
       <InformationStack.Screen name='ActivityInfo' component={ActivityInfo} />
       <InformationStack.Screen name='ValuesInfo' component={ValuesInfo} />
-      <InformationStack.Screen name='CalenderInfo' component={CalenderInfo} />
+      <InformationStack.Screen name='CalenderInfo' component={CalendarInfo} />
       <InformationStack.Screen name='BehaviouralActivation' component={BehaviouralActivation} />
       <InformationStack.Screen name='Settings' component={SettingsScreen} />
       
