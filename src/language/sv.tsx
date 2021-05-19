@@ -145,16 +145,20 @@ const sv = {
         "den kategorin som du vill lägga värderingen i. Det tar dig till en "+
         "vy där alla värderingar som du tidigare har lagt in under den här "+
         "kategorin finns och genom att trycka på plustecknet längst ner till "+
-        "höger så kan du lägga till en värdering.",
+        "höger så kan du lägga till en värdering. För att radera en värdering "+ 
+        "så trycker du och håller in på värderingen som du vill radera.",
         subheading3: "Lägga till en aktivitet",
         paragraph4: "Alla värderingar kan i sin tur varar kopplade till flera "+
         "aktiviteter och dessa ser du genom att trycka på respektive värdering. "+
         "För att lägga till en aktivitet trycker du sedan på plusstecknet längst "+
-        "ner till höger och sedan på den ikon som bäst representerar aktiviteten.",
+        "ner till höger och sedan på den ikon som bäst representerar aktiviteten. "+
+        "För att radera en aktivitet så trycker du och håller in på aktiviteten "+ 
+        "som du vill radera.",
         subheading4: "Lägga till en stödperson",
         paragraph5: "Under knappen stödpersoner finns alla personer som du har "+
         "lagt till. För att lägga till en stödperson så trycker du på "+
-        "plustecknet längst ner till höger. "
+        "plustecknet längst ner till höger. För att radera en stödperson så trycker "+ 
+        "du och håller in på stödpersonen som du vill radera."
     },
     calendarInfo: {
         paragraph1: "I kalendervyn kan du både planera in aktiviteter och se "+

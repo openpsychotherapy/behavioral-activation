@@ -94,7 +94,7 @@ const en = {
         paragraph1: "In the activityview you can both register activites "+
         "you have done and see past registered activites. To get to the "+
         "activityview you simply press the addition symbol furthest to the "+
-        "left in the navigationbar.",
+        "left in the navigationbar which is located at the bottom of the screen.",
         subheading1: "Start page",
         paragraph2: "When you have navigated to the activityview you can see "+
         "a page with 12 icons and 3 menu buttons. The 12 icons are your favorite "+
@@ -135,16 +135,19 @@ const en = {
         paragraph3: "To add a value you simply press on the category you "+
         "want to add the value to. That takes you to a view where all values "+
         "you previously have added to this category exists. By pressing the "+
-        "addition sign at the bottom right of the screen you can add your new value.",
+        "addition sign at the bottom right of the screen you can add your new value. "+
+        "To delete a value you simply hold down on the value you want to delete.",
         subheading3: "Add an activity",
         paragraph4: "All values can in turn be connected to several activites which "+
         "you can see by pressing one of the different values. To add an activity "+
         "you then press the addition sign at the bottom right of the screen and then "+
-        "the icon which you think represents the activity the best.",
+        "the icon which you think represents the activity the best. To delete a "+
+        "activity you simply hold down on the activity you want to delete.",
         subheading4: "Add a support person",
         paragraph5: "Through the button \"support persons\" you can find all the persons "+
         "you have added. To add a support person you simply press the addition sign at the "+
-        "bottom right of the screen."
+        "bottom right of the screen. To delete a support person you simply hold down on the "+
+        "support person you want to delete."
     },
     calendarInfo: {
         paragraph1: "In the calendarview you can both plan activites and see the "+
