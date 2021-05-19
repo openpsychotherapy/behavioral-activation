@@ -1,6 +1,6 @@
 import Storage from 'storage';
 import React, { useState } from 'react';
-import { Button, Text } from 'react-native-paper';
+import { Button, Text, useTheme } from 'react-native-paper';
 import { DeletePortal } from './DeletePortal';
 import { ValuesEntry } from 'storage/types';
 
@@ -15,6 +15,7 @@ interface EntryButtonProps {
 export const EntryButton = (props: EntryButtonProps) => {
   const [values, modifyValues] = Storage.useValues();
   const [showPortal, setShowPortal] = useState(false);
+  const { colors, roundedCorner } = useTheme();
 
   const deleteElement = () => {
     modifyValues.deleteEntry(props.category, props.topic, props.entry);
@@ -22,14 +23,15 @@ export const EntryButton = (props: EntryButtonProps) => {
 
   return (
     <Button
-      theme={{ roundness: 30 }}
+      theme={{ roundness: roundedCorner.roundness }}
       style={{ marginBottom: 20 }}
       contentStyle={{ height: 50 }}
       compact={true}
-      mode='outlined'
+      mode='contained'
       onPress={() => { }}
       onLongPress={() => setShowPortal(true)}
       icon={props.icon}
+      color={colors.surface}
     >
       <Text>{props.name}</Text>
       <DeletePortal deleteElement={deleteElement} showPortal={showPortal} setShowPortal={setShowPortal} />

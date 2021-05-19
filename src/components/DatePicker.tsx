@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Button, List, useTheme } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
 import { DatePickerModal } from 'react-native-paper-dates';
 
 import { useTranslation } from 'language/LanguageProvider';

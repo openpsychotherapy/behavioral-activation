@@ -25,7 +25,7 @@ interface ChooseEntryIconViewProps {
 
 export const ChooseEntryIconView = ({route, navigation}: ChooseEntryIconViewProps) => {
   const [visible, setVisible] = React.useState(false);
-  const { colors } = useTheme();
+  const { colors, iconSizes } = useTheme();
   const { title, navigateBack, categoryString } = route.params;
 
   const iconPressCallback = (pressedIcon: Number, icon: string) => {
@@ -48,7 +48,7 @@ export const ChooseEntryIconView = ({route, navigation}: ChooseEntryIconViewProp
       <IconMeny pressCallback={iconPressCallback} />
 
       <View style={{ paddingBottom: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-        <CircleButton icon='menu' size={40} backgroundColor={colors.accent} onPress={iconListButton} />
+        <CircleButton icon='menu' size={iconSizes.medium} backgroundColor={colors.accent} onPress={iconListButton} />
       </View>
     </View>
   );
