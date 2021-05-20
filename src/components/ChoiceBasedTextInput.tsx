@@ -1,85 +1,89 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, TouchableWithoutFeedback } from 'react-native';
-import { Text, Button, TextInput, Portal, Dialog, Surface, useTheme } from 'react-native-paper';
+import { Text, Button, Menu, TextInput, Portal, Dialog, Surface } from 'react-native-paper';
 import { useTranslation } from 'language/LanguageProvider';
+import { ValuesTopic } from 'storage/types';
+import Storage from 'storage';
 
-type Choice = {
-  value: string,
-  isDefault: boolean
+interface Props {
+  label: string;
+  icon: string;
+  text: string;
+  setText: (text: string) => void;
+  style: any;
 }
 
-/**
- * A text input component that gives prescribed alternatives.
- *
- * @example
- * ```
- * const [choice, setChoice] = React.useState(defaultChoice);
- * const [activityText, setActivityText] = React.useState('');
- *
- * return (
- *   <ChoiceBasedTextInput label={'What have you been doing?'} textInputText={activityText} setTextInputText={setActivityText}
- *     choices={ ['Write text'] } choice={choice} setChoice={setChoice} />
- * );
- *
- * ```
- *
- * @param label - A text label depending on language
- * @param textInputText - Text value for default choice (eg a hook)
- * @param setTextInputText - Set function for default choice text (eg a hook)
- * @param choices - A list with all the prescribed choices
- * @param choice - Choice value as a Date object (eg a hook)
- * @param setChoice - Choice time set function (eg a hook)
- *
- * @returns The ChoiceBasedTextInput component
- *
- */
-export const ChoiceBasedTextInput = (props: {label: string, textInputText: string, setTextInputText: React.Dispatch<React.SetStateAction<string>>,
-  choices: Choice[], choice: Choice, setChoice: React.Dispatch<React.SetStateAction<Choice>>}) => {
-
+export const ChoiceBasedTextInput = ({ label, icon, text, setText, style }: Props) => {
   const lang = useTranslation();
-  const { elevation } = useTheme();
-  const [visible, setVisible] = React.useState(false);
+  const [values, modifyValues] = Storage.useValues();
+  const [inputVisible, setInputVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const openInput = () => setInputVisible(true);
+  const closeInput = () => setInputVisible(false);
+  const openMenu = () => setMenuVisible(true);
+  const closeMenu = () => setMenuVisible(false);
 
-  let choiceComponents = []
-  for (let i = 0; i < props.choices.length; ++i) {
-    const choice = props.choices[i];
+  // Find topics to choose from depending on input icon
+  let choices: string[] = [];
+  const addTopicEntries = (topics: ValuesTopic[]) => {
+    for (let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
+      for (let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
+        const entry = topics[topicIndex].entries[entryIndex];
+        if (entry.icon == icon) {
+          choices.push(entry.text);
+        }
+      }
+    }
+  };
 
-    // List of all items as surface components
-    choiceComponents.push(
-      <TouchableWithoutFeedback onPress={()=>{ props.setChoice(choice); setVisible(false) }} key={'c_' + i}>
-        <Surface style={{ flexDirection: 'row', elevation: visible ? elevation.medium : elevation.zero, marginHorizontal: 10, marginVertical: 5, justifyContent: 'center' }}>
-          <Text style={{ padding: 10}}>{choice.value}</Text>
-        </Surface>
-      </TouchableWithoutFeedback>
-    );
-  }
+  // Go through all categories in values
+  Object.keys(values).forEach(key => addTopicEntries(values[key]));
 
+  useEffect(() => {
+    if (!inputVisible && inputText != '') {
+      setText(inputText);
+      setInputText('');
+    }
+  }, [inputVisible]);
 
   return (
-    <View>
-      <Portal>
-        <Dialog visible={visible} onDismiss={() => setVisible(false)} style={{ marginVertical: 80, marginHorizontal: 40 }}>
-          <Dialog.ScrollArea>
-            <ScrollView style={{paddingVertical: 25 }}>
-              {choiceComponents}
-            </ScrollView>
-          </Dialog.ScrollArea>
-        </Dialog>
-      </Portal >
-
-      <Surface style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 5, elevation: elevation.zero }}>
-          <Text style={{flex: 1, flexGrow: 1, paddingHorizontal: 12}}>{props.choice.value}</Text>
-          <Button onPress={()=> setVisible(true)}>{lang.choiceBasedTextInputChangeLabel}</Button>
-      </Surface>
-
-      <TextInput
-        mode='outlined'
-        label={props.label}
-        editable={props.choice.isDefault}
-        value={!props.choice.isDefault ? props.choice.value : props.textInputText}
-        placeholder={''}
-        onChangeText={(text: string) => {props.setTextInputText(text)}}
-      />
+    <View style={{ ...style, flexDirection: 'row', justifyContent: 'space-evenly' }} >
+      {inputVisible ? 
+        <TextInput
+          style={{ width: '100%' }}
+          autoFocus={true}
+          onBlur={closeInput}
+          mode='flat'
+          label={label}
+          value={inputText}
+          placeholder={''}
+          onChangeText={setInputText}
+        />
+        :
+        <Button icon='plus' onPress={openInput} mode='outlined'>
+          {lang.registratorTextLabel}
+        </Button>
+      }
+      {choices.length != 0 && !inputVisible &&
+        <Menu
+          visible={menuVisible}
+          onDismiss={closeMenu}
+          anchor={
+            <Button icon='plus' onPress={openMenu} mode='outlined'>
+              {lang.registratorValueLabel}
+            </Button>
+          }
+        >
+          {choices.map((c, index) =>
+            <Menu.Item
+              onPress={() => { setText(c); closeMenu(); }}
+              title={c}
+              key={index}
+            />
+          )}
+        </Menu>
+      }
     </View>
   );
 }

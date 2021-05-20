@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Dimensions, Platform  } from 'react-native';
-import { Text, IconButton, Avatar, useTheme } from 'react-native-paper';
+import { View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform  } from 'react-native';
+import { Button, Text, IconButton, Avatar, useTheme, Subheading } from 'react-native-paper';
 
 import Slider from '@react-native-community/slider';
 
@@ -15,19 +15,11 @@ import { ActivitiesEntry } from 'storage/types';
 import { ISODate } from 'utils';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
-  // route.params contains information from activity screen
-
   const lang = useTranslation();
   const [settings, modifySettings] = Storage.useSettings();
   const { iconSizes, colors } = useTheme();
 
   const steps = 1;
-  const defaultChoice = {
-    value: lang.activityRegistratorActivityDefaultChoice,
-    isDefault: true
-  }
-  let choices = [ defaultChoice ];
-
 
   const [values, modifyValues] = Storage.useValues();
   const [activities, modifyActivities] = Storage.useActivities();
@@ -37,45 +29,15 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
   const [date, setDate] = React.useState(new Date());
 
-  const [choice, setChoice] = React.useState(defaultChoice);
   const [activityText, setActivityText] = React.useState('');
 
   const [importance, setImportance] = React.useState(5);
   const [enjoyment, setEnjoyment] = React.useState(5);
 
-
-  // Find topics to choose from depending on input icon
-  const addTopicEntries = (topics: any) => {
-    for (let topicIndex = 0; topicIndex < topics.length; ++topicIndex) {
-      for (let entryIndex = 0; entryIndex < topics[topicIndex].entries.length; ++entryIndex){
-        const entry = topics[topicIndex].entries[entryIndex];
-
-        // If icons match, include it in choices
-        if (entry.icon == route.params.icon) {
-          choices.push({
-            value: entry.text,
-            isDefault: false
-          });
-        }
-      }
-    }
-  };
-
-  // Go through all categories in values
-  addTopicEntries(values.responsibilities);
-  addTopicEntries(values.relations);
-  addTopicEntries(values.enjoyment);
-  addTopicEntries(values.health);
-  addTopicEntries(values.work);
-
-
   const onConfirm = () => {
-    // Check if custom text has been entered
-    const entryText = choice.isDefault ? activityText : choice.value;
-
     // Create entry from information entered by user
     const entry: ActivitiesEntry = {
-      text: entryText,
+      text: activityText,
       icon: route.params.icon,
       person: '', // TODO: link to value based on choice
       importance: importance,
@@ -139,8 +101,26 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
 
           {/* TextInputRow */}
           <View>
-            <ChoiceBasedTextInput label={lang.activityRegistratorTextInputLabel} textInputText={activityText} setTextInputText={setActivityText}
-              choices={ choices } choice={choice} setChoice={setChoice} />
+            <Subheading>{lang.activityRegistratorActivity}</Subheading>
+            <ChoiceBasedTextInput
+              style={{ display: activityText == '' ? undefined : 'none'}}
+              icon={route.params.icon}
+              label={lang.activityRegistratorTextInputLabel}
+              text={activityText}
+              setText={setActivityText}
+            />
+            <View style={{ alignItems: 'center' }}>
+              <Button
+                style={{ display: activityText == '' ? 'none' : undefined }}
+                contentStyle={{ flexDirection: 'row-reverse' }}
+                icon='delete'
+                uppercase={false}
+                onPress={() => setActivityText('')}
+                mode='outlined'
+              >
+                {activityText}
+              </Button>
+            </View>
           </View>
         </KeyboardAvoidingView>
 

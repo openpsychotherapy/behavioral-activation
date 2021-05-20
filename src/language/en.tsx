@@ -37,15 +37,19 @@ const en = {
 
     timePickerLabel: 'Time interval',
 
+    activityRegistratorActivity: 'Activity',
     activityRegistratorTextInputLabel: 'What have you been doing?',
     activityRegistratorActivityDefaultChoice: 'Write text',
     activityRegistratorImporanceLabel : 'Importance',
     activityRegistratorEnjoymentLabel: 'Enjoyment',
 
+    calendarRegistratorActivity: 'Activity',
     calendarRegistratorTextInputLabel: 'What would you like to plan?',
     calendarRegistratorPersonLabel: 'Support person',
+    calendarRegistratorPersonButton: 'Person',
 
-    choiceBasedTextInputChangeLabel: 'Change',
+    registratorTextLabel: 'Text',
+    registratorValueLabel: 'Value',
 
     activiesSnackBarAdded : 'Activity added',
 
