@@ -9,7 +9,7 @@ export const ActivityInfo = () => {
   const dict = useTranslation();
 
   return (
-      <ScrollView 
+    <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}> 
         <Paragraph style={styles.text}>{dict.activityInfo.paragraph1}</Paragraph>
@@ -38,8 +38,7 @@ export const ActivityInfo = () => {
           style={styles.image}
           source={require('../../images/activityHistory.png')}
         />
-        
-      </ScrollView>
+    </ScrollView>
       
   );
 }

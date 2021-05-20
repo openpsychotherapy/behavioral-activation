@@ -9,7 +9,7 @@ export const ValuesInfo = () => {
   const dict = useTranslation();
 
   return (
-      <ScrollView 
+    <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}>
         <Paragraph style={styles.text}>{dict.valuesInfo.paragraph1}</Paragraph>
@@ -37,8 +37,7 @@ export const ValuesInfo = () => {
           style={styles.image}
           source={require('../../images/valuesSupport.png')}
         />
-        
-      </ScrollView>
-      
+    </ScrollView>
   );
-  }
+}
+

@@ -6,12 +6,13 @@ import { useTranslation } from 'language/LanguageProvider';
 
 export const StressInfo = () => {
   const dict = useTranslation();
-    return (
-      <ScrollView 
+  return (
+    <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}> 
-        <Subheading style={styles.text}>{dict.stress.header1}</Subheading>  
-        <Paragraph style={styles.text}>{dict.stress.paragraph1}</Paragraph>
-      </ScrollView>
-    );
-  }
+       <Subheading style={styles.text}>{dict.stress.header1}</Subheading>  
+       <Paragraph style={styles.text}>{dict.stress.paragraph1}</Paragraph>
+    </ScrollView>
+  );
+}
+

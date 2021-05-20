@@ -182,22 +182,21 @@ const sv = {
         "ikonen."
     },
     behavioralActivation:{
-
-        paragraph1: "Denna applikation kommer involvera en metod som kallas beteente aktivering. "+
-        "Enligt denna metod så är nyckeln till ett liv fritt från deprission att utväckla hälsosammare "+
+        paragraph1: "Denna applikation kommer involvera en metod som kallas beteendeaktivering. "+
+        "Enligt denna metod så är nyckeln till ett liv fritt från deprission att utveckla hälsosammare "+
         "beteendemönster där var dag involverar viktiga och/eller underhållande aktiviteter "+
-        "som hjälper dig att känna dig tillfreds och att ditt liv liv är meningsfullt. När du valt vilka "+
+        "som hjälper dig att känna dig tillfreds och att ditt liv är meningsfullt. När du valt vilka "+
         "områden av ditt liv du vill fokusera på och vilka dina värderingar är inom dessa områden, "+
-        "ska vi börjs identifiera och planerra dagliga aktiviteter som hjälper dig leva enligt de "+
-        "värderingar som är viktigast för dig. Detta är viktigt för när du utför aktiviteter som är "+ 
-        "nära relaterade till vad du värdesätter i ditt liv så lär du ha fler posetiva och underhållande "+
-        "uplevelser. Dessa upplevelser kommer i sin tur förbättra hur du mår och dina tankar om ditt liv "+
+        "ska vi börja identifiera och planera dagliga aktiviteter som hjälper dig leva enligt de "+
+        "värderingar som är viktigast för dig. Detta är viktigt, för när du utför aktiviteter som är "+ 
+        "nära relaterade till vad du värdesätter i ditt liv så lär du ha fler positiva och underhållande "+
+        "upplevelser. Dessa upplevelser kommer i sin tur förbättra hur du mår och dina tankar om ditt liv. "+
         "Det blir svårare att känna sig deprimerad och hopplös när man regelbundet utför aktiviteter "+
         "som känns värdefulla och som ger dig en tillfredställande känsla. ",
         paragraph2: "Den här applikationen fokuserar på att ändra ditt beteende för att förbättra  dina "+
-        "tankar, känslor och din livskvalitet överlag. Många individer med deprision känner sig ofta "+
-        "trötta och saknar motivation till att utföra diverse aktiviteter; de tänker sig ofta att när "+
-        "de väl har mer energi och mer possetiva tankar så kommer de ha förmågan att utföra de "+
+        "tankar, känslor och din livskvalitet överlag. Många individer med depression känner sig ofta "+
+        "trötta och saknar motivation till att utföra diverse aktiviteter, de tänker sig ofta att när "+
+        "de väl har mer energi och mer possitiva tankar så kommer de ha förmågan att utföra de "+
         "aktiviteter som de de varit oförmögna att utföra tidigare. I den här behandlingen görs "+
         " "+
 
