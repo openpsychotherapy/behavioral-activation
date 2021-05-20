@@ -9,6 +9,8 @@ import { ActivityInfo } from './info/ActivityInfo';
 import { CalendarInfo } from './info/CalendarInfo';
 import { ValuesInfo } from './info/ValuesInfo';
 import { BehaviouralActivation } from './info/BehaviouralActivation';
+import { DepressionInfo } from './info/DepressionInfo';
+import { StressInfo } from './info/StressInfo';
 import { useTranslation } from 'language/LanguageProvider';
 
 const InformationStack = createStackNavigator();
@@ -18,9 +20,19 @@ const ViewContent = ({navigation}: any) => {
 
   const cardsData = [
     {
+      title: dict.informationCardDepression,
+      imageUri: {uri: "https://picsum.photos/700"},
+      navigateTo: "DepressionInfo",
+    },
+    {
       title: dict.informationCardBehaviouralactivation,
       imageUri: {uri: "https://picsum.photos/700"},
       navigateTo: "BehaviouralActivation",
+    },
+    {
+      title: dict.informationCardStress,
+      imageUri: {uri: "https://picsum.photos/700"},
+      navigateTo: "StressInfo",
     },
     {
       title: dict.informationCardActivityscreen,
@@ -43,10 +55,10 @@ const ViewContent = ({navigation}: any) => {
     onPress={() => navigation.navigate(item.navigateTo)}
     style={{justifyContent: 'space-evenly', marginHorizontal: 10, marginVertical: 10}}>
         <Card.Content style={{alignItems: 'center'}}>
-          <Title>{item.title}</Title>
+          <Title style={{alignSelf: 'center'}}>{item.title}</Title>
         </Card.Content>
          <Card.Cover source={item.imageUri} />
-      </Card>
+    </Card>
   );
 
   return (
@@ -71,6 +83,8 @@ export const InformationScreen = () => {
       <InformationStack.Screen name='ValuesInfo' component={ValuesInfo} />
       <InformationStack.Screen name='CalenderInfo' component={CalendarInfo} />
       <InformationStack.Screen name='BehaviouralActivation' component={BehaviouralActivation} />
+      <InformationStack.Screen name='DepressionInfo' component={DepressionInfo} />
+      <InformationStack.Screen name='StressInfo' component={StressInfo} />
       <InformationStack.Screen name='Settings' component={SettingsScreen} />
       
     </InformationStack.Navigator>

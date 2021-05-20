@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text, Headline, Subheading, Paragraph } from 'react-native-paper';
+import { Subheading, Paragraph } from 'react-native-paper';
 import {styles} from './Styles';
 import { useTranslation } from 'language/LanguageProvider';
 
