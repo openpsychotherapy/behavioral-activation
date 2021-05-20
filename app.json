@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Behaviour Activation",
-    "slug": "BehaviourActivation",
+    "name": "Behavioral Activation",
+    "slug": "BehaviouralActivation",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
