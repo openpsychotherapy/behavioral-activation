@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, FlatList, Pressable } from 'react-native';
-import { Surface, List, Caption, FAB, Title, useTheme } from 'react-native-paper';
+import { View, FlatList } from 'react-native';
+import { Surface, List, Caption, FAB, Title, useTheme, TouchableRipple } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
 
 import { RatingCircle } from './../RatingCircle';
 
 import Storage from 'storage';
+import { ActivitiesDay, ActivitiesEntry } from 'storage/types';
 
 // Returns a date base on ISO string and adds an hour offset
 const getDateFromStringWithOffset = (value: string, offset: number) => {
@@ -53,6 +54,12 @@ export const ActivityHistory = ({route, navigation}: any) => {
     // Set rating
     dayRating = day.score;
 
+    // Callback for item press
+    const onModifyDate = (day: ActivitiesDay, activity: ActivitiesEntry) => {
+      navigation.push('ActivityRegistration', { icon: activity.icon, entry: activity, day: day, modify: true });
+    }
+
+
     let activityCount = 0; // Used for merging activities
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
       const activity = day.entries[activityIndex];
@@ -61,6 +68,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
       if (activity == null) {
         continue;
       }
+
 
       // const haveNext = activityIndex+1 < day.entries.length;
       // const isNextValid = day.entries[activityIndex+1] != null;
@@ -81,13 +89,15 @@ export const ActivityHistory = ({route, navigation}: any) => {
       const toTimeString = getFormattedTime(toDate);
 
       historyItems.push(
-        <Surface key={'hi_' + fromDate.toString()} style={{ flexDirection: 'row', borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
-          <List.Item style={{flex: 1, flexGrow: 1 }} title={fromTimeString + ' - ' + toTimeString} description={activity.text} right={() =>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Caption>{activity.importance + ' | ' + activity.enjoyment}</Caption>
-              <List.Icon icon={activity.icon}/>
-            </View>
-          }/>
+        <Surface key={'hi_' + fromDate.toString()} style={{ borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
+          <TouchableRipple onPress={() => onModifyDate(day, activity)} style={{ flexDirection: 'row' }}>
+            <List.Item style={{flex: 1, flexGrow: 1 }} title={fromTimeString + ' - ' + toTimeString} description={activity.text} right={() =>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Caption>{activity.importance + ' | ' + activity.enjoyment}</Caption>
+                <List.Icon icon={activity.icon}/>
+              </View>
+            }/>
+          </TouchableRipple>
         </Surface>
       );
 
@@ -112,17 +122,19 @@ export const ActivityHistory = ({route, navigation}: any) => {
       <Surface style={{ elevation: elevation.large, flexDirection: 'row', alignItems:'center'}}>
         {/* Title */}
         <View style={{ flexGrow: 1, alignItems: 'baseline'}}>
-          <Pressable style={{ flexDirection:'row', alignItems: 'center', paddingRight: 20}} onPress={onMonthPressed}>
-            <List.Icon icon='calendar-week'/>
-            <Title>{titleString}</Title>
-          </Pressable>
+          <TouchableRipple onPress={onMonthPressed}>
+            <View style={{ flexDirection:'row', alignItems: 'center', paddingRight: 20}}>
+              <List.Icon icon='calendar-week'/>
+              <Title>{titleString}</Title>
+            </View>
+          </TouchableRipple>
         </View>
 
         {/* Day rating */}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Pressable onPress={() => onRateDay()}>
+          <TouchableRipple onPress={() => onRateDay()}>
             <RatingCircle score={dayRating}/>
-          </Pressable>
+          </TouchableRipple>
           <List.Icon icon='star'/>
         </View>
       </Surface>
@@ -132,6 +144,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
         contentContainerStyle={{
           paddingBottom: 75
         }}
+        
       />
 
       {/* FAB + container */}

@@ -26,6 +26,34 @@ export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
 }
 
 /**
+ * Compares two activity days and returns `true` if they are equal.
+ *
+ * @param a - The first activity day
+ * @param b - The second activity day
+ * @returns a === b
+ */
+const activityDayEq = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
+  return a.date === b.date
+      && a.entries === b.entries
+      && a.score === b.score;
+}
+
+/**
+ * Compares two activity entries and returns `true` if they are equal.
+ *
+ * @param a - The first activity entry
+ * @param b - The second activity entry
+ * @returns a === b
+ */
+ const activityEntryEq = (a: ActivitiesEntry, b: ActivitiesEntry): boolean => {
+  return a.text === b.text
+      && a.icon === b.icon
+      && a.person === b.person
+      && a.importance === b.importance
+      && a.enjoyment === b.enjoyment;
+}
+
+/**
  * Hook returning a object with recorded activities and functions to modify the
  * object.
  *
@@ -160,9 +188,33 @@ export const useActivities = (): [Activities, ModifyActivities] => {
     return false;
   };
 
+  /**
+   * Removes an entry from the specified activity list.
+   * 
+   * @remarks: This function ignores all matching instances and does not check
+   *  if they connect or not.
+   *
+   * @param entry - The entry to be removed
+   * @returns A new activity list with the entry removed
+   */
+  const remove = (activity: ActivitiesEntry, day: ActivitiesDay, activities: Activities): Activities => {
+    const dayIndex = activities.findIndex(elem => elem === day);
+    if(dayIndex !== -1) {
+      // Clear out any instance of the given acitivity
+      const newEntries: (ActivitiesEntry | null)[] = [];
+      activities[dayIndex].entries.forEach(elem => {
+        newEntries.push(elem ? (activityEntryEq(elem, activity) ? null : elem) : null);
+      });
+      // Update entry list
+      activities[dayIndex].entries = newEntries;
+    }
+    return [ ...activities ];
+  };
+
   const modifyActivities: ModifyActivities = {
     add: add,
     addInterval: addInterval,
+    remove: (activity, day) => setStoreItem(activitiesKey, remove(activity, day, activities)),
     setRating: setRating
   };
 

@@ -10,36 +10,101 @@ import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
-import { ActivitiesEntry } from 'storage/types';
+import { ActivitiesDay, ActivitiesEntry } from 'storage/types';
 
 import { ISODate } from 'utils';
+import { getDaysInMonth } from 'react-native-paper-dates/lib/typescript/src/Date/dateUtils';
 
 export const ActivityRegistrator = ({ route, navigation }: any) => {
   const lang = useTranslation();
   const [settings, modifySettings] = Storage.useSettings();
   const { iconSizes, colors } = useTheme();
-
-  const steps = 1;
-
   const [values, modifyValues] = Storage.useValues();
   const [activities, modifyActivities] = Storage.useActivities();
 
-  const [fromTime, setFromTime] = React.useState(getCurrentTimeRounded(0, steps));
-  const [toTime, setToTime] = React.useState(getCurrentTimeRounded(1, steps));
+  const steps = 1;
+  let dateDefault = new Date();
+  let fromTimeRoundedDefault = getCurrentTimeRounded(0, steps);
+  let toTimeRoundedDefault = getCurrentTimeRounded(1, steps);
+  let activityTextDefault = '';
+  let importanceDefault = 5;
+  let enjoymentDefault = 5;
 
-  const [date, setDate] = React.useState(new Date());
+  // Overwrite default values from entry (if it exists)
+  if (route.params?.entry && route.params?.day) {
+    const day: ActivitiesDay = route.params?.day;
+    const entry: ActivitiesEntry | null = route.params?.entry;
+    let startEntry: ActivitiesEntry | null = null;
+    let endEntry: ActivitiesEntry | null = null;
+    let startIndex = 0;
+    let endIndex = 0;
 
-  const [activityText, setActivityText] = React.useState('');
+    for(let i = 0; i < day.entries.length; ++i) {
+      const currentEntry = day.entries[i];
+      // If element matches entry
+      if(currentEntry === entry) {
+        // If we haven't found a start yet
+        if(!startEntry) {
+          startEntry = currentEntry;
+          startIndex = i;
+        }
+        // If we have, update end
+        else {
+          endEntry = currentEntry;
+          endIndex = i;
+        }
+      }
+      // If it didn't match
+      else {
+        // If we have a start, we found the end
+        if(startEntry) {
+          if(!endEntry) {
+            endEntry = startEntry;
+            endIndex = startIndex;
+          }
+          break;
+        }
+      }
+    }
 
-  const [importance, setImportance] = React.useState(5);
-  const [enjoyment, setEnjoyment] = React.useState(5);
+    // Set default values
+    if(entry && startEntry) {
+      dateDefault = new Date(day.date);
+      fromTimeRoundedDefault = new Date(
+        dateDefault.getFullYear(),
+        dateDefault.getMonth(),
+        dateDefault.getDate(),
+        startIndex
+      );
+      toTimeRoundedDefault = new Date(
+        dateDefault.getFullYear(),
+        dateDefault.getMonth(),
+        dateDefault.getDate(),
+        endIndex + 1
+      );
+      activityTextDefault = entry.text;
+      importanceDefault = entry.importance;
+      enjoymentDefault = entry.enjoyment;
+    }
+  }
+
+  const [fromTime, setFromTime] = React.useState(fromTimeRoundedDefault);
+  const [toTime, setToTime] = React.useState(toTimeRoundedDefault);
+
+  const [date, setDate] = React.useState(dateDefault);
+
+  const [activityText, setActivityText] = React.useState(activityTextDefault);
+
+  const [importance, setImportance] = React.useState(importanceDefault);
+  const [enjoyment, setEnjoyment] = React.useState(enjoymentDefault);
+
 
   const onConfirm = () => {
     // Create entry from information entered by user
     const entry: ActivitiesEntry = {
       text: activityText,
       icon: route.params.icon,
-      person: '', // TODO: link to value based on choice
+      person: route.params?.entry ? route.params?.entry.person : '',
       importance: importance,
       enjoyment: enjoyment,
     };
@@ -54,13 +119,24 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
     modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour - 1, entry);
 
     // Go back
-    navigation.navigate('Activities', {activityRegistered: true})
+    if(route.params?.modify) {
+      navigation.navigate('History', {activityModified: true})
+    }
+    else {
+      navigation.navigate('Activities', {activityRegistered: true})
+    }
   };
 
-
+  
+  // Cancellation callback
   const onCancel = () => {
     // Go back
-    navigation.navigate('Activities', {activityRegistered: false})
+    if(route.params?.modify) {
+      navigation.navigate('History', {activityModified: false})
+    }
+    else {
+      navigation.navigate('Activities', {activityRegistered: false})
+    }
   };
 
   // Attempts to dissmiss the keyboard when the
@@ -80,6 +156,7 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       setAbsHeight(height);
     }
   };
+
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} >
@@ -166,10 +243,23 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
           </View>
         </View>
 
-        {/* Cancel / Confirm row */}
+        {/* Remove / Cancel / Confirm row */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+          {route.params?.entry &&
+            <IconButton
+              icon='delete'
+              size={iconSizes.large}
+              onPress={() => {
+                modifyActivities.remove(route.params.entry as ActivitiesEntry, route.params.day as ActivitiesDay);
+                onCancel();
+              }}
+              color={colors.cancel}
+            />
+          }
           <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
-          <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
+          {!route.params?.entry &&
+            <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
+          }
         </View>
       </View>
     </TouchableWithoutFeedback>

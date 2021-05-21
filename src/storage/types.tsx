@@ -20,6 +20,7 @@ export type Activities = ActivitiesDay[];
 export interface ModifyActivities {
   add: (date: string, hour: number, entry: ActivitiesEntry) => boolean;
   addInterval: (date: string, startHour: number, endHour: number, entry: ActivitiesEntry) => boolean;
+  remove: (activity: ActivitiesEntry, day: ActivitiesDay) => void;
   setRating: (date: string, score: number) => boolean
 }
 
