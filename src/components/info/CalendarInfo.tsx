@@ -6,7 +6,7 @@ import {styles} from './Styles';
 import { useTranslation } from 'language/LanguageProvider';
 
 export const CalendarInfo = () => {
-const dict = useTranslation();
+  const dict = useTranslation();
 
   return (
     <ScrollView 
@@ -29,4 +29,3 @@ const dict = useTranslation();
       
   );
 }
-
