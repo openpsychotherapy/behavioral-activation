@@ -1,10 +1,10 @@
 const sv = {
     languageName: 'Svenska',
 
-    navigationLabelActivites: 'Registrera',     // Unused
-    navigationLabelCalendar: 'Kalender',        // Unused
-    navigationLabelValues: 'Värderingar',       // Unused
-    navigationLabelInformation: 'Information',  // Unused
+    navigationLabelActivites: 'Registrera',     
+    navigationLabelCalendar: 'Kalender',        
+    navigationLabelValues: 'Värderingar',       
+    navigationLabelInformation: 'Information',  
 
     activitiesButtonRateDay: 'Betygsätt dag',
     activitiesButtonRateDayModify: 'Ändra betyg',
@@ -183,7 +183,7 @@ const sv = {
     },
     behavioralActivation:{
         paragraph1: "Denna applikation kommer involvera en metod som kallas beteendeaktivering. "+
-        "Enligt denna metod så är nyckeln till ett liv fritt från deprission att utveckla hälsosammare "+
+        "Enligt denna metod så är nyckeln till ett liv fritt från depression att utveckla hälsosammare "+
         "beteendemönster där var dag involverar viktiga och/eller underhållande aktiviteter "+
         "som hjälper dig att känna dig tillfreds och att ditt liv är meningsfullt. När du valt vilka "+
         "områden av ditt liv du vill fokusera på och vilka dina värderingar är inom dessa områden, "+
@@ -193,60 +193,57 @@ const sv = {
         "upplevelser. Dessa upplevelser kommer i sin tur förbättra hur du mår och dina tankar om ditt liv. "+
         "Det blir svårare att känna sig deprimerad och hopplös när man regelbundet utför aktiviteter "+
         "som känns värdefulla och som ger dig en tillfredställande känsla. ",
-        paragraph2: "Den här applikationen fokuserar på att ändra ditt beteende för att förbättra  dina "+
+        paragraph2: "Den här applikationen fokuserar på att ändra ditt beteende för att förbättra dina "+
         "tankar, känslor och din livskvalitet överlag. Många individer med depression känner sig ofta "+
-        "trötta och saknar motivation till att utföra diverse aktiviteter, de tänker sig ofta att när "+
-        "de väl har mer energi och mer possitiva tankar så kommer de ha förmågan att utföra de "+
+        "trötta och saknar motivation till att utföra diverse aktiviteter. De tänker sig ofta att när "+
+        "de väl har mer energi och mer positiva tankar så kommer de ha förmågan att utföra de "+
         "aktiviteter som de de varit oförmögna att utföra tidigare. I den här behandlingen görs "+
         "motsattsen till detta, först ändras beteendemönster för att öka energi och motivation samt "+
-        "positiva tankar och känslor. Det faktum att vi fokuserar på beteförändring innebär dock "+
-        "inte att vi ignorerar tankar och känslor. istället så menar vi att negativa tankar och känslor "+
-        "ändast kommer förendras efter att du ändrat ditt beteende och har mer positiva livserfarenheter. "+
-        "Hälsosamt beteende deffinieras som beteenden som är ämnat att förbättra din livskvalitet och "+
+        "positiva tankar och känslor. Det faktum att vi fokuserar på beteendeförändring innebär dock "+
+        "inte att vi ignorerar tankar och känslor. Istället så menar vi att negativa tankar och känslor "+
+        "endast kommer förändras efter att du ändrat ditt beteende och har mer positiva livserfarenheter. "+
+        "Hälsosamt beteende definieras som beteenden som är ämnat att förbättra din livskvalitet och "+
         "att uppnå de värderingar du har i ditt liv. I kontrast till häsosamt beteende står ohälsosamt "+
         "(depressivt) beteende. Ohälsosamt beteende är generellt sätt inte direkt relaterat till "+
-        "förbättrandet av din livskvalitet  och för dig inte närmare att leva enligt dina värderingar. ",
+        "förbättrandet av din livskvalitet och för dig inte närmare att leva enligt dina värderingar. ",
         paragraph3: "Det är viktigt att inse att du kan vara aktiv och ändå vara deprimerad. Detta kan "+
-        "hända om du känner dig överväldigad av aktivitersom är [unfulfilling] eller påtvingade av andra. "+
+        "hända om du känner dig överväldigad av aktiviter som är ouppfyllande eller påtvingade av andra. "+
         "Till exempel, även om du är flitig både på jobbet och hemma så kan dessa aktiviteter uteslutande "+
-        "till för att hjälpa andra. Det är viserligen mycket viktigt att hjälpa andra men det är aldrig "+
+        "vara till för att hjälpa andra. Det är viserligen mycket viktigt att hjälpa andra men det är aldrig "+
         "en bra idé att fokusera på andra till den grad att dina egna behov och känslor blir helt "+
         "försummade. Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
         "och otillfredställd, följt av förvirring och dåligt samvete över att du har dessa känslor. "+
         "Därför är det viktigt att inte bara ha många aktiviteter utan att ha aktiviteter som specifikt "+
-        "är till för att ge dig en känsla av njutning och tillfredställelese."+
+        "är till för att ge dig en känsla av njutning och tillfredställelese."
     },
 
-
     depression: {
-        paragraph1: "Denna behandling var designad för att hjälpa dig med din deprission, deprission "+
-        "definieras som en period på minst två veckor då en person upplever deppresivt humör eller "+
+        paragraph1: "Denna behandling var designad för att hjälpa dig med din depression, depression "+
+        "definieras som en period på minst två veckor då en person upplever depressivt humör eller "+
         "bristande intresse eller nöje från aktiviteter som brukar vara nöjsamma, tillsammans med "+
-        "många andra symptom. Många individer upplever åt minstånde en episod av allvarlig depression "+
+        "många andra symptom. Många individer upplever åt minstånde en period av allvarlig depression "+
         "i livet och det kan påverka personer i alla åldrar, kulturer, inkomst, utbildning och status. "+
         "Depression kan ha stor påverkan på ditt liv, detta kan innefatta minskad optimism eller "+
         "motivation, dåligt självförtroende, konsentrationsproblem, självskadebeteende och/eller "+
         "självmordstankar. Medecinska problem associerade med depression inkluderar hjärtsjukdommar, "+
-        "kronisk smärta, typ två diabetes, missbruk, utmattning, och undernäring, Individer med  "+
+        "kronisk smärta, typ två diabetes, missbruk, utmattning, och undernäring. Individer med  "+
         "depression håller sig ofta för sig själva och undviker sina vanliga aktiviteter. Denna "+
         "isolering kan orsaka ytterligare problematik, så som ensamhet, relationsproblem, minskad "+
         "arbetstillfredsställelse eller avskedande och utbildningsreladetrade misslyckanden. Med tanke "+
         "på dessa problem så är det ytterst viktigt att identifiera och behandla depression. ",
-
-
         paragraph2: "Depressionssymtom kan inkludera:",
         dot1: "- Att oftast känna sig ledsen eller nere,",
         dot2: "- Förlorat intresse för vanliga aktiviteter,",
         dot3: "- Signifikant viktminskning eller viktökning,",
         dot4: "- Minskad eller ökad aptit,",
         dot5: "- Svårt att sova eller att sova för mycket,",
-        dot6: "- Iritationskänslor eller aggresiva känslor,",
+        dot6: "- Irritationskänslor eller aggressiva känslor,",
         dot7: "- Känna sig trött eller utmattad,",
         dot8: "- Känna sig värdelös eller överdrivna skuldkännslor,",
-        dot9: "- Svårigheter med att tänka, fokusera eller ta beslut,,",
+        dot9: "- Svårigheter med att tänka, fokusera eller ta beslut,",
         dot10: "- Gråtattacker,",
         dot11: "- Hopplöshetskänslor,",
-        dot12: "- självmordstankar och/eller försök,",
+        dot12: "- Självmordstankar och/eller självmordsförsök.",
         paragraph3:"Trots att de flesta individer upplever några av ovanstående symptom då och "+
         "då så ställs endast en diagnos för depression om du har kraftig ångest eller om du har "+
         "stora problem med att klara av vardagen. Vissa personer kan identifiera händelser så som "+
@@ -256,7 +253,7 @@ const sv = {
         "orsakat depression så resulterar det i ett specifikt beteendemönster som leder till "+
         "känslor av ensamhet, sorg, isolering, att inte ha något syfte och/eller hopplöshet. Nyckeln "+
         "till att må bättre ligger inte i att identifiera källan till depressionen då detta är "+
-        "nästintill omöjligt, utan i att förstå och ändra dina depresiva beteendemönster. "
+        "nästintill omöjligt, utan i att förstå och ändra dina depressiva beteendemönster. "
     },
     stress: {
         header1: "Stressande livshändelser och förluster i ditt liv",
@@ -266,28 +263,28 @@ const sv = {
         "det finns väldigt lite att leva för och att allt stöd och all glädje du haft nu är borta "+
         "förevigt. Tankar och mardrömmar gällande den hemska upplevelse eller den närstående personen "+
         "du förlorat kan bli regelbundet återkommande. I den här behandlingen är det väldigt viktigt "+
-        "för psykologen att förstå vad som hänt dig, hur du kände och ,viktigast av allt, hur det "+
-        "påverkar ditt liv nu. Under varje session kommer vi avsätta tid till att prata om händelser "+
+        "för psykologen att förstå vad som hänt dig, hur du kände och viktigast av allt, hur det "+
+        "påverkar ditt liv nu. Under varje tillfälle kommer vi avsätta tid till att prata om händelser "+
         "i ditt liv som har lett till din depression. Med det sagt så kräver den här behandlingen mer "+
         "än att bara prata om vad som hänt. Utöver detta så kommer vi också lägga tid på att prova "+
         "strategier som kommer hjälpa dig att leva ett mer tillfredställande och meningsfullt liv. "+
         "Ingen kan ändra vad som redan hänt men vi kan planera en bättre framtid genom vad vi gör i "+
         "nuet. Det händer ofta att när människor har upplevt hektiska händelser och förlust så "+
         "upplever de ofta negativa tankar och känslor om händelsen nästan hela tiden. Det blir svårt "+
-        "att inte tänka på det äller att må dåligt över att det hände. vi upplever att det är viktigt "+
-        "att att förstå hur dessa händelser påverkar vårt nuvarande beteende. Det händer ofta att "+
+        "att inte tänka på det eller att inte må dåligt över att det hände. Vi upplever att det är viktigt "+
+        "att förstå hur dessa händelser påverkar vårt nuvarande beteende. Det händer ofta att "+
         "människor ändrar vad de lägger sin tid på när de upplevt hektiska händelser eller förlust, "+
         "vilket i sin tur kan leda till depresiva beteendemönster. Till exempel, du kanske finner det "+
         "svårt att sova under natten så du börjar sova mycket på dagen istället. Om du sover på dagen "+
         "så kan du börja finna det svårt att utför viktiga, dagliga aktiviteter eller saknar energin "+
         "och viljan att socialisera med vänner och familj. Den här behandlingen kommer hjälpa dig att "+
-        "identifiera aktiviteter som kan bidra till att din depression förvärras och kan hjälpa dig "+
+        "identifiera aktiviteter som kan bidra till att din depression inte förvärras och kan hjälpa dig "+
         "modifiera eller ändra dessa aktiviteter så att du känner dig deprimerad mer sällan. Efter "+
         "en förlust eller en hektisk händelse kan det ofta ta mycket tid och fokus för att bestämma "+
-        "hur du vill leva ditt liv framöver., den här behandlingen är designad för att hjälpa dig "+
+        "hur du vill leva ditt liv framöver. Den här behandlingen är designad för att hjälpa dig "+
         "med detta. Målet är att hjälpa dig leva ett så bra liv som möjligt. Detta kan vara ett svårt "+
         "arbete men om du litar på processen så kommer du uppleva att du kommer må bättre på grund av "+
-        "din ansträgning. Vi kommer jobba i ett tempo som är bekvämt för dig. är du villig att jobba "+
+        "din ansträgning. Vi kommer jobba i ett tempo som är bekvämt för dig. Är du villig att jobba "+
         "på detta tillsammans?"
     },
 }

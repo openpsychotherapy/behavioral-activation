@@ -1,10 +1,10 @@
 const en = {
     languageName: 'English',
 
-    navigationLabelActivites: 'Registation',    // Unused
-    navigationLabelCalendar: 'Calendar',        // Unused
-    navigationLabelValues: 'Values',            // Unused
-    navigationLabelInformation: 'Information',  // Unused
+    navigationLabelActivites: 'Registation',    
+    navigationLabelCalendar: 'Calendar',        
+    navigationLabelValues: 'Values',            
+    navigationLabelInformation: 'Information',  
 
     activitiesButtonRateDay: 'Rate day',
     activitiesButtonRateDayModify: 'Change rating',
