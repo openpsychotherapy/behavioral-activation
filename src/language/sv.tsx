@@ -208,10 +208,10 @@ const sv = {
         "förbättrandet av din livskvalitet och för dig inte närmare att leva enligt dina värderingar. ",
         paragraph3: "Det är viktigt att inse att du kan vara aktiv och ändå vara deprimerad. Detta kan "+
         "hända om du känner dig överväldigad av aktiviter som är ouppfyllande eller påtvingade av andra. "+
-        "Till exempel, även om du är flitig både på jobbet och hemma så kan dessa aktiviteter uteslutande "+
-        "vara till för att hjälpa andra. Det är visserligen mycket viktigt att hjälpa andra men det är aldrig "+
-        "en bra idé att fokusera på andra till den grad att dina egna behov och känslor blir helt "+
-        "försummade. Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
+        "Till exempel, även om man är upptagen med aktiviteter som hjälper andra både jobbet "+
+        "och hemma så är det dåligt att fokusera på andra till en sådan grad att ens egna behov och känslor "+
+        "försummas. Det är såklart bra att hjälpa andra men det får inte gå ut över en själv. "+
+        "Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
         "och otillfredställd, följt av förvirring och dåligt samvete över att du har dessa känslor. "+
         "Därför är det viktigt att inte bara ha många aktiviteter utan att ha aktiviteter som specifikt "+
         "är till för att ge dig en känsla av njutning och tillfredsställelse."
