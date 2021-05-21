@@ -184,7 +184,7 @@ const sv = {
     behavioralActivation:{
         paragraph1: "Denna applikation kommer involvera en metod som kallas beteendeaktivering. "+
         "Enligt denna metod så är nyckeln till ett liv fritt från depression att utveckla hälsosammare "+
-        "beteendemönster där var dag involverar viktiga och/eller underhållande aktiviteter "+
+        "beteendemönster där varje dag involverar viktiga och/eller underhållande aktiviteter "+
         "som hjälper dig att känna dig tillfreds och att ditt liv är meningsfullt. När du valt vilka "+
         "områden av ditt liv du vill fokusera på och vilka dina värderingar är inom dessa områden, "+
         "ska vi börja identifiera och planera dagliga aktiviteter som hjälper dig leva enligt de "+
@@ -198,18 +198,18 @@ const sv = {
         "trötta och saknar motivation till att utföra diverse aktiviteter. De tänker sig ofta att när "+
         "de väl har mer energi och mer positiva tankar så kommer de ha förmågan att utföra de "+
         "aktiviteter som de de varit oförmögna att utföra tidigare. I den här behandlingen görs "+
-        "motsattsen till detta, först ändras beteendemönster för att öka energi och motivation samt "+
+        "motsatsen till detta. Först ändras beteendemönster för att öka energi och motivation samt "+
         "positiva tankar och känslor. Det faktum att vi fokuserar på beteendeförändring innebär dock "+
         "inte att vi ignorerar tankar och känslor. Istället så menar vi att negativa tankar och känslor "+
         "endast kommer förändras efter att du ändrat ditt beteende och har mer positiva livserfarenheter. "+
         "Hälsosamt beteende definieras som beteenden som är ämnat att förbättra din livskvalitet och "+
-        "att uppnå de värderingar du har i ditt liv. I kontrast till häsosamt beteende står ohälsosamt "+
+        "att uppnå de värderingar du har i ditt liv. I kontrast till hälsosamt beteende står ohälsosamt "+
         "(depressivt) beteende. Ohälsosamt beteende är generellt sätt inte direkt relaterat till "+
         "förbättrandet av din livskvalitet och för dig inte närmare att leva enligt dina värderingar. ",
         paragraph3: "Det är viktigt att inse att du kan vara aktiv och ändå vara deprimerad. Detta kan "+
         "hända om du känner dig överväldigad av aktiviter som är ouppfyllande eller påtvingade av andra. "+
         "Till exempel, även om du är flitig både på jobbet och hemma så kan dessa aktiviteter uteslutande "+
-        "vara till för att hjälpa andra. Det är viserligen mycket viktigt att hjälpa andra men det är aldrig "+
+        "vara till för att hjälpa andra. Det är visserligen mycket viktigt att hjälpa andra men det är aldrig "+
         "en bra idé att fokusera på andra till den grad att dina egna behov och känslor blir helt "+
         "försummade. Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
         "och otillfredställd, följt av förvirring och dåligt samvete över att du har dessa känslor. "+
@@ -218,14 +218,14 @@ const sv = {
     },
 
     depression: {
-        paragraph1: "Denna behandling var designad för att hjälpa dig med din depression, depression "+
+        paragraph1: "Denna behandling var designad för att hjälpa dig med din depression. Depression "+
         "definieras som en period på minst två veckor då en person upplever depressivt humör eller "+
         "bristande intresse eller nöje från aktiviteter som brukar vara nöjsamma, tillsammans med "+
-        "många andra symptom. Många individer upplever åt minstånde en period av allvarlig depression "+
-        "i livet och det kan påverka personer i alla åldrar, kulturer, inkomst, utbildning och status. "+
-        "Depression kan ha stor påverkan på ditt liv, detta kan innefatta minskad optimism eller "+
-        "motivation, dåligt självförtroende, konsentrationsproblem, självskadebeteende och/eller "+
-        "självmordstankar. Medecinska problem associerade med depression inkluderar hjärtsjukdommar, "+
+        "många andra symptom. Många individer upplever åtminstone en period av allvarlig depression "+
+        "i livet och det kan påverka personer i alla åldrar, kulturer, inkomster, utbildningar och status. "+
+        "Depression kan ha stor påverkan på ditt liv. Det kan innefatta minskad optimism eller "+
+        "motivation, dåligt självförtroende, koncentrationsproblem, självskadebeteende och/eller "+
+        "självmordstankar. Medicinska problem associerade med depression inkluderar hjärtsjukdomar, "+
         "kronisk smärta, typ två diabetes, missbruk, utmattning, och undernäring. Individer med  "+
         "depression håller sig ofta för sig själva och undviker sina vanliga aktiviteter. Denna "+
         "isolering kan orsaka ytterligare problematik, så som ensamhet, relationsproblem, minskad "+
@@ -239,7 +239,7 @@ const sv = {
         dot5: "- Svårt att sova eller att sova för mycket,",
         dot6: "- Irritationskänslor eller aggressiva känslor,",
         dot7: "- Känna sig trött eller utmattad,",
-        dot8: "- Känna sig värdelös eller överdrivna skuldkännslor,",
+        dot8: "- Känna sig värdelös eller överdrivna skuldkänslor,",
         dot9: "- Svårigheter med att tänka, fokusera eller ta beslut,",
         dot10: "- Gråtattacker,",
         dot11: "- Hopplöshetskänslor,",
@@ -257,8 +257,8 @@ const sv = {
     },
     stress: {
         header1: "Stressande livshändelser och förluster i ditt liv",
-        paragraph1:"Det händer ofta att individer som upplevet hektiska livshändelser och förlust "+
-        "upplever långvariga depressionskänslor. Efter att något väldigt hemskt händer eller när man "+
+        paragraph1:"Det händer ofta att individer som upplevt hektiska livshändelser och förlust "+
+        "upplever långvariga depressionskänslor. Efter att något väldigt hemskt hänt eller när man "+
         "förlorat någon närstående så kan livet kännas tomt och meningslöst. Det kan kännas som att "+
         "det finns väldigt lite att leva för och att allt stöd och all glädje du haft nu är borta "+
         "förevigt. Tankar och mardrömmar gällande den hemska upplevelse eller den närstående personen "+
@@ -274,7 +274,7 @@ const sv = {
         "att inte tänka på det eller att inte må dåligt över att det hände. Vi upplever att det är viktigt "+
         "att förstå hur dessa händelser påverkar vårt nuvarande beteende. Det händer ofta att "+
         "människor ändrar vad de lägger sin tid på när de upplevt hektiska händelser eller förlust, "+
-        "vilket i sin tur kan leda till depresiva beteendemönster. Till exempel, du kanske finner det "+
+        "vilket i sin tur kan leda till depressiva beteendemönster. Till exempel, du kanske finner det "+
         "svårt att sova under natten så du börjar sova mycket på dagen istället. Om du sover på dagen "+
         "så kan du börja finna det svårt att utför viktiga, dagliga aktiviteter eller saknar energin "+
         "och viljan att socialisera med vänner och familj. Den här behandlingen kommer hjälpa dig att "+
@@ -284,7 +284,7 @@ const sv = {
         "hur du vill leva ditt liv framöver. Den här behandlingen är designad för att hjälpa dig "+
         "med detta. Målet är att hjälpa dig leva ett så bra liv som möjligt. Detta kan vara ett svårt "+
         "arbete men om du litar på processen så kommer du uppleva att du kommer må bättre på grund av "+
-        "din ansträgning. Vi kommer jobba i ett tempo som är bekvämt för dig. Är du villig att jobba "+
+        "din ansträngning. Vi kommer jobba i ett tempo som är bekvämt för dig. Är du villig att jobba "+
         "på detta tillsammans?"
     },
 }
