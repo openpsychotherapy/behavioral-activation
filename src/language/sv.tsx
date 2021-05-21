@@ -214,7 +214,7 @@ const sv = {
         "försummade. Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
         "och otillfredställd, följt av förvirring och dåligt samvete över att du har dessa känslor. "+
         "Därför är det viktigt att inte bara ha många aktiviteter utan att ha aktiviteter som specifikt "+
-        "är till för att ge dig en känsla av njutning och tillfredställelese."
+        "är till för att ge dig en känsla av njutning och tillfredsställelse."
     },
 
     depression: {
@@ -229,7 +229,7 @@ const sv = {
         "kronisk smärta, typ två diabetes, missbruk, utmattning, och undernäring. Individer med  "+
         "depression håller sig ofta för sig själva och undviker sina vanliga aktiviteter. Denna "+
         "isolering kan orsaka ytterligare problematik, så som ensamhet, relationsproblem, minskad "+
-        "arbetstillfredsställelse eller avskedande och utbildningsreladetrade misslyckanden. Med tanke "+
+        "arbetstillfredsställelse eller avskedande och utbildningsrelaterade misslyckanden. Med tanke "+
         "på dessa problem så är det ytterst viktigt att identifiera och behandla depression. ",
         paragraph2: "Depressionssymtom kan inkludera:",
         dot1: "- Att oftast känna sig ledsen eller nere,",
@@ -278,7 +278,7 @@ const sv = {
         "svårt att sova under natten så du börjar sova mycket på dagen istället. Om du sover på dagen "+
         "så kan du börja finna det svårt att utför viktiga, dagliga aktiviteter eller saknar energin "+
         "och viljan att socialisera med vänner och familj. Den här behandlingen kommer hjälpa dig att "+
-        "identifiera aktiviteter som kan bidra till att din depression inte förvärras och kan hjälpa dig "+
+        "identifiera aktiviteter som kan förvärra din depression och därefter "+
         "modifiera eller ändra dessa aktiviteter så att du känner dig deprimerad mer sällan. Efter "+
         "en förlust eller en hektisk händelse kan det ofta ta mycket tid och fokus för att bestämma "+
         "hur du vill leva ditt liv framöver. Den här behandlingen är designad för att hjälpa dig "+
