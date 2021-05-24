@@ -135,7 +135,7 @@ export const peopleDefault: People = [];
 export const settingsKey: string = 'settings';
 export const settingsDefault: Settings = {
   notifications: false,
-  language: 'sv',
+  language: 'en',
 };
 
 export const valuesKey: string = 'values';
