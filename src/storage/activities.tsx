@@ -26,6 +26,23 @@ export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
 }
 
 /**
+ * Compares two activity entries and returns `true` if they are equal.
+ *
+ * @remarks Can handle null entries
+ * @param a - The first activity entry
+ * @param b - The second activity entry
+ * @returns a === b
+ */
+ const activityEntryEq = (a: ActivitiesEntry | null, b: ActivitiesEntry | null): boolean => {
+  if(a == null || b == null) return a == b; // For ease of use with ActivitiesDay entries
+  return a.text === b.text
+      && a.icon === b.icon
+      && a.person === b.person
+      && a.importance === b.importance
+      && a.enjoyment === b.enjoyment;
+}
+
+/**
  * Compares two activity days and returns `true` if they are equal.
  *
  * @param a - The first activity day
@@ -34,23 +51,9 @@ export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
  */
 const activityDayEq = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
   return a.date === b.date
-      && a.entries === b.entries
+      && a.entries.length == b.entries.length
+      && a.entries.every((e, i) => activityEntryEq(e, b.entries[i]))
       && a.score === b.score;
-}
-
-/**
- * Compares two activity entries and returns `true` if they are equal.
- *
- * @param a - The first activity entry
- * @param b - The second activity entry
- * @returns a === b
- */
- const activityEntryEq = (a: ActivitiesEntry, b: ActivitiesEntry): boolean => {
-  return a.text === b.text
-      && a.icon === b.icon
-      && a.person === b.person
-      && a.importance === b.importance
-      && a.enjoyment === b.enjoyment;
 }
 
 /**
@@ -190,22 +193,37 @@ export const useActivities = (): [Activities, ModifyActivities] => {
 
   /**
    * Removes an entry from the specified activity list.
-   * 
-   * @remarks: This function ignores all matching instances and does not check
-   *  if they connect or not.
    *
    * @param entry - The entry to be removed
    * @returns A new activity list with the entry removed
    */
-  const remove = (activity: ActivitiesEntry, day: ActivitiesDay): boolean => {
+  const remove = (activityIndex: number, day: ActivitiesDay): boolean => {
     const dayIndex = activities.findIndex(elem => elem === day);
-    if(dayIndex !== -1) {
-      // Clear out any instance of the given acitivity
-      const newEntries: (ActivitiesEntry | null)[] = [];
-      activities[dayIndex].entries.forEach(elem => {
-        newEntries.push(elem ? (activityEntryEq(elem, activity) ? null : elem) : null);
-      });
-      // Update entry list
+    
+    if (dayIndex !== -1 && activityIndex >= 0 && activityIndex < 24) {
+      const activity = activities[dayIndex].entries[activityIndex];
+      
+      // If activityIndex does not point to valid activity
+      if(!activity) {
+        return false;
+      }
+
+      // Clear out any instance of the given activity
+      const newEntries: (ActivitiesEntry | null)[] = activities[dayIndex].entries.slice(0, activityIndex);
+
+      // Find all connected activities matching "activity" and replace it with null
+      for(let i = activityIndex; i < activities[dayIndex].entries.length; ++i) {
+        const entry = activities[dayIndex].entries[i];
+        // Check if the entry broke the segment
+        if(entry != null || !activityEntryEq(entry, activity)) {
+          // Add remaining entries to newEntries
+          newEntries.push(...activities[dayIndex].entries.slice(i));
+          break;
+        }
+        newEntries.push(null);
+      }
+
+      // Update entry list and store changes
       activities[dayIndex].entries = newEntries;
       setStoreItem(activitiesKey, [ ...activities ]);
       return true;

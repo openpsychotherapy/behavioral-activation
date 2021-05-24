@@ -144,7 +144,6 @@ export const ActivityHistory = ({route, navigation}: any) => {
         contentContainerStyle={{
           paddingBottom: 75
         }}
-        
       />
 
       {/* FAB + container */}
