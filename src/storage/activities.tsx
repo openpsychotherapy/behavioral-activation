@@ -197,7 +197,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @param entry - The entry to be removed
    * @returns A new activity list with the entry removed
    */
-  const remove = (activity: ActivitiesEntry, day: ActivitiesDay, activities: Activities): Activities => {
+  const remove = (activity: ActivitiesEntry, day: ActivitiesDay): boolean => {
     const dayIndex = activities.findIndex(elem => elem === day);
     if(dayIndex !== -1) {
       // Clear out any instance of the given acitivity
@@ -207,14 +207,16 @@ export const useActivities = (): [Activities, ModifyActivities] => {
       });
       // Update entry list
       activities[dayIndex].entries = newEntries;
+      setStoreItem(activitiesKey, [ ...activities ]);
+      return true;
     }
-    return [ ...activities ];
+    return false;
   };
 
   const modifyActivities: ModifyActivities = {
     add: add,
     addInterval: addInterval,
-    remove: (activity, day) => setStoreItem(activitiesKey, remove(activity, day, activities)),
+    remove: remove,
     setRating: setRating
   };
 
