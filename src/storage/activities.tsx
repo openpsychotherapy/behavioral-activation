@@ -26,6 +26,37 @@ export const activityDayGt = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
 }
 
 /**
+ * Compares two activity entries and returns `true` if they are equal.
+ *
+ * @remarks Can handle null entries
+ * @param a - The first activity entry
+ * @param b - The second activity entry
+ * @returns a === b
+ */
+ const activityEntryEq = (a: ActivitiesEntry | null, b: ActivitiesEntry | null): boolean => {
+  if (a == null || b == null) return a == b; // For ease of use with ActivitiesDay entries
+  return a.text === b.text
+      && a.icon === b.icon
+      && a.person === b.person
+      && a.importance === b.importance
+      && a.enjoyment === b.enjoyment;
+}
+
+/**
+ * Compares two activity days and returns `true` if they are equal.
+ *
+ * @param a - The first activity day
+ * @param b - The second activity day
+ * @returns a === b
+ */
+const activityDayEq = (a: ActivitiesDay, b: ActivitiesDay): boolean => {
+  return a.date === b.date
+      && a.entries.length == b.entries.length
+      && a.entries.every((e, i) => activityEntryEq(e, b.entries[i]))
+      && a.score === b.score;
+}
+
+/**
  * Hook returning a object with recorded activities and functions to modify the
  * object.
  *
@@ -60,10 +91,11 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @remarks
    * A date will not be inserted if already present.
    *
+   * @param activities - The activity list to insert into
    * @param date - The date to be inserted (YYYY-mm-dd)
    * @returns The activities object with specified date inserted
    */
-  const _insertDay = (date: string): Activities => {
+  const _insertDay = (activities: Activities, date: string): Activities => {
 
     if (!activities.some(a => a.date === date)) {
       const newActivityDay = {
@@ -103,7 +135,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    */
   const add = (date: string, hour: number, entry: ActivitiesEntry): boolean => {
     if (isDate(date) && 0 <= hour && hour < 24) {
-      const newActivities = _insertDay(date);
+      const newActivities = _insertDay(activities, date);
       const index = newActivities.findIndex(a => a.date === date);
       newActivities[index].entries[hour] = entry;
       setStoreItem(activitiesKey, newActivities);
@@ -125,17 +157,16 @@ export const useActivities = (): [Activities, ModifyActivities] => {
    * @param entry - The entry to be inserted
    * @returns `true` if the entry was inserted, `false` otherwise
    */
-  const addInterval = (date: string, startHour: number, endHour: number, entry: ActivitiesEntry): boolean => {
+  const addInterval = (activities: Activities, date: string, startHour: number, endHour: number, entry: ActivitiesEntry): Activities => {
     if (isDate(date) && 0 <= startHour && startHour <= endHour && endHour < 24) {
-      const newActivities = _insertDay(date);
+      const newActivities = _insertDay(activities, date);
       const index = newActivities.findIndex(a => a.date === date);
       for (let hour = startHour; hour <= endHour; ++hour) {
         newActivities[index].entries[hour] = entry;
       }
-      setStoreItem(activitiesKey, newActivities);
-      return true;
+      return newActivities;
     }
-    return false;
+    return [ ...activities ];
   };
 
   /**
@@ -160,10 +191,31 @@ export const useActivities = (): [Activities, ModifyActivities] => {
     return false;
   };
 
+  /**
+   * Removes an entry from the specified activity list.
+   * 
+   * @returns A new activity list with the entry removed
+   */
+  const removeInterval = (activities: Activities, activityStartIndex: number, activityEndIndex: number, date: string): Activities => {
+    const dayIndex = activities.findIndex(elem => elem.date === date);
+    if (dayIndex !== -1 && activityStartIndex >= 0 && activityStartIndex <= activityEndIndex && activityEndIndex < 24) {
+      // Update entry list and store changes
+      activities[dayIndex].entries = [
+        ... activities[dayIndex].entries.slice(0, activityStartIndex),
+        ... Array(activityEndIndex - activityStartIndex).fill(null),
+        ... activities[dayIndex].entries.slice(activityEndIndex + 1),
+      ];
+    }
+    return [ ...activities ];
+  };
+
   const modifyActivities: ModifyActivities = {
     add: add,
-    addInterval: addInterval,
-    setRating: setRating
+    addInterval: (date, startHour, endHour, entry) => setStoreItem(activitiesKey, addInterval(activities, date, startHour, endHour, entry)),
+    removeInterval: (date, activityStartIndex, activityEndIndex) => setStoreItem(activitiesKey, removeInterval(activities, activityStartIndex, activityEndIndex, date)),
+    setRating: setRating,
+    modifyInterval: (fromStartIndex, fromEndIndex, toStartIndex, toEndIndex, fromDay, toDay, entry) =>
+      setStoreItem(activitiesKey, addInterval(removeInterval(activities, fromStartIndex, fromEndIndex, fromDay), toDay, toStartIndex, toEndIndex, entry))
   };
 
   return [activities, modifyActivities];

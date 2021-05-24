@@ -6,8 +6,25 @@ import Slider from '@react-native-community/slider';
 
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
-export const ActivityRateDay = ({ route, navigation } : any) =>{
+type Route = RouteProp<
+  ActivityStackParamList,
+  'RateDay'
+>;
+type Navigation = StackNavigationProp<
+  ActivityStackParamList,
+  'RateDay'
+>;
+
+interface Props {
+  route: Route;
+  navigation: Navigation;
+}
+
+export const ActivityRateDay = ({ route, navigation } : Props) =>{
 
   const lang = useTranslation();
   const [activities, modifyActivities] = Storage.useActivities();
@@ -17,16 +34,10 @@ export const ActivityRateDay = ({ route, navigation } : any) =>{
 
   const onConfirm = () => {
     modifyActivities.setRating(route.params.date, rateOfDay);
-
-    // Go back
-    navigation.navigate('History');
+    navigation.goBack();
   };
 
-
-  const onCancel = () => {
-    // Go back
-    navigation.navigate('History');
-  };
+  const onCancel = () => navigation.goBack();
 
   return(
     <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column',  justifyContent: 'space-around'}}>

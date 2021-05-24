@@ -8,8 +8,26 @@ import { RatingCircle } from './../RatingCircle';
 
 import Storage from 'storage';
 
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
+import { ActivitiesDay } from 'storage/types';
 
-export const ActivityWeekHistory = ({route, navigation}: any) => {
+type Route = RouteProp<
+  ActivityStackParamList,
+  'WeekHistory'
+>;
+type Navigation = StackNavigationProp<
+  ActivityStackParamList,
+  'WeekHistory'
+>;
+
+interface Props {
+  route: Route;
+  navigation: Navigation;
+}
+
+export const ActivityWeekHistory = ({ route, navigation }: Props) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
@@ -17,7 +35,7 @@ export const ActivityWeekHistory = ({route, navigation}: any) => {
 
   let historyItems = [];
 
-  const countActivities = (day: any) => {
+  const countActivities = (day: ActivitiesDay) => {
     let activityCount = 0;
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
       if (day.entries[activityIndex] == null) continue;

@@ -8,8 +8,25 @@ import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { CalendarEntry, ActivitiesEntry } from 'storage/types';
 import { ConfrimPortal } from './ConfirmPortal';
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
-export const ActivityPlanningRate = ({ navigation, route }: any) => {
+type Route = RouteProp<
+  ActivityStackParamList,
+  'RegisterPlanningRate'
+>;
+type Navigation = StackNavigationProp<
+  ActivityStackParamList,
+  'RegisterPlanningRate'
+>;
+
+interface Props {
+  route: Route;
+  navigation: Navigation;
+}
+
+export const ActivityPlanningRate = ({ navigation, route }: Props) => {
 
   const lang = useTranslation();
   const [importance, setImportance] = React.useState(5);
@@ -51,7 +68,7 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
     const onCommit = () => {
       modifyActivities.addInterval(calendarEntry.date, startHour, endHour - 1, entry)
       modifyCalendar.replace(calendarEntry, { ...calendarEntry, isRegistered: true })
-      navigation.navigate('RegisterPlanning');
+      navigation.navigate('RegisterPlanning', {});
     }
 
     if (isAlreadyRegistered) {
@@ -61,7 +78,7 @@ export const ActivityPlanningRate = ({ navigation, route }: any) => {
     }
   };
 
-  const onCancel = () => navigation.navigate('RegisterPlanning');
+  const onCancel = () => navigation.navigate('RegisterPlanning', {});
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 10, paddingVertical: 20, flexDirection: 'column', justifyContent: 'space-evenly' }}>

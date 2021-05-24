@@ -7,8 +7,15 @@ import { CalendarList } from '../calendar/CalendarList';
 import { ISODate, ISOTime } from 'utils';
 import { ConfrimPortal } from './ConfirmPortal';
 import { useTranslation } from 'language/LanguageProvider';
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-export const ActivityPlanning = ({ navigation }: any) => {
+type NavigationProp = StackNavigationProp<
+  ActivityStackParamList,
+  'Activities'
+>;
+
+export const ActivityPlanning = ({ navigation }: { navigation: NavigationProp }) => {
 
   const [calendar, modifyCalendar] = Storage.useCalendar();
   const [portalState, setPortalState] = React.useState({ show: false, onConfirm: () => {} });
