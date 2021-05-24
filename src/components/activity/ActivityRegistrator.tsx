@@ -109,7 +109,7 @@ export const ActivityRegistrator = ({ route, navigation }: Props) => {
       // Go back
       navigation.navigate('Activities', {activityRegistered: true});
     } else {
-      modifyActivities.moveInterval(fromTimeRoundedDefault.getHours(), oldToHour - 1, fromTime.getHours(), toHour - 1, ISODate(dateDefault), ISODate(date), entry);
+      modifyActivities.modifyInterval(fromTimeRoundedDefault.getHours(), oldToHour - 1, fromTime.getHours(), toHour - 1, ISODate(dateDefault), ISODate(date), entry);
       navigation.goBack();
     }
   };
@@ -119,8 +119,7 @@ export const ActivityRegistrator = ({ route, navigation }: Props) => {
     // Go back
     if (route.params?.entry) {
       navigation.goBack();
-    }
-    else {
+    } else {
       navigation.navigate('Activities', {activityRegistered: false})
     }
   };
@@ -148,7 +147,6 @@ export const ActivityRegistrator = ({ route, navigation }: Props) => {
       setAbsHeight(height);
     }
   };
-
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard} >

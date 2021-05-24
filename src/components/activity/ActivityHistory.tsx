@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Pressable } from 'react-native';
 import { Surface, List, Caption, FAB, Title, useTheme, TouchableRipple } from 'react-native-paper';
 
 import { useTranslation } from 'language/LanguageProvider';
@@ -60,7 +60,7 @@ export const ActivityHistory = ({ route, navigation }: Props) => {
 
   let titleString = '';
   let dayRating = null;
-  
+
   if (activities.length !== 0) {
     const day = activities[currentDay];
 
@@ -152,9 +152,9 @@ export const ActivityHistory = ({ route, navigation }: Props) => {
 
         {/* Day rating */}
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableRipple onPress={() => onRateDay()}>
+          <Pressable onPress={() => onRateDay()}>
             <RatingCircle score={dayRating}/>
-          </TouchableRipple>
+          </Pressable>
           <List.Icon icon='star'/>
         </View>
       </Surface>

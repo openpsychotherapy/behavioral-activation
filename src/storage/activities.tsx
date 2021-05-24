@@ -193,8 +193,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
 
   /**
    * Removes an entry from the specified activity list.
-   *
-   * @param entry - The entry to be removed
+   * 
    * @returns A new activity list with the entry removed
    */
   const removeInterval = (activities: Activities, activityStartIndex: number, activityEndIndex: number, date: string): Activities => {
@@ -215,7 +214,7 @@ export const useActivities = (): [Activities, ModifyActivities] => {
     addInterval: (date, startHour, endHour, entry) => setStoreItem(activitiesKey, addInterval(activities, date, startHour, endHour, entry)),
     removeInterval: (date, activityStartIndex, activityEndIndex) => setStoreItem(activitiesKey, removeInterval(activities, activityStartIndex, activityEndIndex, date)),
     setRating: setRating,
-    moveInterval: (fromStartIndex, fromEndIndex, toStartIndex, toEndIndex, fromDay, toDay, entry) =>
+    modifyInterval: (fromStartIndex, fromEndIndex, toStartIndex, toEndIndex, fromDay, toDay, entry) =>
       setStoreItem(activitiesKey, addInterval(removeInterval(activities, fromStartIndex, fromEndIndex, fromDay), toDay, toStartIndex, toEndIndex, entry))
   };
 
