@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Text, Headline, Subheading, Paragraph } from 'react-native-paper';
+import { Subheading, Paragraph } from 'react-native-paper';
 import {styles} from './Styles';
 import { useTranslation } from 'language/LanguageProvider';
 
@@ -9,7 +9,7 @@ export const ValuesInfo = () => {
   const dict = useTranslation();
 
   return (
-      <ScrollView 
+    <ScrollView 
       style={{marginHorizontal: 10}}
       contentContainerStyle={{alignItems: 'center'}}>
         <Paragraph style={styles.text}>{dict.valuesInfo.paragraph1}</Paragraph>
@@ -37,8 +37,7 @@ export const ValuesInfo = () => {
           style={styles.image}
           source={require('../../images/valuesSupport.png')}
         />
-        
-      </ScrollView>
-      
+    </ScrollView>
   );
-  }
+}
+
