@@ -1,4 +1,4 @@
-# Behaviour Activation
+# Behavioral Activation
 
 ## Code style
 
