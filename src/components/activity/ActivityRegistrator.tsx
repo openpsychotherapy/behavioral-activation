@@ -202,7 +202,7 @@ export const ActivityRegistrator = ({ route, navigation }: Props) => {
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
               <Text>0</Text>
               <Slider
-                style={{flex: 1}} value={5} step={1}
+                style={{flex: 1}} value={importance} step={1}
                 minimumValue={0} maximumValue={10}
                 onValueChange={(value: number) => {setImportance(value)}}
                 minimumTrackTintColor={colors.accent} maximumTrackTintColor='#000000'
@@ -223,7 +223,7 @@ export const ActivityRegistrator = ({ route, navigation }: Props) => {
             <View style={{ flexDirection: 'row', alignItems: 'center'}}>
               <Text>0</Text>
               <Slider
-                style={{flex: 1}} value={5} step={1}
+                style={{flex: 1}} value={enjoyment} step={1}
                 minimumValue={0} maximumValue={10}
                 onValueChange={(value: number) => {setEnjoyment(value)}}
                 minimumTrackTintColor={colors.accent} maximumTrackTintColor='#000000'
