@@ -54,7 +54,7 @@ const ViewContent = ({ route, navigation }: Props) => {
 
   const callback = (index: number, icon: string) => {
     setIconListVisible(false);
-    navigation.push('CalendarRegistration', { icon: icon });
+    navigation.navigate('CalendarRegistration', { icon: icon });
   }
 
   const onEntryClick = (entry: CalendarEntry) => {

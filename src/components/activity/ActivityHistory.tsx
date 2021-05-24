@@ -8,6 +8,9 @@ import { RatingCircle } from './../RatingCircle';
 
 import Storage from 'storage';
 import { ActivitiesDay, ActivitiesEntry } from 'storage/types';
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
 // Returns a date base on ISO string and adds an hour offset
 const getDateFromStringWithOffset = (value: string, offset: number) => {
@@ -16,7 +19,21 @@ const getDateFromStringWithOffset = (value: string, offset: number) => {
   return date;
 };
 
-export const ActivityHistory = ({route, navigation}: any) => {
+type Route = RouteProp<
+  ActivityStackParamList,
+  'History'
+>;
+type Navigation = StackNavigationProp<
+  ActivityStackParamList,
+  'History'
+>;
+
+interface Props {
+  route: Route;
+  navigation: Navigation;
+}
+
+export const ActivityHistory = ({ route, navigation }: Props) => {
   const [activities, modifyActivities] = Storage.useActivities();
   const [settings, modifySettings] = Storage.useSettings();
   const lang = useTranslation();
@@ -43,7 +60,7 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
   let titleString = '';
   let dayRating = null;
-
+  
   if (activities.length !== 0) {
     const day = activities[currentDay];
 
@@ -53,12 +70,6 @@ export const ActivityHistory = ({route, navigation}: any) => {
     titleString = Intl.DateTimeFormat(settings.language, options).format(date);
     // Set rating
     dayRating = day.score;
-
-    // Callback for item press
-    const onModifyDate = (day: ActivitiesDay, activity: ActivitiesEntry) => {
-      navigation.push('ActivityRegistration', { icon: activity.icon, entry: activity, day: day, modify: true });
-    }
-
 
     let activityCount = 0; // Used for merging activities
     for (let activityIndex = 0; activityIndex < day.entries.length; ++activityIndex) {
@@ -88,18 +99,16 @@ export const ActivityHistory = ({route, navigation}: any) => {
       const fromTimeString = getFormattedTime(fromDate);
       const toTimeString = getFormattedTime(toDate);
 
-      historyItems.push(
-        <Surface key={'hi_' + fromDate.toString()} style={{ borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
-          <TouchableRipple onPress={() => onModifyDate(day, activity)} style={{ flexDirection: 'row' }}>
-            <List.Item style={{flex: 1, flexGrow: 1 }} title={fromTimeString + ' - ' + toTimeString} description={activity.text} right={() =>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Caption>{activity.importance + ' | ' + activity.enjoyment}</Caption>
-                <List.Icon icon={activity.icon}/>
-              </View>
-            }/>
-          </TouchableRipple>
-        </Surface>
-      );
+      historyItems.push({
+        activity: activity,
+        activityStartIndex: activityIndex-activityCount,
+        activityEndIndex: activityIndex,
+        day: day,
+        fromDate: fromDate,
+        toDate: toDate,
+        fromTimeString: fromTimeString,
+        toTimeString: toTimeString
+      });
 
       // Reset segment
       activityCount = 0;
@@ -108,12 +117,23 @@ export const ActivityHistory = ({route, navigation}: any) => {
 
   const onRateDay = () => {
     if (activities.length !== 0) {
-      navigation.push('RateDay', { date: activities[currentDay].date });
+      navigation.navigate('RateDay', { date: activities[currentDay].date });
     }
   };
 
   const onMonthPressed = () => {
-    navigation.push('WeekHistory', { currentDay: currentDay });
+    navigation.navigate('WeekHistory', { currentDay: currentDay });
+  };
+
+  // Callback for item press
+  const onModifyDate = (day: ActivitiesDay, activity: ActivitiesEntry, activityStartIndex: number, activityEndIndex: number) => {
+    navigation.navigate('ActivityRegistration', {
+      icon: activity.icon,
+      entry: activity,
+      entryStartIndex: activityStartIndex,
+      entryEndIndex: activityEndIndex,
+      day: day
+    });
   };
 
   return (
@@ -140,10 +160,24 @@ export const ActivityHistory = ({route, navigation}: any) => {
       </Surface>
 
       {/* List */}
-      <FlatList style={{}} data={historyItems} renderItem={({item}) => item}
+      <FlatList style={{}}
+        data={historyItems}
         contentContainerStyle={{
           paddingBottom: 75
         }}
+        keyExtractor={(item) => 'hi_' + item.fromDate.toString()}
+        renderItem={({item}) => 
+          <Surface  style={{ borderRadius: 5, elevation: elevation.medium, marginHorizontal: 10 , marginVertical: 5 }}>
+            <TouchableRipple onPress={() => onModifyDate(item.day, item.activity, item.activityStartIndex, item.activityEndIndex)} style={{ flexDirection: 'row' }}>
+              <List.Item style={{flex: 1, flexGrow: 1 }} title={item.fromTimeString + ' - ' + item.toTimeString} description={item.activity.text} right={() =>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Caption>{item.activity.importance + ' | ' + item.activity.enjoyment}</Caption>
+                  <List.Icon icon={item.activity.icon}/>
+                </View>
+              }/>
+            </TouchableRipple>
+          </Surface>
+        }
       />
 
       {/* FAB + container */}

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { Surface, IconButton, useTheme, Snackbar } from 'react-native-paper';
 
-import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack';
+import { createStackNavigator, StackHeaderProps, StackNavigationProp } from '@react-navigation/stack';
 import { CustomNavigationBar } from './CustomNavigationBar';
 import { SettingsScreen } from './SettingsScreen';
 
@@ -16,11 +16,36 @@ import { ActivityPlanning } from './activity/ActivityPlanning';
 import { ActivityPlanningRate} from './activity/ActivityPlanningRate';
 
 import { useTranslation } from 'language/LanguageProvider';
+import { RouteProp } from '@react-navigation/native';
+import { ActivitiesDay, ActivitiesEntry, CalendarEntry } from 'storage/types';
 
-const ActivityStack = createStackNavigator();
+export type ActivityStackParamList = {
+  Activities: { activityRegistered: boolean; };
+  History: { currentDay: number; };
+  ActivityRegistration: {
+    day?: ActivitiesDay;
+    entry?: ActivitiesEntry;
+    entryStartIndex?: number;
+    entryEndIndex?: number;
+    icon: string;
+  };
+  Settings: {};
+  RateDay: { date: string; };
+  WeekHistory: { currentDay: number; };
+  RegisterPlanning: {};
+  RegisterPlanningRate: { entry: CalendarEntry; };
+};
 
+const ActivityStack = createStackNavigator<ActivityStackParamList>();
 
-const CircleButton = (props: any) => {
+interface CircleButtonProps {
+  backgroundColor: string;
+  icon: string;
+  size: number;
+  onPress: () => void;
+}
+
+const CircleButton = (props: CircleButtonProps) => {
   const { elevation } = useTheme();
   return (
     <Surface style={{ borderRadius: 100, elevation: elevation.small, backgroundColor: props.backgroundColor }}>
@@ -29,7 +54,22 @@ const CircleButton = (props: any) => {
   );
 }
 
-const ViewContent = ({ route, navigation }: any) => {
+type ViewContentRouteProp = RouteProp<
+  ActivityStackParamList,
+  'Activities'
+>;
+
+type ViewContentNavigationProp = StackNavigationProp<
+  ActivityStackParamList,
+  'Activities'
+>;
+
+interface ViewContentProps {
+  route: ViewContentRouteProp;
+  navigation: ViewContentNavigationProp;
+}
+
+const ViewContent = ({ route, navigation }: ViewContentProps) => {
   const { colors, iconSizes } = useTheme();
 
   const lang = useTranslation();
@@ -37,27 +77,28 @@ const ViewContent = ({ route, navigation }: any) => {
   const [iconListVisible, setIconListVisible] = React.useState(false);
   const [snackBarVisible, setSnackBarVisible] = React.useState(false);
 
-  // Trigger snackbar to show once
-  if (route.params.activityRegistered) {
-    setSnackBarVisible(true);
-    route.params.activityRegistered = false;
-  }
+  useEffect(() => {
+    if (route.params?.activityRegistered) {
+      setSnackBarVisible(true);
+      navigation.setParams({ activityRegistered: false });
+    }
+  }, [route.params]);
 
   const iconListButton = () => {
     setIconListVisible(true);
   };
 
   const historyButton = () => {
-    navigation.navigate('History');
+    navigation.navigate('History', { currentDay: -1 });
   };
 
   const registerPlanningButton = () => {
-    navigation.navigate("RegisterPlanning")
+    navigation.navigate('RegisterPlanning', {});
   }
 
-  const iconPressCallback = (pressedIcon: Number, icon: String) => {
+  const iconPressCallback = (pressedIcon: Number, icon: string) => {
     setIconListVisible(false);
-    navigation.push('ActivityRegistration', { icon: icon });
+    navigation.navigate('ActivityRegistration', { icon: icon });
   };
 
   return (

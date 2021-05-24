@@ -8,7 +8,7 @@ import { useTranslation } from 'language/LanguageProvider';
 
 // Converts hours and minutes into date based on current date.
 const getOffsetDate = (date: Date, hours: number, minutes: number) : Date => {
-  return new Date(date.getFullYear(), date.getMonth(), date.getDay(), hours, minutes);
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), hours, minutes);
 };
 
 /**
@@ -86,7 +86,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
 
   // JSX Picker.Item components
   let timeSteps: any[] = [];
-  let timeStepDates : {[key: string]: Date} = {};
+  let timeStepDates: {[key: string]: Date} = {};
 
   // props.steps is number of steps per hour
   const count = 24 * props.steps + 1;
@@ -98,7 +98,7 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const hours = Math.floor(minutes / 60);
     minutes = minutes % 60;
 
-    const stepDate = getOffsetDate(props.now,hours, minutes);
+    const stepDate = getOffsetDate(props.now, hours, minutes);
     const timeString = getFormattedTime(stepDate);
 
     timeStepDates[i] = stepDate;
@@ -111,12 +111,9 @@ export const TimePicker = (props: { now: Date, defaultTimeOffset: number, steps:
     const fromDate = timeStepDates[itemIndex]; // index: 0 - 24
     props.setFromTime(fromDate);
 
-    // If overlap occurs, calculate the opposite sides new value
-    if (fromDate >= props.toTime) {
-      let newToDate = new Date(fromDate);
-      newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
-      props.setToTime(newToDate);
-    }
+    let newToDate = new Date(fromDate);
+    newToDate.setMinutes(newToDate.getMinutes() + props.defaultTimeOffset);
+    props.setToTime(newToDate);
   };
 
   const onValueChangeTo = (index: number) => {

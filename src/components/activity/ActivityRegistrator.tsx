@@ -11,11 +11,29 @@ import { ChoiceBasedTextInput } from '../ChoiceBasedTextInput';
 import { useTranslation } from 'language/LanguageProvider';
 import Storage from 'storage';
 import { ActivitiesDay, ActivitiesEntry } from 'storage/types';
+import { activityDayGt } from 'storage/activities';
 
 import { ISODate } from 'utils';
 import { getDaysInMonth } from 'react-native-paper-dates/lib/typescript/src/Date/dateUtils';
+import { ActivityStackParamList } from '../ActivityScreen';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 
-export const ActivityRegistrator = ({ route, navigation }: any) => {
+type Route = RouteProp<
+  ActivityStackParamList,
+  'ActivityRegistration'
+>;
+type Navigation = StackNavigationProp<
+  ActivityStackParamList,
+  'ActivityRegistration'
+>;
+
+interface Props {
+  route: Route;
+  navigation: Navigation;
+}
+
+export const ActivityRegistrator = ({ route, navigation }: Props) => {
   const lang = useTranslation();
   const [settings, modifySettings] = Storage.useSettings();
   const { iconSizes, colors } = useTheme();
@@ -31,75 +49,42 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
   let enjoymentDefault = 5;
 
   // Overwrite default values from entry (if it exists)
-  if (route.params?.entry && route.params?.day) {
-    const day: ActivitiesDay = route.params?.day;
-    const entry: ActivitiesEntry | null = route.params?.entry;
-    let startEntry: ActivitiesEntry | null = null;
-    let endEntry: ActivitiesEntry | null = null;
-    let startIndex = 0;
-    let endIndex = 0;
-
-    for(let i = 0; i < day.entries.length; ++i) {
-      const currentEntry = day.entries[i];
-      // If element matches entry
-      if(currentEntry === entry) {
-        // If we haven't found a start yet
-        if(!startEntry) {
-          startEntry = currentEntry;
-          startIndex = i;
-        }
-        // If we have, update end
-        else {
-          endEntry = currentEntry;
-          endIndex = i;
-        }
-      }
-      // If it didn't match
-      else {
-        // If we have a start, we found the end
-        if(startEntry) {
-          if(!endEntry) {
-            endEntry = startEntry;
-            endIndex = startIndex;
-          }
-          break;
-        }
-      }
-    }
-
+  if (route.params?.entry && route.params?.entryStartIndex && route.params?.entryEndIndex && route.params?.day) {
     // Set default values
-    if(entry && startEntry) {
-      dateDefault = new Date(day.date);
-      fromTimeRoundedDefault = new Date(
-        dateDefault.getFullYear(),
-        dateDefault.getMonth(),
-        dateDefault.getDate(),
-        startIndex
-      );
-      toTimeRoundedDefault = new Date(
-        dateDefault.getFullYear(),
-        dateDefault.getMonth(),
-        dateDefault.getDate(),
-        endIndex + 1
-      );
-      activityTextDefault = entry.text;
-      importanceDefault = entry.importance;
-      enjoymentDefault = entry.enjoyment;
-    }
+    dateDefault = new Date(route.params?.day.date);
+    fromTimeRoundedDefault = new Date(
+      dateDefault.getFullYear(),
+      dateDefault.getMonth(),
+      dateDefault.getDate(),
+      route.params?.entryStartIndex
+    );
+    toTimeRoundedDefault = new Date(
+      dateDefault.getFullYear(),
+      dateDefault.getMonth(),
+      dateDefault.getDate(),
+      route.params?.entryEndIndex + 1
+    );
+    activityTextDefault = route.params?.entry.text;
+    importanceDefault = route.params?.entry.importance;
+    enjoymentDefault = route.params?.entry.enjoyment;
   }
 
+  // Create all React states
   const [fromTime, setFromTime] = React.useState(fromTimeRoundedDefault);
   const [toTime, setToTime] = React.useState(toTimeRoundedDefault);
-
   const [date, setDate] = React.useState(dateDefault);
-
   const [activityText, setActivityText] = React.useState(activityTextDefault);
-
   const [importance, setImportance] = React.useState(importanceDefault);
   const [enjoyment, setEnjoyment] = React.useState(enjoymentDefault);
 
-
+  // Confirm callback
   const onConfirm = () => {
+    // If toTime returns 0 hours its the next day, count it as 24.
+    let toHour = toTime.getHours();
+    let oldToHour = toTimeRoundedDefault.getHours();
+    if (toHour === 0) toHour = 24;
+    if (oldToHour === 0) oldToHour = 24;
+
     // Create entry from information entered by user
     const entry: ActivitiesEntry = {
       text: activityText,
@@ -109,34 +94,41 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
       enjoyment: enjoyment,
     };
 
-    // If toTime returns 0 hours its the next day, count it as 24.
-    let toHour = toTime.getHours();
-    if (toHour === 0) {
-      toHour = 24;
-    }
+    const oldEntry: ActivitiesEntry = {
+      text: activityTextDefault,
+      icon: route.params.icon,
+      person: route.params?.entry ? route.params?.entry.person : '',
+      importance: importanceDefault,
+      enjoyment: enjoymentDefault,
+    };
 
-    // Add entry att every applicable hour
-    modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour - 1, entry);
+    if (!route.params?.entry) {
+      // Add entry att every applicable hour
+      modifyActivities.addInterval(ISODate(date), fromTime.getHours(), toHour - 1, entry);
 
-    // Go back
-    if(route.params?.modify) {
-      navigation.navigate('History', {activityModified: true})
-    }
-    else {
-      navigation.navigate('Activities', {activityRegistered: true})
+      // Go back
+      navigation.navigate('Activities', {activityRegistered: true});
+    } else {
+      modifyActivities.moveInterval(fromTimeRoundedDefault.getHours(), oldToHour - 1, fromTime.getHours(), toHour - 1, ISODate(dateDefault), ISODate(date), entry);
+      navigation.goBack();
     }
   };
 
-  
   // Cancellation callback
   const onCancel = () => {
     // Go back
-    if(route.params?.modify) {
-      navigation.navigate('History', {activityModified: false})
+    if (route.params?.entry) {
+      navigation.goBack();
     }
     else {
       navigation.navigate('Activities', {activityRegistered: false})
     }
+  };
+
+  // Remove callback
+  const onRemove = () => {
+    modifyActivities.removeInterval((route.params.day as ActivitiesDay).date, route.params.entryStartIndex as number, route.params.entryEndIndex as number);
+    onCancel();
   };
 
   // Attempts to dissmiss the keyboard when the
@@ -172,9 +164,9 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
           </View>
           {/* TimeRow */}
           <View style={{ flexDirection: 'row', paddingBottom: 20,  ...(Platform.OS !== 'android' && { zIndex: 10 })}}>
-            <TimePicker now={new Date()} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime}
+            <TimePicker now={dateDefault} defaultTimeOffset={60} steps={steps} fromTime={fromTime} setFromTime={setFromTime}
               toTime={toTime} setToTime={setToTime} />
-            </View>
+          </View>
 
           {/* TextInputRow */}
           <View>
@@ -246,20 +238,10 @@ export const ActivityRegistrator = ({ route, navigation }: any) => {
         {/* Remove / Cancel / Confirm row */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
           {route.params?.entry &&
-            <IconButton
-              icon='delete'
-              size={iconSizes.large}
-              onPress={() => {
-                modifyActivities.remove(route.params.entry as ActivitiesEntry, route.params.day as ActivitiesDay);
-                onCancel();
-              }}
-              color={colors.cancel}
-            />
+            <IconButton icon='delete' size={iconSizes.large} onPress={() => onRemove()} color={colors.cancel} />
           }
           <IconButton icon='close' size={iconSizes.large} onPress={() => onCancel()} color={colors.cancel} />
-          {!route.params?.entry &&
-            <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
-          }
+          <IconButton icon='check' size={iconSizes.large} onPress={() => onConfirm()} color={colors.confirm} />
         </View>
       </View>
     </TouchableWithoutFeedback>
