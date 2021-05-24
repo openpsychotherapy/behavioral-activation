@@ -82,7 +82,7 @@ const sv = {
         AddEntryView: 'Lägg till aktivitet',
         Information: 'Information',
         BehaviouralActivation: 'Beteendeaktivering',
-        
+
         ActivityInfo: 'Manual för registrering',
         ValuesInfo: 'Manual för värdering',
         CalenderInfo: 'Manual för kalendern',
@@ -148,19 +148,19 @@ const sv = {
         "den kategorin som du vill lägga värderingen i. Det tar dig till en "+
         "vy där alla värderingar som du tidigare har lagt in under den här "+
         "kategorin finns och genom att trycka på plustecknet längst ner till "+
-        "höger så kan du lägga till en värdering. För att radera en värdering "+ 
+        "höger så kan du lägga till en värdering. För att radera en värdering "+
         "så trycker du och håller in på värderingen som du vill radera.",
         subheading3: "Lägga till en aktivitet",
         paragraph4: "Alla värderingar kan i sin tur varar kopplade till flera "+
         "aktiviteter och dessa ser du genom att trycka på respektive värdering. "+
         "För att lägga till en aktivitet trycker du sedan på plusstecknet längst "+
         "ner till höger och sedan på den ikon som bäst representerar aktiviteten. "+
-        "För att radera en aktivitet så trycker du och håller in på aktiviteten "+ 
+        "För att radera en aktivitet så trycker du och håller in på aktiviteten "+
         "som du vill radera.",
         subheading4: "Lägga till en stödperson",
         paragraph5: "Under knappen stödpersoner finns alla personer som du har "+
         "lagt till. För att lägga till en stödperson så trycker du på "+
-        "plustecknet längst ner till höger. För att radera en stödperson så trycker "+ 
+        "plustecknet längst ner till höger. För att radera en stödperson så trycker "+
         "du och håller in på stödpersonen som du vill radera."
     },
     calendarInfo: {
@@ -188,7 +188,7 @@ const sv = {
         "som hjälper dig att känna dig tillfreds och att ditt liv är meningsfullt. När du valt vilka "+
         "områden av ditt liv du vill fokusera på och vilka dina värderingar är inom dessa områden, "+
         "ska vi börja identifiera och planera dagliga aktiviteter som hjälper dig leva enligt de "+
-        "värderingar som är viktigast för dig. Detta är viktigt, för när du utför aktiviteter som är "+ 
+        "värderingar som är viktigast för dig. Detta är viktigt, för när du utför aktiviteter som är "+
         "nära relaterade till vad du värdesätter i ditt liv så lär du ha fler positiva och underhållande "+
         "upplevelser. Dessa upplevelser kommer i sin tur förbättra hur du mår och dina tankar om ditt liv. "+
         "Det blir svårare att känna sig deprimerad och hopplös när man regelbundet utför aktiviteter "+
@@ -198,98 +198,97 @@ const sv = {
         "trötta och saknar motivation till att utföra diverse aktiviteter, de tänker sig ofta att när "+
         "de väl har mer energi och mer possitiva tankar så kommer de ha förmågan att utföra de "+
         "aktiviteter som de de varit oförmögna att utföra tidigare. I den här behandlingen görs "+
-        " "+
-
-
-        "ignored or have been unable to accomplish in the past. The opposite approach is taken in "+
-        "this treatment—behavior is changed first as a way to increase energy and motivation as well "+
-        "as positive thinking and feelings. The focus on behavior change, however, does not mean that "+
-        "we ignore thoughts and feelings. Instead, we suggest that negative thoughts and feelings "+
-        "will change only after you change your behavior and have more positive life experiences. "+
-        "Healthy behavior is defined as behavior that is directed toward improving your quality of "+
-        "life and attaining the values you have in your life. In contrast with healthy behavior, "+
-        "unhealthy (depressed) behavior generally is not directly related to improvements in the "+
-        "quality of your life and does not move you closer to living according to your values.",
-        paragraph3: "You should know that it is possible for you to be active, yet still be "+
-        "depressed. This can happen if you feel overwhelmed with activities that are unfulfilling "+
-        "or forced by others. For example, although you may be busy at work and home, these "+
-        "activities may be focused only on helping others. Although it certainly is important "+
-        "to help others, it is never a good idea to focus so much on others that your own needs "+
-        "and feelings are completely neglected. Focusing entirely on the needs of others may "+
-        "result in feelings of emptiness and dissatisfaction, followed by confusion and guilt "+
-        "for having such feelings. Thus, it is important not only to have many activities in "+
-        "your life but also specifically to have activities that bring you some degree of "+
-        "pleasure and fulfillment."
+        "motsattsen till detta, först ändras beteendemönster för att öka energi och motivation samt "+
+        "positiva tankar och känslor. Det faktum att vi fokuserar på beteförändring innebär dock "+
+        "inte att vi ignorerar tankar och känslor. istället så menar vi att negativa tankar och känslor "+
+        "ändast kommer förendras efter att du ändrat ditt beteende och har mer positiva livserfarenheter. "+
+        "Hälsosamt beteende deffinieras som beteenden som är ämnat att förbättra din livskvalitet och "+
+        "att uppnå de värderingar du har i ditt liv. I kontrast till häsosamt beteende står ohälsosamt "+
+        "(depressivt) beteende. Ohälsosamt beteende är generellt sätt inte direkt relaterat till "+
+        "förbättrandet av din livskvalitet  och för dig inte närmare att leva enligt dina värderingar. ",
+        paragraph3: "Det är viktigt att inse att du kan vara aktiv och ändå vara deprimerad. Detta kan "+
+        "hända om du känner dig överväldigad av aktivitersom är [unfulfilling] eller påtvingade av andra. "+
+        "Till exempel, även om du är flitig både på jobbet och hemma så kan dessa aktiviteter uteslutande "+
+        "till för att hjälpa andra. Det är viserligen mycket viktigt att hjälpa andra men det är aldrig "+
+        "en bra idé att fokusera på andra till den grad att dina egna behov och känslor blir helt "+
+        "försummade. Att helt och hållet fokusera på andras behov kan resultera i att du känner dig tom "+
+        "och otillfredställd, följt av förvirring och dåligt samvete över att du har dessa känslor. "+
+        "Därför är det viktigt att inte bara ha många aktiviteter utan att ha aktiviteter som specifikt "+
+        "är till för att ge dig en känsla av njutning och tillfredställelese."+
     },
+
+
     depression: {
-        paragraph1: "This treatment was designed to help you with depression, which is defined as an "+
-        "extended period of time of at least 2 weeks in which a person experiences a depressed "+
-        "mood or a loss of interest or pleasure in activities that were once enjoyed, along with "+ 
-        "several other symptoms. Many people will experience at least one episode of major "+
-        "depression in their lifetime and it can affect people of all ages, cultures, income, "+
-        "education, and marital status. Depression can have a major impact on your life, "+
-        "including decreased optimism or motivation, low self-esteem, trouble concentrating "+
-        "(paying attention), self-harm, and/or suicidal thoughts and behavior. Medical problems "+
-        "associated with depression include heart disease, chronic pain, type 2 diabetes, "+
-        "substance use, fatigue, and malnutrition. Individuals with depression often keep to "+
-        "themselves and avoid their normal activities. This isolation can cause additional "+
-        "problems, such as loneliness, relationship problems, decreased job satisfaction or "+
-        "unemployment, and educational failure. Given all these resulting problems, the "+
-        "identification and treatment of depression are critical.",
-        paragraph2: "The specific symptoms of depression may include the following:",
-        dot1: "- Feeling sad or down most of the time,",
-        dot2: "- Loss of interest in usual activities,",
-        dot3: "- Significant weight loss or weight gain,",
-        dot4: "- A decrease or increase in appetite,",
-        dot5: "- Difficulty sleeping or sleeping too much,",
-        dot6: "- Feelings of agitation or irritability,",
-        dot7: "- Feeling tired or loss of energy (fatigue),",
-        dot8: "- Feelings of worthlessness or excessive/inappropriate guilt,",
-        dot9: "- Difficulty thinking or concentrating or making decisions,",
-        dot10: "- Crying spells,",
-        dot11: "- Feeling hopeless,",
-        dot12: "- Suicidal thoughts and/or attempts.",
-        paragraph3: "Although most individuals experience some form of the above symptoms "+
-        "from time to time, a diagnosis of depression only is made if you feel strong feelings "+
-        "of distress, or you are having a lot of trouble with your day-to-day functioning. "+
-        "Some people can identify stressful life events including loss of a loved one, financial "+
-        "difficulty, or job loss as a reason for their depression. However, the specific causes "+
-        "of depression are rarely known, and depression might start without warning. Regardless "+
-        "of the initial cause of depression, depression results in a specific pattern of behavior "+
-        "that leads to feelings of loneliness, sadness, isolation, lack of purpose, and/or "+
-        "hopelessness. The key to feeling better is not in identifying the root cause of depression "+
-        "because this is nearly impossible, but rather in understanding and changing your depressed "+
-        "patterns of behavior."
+        paragraph1: "Denna behandling var designad för att hjälpa dig med din deprission, deprission "+
+        "definieras som en period på minst två veckor då en person upplever deppresivt humör eller "+
+        "bristande intresse eller nöje från aktiviteter som brukar vara nöjsamma, tillsammans med "+
+        "många andra symptom. Många individer upplever åt minstånde en episod av allvarlig depression "+
+        "i livet och det kan påverka personer i alla åldrar, kulturer, inkomst, utbildning och status. "+
+        "Depression kan ha stor påverkan på ditt liv, detta kan innefatta minskad optimism eller "+
+        "motivation, dåligt självförtroende, konsentrationsproblem, självskadebeteende och/eller "+
+        "självmordstankar. Medecinska problem associerade med depression inkluderar hjärtsjukdommar, "+
+        "kronisk smärta, typ två diabetes, missbruk, utmattning, och undernäring, Individer med  "+
+        "depression håller sig ofta för sig själva och undviker sina vanliga aktiviteter. Denna "+
+        "isolering kan orsaka ytterligare problematik, så som ensamhet, relationsproblem, minskad "+
+        "arbetstillfredsställelse eller avskedande och utbildningsreladetrade misslyckanden. Med tanke "+
+        "på dessa problem så är det ytterst viktigt att identifiera och behandla depression. ",
+
+
+        paragraph2: "Depressionssymtom kan inkludera:",
+        dot1: "- Att oftast känna sig ledsen eller nere,",
+        dot2: "- Förlorat intresse för vanliga aktiviteter,",
+        dot3: "- Signifikant viktminskning eller viktökning,",
+        dot4: "- Minskad eller ökad aptit,",
+        dot5: "- Svårt att sova eller att sova för mycket,",
+        dot6: "- Iritationskänslor eller aggresiva känslor,",
+        dot7: "- Känna sig trött eller utmattad,",
+        dot8: "- Känna sig värdelös eller överdrivna skuldkännslor,",
+        dot9: "- Svårigheter med att tänka, fokusera eller ta beslut,,",
+        dot10: "- Gråtattacker,",
+        dot11: "- Hopplöshetskänslor,",
+        dot12: "- självmordstankar och/eller försök,",
+        paragraph3:"Trots att de flesta individer upplever några av ovanstående symptom då och "+
+        "då så ställs endast en diagnos för depression om du har kraftig ångest eller om du har "+
+        "stora problem med att klara av vardagen. Vissa personer kan identifiera händelser så som "+
+        "att ha förlorat någon närstående, financiella svårigheter eller att blivit avskedad som "+
+        "en anledning till deras depression. Med det sagt så är det sällsynt att kunna identifiera "+
+        "orsaken till depression och depression kan starta utan någon varning. Oavsätt vad som "+
+        "orsakat depression så resulterar det i ett specifikt beteendemönster som leder till "+
+        "känslor av ensamhet, sorg, isolering, att inte ha något syfte och/eller hopplöshet. Nyckeln "+
+        "till att må bättre ligger inte i att identifiera källan till depressionen då detta är "+
+        "nästintill omöjligt, utan i att förstå och ändra dina depresiva beteendemönster. "
     },
     stress: {
         header1: "Stressande livshändelser och förluster i ditt liv",
-        paragraph1:"Often people who have experienced stressful life events and loss end up having "+
-        "long-standing feelings of depression. After something very bad has happened or loved ones "+
-        "are lost, life can feel empty or meaningless. It can feel as if there is very little to "+
-        "live for and that all the support and happiness you once had is gone forever. Thoughts "+
-        "and bad dreams may keep coming back about the bad experience or about the loved one who "+
-        "has passed away. In this treatment, it is very important for the therapist to understand "+
-        "what happened to you, how you felt about it, and most importantly, how it affects your life "+
-        "now. At every session, we will spend some time talking about events in your life that have "+
-        "led to your depression. However, this treatment requires more than just talking about what "+
-        "has happened. In addition, we also will spend some time trying strategies that will help "+
-        "you to live a more fulfilling and meaningful life going forward. Nobody can change events "+
-        "of the past, but we can plan for a better future by what we do today. Often, when people "+
-        "have experienced stressful life events and loss, negative thoughts and feelings about the "+
-        "event come to mind all the time. It becomes hard not to think about it or feel terrible "+
-        "that it happened. We find that it is important to understand how these experiences affect "+
-        "your current behavior. Often after a loss or stressful life event, people change how they "+
-        "spend their time, and this can lead to depressed behavior patterns. For example, you might "+
-        "find it difficult to sleep at night, and so you spend a lot of time sleeping during the day. "+
-        "If you sleep during the day, you may be unable to perform important daily activities or "+
-        "lack the energy and desire to socialize with family and friends. This treatment will help "+
-        "you to identify activities that might be making your depression worse and can help you "+
-        "modify or change those activities so that you feel depressed less often. After a loss or "+
-        "stressful event, it can often take time and focus to decide how you want to live your life "+
-        "moving forward, and this treatment is designed to help you with that. The goal is to help "+
-        "you make the best life possible for yourself. This can be hard work, but if you trust the "+
-        "process you will find that good things will come from your effort. We will work at a pace "+
-        "that is comfortable for you. Are you willing to work on this together?"
+        paragraph1:"Det händer ofta att individer som upplevet hektiska livshändelser och förlust "+
+        "upplever långvariga depressionskänslor. Efter att något väldigt hemskt händer eller när man "+
+        "förlorat någon närstående så kan livet kännas tomt och meningslöst. Det kan kännas som att "+
+        "det finns väldigt lite att leva för och att allt stöd och all glädje du haft nu är borta "+
+        "förevigt. Tankar och mardrömmar gällande den hemska upplevelse eller den närstående personen "+
+        "du förlorat kan bli regelbundet återkommande. I den här behandlingen är det väldigt viktigt "+
+        "för psykologen att förstå vad som hänt dig, hur du kände och ,viktigast av allt, hur det "+
+        "påverkar ditt liv nu. Under varje session kommer vi avsätta tid till att prata om händelser "+
+        "i ditt liv som har lett till din depression. Med det sagt så kräver den här behandlingen mer "+
+        "än att bara prata om vad som hänt. Utöver detta så kommer vi också lägga tid på att prova "+
+        "strategier som kommer hjälpa dig att leva ett mer tillfredställande och meningsfullt liv. "+
+        "Ingen kan ändra vad som redan hänt men vi kan planera en bättre framtid genom vad vi gör i "+
+        "nuet. Det händer ofta att när människor har upplevt hektiska händelser och förlust så "+
+        "upplever de ofta negativa tankar och känslor om händelsen nästan hela tiden. Det blir svårt "+
+        "att inte tänka på det äller att må dåligt över att det hände. vi upplever att det är viktigt "+
+        "att att förstå hur dessa händelser påverkar vårt nuvarande beteende. Det händer ofta att "+
+        "människor ändrar vad de lägger sin tid på när de upplevt hektiska händelser eller förlust, "+
+        "vilket i sin tur kan leda till depresiva beteendemönster. Till exempel, du kanske finner det "+
+        "svårt att sova under natten så du börjar sova mycket på dagen istället. Om du sover på dagen "+
+        "så kan du börja finna det svårt att utför viktiga, dagliga aktiviteter eller saknar energin "+
+        "och viljan att socialisera med vänner och familj. Den här behandlingen kommer hjälpa dig att "+
+        "identifiera aktiviteter som kan bidra till att din depression förvärras och kan hjälpa dig "+
+        "modifiera eller ändra dessa aktiviteter så att du känner dig deprimerad mer sällan. Efter "+
+        "en förlust eller en hektisk händelse kan det ofta ta mycket tid och fokus för att bestämma "+
+        "hur du vill leva ditt liv framöver., den här behandlingen är designad för att hjälpa dig "+
+        "med detta. Målet är att hjälpa dig leva ett så bra liv som möjligt. Detta kan vara ett svårt "+
+        "arbete men om du litar på processen så kommer du uppleva att du kommer må bättre på grund av "+
+        "din ansträgning. Vi kommer jobba i ett tempo som är bekvämt för dig. är du villig att jobba "+
+        "på detta tillsammans?"
     },
 }
 
