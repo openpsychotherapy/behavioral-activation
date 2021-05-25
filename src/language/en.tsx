@@ -64,7 +64,7 @@ const en = {
     informationCardValuesscreen: 'Values',
     informationCardCalenderscreen: 'Calendar',
     informationCardDepression: "What is depression?",
-    informationCardBehaviouralactivation: 'Behavioural activation',
+    informationCardBehaviouralactivation: 'Behavioral activation',
     informationCardStress: "Stressful life events \nand loss in your life",
 
     calendarNoItem: 'You have no planned activities today.\nPull down to get earlier planned activities.',
